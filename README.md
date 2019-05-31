@@ -1,3 +1,2 @@
-<div style="border: 1px; width: 100%; height: 100%; background-color: #205080;">
 <img src="https://www.arcadeit.net/assets/images/hero-logo.png" />
-</div>
+<p>ArcadeIT! develop your entertainment! Start with fun today, why not!</p>
