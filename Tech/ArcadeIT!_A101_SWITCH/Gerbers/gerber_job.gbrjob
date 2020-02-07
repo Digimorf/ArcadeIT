@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2020-01-30T17:01:41Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.4.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.67,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "ArcadeIT!_A101_SWITCH"
+        },
+        "Owner": "Francesco De Simone <info@digimorf.com>",
+        "Size": {
+            "X": 25.4,
+            "Y": 38.1
+        }
+    }
+}
