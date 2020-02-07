@@ -1,0 +1,210 @@
+
+ArcadeIT_Ver020_F469_CMSIS.elf:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   000001b4  08000000  08000000  00010000  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+  1 .text         00000148  080001b4  080001b4  000101b4  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00000000  080002fc  08000304  00010304  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .ARM.extab    00000000  080002fc  080002fc  00010304  2**0
+                  CONTENTS
+  4 .ARM          00000000  080002fc  080002fc  00010304  2**0
+                  CONTENTS
+  5 .preinit_array 00000000  080002fc  08000304  00010304  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000004  080002fc  080002fc  000102fc  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .fini_array   00000004  08000300  08000300  00010300  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .data         00000000  20000000  20000000  00010304  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .bss          00000028  20000000  08000304  00020000  2**2
+                  ALLOC
+ 10 ._user_heap_stack 00000600  20000028  08000304  00020028  2**0
+                  ALLOC
+ 11 .ARM.attributes 00000030  00000000  00000000  00010304  2**0
+                  CONTENTS, READONLY
+ 12 .comment      0000007b  00000000  00000000  00010334  2**0
+                  CONTENTS, READONLY
+ 13 .debug_frame  0000002c  00000000  00000000  000103b0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+080001b4 <__do_global_dtors_aux>:
+ 80001b4:	b510      	push	{r4, lr}
+ 80001b6:	4c05      	ldr	r4, [pc, #20]	; (80001cc <__do_global_dtors_aux+0x18>)
+ 80001b8:	7823      	ldrb	r3, [r4, #0]
+ 80001ba:	b933      	cbnz	r3, 80001ca <__do_global_dtors_aux+0x16>
+ 80001bc:	4b04      	ldr	r3, [pc, #16]	; (80001d0 <__do_global_dtors_aux+0x1c>)
+ 80001be:	b113      	cbz	r3, 80001c6 <__do_global_dtors_aux+0x12>
+ 80001c0:	4804      	ldr	r0, [pc, #16]	; (80001d4 <__do_global_dtors_aux+0x20>)
+ 80001c2:	f3af 8000 	nop.w
+ 80001c6:	2301      	movs	r3, #1
+ 80001c8:	7023      	strb	r3, [r4, #0]
+ 80001ca:	bd10      	pop	{r4, pc}
+ 80001cc:	20000000 	.word	0x20000000
+ 80001d0:	00000000 	.word	0x00000000
+ 80001d4:	080002e4 	.word	0x080002e4
+
+080001d8 <frame_dummy>:
+ 80001d8:	b508      	push	{r3, lr}
+ 80001da:	4b03      	ldr	r3, [pc, #12]	; (80001e8 <frame_dummy+0x10>)
+ 80001dc:	b11b      	cbz	r3, 80001e6 <frame_dummy+0xe>
+ 80001de:	4903      	ldr	r1, [pc, #12]	; (80001ec <frame_dummy+0x14>)
+ 80001e0:	4803      	ldr	r0, [pc, #12]	; (80001f0 <frame_dummy+0x18>)
+ 80001e2:	f3af 8000 	nop.w
+ 80001e6:	bd08      	pop	{r3, pc}
+ 80001e8:	00000000 	.word	0x00000000
+ 80001ec:	20000004 	.word	0x20000004
+ 80001f0:	080002e4 	.word	0x080002e4
+
+080001f4 <main>:
+ 80001f4:	b508      	push	{r3, lr}
+ 80001f6:	f000 f843 	bl	8000280 <ArcadeIT_Test_Bench>
+ 80001fa:	2000      	movs	r0, #0
+ 80001fc:	bd08      	pop	{r3, pc}
+
+080001fe <NMI_Handler>:
+ 80001fe:	4770      	bx	lr
+
+08000200 <HardFault_Handler>:
+ 8000200:	e7fe      	b.n	8000200 <HardFault_Handler>
+
+08000202 <MemManage_Handler>:
+ 8000202:	e7fe      	b.n	8000202 <MemManage_Handler>
+
+08000204 <BusFault_Handler>:
+ 8000204:	e7fe      	b.n	8000204 <BusFault_Handler>
+
+08000206 <UsageFault_Handler>:
+ 8000206:	e7fe      	b.n	8000206 <UsageFault_Handler>
+
+08000208 <SVC_Handler>:
+ 8000208:	4770      	bx	lr
+
+0800020a <DebugMon_Handler>:
+ 800020a:	4770      	bx	lr
+
+0800020c <PendSV_Handler>:
+ 800020c:	4770      	bx	lr
+
+0800020e <SysTick_Handler>:
+ 800020e:	4770      	bx	lr
+
+08000210 <SystemInit>:
+ 8000210:	4b05      	ldr	r3, [pc, #20]	; (8000228 <SystemInit+0x18>)
+ 8000212:	f8d3 2088 	ldr.w	r2, [r3, #136]	; 0x88
+ 8000216:	f442 0270 	orr.w	r2, r2, #15728640	; 0xf00000
+ 800021a:	f8c3 2088 	str.w	r2, [r3, #136]	; 0x88
+ 800021e:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
+ 8000222:	609a      	str	r2, [r3, #8]
+ 8000224:	4770      	bx	lr
+ 8000226:	bf00      	nop
+ 8000228:	e000ed00 	.word	0xe000ed00
+
+0800022c <Reset_Handler>:
+ 800022c:	f8df d034 	ldr.w	sp, [pc, #52]	; 8000264 <LoopFillZerobss+0x14>
+ 8000230:	2100      	movs	r1, #0
+ 8000232:	e003      	b.n	800023c <LoopCopyDataInit>
+
+08000234 <CopyDataInit>:
+ 8000234:	4b0c      	ldr	r3, [pc, #48]	; (8000268 <LoopFillZerobss+0x18>)
+ 8000236:	585b      	ldr	r3, [r3, r1]
+ 8000238:	5043      	str	r3, [r0, r1]
+ 800023a:	3104      	adds	r1, #4
+
+0800023c <LoopCopyDataInit>:
+ 800023c:	480b      	ldr	r0, [pc, #44]	; (800026c <LoopFillZerobss+0x1c>)
+ 800023e:	4b0c      	ldr	r3, [pc, #48]	; (8000270 <LoopFillZerobss+0x20>)
+ 8000240:	1842      	adds	r2, r0, r1
+ 8000242:	429a      	cmp	r2, r3
+ 8000244:	d3f6      	bcc.n	8000234 <CopyDataInit>
+ 8000246:	4a0b      	ldr	r2, [pc, #44]	; (8000274 <LoopFillZerobss+0x24>)
+ 8000248:	e002      	b.n	8000250 <LoopFillZerobss>
+
+0800024a <FillZerobss>:
+ 800024a:	2300      	movs	r3, #0
+ 800024c:	f842 3b04 	str.w	r3, [r2], #4
+
+08000250 <LoopFillZerobss>:
+ 8000250:	4b09      	ldr	r3, [pc, #36]	; (8000278 <LoopFillZerobss+0x28>)
+ 8000252:	429a      	cmp	r2, r3
+ 8000254:	d3f9      	bcc.n	800024a <FillZerobss>
+ 8000256:	f7ff ffdb 	bl	8000210 <SystemInit>
+ 800025a:	f000 f81f 	bl	800029c <__libc_init_array>
+ 800025e:	f7ff ffc9 	bl	80001f4 <main>
+ 8000262:	4770      	bx	lr
+ 8000264:	20050000 	.word	0x20050000
+ 8000268:	08000304 	.word	0x08000304
+ 800026c:	20000000 	.word	0x20000000
+ 8000270:	20000000 	.word	0x20000000
+ 8000274:	20000000 	.word	0x20000000
+ 8000278:	20000028 	.word	0x20000028
+
+0800027c <ADC_IRQHandler>:
+ 800027c:	e7fe      	b.n	800027c <ADC_IRQHandler>
+	...
+
+08000280 <ArcadeIT_Test_Bench>:
+ 8000280:	4a03      	ldr	r2, [pc, #12]	; (8000290 <ArcadeIT_Test_Bench+0x10>)
+ 8000282:	2300      	movs	r3, #0
+ 8000284:	6013      	str	r3, [r2, #0]
+ 8000286:	4a03      	ldr	r2, [pc, #12]	; (8000294 <ArcadeIT_Test_Bench+0x14>)
+ 8000288:	6013      	str	r3, [r2, #0]
+ 800028a:	4a03      	ldr	r2, [pc, #12]	; (8000298 <ArcadeIT_Test_Bench+0x18>)
+ 800028c:	6013      	str	r3, [r2, #0]
+ 800028e:	e7fe      	b.n	800028e <ArcadeIT_Test_Bench+0xe>
+ 8000290:	20000024 	.word	0x20000024
+ 8000294:	20000020 	.word	0x20000020
+ 8000298:	2000001c 	.word	0x2000001c
+
+0800029c <__libc_init_array>:
+ 800029c:	b570      	push	{r4, r5, r6, lr}
+ 800029e:	4e0d      	ldr	r6, [pc, #52]	; (80002d4 <__libc_init_array+0x38>)
+ 80002a0:	4c0d      	ldr	r4, [pc, #52]	; (80002d8 <__libc_init_array+0x3c>)
+ 80002a2:	1ba4      	subs	r4, r4, r6
+ 80002a4:	10a4      	asrs	r4, r4, #2
+ 80002a6:	2500      	movs	r5, #0
+ 80002a8:	42a5      	cmp	r5, r4
+ 80002aa:	d109      	bne.n	80002c0 <__libc_init_array+0x24>
+ 80002ac:	4e0b      	ldr	r6, [pc, #44]	; (80002dc <__libc_init_array+0x40>)
+ 80002ae:	4c0c      	ldr	r4, [pc, #48]	; (80002e0 <__libc_init_array+0x44>)
+ 80002b0:	f000 f818 	bl	80002e4 <_init>
+ 80002b4:	1ba4      	subs	r4, r4, r6
+ 80002b6:	10a4      	asrs	r4, r4, #2
+ 80002b8:	2500      	movs	r5, #0
+ 80002ba:	42a5      	cmp	r5, r4
+ 80002bc:	d105      	bne.n	80002ca <__libc_init_array+0x2e>
+ 80002be:	bd70      	pop	{r4, r5, r6, pc}
+ 80002c0:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80002c4:	4798      	blx	r3
+ 80002c6:	3501      	adds	r5, #1
+ 80002c8:	e7ee      	b.n	80002a8 <__libc_init_array+0xc>
+ 80002ca:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80002ce:	4798      	blx	r3
+ 80002d0:	3501      	adds	r5, #1
+ 80002d2:	e7f2      	b.n	80002ba <__libc_init_array+0x1e>
+ 80002d4:	080002fc 	.word	0x080002fc
+ 80002d8:	080002fc 	.word	0x080002fc
+ 80002dc:	080002fc 	.word	0x080002fc
+ 80002e0:	08000300 	.word	0x08000300
+
+080002e4 <_init>:
+ 80002e4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80002e6:	bf00      	nop
+ 80002e8:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80002ea:	bc08      	pop	{r3}
+ 80002ec:	469e      	mov	lr, r3
+ 80002ee:	4770      	bx	lr
+
+080002f0 <_fini>:
+ 80002f0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80002f2:	bf00      	nop
+ 80002f4:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80002f6:	bc08      	pop	{r3}
+ 80002f8:	469e      	mov	lr, r3
+ 80002fa:	4770      	bx	lr
