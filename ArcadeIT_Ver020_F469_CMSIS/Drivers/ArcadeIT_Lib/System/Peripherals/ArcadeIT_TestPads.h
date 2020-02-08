@@ -16,7 +16,7 @@
  * @file    ArcadeIT_TestPads.h
  * @version V0.13
  * @date    17-07-2018
- * @last    26-07-2020
+ * @last    08-02-2020
  * @brief   This library is used to output the MCU clock frequency out of the
  *          test pads for debug purpose.
  *
@@ -39,7 +39,37 @@
  ---------------------------------------------
  122  PC9 GPIO, MCO2          clock source to output pin 2
 
+
+ ArcadeIT! mainboard:
+
  <TESTPAD1]----------O
+
+ is used to test the STM32F469 microcontroller configuration by measuring the
+ different frequencies, HCLK, SYS etc.
+
+ From: RM0386, Reference manual, page 144
+
+ 6.2.10 Clock-out capability
+
+  Two microcontroller clock output (MCO) pins are available:
+  • MCO1
+  • MCO2
+    You can output four different clock sources onto the MCO2 pin (PC9) using the
+    configurable prescaler (from 1 to 5):
+    – HSE clock
+    – PLL clock
+    – System clock (SYSCLK)
+    – PLLI2S clock
+    The desired clock source is selected using the MCO2PRE[2:0] and MCO2 bits in the
+    RCC clock configuration register (RCC_CFGR).
+    For the different MCO pins, the corresponding GPIO port has to be programmed in alternate
+    function mode.
+    The selected clock to output onto MCO must not exceed 100 MHz (the maximum I/O
+    speed).
+
+ From: RM0386, Datasheet, page 76, Table 12. Alternate function
+
+ MCO2 function is applied to pin PC9 using alternate function 0
 
  ******************************************************************************
  HISTORY
@@ -79,8 +109,8 @@ void ArcadeIT_TestPad_DeInit(void);
 //------------------------------------------------------------------------------
 void ArcadeIT_TestPad_Frequency
 (
-  uint32_t pFrequencySystem,  // What frequency source to test.
-  uint32_t pFrequencyDivider  // What divider to test.
+    uint32_t pFrequencySystem,  // clock source output to testpad
+    uint32_t pFrequencyDivider  // the frequency divider
 );
 // /////////////////////////////////////////////////////////////////////////////
 
