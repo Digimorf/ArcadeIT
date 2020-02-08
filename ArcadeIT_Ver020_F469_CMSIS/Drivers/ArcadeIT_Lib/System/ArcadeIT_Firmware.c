@@ -27,11 +27,12 @@
 
  ******************************************************************************
  HISTORY
+
  28-06-2017:
  - Creation date of the library structure.
 
  20-09-2018:
-   Ported the project on STM32CubeIDE.
+ - Ported the project on STM32CubeIDE.
 
  06-02-2020:
  - Converted to pure CMSIS.

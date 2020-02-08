@@ -1,0 +1,6 @@
+ArcadeIT_Status_LEDs.c:93:6:ArcadeIT_Status_LEDS_Init	16	static
+ArcadeIT_Status_LEDs.c:160:6:ArcadeIT_Status_LEDS_Set	16	static
+ArcadeIT_Status_LEDs.c:186:6:ArcadeIT_Status_LED1_Set	16	static
+ArcadeIT_Status_LEDs.c:210:6:ArcadeIT_Status_LED2_Set	16	static
+ArcadeIT_Status_LEDs.c:234:6:ArcadeIT_Status_LED1_Toggle	4	static
+ArcadeIT_Status_LEDs.c:256:6:ArcadeIT_Status_LED2_Toggle	4	static

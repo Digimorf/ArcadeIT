@@ -27,14 +27,15 @@
 
  ******************************************************************************
  HISTORY
+
  16-06-2017:
  - Creation date of the library.
 
  21-06-2017:
-   Ported the project on Atollic TrueStudio.
+ - Ported the project on Atollic TrueStudio.
 
  20-09-2018:
-   Ported the project on STM32CubeIDE.
+ - Ported the project on STM32CubeIDE.
 
  06-02-2020:
  - Converted to pure CMSIS.

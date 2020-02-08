@@ -35,15 +35,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  15 .debug_ranges 00000118  00000000  00000000  00013038  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00022780  00000000  00000000  00013150  2**0
+ 16 .debug_macro  00022790  00000000  00000000  00013150  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00001680  00000000  00000000  000358d0  2**0
+ 17 .debug_line   00001680  00000000  00000000  000358e0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000b809b  00000000  00000000  00036f50  2**0
+ 18 .debug_str    000b811b  00000000  00000000  00036f60  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000eefeb  2**0
+ 19 .comment      0000007b  00000000  00000000  000ef07b  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000003b8  00000000  00000000  000ef068  2**2
+ 20 .debug_frame  000003b8  00000000  00000000  000ef0f8  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -96,193 +96,76 @@ int main(void)
  8000200:	bd80      	pop	{r7, pc}
 
 08000202 <NMI_Handler>:
-/******************************************************************************/
-/**
-  * @brief This function handles Non maskable interrupt.
-  */
-void NMI_Handler(void)
-{
  8000202:	b480      	push	{r7}
  8000204:	af00      	add	r7, sp, #0
-
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-
-  /* USER CODE END NonMaskableInt_IRQn 1 */
-}
  8000206:	bf00      	nop
  8000208:	46bd      	mov	sp, r7
  800020a:	f85d 7b04 	ldr.w	r7, [sp], #4
  800020e:	4770      	bx	lr
 
 08000210 <HardFault_Handler>:
-
-/**
-  * @brief This function handles Hard fault interrupt.
-  */
-void HardFault_Handler(void)
-{
  8000210:	b480      	push	{r7}
  8000212:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN HardFault_IRQn 0 */
-
-  /* USER CODE END HardFault_IRQn 0 */
-  while (1)
  8000214:	e7fe      	b.n	8000214 <HardFault_Handler+0x4>
 
 08000216 <MemManage_Handler>:
-
-/**
-  * @brief This function handles Memory management fault.
-  */
-void MemManage_Handler(void)
-{
  8000216:	b480      	push	{r7}
  8000218:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
-
-  /* USER CODE END MemoryManagement_IRQn 0 */
-  while (1)
  800021a:	e7fe      	b.n	800021a <MemManage_Handler+0x4>
 
 0800021c <BusFault_Handler>:
-
-/**
-  * @brief This function handles Pre-fetch fault, memory access fault.
-  */
-void BusFault_Handler(void)
-{
  800021c:	b480      	push	{r7}
  800021e:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN BusFault_IRQn 0 */
-
-  /* USER CODE END BusFault_IRQn 0 */
-  while (1)
  8000220:	e7fe      	b.n	8000220 <BusFault_Handler+0x4>
 
 08000222 <UsageFault_Handler>:
-
-/**
-  * @brief This function handles Undefined instruction or illegal state.
-  */
-void UsageFault_Handler(void)
-{
  8000222:	b480      	push	{r7}
  8000224:	af00      	add	r7, sp, #0
-  /* USER CODE BEGIN UsageFault_IRQn 0 */
-
-  /* USER CODE END UsageFault_IRQn 0 */
-  while (1)
  8000226:	e7fe      	b.n	8000226 <UsageFault_Handler+0x4>
 
 08000228 <SVC_Handler>:
-
-/**
-  * @brief This function handles System service call via SWI instruction.
-  */
-void SVC_Handler(void)
-{
  8000228:	b480      	push	{r7}
  800022a:	af00      	add	r7, sp, #0
-
-  /* USER CODE END SVCall_IRQn 0 */
-  /* USER CODE BEGIN SVCall_IRQn 1 */
-
-  /* USER CODE END SVCall_IRQn 1 */
-}
  800022c:	bf00      	nop
  800022e:	46bd      	mov	sp, r7
  8000230:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000234:	4770      	bx	lr
 
 08000236 <DebugMon_Handler>:
-
-/**
-  * @brief This function handles Debug monitor.
-  */
-void DebugMon_Handler(void)
-{
  8000236:	b480      	push	{r7}
  8000238:	af00      	add	r7, sp, #0
-
-  /* USER CODE END DebugMonitor_IRQn 0 */
-  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
-
-  /* USER CODE END DebugMonitor_IRQn 1 */
-}
  800023a:	bf00      	nop
  800023c:	46bd      	mov	sp, r7
  800023e:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000242:	4770      	bx	lr
 
 08000244 <PendSV_Handler>:
-
-/**
-  * @brief This function handles Pendable request for system service.
-  */
-void PendSV_Handler(void)
-{
  8000244:	b480      	push	{r7}
  8000246:	af00      	add	r7, sp, #0
-
-  /* USER CODE END PendSV_IRQn 0 */
-  /* USER CODE BEGIN PendSV_IRQn 1 */
-
-  /* USER CODE END PendSV_IRQn 1 */
-}
  8000248:	bf00      	nop
  800024a:	46bd      	mov	sp, r7
  800024c:	f85d 7b04 	ldr.w	r7, [sp], #4
  8000250:	4770      	bx	lr
 
 08000252 <SysTick_Handler>:
-
-/**
-  * @brief This function handles System tick timer.
-  */
-void SysTick_Handler(void)
-{
  8000252:	b480      	push	{r7}
  8000254:	af00      	add	r7, sp, #0
-  /* USER CODE END SysTick_IRQn 0 */
-  
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
-}
  8000256:	bf00      	nop
  8000258:	46bd      	mov	sp, r7
  800025a:	f85d 7b04 	ldr.w	r7, [sp], #4
  800025e:	4770      	bx	lr
 
 08000260 <SystemInit>:
-  *         configuration.
-  * @param  None
-  * @retval None
-  */
-void SystemInit(void)
-{
  8000260:	b480      	push	{r7}
  8000262:	af00      	add	r7, sp, #0
-  /* FPU settings ------------------------------------------------------------*/
-  #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
-    SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
  8000264:	4b08      	ldr	r3, [pc, #32]	; (8000288 <SystemInit+0x28>)
  8000266:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
  800026a:	4a07      	ldr	r2, [pc, #28]	; (8000288 <SystemInit+0x28>)
  800026c:	f443 0370 	orr.w	r3, r3, #15728640	; 0xf00000
  8000270:	f8c2 3088 	str.w	r3, [r2, #136]	; 0x88
-
-  /* Configure the Vector Table location add offset address ------------------*/
-#ifdef VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
-#else
-  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
  8000274:	4b04      	ldr	r3, [pc, #16]	; (8000288 <SystemInit+0x28>)
  8000276:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
  800027a:	609a      	str	r2, [r3, #8]
-#endif
-}
  800027c:	bf00      	nop
  800027e:	46bd      	mov	sp, r7
  8000280:	f85d 7b04 	ldr.w	r7, [sp], #4
@@ -291,99 +174,45 @@ void SystemInit(void)
  8000288:	e000ed00 	.word	0xe000ed00
 
 0800028c <Reset_Handler>:
-
-    .section  .text.Reset_Handler
-  .weak  Reset_Handler
-  .type  Reset_Handler, %function
-Reset_Handler:  
-  ldr   sp, =_estack     /* set stack pointer */
  800028c:	f8df d034 	ldr.w	sp, [pc, #52]	; 80002c4 <LoopFillZerobss+0x14>
-
-/* Copy the data segment initializers from flash to SRAM */  
-  movs  r1, #0
  8000290:	2100      	movs	r1, #0
-  b  LoopCopyDataInit
  8000292:	e003      	b.n	800029c <LoopCopyDataInit>
 
 08000294 <CopyDataInit>:
-
-CopyDataInit:
-  ldr  r3, =_sidata
  8000294:	4b0c      	ldr	r3, [pc, #48]	; (80002c8 <LoopFillZerobss+0x18>)
-  ldr  r3, [r3, r1]
  8000296:	585b      	ldr	r3, [r3, r1]
-  str  r3, [r0, r1]
  8000298:	5043      	str	r3, [r0, r1]
-  adds  r1, r1, #4
  800029a:	3104      	adds	r1, #4
 
 0800029c <LoopCopyDataInit>:
-    
-LoopCopyDataInit:
-  ldr  r0, =_sdata
  800029c:	480b      	ldr	r0, [pc, #44]	; (80002cc <LoopFillZerobss+0x1c>)
-  ldr  r3, =_edata
  800029e:	4b0c      	ldr	r3, [pc, #48]	; (80002d0 <LoopFillZerobss+0x20>)
-  adds  r2, r0, r1
  80002a0:	1842      	adds	r2, r0, r1
-  cmp  r2, r3
  80002a2:	429a      	cmp	r2, r3
-  bcc  CopyDataInit
  80002a4:	d3f6      	bcc.n	8000294 <CopyDataInit>
-  ldr  r2, =_sbss
  80002a6:	4a0b      	ldr	r2, [pc, #44]	; (80002d4 <LoopFillZerobss+0x24>)
-  b  LoopFillZerobss
  80002a8:	e002      	b.n	80002b0 <LoopFillZerobss>
 
 080002aa <FillZerobss>:
-/* Zero fill the bss segment. */  
-FillZerobss:
-  movs  r3, #0
  80002aa:	2300      	movs	r3, #0
-  str  r3, [r2], #4
  80002ac:	f842 3b04 	str.w	r3, [r2], #4
 
 080002b0 <LoopFillZerobss>:
-    
-LoopFillZerobss:
-  ldr  r3, = _ebss
  80002b0:	4b09      	ldr	r3, [pc, #36]	; (80002d8 <LoopFillZerobss+0x28>)
-  cmp  r2, r3
  80002b2:	429a      	cmp	r2, r3
-  bcc  FillZerobss
  80002b4:	d3f9      	bcc.n	80002aa <FillZerobss>
-
-/* Call the clock system intitialization function.*/
-  bl  SystemInit   
  80002b6:	f7ff ffd3 	bl	8000260 <SystemInit>
-/* Call static constructors */
-    bl __libc_init_array
  80002ba:	f000 f823 	bl	8000304 <__libc_init_array>
-/* Call the application's entry point.*/
-  bl  main
  80002be:	f7ff ff99 	bl	80001f4 <main>
-  bx  lr    
  80002c2:	4770      	bx	lr
-  ldr   sp, =_estack     /* set stack pointer */
  80002c4:	20050000 	.word	0x20050000
-  ldr  r3, =_sidata
  80002c8:	0800036c 	.word	0x0800036c
-  ldr  r0, =_sdata
  80002cc:	20000000 	.word	0x20000000
-  ldr  r3, =_edata
  80002d0:	20000000 	.word	0x20000000
-  ldr  r2, =_sbss
  80002d4:	20000000 	.word	0x20000000
-  ldr  r3, = _ebss
  80002d8:	20000028 	.word	0x20000028
 
 080002dc <ADC_IRQHandler>:
- * @retval None       
-*/
-    .section  .text.Default_Handler,"ax",%progbits
-Default_Handler:
-Infinite_Loop:
-  b  Infinite_Loop
  80002dc:	e7fe      	b.n	80002dc <ADC_IRQHandler>
 	...
 
