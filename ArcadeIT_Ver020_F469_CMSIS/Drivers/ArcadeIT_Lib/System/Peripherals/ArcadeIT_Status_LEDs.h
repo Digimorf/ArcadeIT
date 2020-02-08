@@ -10,7 +10,7 @@
  * -----------------------------------------------------------------
  *                       P E R I P H E R A L S
  * -----------------------------------------------------------------
- *           (C)2018 www.digimorf.com, www.arcadeit.net
+ *           (C)2020 www.digimorf.com, www.arcadeit.net
  *
  * @author  Francesco De Simone
  * @file    ArcadeIT_Status-LEDs.h
