@@ -6,4 +6,3 @@ stm32f4xx_it.c:128:6:UsageFault_Handler	0	static
 stm32f4xx_it.c:143:6:SVC_Handler	0	static
 stm32f4xx_it.c:156:6:DebugMon_Handler	0	static
 stm32f4xx_it.c:169:6:PendSV_Handler	0	static
-stm32f4xx_it.c:182:6:SysTick_Handler	0	static

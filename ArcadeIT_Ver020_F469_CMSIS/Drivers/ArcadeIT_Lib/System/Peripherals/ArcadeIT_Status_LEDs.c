@@ -79,12 +79,12 @@
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "../ArcadeIT_Common.h"
-#include "../ArcadeIT_Utilities.h"
-#include "../ArcadeIT_Firmware.h"
+#include "System/ArcadeIT_Common.h"
+#include "System/ArcadeIT_Utilities.h"
+#include "System/ArcadeIT_Firmware.h"
 
 // ArcadeIT! Peripherals and buses.
-#include "ArcadeIT_Status_LEDs.h"
+#include "System/Peripherals/ArcadeIT_Status_LEDs.h"
 //#include "System/Peripherals/ArcadeIT_Serial_Port.h"
 
 // //////////////////////////////////////////////////////////////////////////////
@@ -97,7 +97,72 @@ void ArcadeIT_Status_LEDS_Init(void)
   *              the GPIOs connected to the two status LEDs.
   * PARAMETERS:  None.
   * RETURNS:     Nothing.
-  */
+  *
+  * From: RM0386, Reference manual, page 206-207
+  *
+  * STATUS LEDs PH2, PH3
+  *
+  * These registers are 32 bit wide, values for each pin go from 0 to 3
+  *  GPIO port mode register (GPIOx_MODER) (x = A to K)
+  *  GPIO port speed register (GPIOx_OSPEEDR) (x = A to K)
+  *  GPIO port pull-up register (GPIOx_PUPDR) (x = A to K)
+  *
+  * |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+  * +---------+---------+---------+---------+---------+---------+---------+---------+
+  * | PIN 15  | PIN 14  | PIN 13  | PIN 12  | PIN 11  | PIN 10  | PIN 09  | PIN 08  |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  * | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  * | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   |
+  * | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR |
+  * | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    |
+  * |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  * | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  *
+  * |  0    0    0    0 .  0    0    0    0 |  1    1    1    1 .  0    0    0    0 |
+  * +---------+---------+---------+---------#####################---------+---------+
+  * | PIN 07  | PIN 06  | PIN 05  | PIN 04  # PIN 03  # PIN 02  # PIN 01  | PIN 00  |
+  * +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+  * | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 # 07 | 06 # 05 | 04 # 03 | 02 | 01 | 00 |
+  * +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+  * | MODER   | MODER   | MODER   | MODER   # MODER   # MODER   # MODER   | MODER   |
+  * | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR # OSPEEDR # OSPEEDR # OSPEEDR | OSPEEDR |
+  * | PUDR    | PUDR    | PUDR    | PUDR    # PUDR    # PUDR    # PUDR    | PUDR    |
+  * |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  #  [1:0]  #  [1:0]  #  [1:0]  |  [1:0]  |
+  * +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+  * | rw | rw | rw | rw | rw | rw | rw | rw # rw | rw # rw | rw # rw | rw | rw | rw |
+  * +----+----+----+----+----+----+----+----#####################----+----+----+----+
+  *
+  * This register is 32 bit wide but only 16 are used since values for each pin
+  * require only one bit.
+  *  GPIO port type register (GPIOx_OTYPER) (x = A to K)
+  *
+  * |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+  * +---------+---------+---------+---------+---------+---------+---------+---------+
+  * |         |         |         |         |         |         |         |         |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  * | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  * | OTYPER  | OTYPER  | OTYPER  | OTYPER  | OTYPER  | OTYPER  | OTYPER  | OTYPER  |
+  * |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  * |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+  * +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+  *
+  * |  0    0    0    0 .  0    0    0    0 |  1    1    1    1 .  0    0    0    0 |
+  * +----+----+----+----+----+----+----+----#####################----+----+----+----+
+  * |P15 |P14 |P13 |P12 |P11 |P10 |P09 |P08 #P07 |P06 #P05 |P04 #P03 |P02 |P01 |P00 |
+  * +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+  * | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 # 07 | 06 # 05 | 04 # 03 | 02 | 01 | 00 |
+  * +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+  * | OTYPER  | OTYPER  | OTYPER  | OTYPER  # OTYPER  # OTYPER  # OTYPER  | OTYPER  |
+  * +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+  * | rw | rw | rw | rw | rw | rw | rw | rw # rw | rw # rw | rw # rw | rw | rw | rw |
+  * +----+----+----+----+----+----+----+----#####################----+----+----+----+
+  *
+ */
 
   uint32_t lPinPosition = 0;
 
@@ -107,43 +172,46 @@ void ArcadeIT_Status_LEDS_Init(void)
   // Configure the output lines connected to the Status LEDs as output, LOW
   // level as default.
   // -----------------------
-  lPinPosition = (SYS_STATUS_LED1_PIN_NO * 2);
+  lPinPosition = (SYS_STATUS_LED1_PIN_NO * 2); // the position is a multiple of 2
+
   // GPIO pin(PH2) in output
-  SYS_TESTPADS_PER->MODER   &= ~(GPIO_MODER_MODER0 << lPinPosition);
-  SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
+  SYS_STATUS_LED1_PER->MODER   &= ~GPIO_MODER_MODER2;
+  SYS_STATUS_LED1_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
-  SYS_TESTPADS_PER->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << lPinPosition);
-  SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+  SYS_STATUS_LED1_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
+  SYS_STATUS_LED1_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
 
   // type output
-  SYS_TESTPADS_PER->OTYPER  &= ~(GPIO_OTYPER_OT_0 << SYS_TESTPADS_PIN_NO);
-  SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
+  SYS_STATUS_LED1_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
+  SYS_STATUS_LED1_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED1_PIN_NO);
 
   // pull up configuration
-  SYS_TESTPADS_PER->PUPDR   &= ~(GPIO_PUPDR_PUPDR0 << lPinPosition);
-  SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+  SYS_STATUS_LED1_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
+  SYS_STATUS_LED1_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
 
   // -----------------------
-  lPinPosition = (SYS_STATUS_LED2_PIN_NO * 2);
+  lPinPosition = (SYS_STATUS_LED2_PIN_NO * 2); // the position is a multiple of 2
+
   // GPIO pin(PH3) in output
-  SYS_TESTPADS_PER->MODER   &= ~(GPIO_MODER_MODER0 << lPinPosition);
-  SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
+  SYS_STATUS_LED2_PER->MODER   &= ~GPIO_MODER_MODER3;
+  SYS_STATUS_LED2_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
-  SYS_TESTPADS_PER->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << lPinPosition);
-  SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+  SYS_STATUS_LED2_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
+  SYS_STATUS_LED2_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
 
   // type output
-  SYS_TESTPADS_PER->OTYPER  &= ~(GPIO_OTYPER_OT_0 << SYS_TESTPADS_PIN_NO);
-  SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
+  SYS_STATUS_LED2_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
+  SYS_STATUS_LED2_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
 
   // pull up configuration
-  SYS_TESTPADS_PER->PUPDR   &= ~(GPIO_PUPDR_PUPDR0 << lPinPosition);
-  SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+  SYS_STATUS_LED2_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
+  SYS_STATUS_LED2_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
 
+  // -----------------------
   // Put LEDs line LOW.
   SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
   SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
@@ -169,13 +237,13 @@ void ArcadeIT_Status_LEDS_Set
   */
 
   // Put LEDs line LOW.
-  SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+  GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
   SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
 
   if (((uint32_t*)pParameters)[PAR_1])
   {
     // Compute the output value according to the parameter provided.
-    SYS_STATUS_LED1_PER->ODR |= ((uint16_t)(((uint32_t*)pParameters)[PAR_2]) & (uint16_t)1) ? SYS_STATUS_LED1_PIN : (uint16_t)0;
+    GPIOH->ODR |= ((uint16_t)(((uint32_t*)pParameters)[PAR_2]) & (uint16_t)1) ? SYS_STATUS_LED1_PIN : (uint16_t)0;
     SYS_STATUS_LED2_PER->ODR |= ((uint16_t)(((uint32_t*)pParameters)[PAR_2]) & (uint16_t)2) ? SYS_STATUS_LED2_PIN : (uint16_t)0;
 
   } // End if.
@@ -197,10 +265,10 @@ void ArcadeIT_Status_LED1_Set
   if (((uint32_t*)pParameters)[PAR_1])
   {
     // Set LEDs line LOW.
-    SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+    GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
 
     // Compute the output value according to the parameter provided.
-    SYS_STATUS_LED1_PER->ODR |= (uint16_t)(((uint32_t*)pParameters)[PAR_2]) ? SYS_STATUS_LED1_PIN : (uint16_t)0;
+    GPIOH->ODR |= (uint16_t)(((uint32_t*)pParameters)[PAR_2]) ? SYS_STATUS_LED1_PIN : (uint16_t)0;
 
   } // End if.
 
@@ -240,13 +308,13 @@ void ArcadeIT_Status_LED1_Toggle(void)
   */
 
   // Set LEDs line LOW or HIGH depending the current status of the LED.
-  if (SYS_STATUS_LED1_PER->ODR & SYS_STATUS_LED1_PIN)
+  if (GPIOH->ODR & SYS_STATUS_LED1_PIN)
   {
-    SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+    GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
   }
   else
   {
-    SYS_STATUS_LED1_PER->ODR |= SYS_STATUS_LED1_PIN;
+    GPIOH->ODR |= SYS_STATUS_LED1_PIN;
 
   } // End if.
 

@@ -1,2 +1,2 @@
-ArcadeIT_TestPads.c:104:6:ArcadeIT_TestPad_Set	24	static
-ArcadeIT_TestPads.c:141:6:ArcadeIT_TestPad_Init	24	static
+ArcadeIT_TestPads.c:104:6:ArcadeIT_TestPad_Set	0	static
+ArcadeIT_TestPads.c:141:6:ArcadeIT_TestPad_Init	8	static

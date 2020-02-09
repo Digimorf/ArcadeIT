@@ -93,9 +93,9 @@
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "../ArcadeIT_Common.h"
-#include "../ArcadeIT_Utilities.h"
-#include "../ArcadeIT_Firmware.h"
+#include "System/ArcadeIT_Common.h"
+#include "System/ArcadeIT_Utilities.h"
+#include "System/ArcadeIT_Firmware.h"
 
 // /////////////////////////////////////////////////////////////////////////////
 // Defines.
@@ -104,7 +104,11 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
 // /////////////////////////////////////////////////////////////////////////////
-void ArcadeIT_TestPads_Init(void);
+void ArcadeIT_TestPad_Init
+(
+    uint32_t pFrequencySystem,  // What frequency source to test.
+    uint32_t pFrequencyDivider  // What divider to test.
+);
 //------------------------------------------------------------------------------
 void ArcadeIT_TestPad_DeInit(void);
 //------------------------------------------------------------------------------

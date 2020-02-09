@@ -5,45 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   000001b4  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         000001b0  080001b4  080001b4  000101b4  2**2
+  1 .text         00000428  080001b4  080001b4  000101b4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  08000364  0800036c  0001036c  2**0
+  2 .rodata       00000000  080005dc  080005e4  000105e4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  08000364  08000364  0001036c  2**0
+  3 .ARM.extab    00000000  080005dc  080005dc  000105e4  2**0
                   CONTENTS
-  4 .ARM          00000000  08000364  08000364  0001036c  2**0
+  4 .ARM          00000000  080005dc  080005dc  000105e4  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08000364  0800036c  0001036c  2**0
+  5 .preinit_array 00000000  080005dc  080005e4  000105e4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08000364  08000364  00010364  2**2
+  6 .init_array   00000004  080005dc  080005dc  000105dc  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08000368  08000368  00010368  2**2
+  7 .fini_array   00000004  080005e0  080005e0  000105e0  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000000  20000000  20000000  0001036c  2**0
+  8 .data         00000000  20000000  20000000  000105e4  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000028  20000000  0800036c  00020000  2**2
+  9 .bss          00000034  20000000  080005e4  00020000  2**2
                   ALLOC
- 10 ._user_heap_stack 00000600  20000028  0800036c  00020028  2**0
+ 10 ._user_heap_stack 00000604  20000034  080005e4  00020034  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  0001036c  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000105e4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00002542  00000000  00000000  0001039c  2**0
+ 12 .debug_info   00003b85  00000000  00000000  00010614  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 000005f4  00000000  00000000  000128de  2**0
+ 13 .debug_abbrev 00000962  00000000  00000000  00014199  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000160  00000000  00000000  00012ed8  2**3
+ 14 .debug_aranges 00000190  00000000  00000000  00014b00  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000118  00000000  00000000  00013038  2**3
+ 15 .debug_ranges 00000138  00000000  00000000  00014c90  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00022790  00000000  00000000  00013150  2**0
+ 16 .debug_macro  00022040  00000000  00000000  00014dc8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00001680  00000000  00000000  000358e0  2**0
+ 17 .debug_line   00002616  00000000  00000000  00036e08  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000b811b  00000000  00000000  00036f60  2**0
+ 18 .debug_str    000b8253  00000000  00000000  0003941e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000ef07b  2**0
+ 19 .comment      0000007b  00000000  00000000  000f1671  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000003b8  00000000  00000000  000ef0f8  2**2
+ 20 .debug_frame  00000294  00000000  00000000  000f16ec  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 21 .debug_loc    00000117  00000000  00000000  000f1980  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -62,7 +64,7 @@ Disassembly of section .text:
  80001ca:	bd10      	pop	{r4, pc}
  80001cc:	20000000 	.word	0x20000000
  80001d0:	00000000 	.word	0x00000000
- 80001d4:	0800034c 	.word	0x0800034c
+ 80001d4:	080005c4 	.word	0x080005c4
 
 080001d8 <frame_dummy>:
  80001d8:	b508      	push	{r3, lr}
@@ -74,7 +76,7 @@ Disassembly of section .text:
  80001e6:	bd08      	pop	{r3, pc}
  80001e8:	00000000 	.word	0x00000000
  80001ec:	20000004 	.word	0x20000004
- 80001f0:	0800034c 	.word	0x0800034c
+ 80001f0:	080005c4 	.word	0x080005c4
 
 080001f4 <main>:
 // /////////////////////////////////////////////////////////////////////////////
@@ -83,228 +85,839 @@ Disassembly of section .text:
 
 int main(void)
 {
- 80001f4:	b580      	push	{r7, lr}
- 80001f6:	af00      	add	r7, sp, #0
+ 80001f4:	b508      	push	{r3, lr}
   ArcadeIT_Test_Bench();
- 80001f8:	f000 f872 	bl	80002e0 <ArcadeIT_Test_Bench>
+ 80001f6:	f000 f907 	bl	8000408 <ArcadeIT_Test_Bench>
 
   return 0;
- 80001fc:	2300      	movs	r3, #0
 
 } // End main.
- 80001fe:	4618      	mov	r0, r3
- 8000200:	bd80      	pop	{r7, pc}
+ 80001fa:	2000      	movs	r0, #0
+ 80001fc:	bd08      	pop	{r3, pc}
 
-08000202 <NMI_Handler>:
- 8000202:	b480      	push	{r7}
- 8000204:	af00      	add	r7, sp, #0
- 8000206:	bf00      	nop
- 8000208:	46bd      	mov	sp, r7
- 800020a:	f85d 7b04 	ldr.w	r7, [sp], #4
- 800020e:	4770      	bx	lr
+080001fe <NMI_Handler>:
 
-08000210 <HardFault_Handler>:
- 8000210:	b480      	push	{r7}
- 8000212:	af00      	add	r7, sp, #0
- 8000214:	e7fe      	b.n	8000214 <HardFault_Handler+0x4>
+  /* USER CODE END NonMaskableInt_IRQn 0 */
+  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
 
-08000216 <MemManage_Handler>:
- 8000216:	b480      	push	{r7}
- 8000218:	af00      	add	r7, sp, #0
- 800021a:	e7fe      	b.n	800021a <MemManage_Handler+0x4>
+  /* USER CODE END NonMaskableInt_IRQn 1 */
+}
+ 80001fe:	4770      	bx	lr
 
-0800021c <BusFault_Handler>:
- 800021c:	b480      	push	{r7}
- 800021e:	af00      	add	r7, sp, #0
- 8000220:	e7fe      	b.n	8000220 <BusFault_Handler+0x4>
+08000200 <HardFault_Handler>:
 
-08000222 <UsageFault_Handler>:
- 8000222:	b480      	push	{r7}
- 8000224:	af00      	add	r7, sp, #0
- 8000226:	e7fe      	b.n	8000226 <UsageFault_Handler+0x4>
+/**
+  * @brief This function handles Hard fault interrupt.
+  */
+void HardFault_Handler(void)
+{
+ 8000200:	e7fe      	b.n	8000200 <HardFault_Handler>
 
-08000228 <SVC_Handler>:
- 8000228:	b480      	push	{r7}
- 800022a:	af00      	add	r7, sp, #0
- 800022c:	bf00      	nop
- 800022e:	46bd      	mov	sp, r7
- 8000230:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000234:	4770      	bx	lr
+08000202 <MemManage_Handler>:
 
-08000236 <DebugMon_Handler>:
- 8000236:	b480      	push	{r7}
- 8000238:	af00      	add	r7, sp, #0
- 800023a:	bf00      	nop
- 800023c:	46bd      	mov	sp, r7
- 800023e:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000242:	4770      	bx	lr
+/**
+  * @brief This function handles Memory management fault.
+  */
+void MemManage_Handler(void)
+{
+ 8000202:	e7fe      	b.n	8000202 <MemManage_Handler>
 
-08000244 <PendSV_Handler>:
- 8000244:	b480      	push	{r7}
- 8000246:	af00      	add	r7, sp, #0
- 8000248:	bf00      	nop
- 800024a:	46bd      	mov	sp, r7
- 800024c:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000250:	4770      	bx	lr
+08000204 <BusFault_Handler>:
 
-08000252 <SysTick_Handler>:
- 8000252:	b480      	push	{r7}
- 8000254:	af00      	add	r7, sp, #0
- 8000256:	bf00      	nop
- 8000258:	46bd      	mov	sp, r7
- 800025a:	f85d 7b04 	ldr.w	r7, [sp], #4
- 800025e:	4770      	bx	lr
+/**
+  * @brief This function handles Pre-fetch fault, memory access fault.
+  */
+void BusFault_Handler(void)
+{
+ 8000204:	e7fe      	b.n	8000204 <BusFault_Handler>
 
-08000260 <SystemInit>:
- 8000260:	b480      	push	{r7}
- 8000262:	af00      	add	r7, sp, #0
- 8000264:	4b08      	ldr	r3, [pc, #32]	; (8000288 <SystemInit+0x28>)
- 8000266:	f8d3 3088 	ldr.w	r3, [r3, #136]	; 0x88
- 800026a:	4a07      	ldr	r2, [pc, #28]	; (8000288 <SystemInit+0x28>)
- 800026c:	f443 0370 	orr.w	r3, r3, #15728640	; 0xf00000
- 8000270:	f8c2 3088 	str.w	r3, [r2, #136]	; 0x88
- 8000274:	4b04      	ldr	r3, [pc, #16]	; (8000288 <SystemInit+0x28>)
- 8000276:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
- 800027a:	609a      	str	r2, [r3, #8]
- 800027c:	bf00      	nop
- 800027e:	46bd      	mov	sp, r7
- 8000280:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000284:	4770      	bx	lr
- 8000286:	bf00      	nop
- 8000288:	e000ed00 	.word	0xe000ed00
+08000206 <UsageFault_Handler>:
 
-0800028c <Reset_Handler>:
- 800028c:	f8df d034 	ldr.w	sp, [pc, #52]	; 80002c4 <LoopFillZerobss+0x14>
- 8000290:	2100      	movs	r1, #0
- 8000292:	e003      	b.n	800029c <LoopCopyDataInit>
+/**
+  * @brief This function handles Undefined instruction or illegal state.
+  */
+void UsageFault_Handler(void)
+{
+ 8000206:	e7fe      	b.n	8000206 <UsageFault_Handler>
 
-08000294 <CopyDataInit>:
- 8000294:	4b0c      	ldr	r3, [pc, #48]	; (80002c8 <LoopFillZerobss+0x18>)
- 8000296:	585b      	ldr	r3, [r3, r1]
- 8000298:	5043      	str	r3, [r0, r1]
- 800029a:	3104      	adds	r1, #4
+08000208 <SVC_Handler>:
 
-0800029c <LoopCopyDataInit>:
- 800029c:	480b      	ldr	r0, [pc, #44]	; (80002cc <LoopFillZerobss+0x1c>)
- 800029e:	4b0c      	ldr	r3, [pc, #48]	; (80002d0 <LoopFillZerobss+0x20>)
- 80002a0:	1842      	adds	r2, r0, r1
- 80002a2:	429a      	cmp	r2, r3
- 80002a4:	d3f6      	bcc.n	8000294 <CopyDataInit>
- 80002a6:	4a0b      	ldr	r2, [pc, #44]	; (80002d4 <LoopFillZerobss+0x24>)
- 80002a8:	e002      	b.n	80002b0 <LoopFillZerobss>
+  /* USER CODE END SVCall_IRQn 0 */
+  /* USER CODE BEGIN SVCall_IRQn 1 */
 
-080002aa <FillZerobss>:
- 80002aa:	2300      	movs	r3, #0
- 80002ac:	f842 3b04 	str.w	r3, [r2], #4
+  /* USER CODE END SVCall_IRQn 1 */
+}
+ 8000208:	4770      	bx	lr
 
-080002b0 <LoopFillZerobss>:
- 80002b0:	4b09      	ldr	r3, [pc, #36]	; (80002d8 <LoopFillZerobss+0x28>)
- 80002b2:	429a      	cmp	r2, r3
- 80002b4:	d3f9      	bcc.n	80002aa <FillZerobss>
- 80002b6:	f7ff ffd3 	bl	8000260 <SystemInit>
- 80002ba:	f000 f823 	bl	8000304 <__libc_init_array>
- 80002be:	f7ff ff99 	bl	80001f4 <main>
- 80002c2:	4770      	bx	lr
- 80002c4:	20050000 	.word	0x20050000
- 80002c8:	0800036c 	.word	0x0800036c
- 80002cc:	20000000 	.word	0x20000000
- 80002d0:	20000000 	.word	0x20000000
- 80002d4:	20000000 	.word	0x20000000
- 80002d8:	20000028 	.word	0x20000028
+0800020a <DebugMon_Handler>:
 
-080002dc <ADC_IRQHandler>:
- 80002dc:	e7fe      	b.n	80002dc <ADC_IRQHandler>
+  /* USER CODE END DebugMonitor_IRQn 0 */
+  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+
+  /* USER CODE END DebugMonitor_IRQn 1 */
+}
+ 800020a:	4770      	bx	lr
+
+0800020c <PendSV_Handler>:
+
+  /* USER CODE END PendSV_IRQn 0 */
+  /* USER CODE BEGIN PendSV_IRQn 1 */
+
+  /* USER CODE END PendSV_IRQn 1 */
+}
+ 800020c:	4770      	bx	lr
 	...
 
-080002e0 <ArcadeIT_Test_Bench>:
+08000210 <Reset_Handler>:
+
+    .section  .text.Reset_Handler
+  .weak  Reset_Handler
+  .type  Reset_Handler, %function
+Reset_Handler:  
+ ldr   sp, =_estack     /* set stack pointer */
+ 8000210:	f8df d034 	ldr.w	sp, [pc, #52]	; 8000248 <LoopFillZerobss+0x14>
+
+/* Copy the data segment initializers from flash to SRAM */  
+  movs  r1, #0
+ 8000214:	2100      	movs	r1, #0
+  b  LoopCopyDataInit
+ 8000216:	e003      	b.n	8000220 <LoopCopyDataInit>
+
+08000218 <CopyDataInit>:
+
+CopyDataInit:
+  ldr  r3, =_sidata
+ 8000218:	4b0c      	ldr	r3, [pc, #48]	; (800024c <LoopFillZerobss+0x18>)
+  ldr  r3, [r3, r1]
+ 800021a:	585b      	ldr	r3, [r3, r1]
+  str  r3, [r0, r1]
+ 800021c:	5043      	str	r3, [r0, r1]
+  adds  r1, r1, #4
+ 800021e:	3104      	adds	r1, #4
+
+08000220 <LoopCopyDataInit>:
+    
+LoopCopyDataInit:
+  ldr  r0, =_sdata
+ 8000220:	480b      	ldr	r0, [pc, #44]	; (8000250 <LoopFillZerobss+0x1c>)
+  ldr  r3, =_edata
+ 8000222:	4b0c      	ldr	r3, [pc, #48]	; (8000254 <LoopFillZerobss+0x20>)
+  adds  r2, r0, r1
+ 8000224:	1842      	adds	r2, r0, r1
+  cmp  r2, r3
+ 8000226:	429a      	cmp	r2, r3
+  bcc  CopyDataInit
+ 8000228:	d3f6      	bcc.n	8000218 <CopyDataInit>
+  ldr  r2, =_sbss
+ 800022a:	4a0b      	ldr	r2, [pc, #44]	; (8000258 <LoopFillZerobss+0x24>)
+  b  LoopFillZerobss
+ 800022c:	e002      	b.n	8000234 <LoopFillZerobss>
+
+0800022e <FillZerobss>:
+/* Zero fill the bss segment. */  
+FillZerobss:
+  movs  r3, #0
+ 800022e:	2300      	movs	r3, #0
+  str  r3, [r2], #4
+ 8000230:	f842 3b04 	str.w	r3, [r2], #4
+
+08000234 <LoopFillZerobss>:
+    
+LoopFillZerobss:
+  ldr  r3, = _ebss
+ 8000234:	4b09      	ldr	r3, [pc, #36]	; (800025c <LoopFillZerobss+0x28>)
+  cmp  r2, r3
+ 8000236:	429a      	cmp	r2, r3
+  bcc  FillZerobss
+ 8000238:	d3f9      	bcc.n	800022e <FillZerobss>
+
+/* Call the clock system intitialization function.*/
+  bl  ArcadeIT_System_Init //SystemInit
+ 800023a:	f000 f829 	bl	8000290 <ArcadeIT_System_Init>
+/* Call static constructors */
+    bl __libc_init_array
+ 800023e:	f000 f99d 	bl	800057c <__libc_init_array>
+/* Call the application's entry point.*/
+  bl  main
+ 8000242:	f7ff ffd7 	bl	80001f4 <main>
+  bx  lr    
+ 8000246:	4770      	bx	lr
+ ldr   sp, =_estack     /* set stack pointer */
+ 8000248:	20050000 	.word	0x20050000
+  ldr  r3, =_sidata
+ 800024c:	080005e4 	.word	0x080005e4
+  ldr  r0, =_sdata
+ 8000250:	20000000 	.word	0x20000000
+  ldr  r3, =_edata
+ 8000254:	20000000 	.word	0x20000000
+  ldr  r2, =_sbss
+ 8000258:	20000000 	.word	0x20000000
+  ldr  r3, = _ebss
+ 800025c:	20000034 	.word	0x20000034
+
+08000260 <ADC_IRQHandler>:
+ * @retval None       
+*/
+    .section  .text.Default_Handler,"ax",%progbits
+Default_Handler:
+Infinite_Loop:
+  b  Infinite_Loop
+ 8000260:	e7fe      	b.n	8000260 <ADC_IRQHandler>
+	...
+
+08000264 <ArcadeIT_SysTick_Init>:
+  if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
+  {
+    return (1UL);                                                   /* Reload value impossible */
+  }
+
+  SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
+ 8000264:	4b07      	ldr	r3, [pc, #28]	; (8000284 <ArcadeIT_SysTick_Init+0x20>)
+ 8000266:	4a08      	ldr	r2, [pc, #32]	; (8000288 <ArcadeIT_SysTick_Init+0x24>)
+ 8000268:	605a      	str	r2, [r3, #4]
+    SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
+ 800026a:	4a08      	ldr	r2, [pc, #32]	; (800028c <ArcadeIT_SysTick_Init+0x28>)
+ 800026c:	21f0      	movs	r1, #240	; 0xf0
+ 800026e:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
+  NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
+  SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
+ 8000272:	2000      	movs	r0, #0
+ 8000274:	6098      	str	r0, [r3, #8]
+  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+ 8000276:	2107      	movs	r1, #7
+ 8000278:	6019      	str	r1, [r3, #0]
+    SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
+ 800027a:	23c0      	movs	r3, #192	; 0xc0
+ 800027c:	f882 3023 	strb.w	r3, [r2, #35]	; 0x23
+    } // End if.
+
+  // And return the status.
+  return lRetStatus;
+
+} // end ArcadeIT_SysTick_Init.
+ 8000280:	4770      	bx	lr
+ 8000282:	bf00      	nop
+ 8000284:	e000e010 	.word	0xe000e010
+ 8000288:	0002bf1f 	.word	0x0002bf1f
+ 800028c:	e000ed00 	.word	0xe000ed00
+
+08000290 <ArcadeIT_System_Init>:
+
+} // end ArcadeIT_System_Delay.
+
+// -----------------------------------------------------------------------------
+void ArcadeIT_System_Init (void)
+{
+ 8000290:	b082      	sub	sp, #8
+   * DESCRIPTION: This function initializes the core of the system
+   * PARAMETERS:  None.
+   * RETURNS:     Nothing.
+   */
+
+  __IO uint32_t lStartUpCounter = 0;
+ 8000292:	2300      	movs	r3, #0
+ 8000294:	9301      	str	r3, [sp, #4]
+
+  SCB->AIRCR = ((uint32_t)0x05FA0000) | NVIC_PriorityGroup_2; // Set the PRIGROUP[10:8] bits according to NVIC_PriorityGroup 2 value
+ 8000296:	4b38      	ldr	r3, [pc, #224]	; (8000378 <ArcadeIT_System_Init+0xe8>)
+ 8000298:	4a38      	ldr	r2, [pc, #224]	; (800037c <ArcadeIT_System_Init+0xec>)
+ 800029a:	60da      	str	r2, [r3, #12]
+  SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  // FPU settings: set CP10 and CP11 Full Access
+ 800029c:	f8d3 2088 	ldr.w	r2, [r3, #136]	; 0x88
+ 80002a0:	f442 0270 	orr.w	r2, r2, #15728640	; 0xf00000
+ 80002a4:	f8c3 2088 	str.w	r2, [r3, #136]	; 0x88
+  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET;     // Vector Table Relocation in Internal FLASH
+ 80002a8:	f04f 6200 	mov.w	r2, #134217728	; 0x8000000
+ 80002ac:	609a      	str	r2, [r3, #8]
+
+  // In ArcadeIT PLL (clocked by HSE) is used as System clock source
+  RCC->CR |= ((uint32_t)RCC_CR_HSEON);
+ 80002ae:	4a34      	ldr	r2, [pc, #208]	; (8000380 <ArcadeIT_System_Init+0xf0>)
+ 80002b0:	6813      	ldr	r3, [r2, #0]
+ 80002b2:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
+ 80002b6:	6013      	str	r3, [r2, #0]
+
+  // Wait till HSE is ready and if Time out is reached exit
+  while(((RCC->CR & RCC_CR_HSERDY) == 0) && (++lStartUpCounter != HSE_STARTUP_TIMEOUT));
+ 80002b8:	4b31      	ldr	r3, [pc, #196]	; (8000380 <ArcadeIT_System_Init+0xf0>)
+ 80002ba:	681b      	ldr	r3, [r3, #0]
+ 80002bc:	f413 3f00 	tst.w	r3, #131072	; 0x20000
+ 80002c0:	d105      	bne.n	80002ce <ArcadeIT_System_Init+0x3e>
+ 80002c2:	9b01      	ldr	r3, [sp, #4]
+ 80002c4:	3301      	adds	r3, #1
+ 80002c6:	9301      	str	r3, [sp, #4]
+ 80002c8:	4a2e      	ldr	r2, [pc, #184]	; (8000384 <ArcadeIT_System_Init+0xf4>)
+ 80002ca:	4293      	cmp	r3, r2
+ 80002cc:	d1f4      	bne.n	80002b8 <ArcadeIT_System_Init+0x28>
+
+  if (RCC->CR & RCC_CR_HSERDY)
+ 80002ce:	4b2c      	ldr	r3, [pc, #176]	; (8000380 <ArcadeIT_System_Init+0xf0>)
+ 80002d0:	681b      	ldr	r3, [r3, #0]
+ 80002d2:	f413 3f00 	tst.w	r3, #131072	; 0x20000
+ 80002d6:	d046      	beq.n	8000366 <ArcadeIT_System_Init+0xd6>
+  {
+    // Select regulator voltage output Scale 1 mode
+    RCC->APB1ENR |= RCC_APB1ENR_PWREN;
+ 80002d8:	4b29      	ldr	r3, [pc, #164]	; (8000380 <ArcadeIT_System_Init+0xf0>)
+ 80002da:	6c1a      	ldr	r2, [r3, #64]	; 0x40
+ 80002dc:	f042 5280 	orr.w	r2, r2, #268435456	; 0x10000000
+ 80002e0:	641a      	str	r2, [r3, #64]	; 0x40
+    PWR->CR |= PWR_CR_VOS;
+ 80002e2:	4929      	ldr	r1, [pc, #164]	; (8000388 <ArcadeIT_System_Init+0xf8>)
+ 80002e4:	680a      	ldr	r2, [r1, #0]
+ 80002e6:	f442 4240 	orr.w	r2, r2, #49152	; 0xc000
+ 80002ea:	600a      	str	r2, [r1, #0]
+    // HCLK = SYSCLK / 1
+    RCC->CFGR |= RCC_CFGR_HPRE_DIV1;
+ 80002ec:	689a      	ldr	r2, [r3, #8]
+ 80002ee:	609a      	str	r2, [r3, #8]
+    // PCLK2 = HCLK / 2
+    RCC->CFGR |= RCC_CFGR_PPRE2_DIV2;
+ 80002f0:	689a      	ldr	r2, [r3, #8]
+ 80002f2:	f442 4200 	orr.w	r2, r2, #32768	; 0x8000
+ 80002f6:	609a      	str	r2, [r3, #8]
+    // PCLK1 = HCLK / 4
+    RCC->CFGR |= RCC_CFGR_PPRE1_DIV4;
+ 80002f8:	689a      	ldr	r2, [r3, #8]
+ 80002fa:	f442 52a0 	orr.w	r2, r2, #5120	; 0x1400
+ 80002fe:	609a      	str	r2, [r3, #8]
+    // Configure the main PLL
+    RCC->PLLCFGR = PLL_M | (PLL_N << 6) | (((PLL_P >> 1) -1) << 16) | (RCC_PLLCFGR_PLLSRC_HSE) | (PLL_Q << 24);
+ 8000300:	4a22      	ldr	r2, [pc, #136]	; (800038c <ArcadeIT_System_Init+0xfc>)
+ 8000302:	605a      	str	r2, [r3, #4]
+    // Enable the main PLL
+    RCC->CR |= RCC_CR_PLLON;
+ 8000304:	681a      	ldr	r2, [r3, #0]
+ 8000306:	f042 7280 	orr.w	r2, r2, #16777216	; 0x1000000
+ 800030a:	601a      	str	r2, [r3, #0]
+    // Wait till the main PLL is ready
+    while((RCC->CR & RCC_CR_PLLRDY) == 0) {}
+ 800030c:	4b1c      	ldr	r3, [pc, #112]	; (8000380 <ArcadeIT_System_Init+0xf0>)
+ 800030e:	681b      	ldr	r3, [r3, #0]
+ 8000310:	f013 7f00 	tst.w	r3, #33554432	; 0x2000000
+ 8000314:	d0fa      	beq.n	800030c <ArcadeIT_System_Init+0x7c>
+    // Enable the Over-drive to extend the clock frequency to 180 Mhz
+    PWR->CR |= PWR_CR_ODEN;
+ 8000316:	4a1c      	ldr	r2, [pc, #112]	; (8000388 <ArcadeIT_System_Init+0xf8>)
+ 8000318:	6813      	ldr	r3, [r2, #0]
+ 800031a:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
+ 800031e:	6013      	str	r3, [r2, #0]
+    while((PWR->CSR & PWR_CSR_ODRDY) == 0) {}
+ 8000320:	4b19      	ldr	r3, [pc, #100]	; (8000388 <ArcadeIT_System_Init+0xf8>)
+ 8000322:	685b      	ldr	r3, [r3, #4]
+ 8000324:	f413 3f80 	tst.w	r3, #65536	; 0x10000
+ 8000328:	d0fa      	beq.n	8000320 <ArcadeIT_System_Init+0x90>
+    PWR->CR |= PWR_CR_ODSWEN;
+ 800032a:	4a17      	ldr	r2, [pc, #92]	; (8000388 <ArcadeIT_System_Init+0xf8>)
+ 800032c:	6813      	ldr	r3, [r2, #0]
+ 800032e:	f443 3300 	orr.w	r3, r3, #131072	; 0x20000
+ 8000332:	6013      	str	r3, [r2, #0]
+    while((PWR->CSR & PWR_CSR_ODSWRDY) == 0) {}
+ 8000334:	4b14      	ldr	r3, [pc, #80]	; (8000388 <ArcadeIT_System_Init+0xf8>)
+ 8000336:	685b      	ldr	r3, [r3, #4]
+ 8000338:	f413 3f00 	tst.w	r3, #131072	; 0x20000
+ 800033c:	d0fa      	beq.n	8000334 <ArcadeIT_System_Init+0xa4>
+    // Configure Flash prefetch, Instruction cache, Data cache and wait state
+    FLASH->ACR = FLASH_ACR_PRFTEN | FLASH_ACR_ICEN |FLASH_ACR_DCEN |FLASH_ACR_LATENCY_5WS;
+ 800033e:	4b14      	ldr	r3, [pc, #80]	; (8000390 <ArcadeIT_System_Init+0x100>)
+ 8000340:	f240 7205 	movw	r2, #1797	; 0x705
+ 8000344:	601a      	str	r2, [r3, #0]
+    // Select the main PLL as system clock source
+    RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
+ 8000346:	f5a3 6380 	sub.w	r3, r3, #1024	; 0x400
+ 800034a:	689a      	ldr	r2, [r3, #8]
+ 800034c:	f022 0203 	bic.w	r2, r2, #3
+ 8000350:	609a      	str	r2, [r3, #8]
+    RCC->CFGR |= RCC_CFGR_SW_PLL;
+ 8000352:	689a      	ldr	r2, [r3, #8]
+ 8000354:	f042 0202 	orr.w	r2, r2, #2
+ 8000358:	609a      	str	r2, [r3, #8]
+    // Wait till the main PLL is used as system clock source
+    while ((RCC->CFGR & (uint32_t)RCC_CFGR_SWS ) != RCC_CFGR_SWS_PLL) {}
+ 800035a:	4b09      	ldr	r3, [pc, #36]	; (8000380 <ArcadeIT_System_Init+0xf0>)
+ 800035c:	689b      	ldr	r3, [r3, #8]
+ 800035e:	f003 030c 	and.w	r3, r3, #12
+ 8000362:	2b08      	cmp	r3, #8
+ 8000364:	d1f9      	bne.n	800035a <ArcadeIT_System_Init+0xca>
+    // configuration. User can add here some code to deal with this error
+
+  } // end if
+
+  // HCLK counter, DWT struct is defined inside the core_cm4.h file
+  DWT->CTRL |= 1;  // enable the counter
+ 8000366:	4b0b      	ldr	r3, [pc, #44]	; (8000394 <ArcadeIT_System_Init+0x104>)
+ 8000368:	681a      	ldr	r2, [r3, #0]
+ 800036a:	f042 0201 	orr.w	r2, r2, #1
+ 800036e:	601a      	str	r2, [r3, #0]
+  DWT->CYCCNT = 0; // reset the counter
+ 8000370:	2200      	movs	r2, #0
+ 8000372:	605a      	str	r2, [r3, #4]
+
+} // end ArcadeIT_System_Init.
+ 8000374:	b002      	add	sp, #8
+ 8000376:	4770      	bx	lr
+ 8000378:	e000ed00 	.word	0xe000ed00
+ 800037c:	05fa0500 	.word	0x05fa0500
+ 8000380:	40023800 	.word	0x40023800
+ 8000384:	15752a00 	.word	0x15752a00
+ 8000388:	40007000 	.word	0x40007000
+ 800038c:	07402d04 	.word	0x07402d04
+ 8000390:	40023c00 	.word	0x40023c00
+ 8000394:	e0001000 	.word	0xe0001000
+
+08000398 <ArcadeIT_SysTick_Handler>:
+   * PARAMETERS:  TimeDivider: this is the number to divide the system clock by (i.e. 1000: MSec, 1000000: MicroSec... ).
+   * RETURNS:     Nothing
+   */
+
+  // Decrement timers synchronized to the MCU in ms.
+  gSystemTick++;
+ 8000398:	4a09      	ldr	r2, [pc, #36]	; (80003c0 <ArcadeIT_SysTick_Handler+0x28>)
+ 800039a:	6813      	ldr	r3, [r2, #0]
+ 800039c:	3301      	adds	r3, #1
+ 800039e:	6013      	str	r3, [r2, #0]
+
+  if (gSecondaryTimer > 0)
+ 80003a0:	4b08      	ldr	r3, [pc, #32]	; (80003c4 <ArcadeIT_SysTick_Handler+0x2c>)
+ 80003a2:	681b      	ldr	r3, [r3, #0]
+ 80003a4:	b11b      	cbz	r3, 80003ae <ArcadeIT_SysTick_Handler+0x16>
+    gSecondaryTimer--;
+ 80003a6:	4a07      	ldr	r2, [pc, #28]	; (80003c4 <ArcadeIT_SysTick_Handler+0x2c>)
+ 80003a8:	6813      	ldr	r3, [r2, #0]
+ 80003aa:	3b01      	subs	r3, #1
+ 80003ac:	6013      	str	r3, [r2, #0]
+
+  if (gSystemTimer > 0)
+ 80003ae:	4b06      	ldr	r3, [pc, #24]	; (80003c8 <ArcadeIT_SysTick_Handler+0x30>)
+ 80003b0:	681b      	ldr	r3, [r3, #0]
+ 80003b2:	b11b      	cbz	r3, 80003bc <ArcadeIT_SysTick_Handler+0x24>
+    gSystemTimer--;
+ 80003b4:	4a04      	ldr	r2, [pc, #16]	; (80003c8 <ArcadeIT_SysTick_Handler+0x30>)
+ 80003b6:	6813      	ldr	r3, [r2, #0]
+ 80003b8:	3b01      	subs	r3, #1
+ 80003ba:	6013      	str	r3, [r2, #0]
+    {
+     // ArcadeIT_Scheduler_Update ();
+
+    } // End if.
+
+} // end ArcadeIT_SysTick_Handler.
+ 80003bc:	4770      	bx	lr
+ 80003be:	bf00      	nop
+ 80003c0:	20000028 	.word	0x20000028
+ 80003c4:	20000020 	.word	0x20000020
+ 80003c8:	2000002c 	.word	0x2000002c
+
+080003cc <SysTick_Handler>:
+
+void SysTick_Handler(void)
+{
+ 80003cc:	b508      	push	{r3, lr}
+  ArcadeIT_SysTick_Handler();
+ 80003ce:	f7ff ffe3 	bl	8000398 <ArcadeIT_SysTick_Handler>
+
+} // End SysTick_Handler.
+ 80003d2:	bd08      	pop	{r3, pc}
+
+080003d4 <ArcadeIT_ArcadeIT_Start>:
+
+} // end ArcadeIT_PowerUP_Systems
+
+// /////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_ArcadeIT_Start (void)
+{
+ 80003d4:	b508      	push	{r3, lr}
+  //ArcadeIT_PowerUP_Systems ();
+
+  // ---------------------------------------------------------------------------
+  // Clock and timer system. Thjis must be called before the SD card initialization.
+  // 1ms System Tick timer.
+  ArcadeIT_SysTick_Init ();
+ 80003d6:	f7ff ff45 	bl	8000264 <ArcadeIT_SysTick_Init>
+
+  // ---------------------------------------------------------------------------
+  if (gSystems & ARCADEIT_SYSTEM_TESTPADS)
+ 80003da:	4b0a      	ldr	r3, [pc, #40]	; (8000404 <ArcadeIT_ArcadeIT_Start+0x30>)
+ 80003dc:	681b      	ldr	r3, [r3, #0]
+ 80003de:	f013 0f20 	tst.w	r3, #32
+ 80003e2:	d105      	bne.n	80003f0 <ArcadeIT_ArcadeIT_Start+0x1c>
+      //ArcadeIT_TestPad_Init (RCC_MCO2Source_HSE, RCC_MCO2Div_1);    //  8 MHz
+
+    } // End if.
+
+  // ---------------------------------------------------------------------------
+  if (gSystems & ARCADEIT_SYSTEM_STATUSLED)
+ 80003e4:	4b07      	ldr	r3, [pc, #28]	; (8000404 <ArcadeIT_ArcadeIT_Start+0x30>)
+ 80003e6:	681b      	ldr	r3, [r3, #0]
+ 80003e8:	f013 0f04 	tst.w	r3, #4
+ 80003ec:	d106      	bne.n	80003fc <ArcadeIT_ArcadeIT_Start+0x28>
+
+    } // End if.
+
+  // ---------------------------------------------------------------------------
 
 } // End ArcadeIT_Start
+ 80003ee:	bd08      	pop	{r3, pc}
+      ArcadeIT_TestPad_Init (RCC_MCO2Source_SYSCLK, RCC_MCO2Div_4);  //  45 MHz
+ 80003f0:	f04f 5140 	mov.w	r1, #805306368	; 0x30000000
+ 80003f4:	2000      	movs	r0, #0
+ 80003f6:	f000 f88f 	bl	8000518 <ArcadeIT_TestPad_Init>
+ 80003fa:	e7f3      	b.n	80003e4 <ArcadeIT_ArcadeIT_Start+0x10>
+      ArcadeIT_Status_LEDS_Init ();
+ 80003fc:	f000 f818 	bl	8000430 <ArcadeIT_Status_LEDS_Init>
+} // End ArcadeIT_Start
+ 8000400:	e7f5      	b.n	80003ee <ArcadeIT_ArcadeIT_Start+0x1a>
+ 8000402:	bf00      	nop
+ 8000404:	20000030 	.word	0x20000030
+
+08000408 <ArcadeIT_Test_Bench>:
 
 // ////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_Test_Bench (void)
 {
- 80002e0:	b480      	push	{r7}
- 80002e2:	af00      	add	r7, sp, #0
+ 8000408:	b508      	push	{r3, lr}
   // The following variables hold the flags that start the features/peripherals
   // of the ArcadeIT System. It could be possible to configure the ArcadeIT System from a
   // *.ini text file on the SD Card, or other sources.
 
   // System features.
   gSystems = NONE
- 80002e4:	4b04      	ldr	r3, [pc, #16]	; (80002f8 <ArcadeIT_Test_Bench+0x18>)
- 80002e6:	2200      	movs	r2, #0
- 80002e8:	601a      	str	r2, [r3, #0]
+ 800040a:	4b06      	ldr	r3, [pc, #24]	; (8000424 <ArcadeIT_Test_Bench+0x1c>)
+ 800040c:	2224      	movs	r2, #36	; 0x24
+ 800040e:	601a      	str	r2, [r3, #0]
       //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
       //| ARCADEIT_SYSTEM_DMM           // The custom ArcadeIt Dynamic Memory Manager
       //| ARCADEIT_SYSTEM_SCHEDULER     // The task scheduler system.
       ;
 
   gStorage = NONE
- 80002ea:	4b04      	ldr	r3, [pc, #16]	; (80002fc <ArcadeIT_Test_Bench+0x1c>)
- 80002ec:	2200      	movs	r2, #0
- 80002ee:	601a      	str	r2, [r3, #0]
+ 8000410:	2300      	movs	r3, #0
+ 8000412:	4a05      	ldr	r2, [pc, #20]	; (8000428 <ArcadeIT_Test_Bench+0x20>)
+ 8000414:	6013      	str	r3, [r2, #0]
       //| ARCADEIT_STORAGE_RAM_DISK     // Ram disk with a FAT File system on the SRAM expansion
       //| ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
       ;
 
   gDevices = NONE
- 80002f0:	4b03      	ldr	r3, [pc, #12]	; (8000300 <ArcadeIT_Test_Bench+0x20>)
- 80002f2:	2200      	movs	r2, #0
- 80002f4:	601a      	str	r2, [r3, #0]
+ 8000416:	4a05      	ldr	r2, [pc, #20]	; (800042c <ArcadeIT_Test_Bench+0x24>)
+ 8000418:	6013      	str	r3, [r2, #0]
+       //| ARCADEIT_DEVICE_LCDS         // LCDs port
        //| ARCADEIT_DEVICE_USB          // USB port
        //| ARCADEIT_DEVICE_AUDIO        // Audio DAC port
        ;
 
+  ArcadeIT_ArcadeIT_Start();
+ 800041a:	f7ff ffdb 	bl	80003d4 <ArcadeIT_ArcadeIT_Start>
 
   while (1)
- 80002f6:	e7fe      	b.n	80002f6 <ArcadeIT_Test_Bench+0x16>
- 80002f8:	20000020 	.word	0x20000020
- 80002fc:	20000024 	.word	0x20000024
- 8000300:	2000001c 	.word	0x2000001c
+  {
+    ArcadeIT_Status_LED1_Toggle();
+ 800041e:	f000 f85d 	bl	80004dc <ArcadeIT_Status_LED1_Toggle>
+ 8000422:	e7fc      	b.n	800041e <ArcadeIT_Test_Bench+0x16>
+ 8000424:	20000030 	.word	0x20000030
+ 8000428:	20000024 	.word	0x20000024
+ 800042c:	2000001c 	.word	0x2000001c
 
-08000304 <__libc_init_array>:
- 8000304:	b570      	push	{r4, r5, r6, lr}
- 8000306:	4e0d      	ldr	r6, [pc, #52]	; (800033c <__libc_init_array+0x38>)
- 8000308:	4c0d      	ldr	r4, [pc, #52]	; (8000340 <__libc_init_array+0x3c>)
- 800030a:	1ba4      	subs	r4, r4, r6
- 800030c:	10a4      	asrs	r4, r4, #2
- 800030e:	2500      	movs	r5, #0
- 8000310:	42a5      	cmp	r5, r4
- 8000312:	d109      	bne.n	8000328 <__libc_init_array+0x24>
- 8000314:	4e0b      	ldr	r6, [pc, #44]	; (8000344 <__libc_init_array+0x40>)
- 8000316:	4c0c      	ldr	r4, [pc, #48]	; (8000348 <__libc_init_array+0x44>)
- 8000318:	f000 f818 	bl	800034c <_init>
- 800031c:	1ba4      	subs	r4, r4, r6
- 800031e:	10a4      	asrs	r4, r4, #2
- 8000320:	2500      	movs	r5, #0
- 8000322:	42a5      	cmp	r5, r4
- 8000324:	d105      	bne.n	8000332 <__libc_init_array+0x2e>
- 8000326:	bd70      	pop	{r4, r5, r6, pc}
- 8000328:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 800032c:	4798      	blx	r3
- 800032e:	3501      	adds	r5, #1
- 8000330:	e7ee      	b.n	8000310 <__libc_init_array+0xc>
- 8000332:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 8000336:	4798      	blx	r3
- 8000338:	3501      	adds	r5, #1
- 800033a:	e7f2      	b.n	8000322 <__libc_init_array+0x1e>
- 800033c:	08000364 	.word	0x08000364
- 8000340:	08000364 	.word	0x08000364
- 8000344:	08000364 	.word	0x08000364
- 8000348:	08000368 	.word	0x08000368
+08000430 <ArcadeIT_Status_LEDS_Init>:
+ */
 
-0800034c <_init>:
- 800034c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800034e:	bf00      	nop
- 8000350:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8000352:	bc08      	pop	{r3}
- 8000354:	469e      	mov	lr, r3
- 8000356:	4770      	bx	lr
+  uint32_t lPinPosition = 0;
 
-08000358 <_fini>:
- 8000358:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800035a:	bf00      	nop
- 800035c:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800035e:	bc08      	pop	{r3}
- 8000360:	469e      	mov	lr, r3
- 8000362:	4770      	bx	lr
+  // Turn on the MCU peripheral by enabling its Clock.
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOH) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOH;
+ 8000430:	4b28      	ldr	r3, [pc, #160]	; (80004d4 <ArcadeIT_Status_LEDS_Init+0xa4>)
+ 8000432:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 8000434:	f013 0f80 	tst.w	r3, #128	; 0x80
+ 8000438:	d104      	bne.n	8000444 <ArcadeIT_Status_LEDS_Init+0x14>
+ 800043a:	4a26      	ldr	r2, [pc, #152]	; (80004d4 <ArcadeIT_Status_LEDS_Init+0xa4>)
+ 800043c:	6b13      	ldr	r3, [r2, #48]	; 0x30
+ 800043e:	f043 0380 	orr.w	r3, r3, #128	; 0x80
+ 8000442:	6313      	str	r3, [r2, #48]	; 0x30
+  // level as default.
+  // -----------------------
+  lPinPosition = (SYS_STATUS_LED1_PIN_NO * 2); // the position is a multiple of 2
+
+  // GPIO pin(PH2) in output
+  SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER2;
+ 8000444:	4b24      	ldr	r3, [pc, #144]	; (80004d8 <ArcadeIT_Status_LEDS_Init+0xa8>)
+ 8000446:	681a      	ldr	r2, [r3, #0]
+ 8000448:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 800044c:	601a      	str	r2, [r3, #0]
+  SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
+ 800044e:	681a      	ldr	r2, [r3, #0]
+ 8000450:	f042 0210 	orr.w	r2, r2, #16
+ 8000454:	601a      	str	r2, [r3, #0]
+
+  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
+  // to test 180MHz, you have to set the divider at least 2
+  SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
+ 8000456:	689a      	ldr	r2, [r3, #8]
+ 8000458:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 800045c:	609a      	str	r2, [r3, #8]
+  SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+ 800045e:	689a      	ldr	r2, [r3, #8]
+ 8000460:	f042 0230 	orr.w	r2, r2, #48	; 0x30
+ 8000464:	609a      	str	r2, [r3, #8]
+
+  // type output
+  SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
+ 8000466:	685a      	ldr	r2, [r3, #4]
+ 8000468:	f022 0204 	bic.w	r2, r2, #4
+ 800046c:	605a      	str	r2, [r3, #4]
+  SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED1_PIN_NO);
+ 800046e:	685a      	ldr	r2, [r3, #4]
+ 8000470:	605a      	str	r2, [r3, #4]
+
+  // pull up configuration
+  SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
+ 8000472:	68da      	ldr	r2, [r3, #12]
+ 8000474:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 8000478:	60da      	str	r2, [r3, #12]
+  SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
+ 800047a:	68da      	ldr	r2, [r3, #12]
+ 800047c:	f042 0210 	orr.w	r2, r2, #16
+ 8000480:	60da      	str	r2, [r3, #12]
+
+  // -----------------------
+  lPinPosition = (SYS_STATUS_LED2_PIN_NO * 2); // the position is a multiple of 2
+
+  // GPIO pin(PH3) in output
+  SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER3;
+ 8000482:	681a      	ldr	r2, [r3, #0]
+ 8000484:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 8000488:	601a      	str	r2, [r3, #0]
+  SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
+ 800048a:	681a      	ldr	r2, [r3, #0]
+ 800048c:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 8000490:	601a      	str	r2, [r3, #0]
+
+  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
+  // to test 180MHz, you have to set the divider at least 2
+  SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
+ 8000492:	689a      	ldr	r2, [r3, #8]
+ 8000494:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 8000498:	609a      	str	r2, [r3, #8]
+  SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+ 800049a:	689a      	ldr	r2, [r3, #8]
+ 800049c:	f042 02c0 	orr.w	r2, r2, #192	; 0xc0
+ 80004a0:	609a      	str	r2, [r3, #8]
+
+  // type output
+  SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
+ 80004a2:	685a      	ldr	r2, [r3, #4]
+ 80004a4:	f022 0208 	bic.w	r2, r2, #8
+ 80004a8:	605a      	str	r2, [r3, #4]
+  SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
+ 80004aa:	685a      	ldr	r2, [r3, #4]
+ 80004ac:	605a      	str	r2, [r3, #4]
+
+  // pull up configuration
+  SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
+ 80004ae:	68da      	ldr	r2, [r3, #12]
+ 80004b0:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 80004b4:	60da      	str	r2, [r3, #12]
+  SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+ 80004b6:	68da      	ldr	r2, [r3, #12]
+ 80004b8:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+ 80004bc:	60da      	str	r2, [r3, #12]
+
+  // -----------------------
+  // Put LEDs line LOW.
+  SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+ 80004be:	f503 53a0 	add.w	r3, r3, #5120	; 0x1400
+ 80004c2:	695a      	ldr	r2, [r3, #20]
+ 80004c4:	f022 0204 	bic.w	r2, r2, #4
+ 80004c8:	615a      	str	r2, [r3, #20]
+  SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
+ 80004ca:	695a      	ldr	r2, [r3, #20]
+ 80004cc:	f022 0208 	bic.w	r2, r2, #8
+ 80004d0:	615a      	str	r2, [r3, #20]
+  {
+    //ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
+
+  } // End if.
+
+} // End ArcadeIT_Status_LEDS_Init.
+ 80004d2:	4770      	bx	lr
+ 80004d4:	40023800 	.word	0x40023800
+ 80004d8:	40020800 	.word	0x40020800
+
+080004dc <ArcadeIT_Status_LED1_Toggle>:
+  * PARAMETERS:  None.
+  * RETURNS:     Nothing.
+  */
+
+  // Set LEDs line LOW or HIGH depending the current status of the LED.
+  if (SYS_STATUS_LED1_PER->ODR & SYS_STATUS_LED1_PIN)
+ 80004dc:	4b08      	ldr	r3, [pc, #32]	; (8000500 <ArcadeIT_Status_LED1_Toggle+0x24>)
+ 80004de:	695b      	ldr	r3, [r3, #20]
+ 80004e0:	f013 0f04 	tst.w	r3, #4
+ 80004e4:	d105      	bne.n	80004f2 <ArcadeIT_Status_LED1_Toggle+0x16>
+  {
+    SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+  }
+  else
+  {
+    SYS_STATUS_LED1_PER->ODR |= SYS_STATUS_LED1_PIN;
+ 80004e6:	4a06      	ldr	r2, [pc, #24]	; (8000500 <ArcadeIT_Status_LED1_Toggle+0x24>)
+ 80004e8:	6953      	ldr	r3, [r2, #20]
+ 80004ea:	f043 0304 	orr.w	r3, r3, #4
+ 80004ee:	6153      	str	r3, [r2, #20]
+
+  } // End if.
+
+} // End ArcadeIT_Status_LED1_Toggle.
+ 80004f0:	4770      	bx	lr
+    SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+ 80004f2:	4a03      	ldr	r2, [pc, #12]	; (8000500 <ArcadeIT_Status_LED1_Toggle+0x24>)
+ 80004f4:	6953      	ldr	r3, [r2, #20]
+ 80004f6:	f023 0304 	bic.w	r3, r3, #4
+ 80004fa:	6153      	str	r3, [r2, #20]
+ 80004fc:	4770      	bx	lr
+ 80004fe:	bf00      	nop
+ 8000500:	40021c00 	.word	0x40021c00
+
+08000504 <ArcadeIT_TestPad_Set>:
+  *  RCC_MCO2Div_4
+  *  RCC_MCO2Div_5
+  *
+  */
+
+  uint32_t lTmpReg = RCC->CFGR;
+ 8000504:	4a03      	ldr	r2, [pc, #12]	; (8000514 <ArcadeIT_TestPad_Set+0x10>)
+ 8000506:	6893      	ldr	r3, [r2, #8]
+  lTmpReg  &= CFGR_MCO2_RESET_MASK;                 // Clear MCO2 and MCO2PRE[2:0] bits
+ 8000508:	f023 4378 	bic.w	r3, r3, #4160749568	; 0xf8000000
+  lTmpReg  |= pFrequencySystem | pFrequencyDivider; // Select MCO2 clock source and prescaler
+ 800050c:	4301      	orrs	r1, r0
+ 800050e:	4319      	orrs	r1, r3
+  RCC->CFGR = lTmpReg;
+ 8000510:	6091      	str	r1, [r2, #8]
+
+} // End ArcadeIT_TestPad_Set.
+ 8000512:	4770      	bx	lr
+ 8000514:	40023800 	.word	0x40023800
+
+08000518 <ArcadeIT_TestPad_Init>:
+void ArcadeIT_TestPad_Init
+(
+    uint32_t pFrequencySystem,  // What frequency source to test.
+    uint32_t pFrequencyDivider  // What divider to test.
+)
+{
+ 8000518:	b508      	push	{r3, lr}
+  * RETURNS:     Nothing.
+  */
+
+  uint32_t lPinPosition = (SYS_TESTPADS_PIN_NO * 2);
+
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
+ 800051a:	4b16      	ldr	r3, [pc, #88]	; (8000574 <ArcadeIT_TestPad_Init+0x5c>)
+ 800051c:	6b1b      	ldr	r3, [r3, #48]	; 0x30
+ 800051e:	f013 0f04 	tst.w	r3, #4
+ 8000522:	d104      	bne.n	800052e <ArcadeIT_TestPad_Init+0x16>
+ 8000524:	4a13      	ldr	r2, [pc, #76]	; (8000574 <ArcadeIT_TestPad_Init+0x5c>)
+ 8000526:	6b13      	ldr	r3, [r2, #48]	; 0x30
+ 8000528:	f043 0304 	orr.w	r3, r3, #4
+ 800052c:	6313      	str	r3, [r2, #48]	; 0x30
+
+  // Configure MCO2 pin(PC9) in alternate function 0
+  SYS_TESTPADS_PER->MODER   &= ~(GPIO_MODER_MODER0 << lPinPosition);
+ 800052e:	4b12      	ldr	r3, [pc, #72]	; (8000578 <ArcadeIT_TestPad_Init+0x60>)
+ 8000530:	681a      	ldr	r2, [r3, #0]
+ 8000532:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 8000536:	601a      	str	r2, [r3, #0]
+  SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
+ 8000538:	681a      	ldr	r2, [r3, #0]
+ 800053a:	f442 2200 	orr.w	r2, r2, #524288	; 0x80000
+ 800053e:	601a      	str	r2, [r3, #0]
+
+  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
+  // to test 180MHz, you have to set the divider at least 2
+  SYS_TESTPADS_PER->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << lPinPosition);
+ 8000540:	689a      	ldr	r2, [r3, #8]
+ 8000542:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 8000546:	609a      	str	r2, [r3, #8]
+  SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+ 8000548:	689a      	ldr	r2, [r3, #8]
+ 800054a:	f442 2240 	orr.w	r2, r2, #786432	; 0xc0000
+ 800054e:	609a      	str	r2, [r3, #8]
+
+  // type output
+  SYS_TESTPADS_PER->OTYPER  &= ~(GPIO_OTYPER_OT_0 << SYS_TESTPADS_PIN_NO);
+ 8000550:	685a      	ldr	r2, [r3, #4]
+ 8000552:	f422 7200 	bic.w	r2, r2, #512	; 0x200
+ 8000556:	605a      	str	r2, [r3, #4]
+  SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
+ 8000558:	685a      	ldr	r2, [r3, #4]
+ 800055a:	605a      	str	r2, [r3, #4]
+
+  // pull up configuration
+  SYS_TESTPADS_PER->PUPDR   &= ~(GPIO_PUPDR_PUPDR0 << lPinPosition);
+ 800055c:	68da      	ldr	r2, [r3, #12]
+ 800055e:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 8000562:	60da      	str	r2, [r3, #12]
+  SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
+ 8000564:	68da      	ldr	r2, [r3, #12]
+ 8000566:	f442 2280 	orr.w	r2, r2, #262144	; 0x40000
+ 800056a:	60da      	str	r2, [r3, #12]
+
+  ArcadeIT_TestPad_Set(pFrequencySystem, pFrequencyDivider);
+ 800056c:	f7ff ffca 	bl	8000504 <ArcadeIT_TestPad_Set>
+    // Starts and configure the serial port.
+    //ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);
+
+  } // End if.
+
+} // End ArcadeIT_TestPads_Init.
+ 8000570:	bd08      	pop	{r3, pc}
+ 8000572:	bf00      	nop
+ 8000574:	40023800 	.word	0x40023800
+ 8000578:	40020800 	.word	0x40020800
+
+0800057c <__libc_init_array>:
+ 800057c:	b570      	push	{r4, r5, r6, lr}
+ 800057e:	4e0d      	ldr	r6, [pc, #52]	; (80005b4 <__libc_init_array+0x38>)
+ 8000580:	4c0d      	ldr	r4, [pc, #52]	; (80005b8 <__libc_init_array+0x3c>)
+ 8000582:	1ba4      	subs	r4, r4, r6
+ 8000584:	10a4      	asrs	r4, r4, #2
+ 8000586:	2500      	movs	r5, #0
+ 8000588:	42a5      	cmp	r5, r4
+ 800058a:	d109      	bne.n	80005a0 <__libc_init_array+0x24>
+ 800058c:	4e0b      	ldr	r6, [pc, #44]	; (80005bc <__libc_init_array+0x40>)
+ 800058e:	4c0c      	ldr	r4, [pc, #48]	; (80005c0 <__libc_init_array+0x44>)
+ 8000590:	f000 f818 	bl	80005c4 <_init>
+ 8000594:	1ba4      	subs	r4, r4, r6
+ 8000596:	10a4      	asrs	r4, r4, #2
+ 8000598:	2500      	movs	r5, #0
+ 800059a:	42a5      	cmp	r5, r4
+ 800059c:	d105      	bne.n	80005aa <__libc_init_array+0x2e>
+ 800059e:	bd70      	pop	{r4, r5, r6, pc}
+ 80005a0:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80005a4:	4798      	blx	r3
+ 80005a6:	3501      	adds	r5, #1
+ 80005a8:	e7ee      	b.n	8000588 <__libc_init_array+0xc>
+ 80005aa:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80005ae:	4798      	blx	r3
+ 80005b0:	3501      	adds	r5, #1
+ 80005b2:	e7f2      	b.n	800059a <__libc_init_array+0x1e>
+ 80005b4:	080005dc 	.word	0x080005dc
+ 80005b8:	080005dc 	.word	0x080005dc
+ 80005bc:	080005dc 	.word	0x080005dc
+ 80005c0:	080005e0 	.word	0x080005e0
+
+080005c4 <_init>:
+ 80005c4:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80005c6:	bf00      	nop
+ 80005c8:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80005ca:	bc08      	pop	{r3}
+ 80005cc:	469e      	mov	lr, r3
+ 80005ce:	4770      	bx	lr
+
+080005d0 <_fini>:
+ 80005d0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80005d2:	bf00      	nop
+ 80005d4:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80005d6:	bc08      	pop	{r3}
+ 80005d8:	469e      	mov	lr, r3
+ 80005da:	4770      	bx	lr

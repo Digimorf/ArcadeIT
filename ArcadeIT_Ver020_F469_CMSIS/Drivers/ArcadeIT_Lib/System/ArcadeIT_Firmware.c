@@ -60,10 +60,13 @@
 #include "System/Peripherals/ArcadeIT_RTC.h"
 #include "System/Peripherals/ArcadeIT_Scheduler.h"
 #include "System/Peripherals/ArcadeIT_DMM.h"
+#endif
 
 // ArcadeIT! Peripherals and buses.
 #include "System/Peripherals/ArcadeIT_TestPads.h"
 #include "System/Peripherals/ArcadeIT_Status_LEDs.h"
+
+#if 0
 #include "System/Peripherals/ArcadeIT_Serial_Port.h"
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
 #include "System/Peripherals/ArcadeIT_SPI_Port.h"
@@ -119,9 +122,9 @@ extern Shell_Command_t gCurrentCommand;
 
 uint32_t gDevices = 0, gSystems = 0, gStorage = 0; // Flags for the activation of the systems
 
-/*
-uint32_t gDevices = 0, gSystems = 0, gStorage = 0;
+__IO uint32_t gSystemTimer = 0, gSecondaryTimer = 0, gSystemTick = 0;
 
+/*
 uint8_t gTerminal = FALSE;
 
 __IO Video_Driver_t gVideoDriver, gVideoDriverBackup;
@@ -174,7 +177,7 @@ int ArcadeIT_SysTick_Init (void)
   int lRetStatus = FALSE;
 
   // Setup SysTick Timer interrupts.
-  lRetStatus = SysTick_Config (ARCADEIT_HCLKS_PER_MS);
+  lRetStatus = SysTick_Config(ARCADEIT_HCLKS_PER_MS);
 
   // Sets the priority of the interrupt
   NVIC_SetPriority (SysTick_IRQn, NVIC_SYSTICK_PRIORITY << 2);
@@ -342,6 +345,12 @@ void ArcadeIT_SysTick_Handler (void)
 
 } // end ArcadeIT_SysTick_Handler.
 
+void SysTick_Handler(void)
+{
+  ArcadeIT_SysTick_Handler();
+
+} // End SysTick_Handler.
+
 // /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_PowerUP_Systems (void)
 {
@@ -449,7 +458,7 @@ void ArcadeIT_PowerUP_Systems (void)
 } // end ArcadeIT_PowerUP_Systems
 
 // /////////////////////////////////////////////////////////////////////////////
-void ArcadeIT_Start (void)
+void ArcadeIT_ArcadeIT_Start (void)
 {
   /*
    * DESCRIPTION: Starts all the systems according to the activation flags stored
@@ -458,7 +467,53 @@ void ArcadeIT_Start (void)
    * RETURNS:     Nothing
    */
 
-  ArcadeIT_PowerUP_Systems ();
+  //ArcadeIT_PowerUP_Systems ();
+
+  // ---------------------------------------------------------------------------
+  // Clock and timer system. Thjis must be called before the SD card initialization.
+  // 1ms System Tick timer.
+  ArcadeIT_SysTick_Init ();
+
+  // ---------------------------------------------------------------------------
+  if (gSystems & ARCADEIT_SYSTEM_TESTPADS)
+    {
+      /*
+      *
+      * Source
+      *  RCC_MCO2Source_SYSCLK
+      *  RCC_MCO2Source_PLLI2SCLK
+      *  RCC_MCO2Source_HSE
+      *  RCC_MCO2Source_PLLCLK
+      *
+      * Divider
+      *  RCC_MCO2Div_1
+      *  RCC_MCO2Div_2
+      *  RCC_MCO2Div_3
+      *  RCC_MCO2Div_4
+      *  RCC_MCO2Div_5
+      *
+      *  You can test the correct frequency of the MCU by using an oscilloscope
+      *  or a logic analyzer on the testpad of the motherboard. The tests below
+      *  should give you the values shown.
+      *
+      */
+
+      ArcadeIT_TestPad_Init (RCC_MCO2Source_SYSCLK, RCC_MCO2Div_4);  //  45 MHz
+
+      //ArcadeIT_TestPad_Init (RCC_MCO2Source_PLLCLK, RCC_MCO2Div_4); // 45 MHz
+      //ArcadeIT_TestPad_Init (RCC_MCO2Source_HSE, RCC_MCO2Div_1);    //  8 MHz
+
+    } // End if.
+
+  // ---------------------------------------------------------------------------
+  if (gSystems & ARCADEIT_SYSTEM_STATUSLED)
+    {
+      // Start LED Status system.
+      ArcadeIT_Status_LEDS_Init ();
+
+    } // End if.
+
+  // ---------------------------------------------------------------------------
 
 } // End ArcadeIT_Start
 
@@ -472,8 +527,8 @@ void ArcadeIT_Test_Bench (void)
   // System features.
   gSystems = NONE
       //| ARCADEIT_SYSTEM_RTC           // Real time clock
-      //| ARCADEIT_SYSTEM_STATUSLED     // Two Status LEDs
-      //| ARCADEIT_SYSTEM_TESTPADS      // System clock test pads
+        | ARCADEIT_SYSTEM_STATUSLED     // Two Status LEDs
+        | ARCADEIT_SYSTEM_TESTPADS      // System clock test pads
       //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
       //| ARCADEIT_SYSTEM_DMM           // The custom ArcadeIt Dynamic Memory Manager
       //| ARCADEIT_SYSTEM_SCHEDULER     // The task scheduler system.
@@ -496,9 +551,18 @@ void ArcadeIT_Test_Bench (void)
        //| ARCADEIT_DEVICE_AUDIO        // Audio DAC port
        ;
 
+  ArcadeIT_ArcadeIT_Start();
 
   while (1)
   {
+    ArcadeIT_Status_LED1_Toggle();
+    ArcadeIT_System_Delay(250);
+    ArcadeIT_Status_LED2_Toggle();
+    ArcadeIT_System_Delay(250);
+
+    //ArcadeIT_Status_LED1_Toggle();
+    //ArcadeIT_Status_LED2_Toggle();
+    //ArcadeIT_System_Delay(500);
 
   } // End while.
 

@@ -90,13 +90,13 @@
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "../ArcadeIT_Common.h"
-#include "../ArcadeIT_Utilities.h"
-#include "../ArcadeIT_Firmware.h"
+#include "System/ArcadeIT_Common.h"
+#include "System/ArcadeIT_Utilities.h"
+#include "System/ArcadeIT_Firmware.h"
 
 // ArcadeIT! Peripherals and buses.
-#include "ArcadeIT_TestPads.h"
-//#include "ArcadeIT_Serial_Port.h"
+#include "System/Peripherals/ArcadeIT_TestPads.h"
+//#include "System/Peripherals/ArcadeIT_Serial_Port.h"
 
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
