@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   000001b4  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00000424  080001b4  080001b4  000101b4  2**2
+  1 .text         00000430  080001b4  080001b4  000101b4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  080005d8  080005e0  000105e0  2**0
+  2 .rodata       00000000  080005e4  080005ec  000105ec  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  080005d8  080005d8  000105e0  2**0
+  3 .ARM.extab    00000000  080005e4  080005e4  000105ec  2**0
                   CONTENTS
-  4 .ARM          00000000  080005d8  080005d8  000105e0  2**0
+  4 .ARM          00000000  080005e4  080005e4  000105ec  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080005d8  080005e0  000105e0  2**0
+  5 .preinit_array 00000000  080005e4  080005ec  000105ec  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080005d8  080005d8  000105d8  2**2
+  6 .init_array   00000004  080005e4  080005e4  000105e4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080005dc  080005dc  000105dc  2**2
+  7 .fini_array   00000004  080005e8  080005e8  000105e8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000000  20000000  20000000  000105e0  2**0
+  8 .data         00000000  20000000  20000000  000105ec  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000034  20000000  080005e0  00020000  2**2
+  9 .bss          00000034  20000000  080005ec  00020000  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20000034  080005e0  00020034  2**0
+ 10 ._user_heap_stack 00000604  20000034  080005ec  00020034  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  000105e0  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000105ec  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00003c8b  00000000  00000000  00010610  2**0
+ 12 .debug_info   00003cac  00000000  00000000  0001061c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000a6f  00000000  00000000  0001429b  2**0
+ 13 .debug_abbrev 00000a80  00000000  00000000  000142c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000178  00000000  00000000  00014d10  2**3
+ 14 .debug_aranges 00000178  00000000  00000000  00014d48  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000208  00000000  00000000  00014e88  2**3
+ 15 .debug_ranges 00000208  00000000  00000000  00014ec0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  0002204c  00000000  00000000  00015090  2**0
+ 16 .debug_macro  00022069  00000000  00000000  000150c8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00002675  00000000  00000000  000370dc  2**0
+ 17 .debug_line   0000267b  00000000  00000000  00037131  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000b827c  00000000  00000000  00039751  2**0
+ 18 .debug_str    000b828a  00000000  00000000  000397ac  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000f19cd  2**0
+ 19 .comment      0000007b  00000000  00000000  000f1a36  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000002ac  00000000  00000000  000f1a48  2**2
+ 20 .debug_frame  000002b0  00000000  00000000  000f1ab4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 21 .debug_loc    000001bc  00000000  00000000  000f1cf4  2**0
+ 21 .debug_loc    000001e5  00000000  00000000  000f1d64  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -64,7 +64,7 @@ Disassembly of section .text:
  80001ca:	bd10      	pop	{r4, pc}
  80001cc:	20000000 	.word	0x20000000
  80001d0:	00000000 	.word	0x00000000
- 80001d4:	080005c0 	.word	0x080005c0
+ 80001d4:	080005cc 	.word	0x080005cc
 
 080001d8 <frame_dummy>:
  80001d8:	b508      	push	{r3, lr}
@@ -76,7 +76,7 @@ Disassembly of section .text:
  80001e6:	bd08      	pop	{r3, pc}
  80001e8:	00000000 	.word	0x00000000
  80001ec:	20000004 	.word	0x20000004
- 80001f0:	080005c0 	.word	0x080005c0
+ 80001f0:	080005cc 	.word	0x080005cc
 
 080001f4 <main>:
 // /////////////////////////////////////////////////////////////////////////////
@@ -226,7 +226,7 @@ LoopFillZerobss:
  800024a:	f000 f813 	bl	8000274 <ArcadeIT_System_Init>
 /* Call static constructors */
     bl __libc_init_array
- 800024e:	f000 f993 	bl	8000578 <__libc_init_array>
+ 800024e:	f000 f999 	bl	8000584 <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
  8000252:	f7ff ffcf 	bl	80001f4 <main>
@@ -235,7 +235,7 @@ LoopFillZerobss:
  ldr   sp, =_estack     /* set stack pointer */
  8000258:	20050000 	.word	0x20050000
   ldr  r3, =_sidata
- 800025c:	080005e0 	.word	0x080005e0
+ 800025c:	080005ec 	.word	0x080005ec
   ldr  r0, =_sdata
  8000260:	20000000 	.word	0x20000000
   ldr  r3, =_edata
@@ -539,10 +539,10 @@ void ArcadeIT_ArcadeIT_Start (void)
  80003c6:	bd38      	pop	{r3, r4, r5, pc}
  80003c8:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
       ArcadeIT_Status_LEDS_Init ();
- 80003cc:	f000 b830 	b.w	8000430 <ArcadeIT_Status_LEDS_Init>
+ 80003cc:	f000 b836 	b.w	800043c <ArcadeIT_Status_LEDS_Init>
       ArcadeIT_TestPad_Init (RCC_MCO2Source_SYSCLK, RCC_MCO2Div_4);  //  45 MHz
  80003d0:	f04f 5140 	mov.w	r1, #805306368	; 0x30000000
- 80003d4:	f000 f89a 	bl	800050c <ArcadeIT_TestPad_Init>
+ 80003d4:	f000 f8a0 	bl	8000518 <ArcadeIT_TestPad_Init>
  80003d8:	6823      	ldr	r3, [r4, #0]
  80003da:	e7f2      	b.n	80003c2 <ArcadeIT_ArcadeIT_Start+0x26>
  80003dc:	e000e010 	.word	0xe000e010
@@ -557,370 +557,377 @@ void ArcadeIT_ArcadeIT_Start (void)
 
   // System features.
   gSystems = NONE
- 80003ec:	480c      	ldr	r0, [pc, #48]	; (8000420 <ArcadeIT_Test_Bench+0x34>)
+ 80003ec:	480f      	ldr	r0, [pc, #60]	; (800042c <ArcadeIT_Test_Bench+0x40>)
       //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
       //| ARCADEIT_SYSTEM_DMM           // The custom ArcadeIt Dynamic Memory Manager
       //| ARCADEIT_SYSTEM_SCHEDULER     // The task scheduler system.
       ;
 
   gStorage = NONE
- 80003ee:	490d      	ldr	r1, [pc, #52]	; (8000424 <ArcadeIT_Test_Bench+0x38>)
+ 80003ee:	4910      	ldr	r1, [pc, #64]	; (8000430 <ArcadeIT_Test_Bench+0x44>)
       //| ARCADEIT_STORAGE_RAM_DISK     // Ram disk with a FAT File system on the SRAM expansion
       //| ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
       ;
 
   gDevices = NONE
- 80003f0:	4a0d      	ldr	r2, [pc, #52]	; (8000428 <ArcadeIT_Test_Bench+0x3c>)
- 80003f2:	4c0e      	ldr	r4, [pc, #56]	; (800042c <ArcadeIT_Test_Bench+0x40>)
+ 80003f0:	4a10      	ldr	r2, [pc, #64]	; (8000434 <ArcadeIT_Test_Bench+0x48>)
 {
- 80003f4:	b508      	push	{r3, lr}
+ 80003f2:	b570      	push	{r4, r5, r6, lr}
+  gStorage = NONE
+ 80003f4:	2300      	movs	r3, #0
   gSystems = NONE
  80003f6:	2524      	movs	r5, #36	; 0x24
+ 80003f8:	6005      	str	r5, [r0, #0]
   gStorage = NONE
- 80003f8:	2300      	movs	r3, #0
-  gSystems = NONE
- 80003fa:	6005      	str	r5, [r0, #0]
-  gStorage = NONE
- 80003fc:	600b      	str	r3, [r1, #0]
+ 80003fa:	600b      	str	r3, [r1, #0]
   gDevices = NONE
- 80003fe:	6013      	str	r3, [r2, #0]
+ 80003fc:	6013      	str	r3, [r2, #0]
        //| ARCADEIT_DEVICE_LCDS         // LCDs port
        //| ARCADEIT_DEVICE_USB          // USB port
        //| ARCADEIT_DEVICE_AUDIO        // Audio DAC port
        ;
 
   ArcadeIT_ArcadeIT_Start();
- 8000400:	f7ff ffcc 	bl	800039c <ArcadeIT_ArcadeIT_Start>
+ 80003fe:	f7ff ffcd 	bl	800039c <ArcadeIT_ArcadeIT_Start>
+ 8000402:	4c0d      	ldr	r4, [pc, #52]	; (8000438 <ArcadeIT_Test_Bench+0x4c>)
+ 8000404:	2504      	movs	r5, #4
   gSystemTimer = pDelay;
- 8000404:	25fa      	movs	r5, #250	; 0xfa
-
-  while (1)
+ 8000406:	26fa      	movs	r6, #250	; 0xfa
+  // Test suite
+#ifdef TEST
+  // Status LEDs
+  for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
   {
     ArcadeIT_Status_LED1_Toggle();
- 8000406:	f000 f865 	bl	80004d4 <ArcadeIT_Status_LED1_Toggle>
+ 8000408:	f000 f86a 	bl	80004e0 <ArcadeIT_Status_LED1_Toggle>
   gSystemTimer = pDelay;
- 800040a:	6025      	str	r5, [r4, #0]
+ 800040c:	6026      	str	r6, [r4, #0]
   while (gSystemTimer);
- 800040c:	6823      	ldr	r3, [r4, #0]
- 800040e:	2b00      	cmp	r3, #0
- 8000410:	d1fc      	bne.n	800040c <ArcadeIT_Test_Bench+0x20>
+ 800040e:	6823      	ldr	r3, [r4, #0]
+ 8000410:	2b00      	cmp	r3, #0
+ 8000412:	d1fc      	bne.n	800040e <ArcadeIT_Test_Bench+0x22>
     ArcadeIT_System_Delay(250);
     ArcadeIT_Status_LED2_Toggle();
- 8000412:	f000 f86d 	bl	80004f0 <ArcadeIT_Status_LED2_Toggle>
+ 8000414:	f000 f872 	bl	80004fc <ArcadeIT_Status_LED2_Toggle>
   gSystemTimer = pDelay;
- 8000416:	6025      	str	r5, [r4, #0]
+ 8000418:	6026      	str	r6, [r4, #0]
   while (gSystemTimer);
- 8000418:	6823      	ldr	r3, [r4, #0]
- 800041a:	2b00      	cmp	r3, #0
- 800041c:	d1fc      	bne.n	8000418 <ArcadeIT_Test_Bench+0x2c>
- 800041e:	e7f2      	b.n	8000406 <ArcadeIT_Test_Bench+0x1a>
- 8000420:	20000030 	.word	0x20000030
- 8000424:	20000024 	.word	0x20000024
- 8000428:	2000001c 	.word	0x2000001c
- 800042c:	2000002c 	.word	0x2000002c
+ 800041a:	6823      	ldr	r3, [r4, #0]
+ 800041c:	2b00      	cmp	r3, #0
+ 800041e:	d1fc      	bne.n	800041a <ArcadeIT_Test_Bench+0x2e>
+ 8000420:	3d01      	subs	r5, #1
+  for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
+ 8000422:	f015 05ff 	ands.w	r5, r5, #255	; 0xff
+ 8000426:	d1ef      	bne.n	8000408 <ArcadeIT_Test_Bench+0x1c>
+ 8000428:	e7fe      	b.n	8000428 <ArcadeIT_Test_Bench+0x3c>
+ 800042a:	bf00      	nop
+ 800042c:	20000030 	.word	0x20000030
+ 8000430:	20000024 	.word	0x20000024
+ 8000434:	2000001c 	.word	0x2000001c
+ 8000438:	2000002c 	.word	0x2000002c
 
-08000430 <ArcadeIT_Status_LEDS_Init>:
+0800043c <ArcadeIT_Status_LEDS_Init>:
  */
 
   uint32_t lPinPosition = 0;
 
   // Turn on the MCU peripheral by enabling its Clock.
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOH) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOH;
- 8000430:	4b26      	ldr	r3, [pc, #152]	; (80004cc <ArcadeIT_Status_LEDS_Init+0x9c>)
- 8000432:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 8000434:	0612      	lsls	r2, r2, #24
- 8000436:	d403      	bmi.n	8000440 <ArcadeIT_Status_LEDS_Init+0x10>
- 8000438:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 800043a:	f042 0280 	orr.w	r2, r2, #128	; 0x80
- 800043e:	631a      	str	r2, [r3, #48]	; 0x30
+ 800043c:	4b26      	ldr	r3, [pc, #152]	; (80004d8 <ArcadeIT_Status_LEDS_Init+0x9c>)
+ 800043e:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 8000440:	0612      	lsls	r2, r2, #24
+ 8000442:	d403      	bmi.n	800044c <ArcadeIT_Status_LEDS_Init+0x10>
+ 8000444:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 8000446:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+ 800044a:	631a      	str	r2, [r3, #48]	; 0x30
   // level as default.
   // -----------------------
   lPinPosition = (SYS_STATUS_LED1_PIN_NO * 2); // the position is a multiple of 2
 
   // GPIO pin(PH2) in output
   SYS_STATUS_LED1_PER->MODER   &= ~GPIO_MODER_MODER2;
- 8000440:	4b23      	ldr	r3, [pc, #140]	; (80004d0 <ArcadeIT_Status_LEDS_Init+0xa0>)
- 8000442:	681a      	ldr	r2, [r3, #0]
- 8000444:	f022 0230 	bic.w	r2, r2, #48	; 0x30
- 8000448:	601a      	str	r2, [r3, #0]
+ 800044c:	4b23      	ldr	r3, [pc, #140]	; (80004dc <ArcadeIT_Status_LEDS_Init+0xa0>)
+ 800044e:	681a      	ldr	r2, [r3, #0]
+ 8000450:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 8000454:	601a      	str	r2, [r3, #0]
   SYS_STATUS_LED1_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
- 800044a:	681a      	ldr	r2, [r3, #0]
- 800044c:	f042 0210 	orr.w	r2, r2, #16
- 8000450:	601a      	str	r2, [r3, #0]
+ 8000456:	681a      	ldr	r2, [r3, #0]
+ 8000458:	f042 0210 	orr.w	r2, r2, #16
+ 800045c:	601a      	str	r2, [r3, #0]
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED1_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
- 8000452:	689a      	ldr	r2, [r3, #8]
- 8000454:	f022 0230 	bic.w	r2, r2, #48	; 0x30
- 8000458:	609a      	str	r2, [r3, #8]
+ 800045e:	689a      	ldr	r2, [r3, #8]
+ 8000460:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 8000464:	609a      	str	r2, [r3, #8]
   SYS_STATUS_LED1_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
- 800045a:	689a      	ldr	r2, [r3, #8]
- 800045c:	f042 0230 	orr.w	r2, r2, #48	; 0x30
- 8000460:	609a      	str	r2, [r3, #8]
+ 8000466:	689a      	ldr	r2, [r3, #8]
+ 8000468:	f042 0230 	orr.w	r2, r2, #48	; 0x30
+ 800046c:	609a      	str	r2, [r3, #8]
 
   // type output
   SYS_STATUS_LED1_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
- 8000462:	685a      	ldr	r2, [r3, #4]
- 8000464:	f022 0204 	bic.w	r2, r2, #4
- 8000468:	605a      	str	r2, [r3, #4]
+ 800046e:	685a      	ldr	r2, [r3, #4]
+ 8000470:	f022 0204 	bic.w	r2, r2, #4
+ 8000474:	605a      	str	r2, [r3, #4]
   SYS_STATUS_LED1_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED1_PIN_NO);
- 800046a:	685a      	ldr	r2, [r3, #4]
- 800046c:	605a      	str	r2, [r3, #4]
+ 8000476:	685a      	ldr	r2, [r3, #4]
+ 8000478:	605a      	str	r2, [r3, #4]
 
   // pull up configuration
   SYS_STATUS_LED1_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
- 800046e:	68da      	ldr	r2, [r3, #12]
- 8000470:	f022 0230 	bic.w	r2, r2, #48	; 0x30
- 8000474:	60da      	str	r2, [r3, #12]
+ 800047a:	68da      	ldr	r2, [r3, #12]
+ 800047c:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 8000480:	60da      	str	r2, [r3, #12]
   SYS_STATUS_LED1_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
- 8000476:	68da      	ldr	r2, [r3, #12]
- 8000478:	f042 0220 	orr.w	r2, r2, #32
- 800047c:	60da      	str	r2, [r3, #12]
+ 8000482:	68da      	ldr	r2, [r3, #12]
+ 8000484:	f042 0220 	orr.w	r2, r2, #32
+ 8000488:	60da      	str	r2, [r3, #12]
 
   // -----------------------
   lPinPosition = (SYS_STATUS_LED2_PIN_NO * 2); // the position is a multiple of 2
 
   // GPIO pin(PH3) in output
   SYS_STATUS_LED2_PER->MODER   &= ~GPIO_MODER_MODER3;
- 800047e:	681a      	ldr	r2, [r3, #0]
- 8000480:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
- 8000484:	601a      	str	r2, [r3, #0]
+ 800048a:	681a      	ldr	r2, [r3, #0]
+ 800048c:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 8000490:	601a      	str	r2, [r3, #0]
   SYS_STATUS_LED2_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
- 8000486:	681a      	ldr	r2, [r3, #0]
- 8000488:	f042 0240 	orr.w	r2, r2, #64	; 0x40
- 800048c:	601a      	str	r2, [r3, #0]
+ 8000492:	681a      	ldr	r2, [r3, #0]
+ 8000494:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 8000498:	601a      	str	r2, [r3, #0]
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED2_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
- 800048e:	689a      	ldr	r2, [r3, #8]
- 8000490:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
- 8000494:	609a      	str	r2, [r3, #8]
+ 800049a:	689a      	ldr	r2, [r3, #8]
+ 800049c:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 80004a0:	609a      	str	r2, [r3, #8]
   SYS_STATUS_LED2_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
- 8000496:	689a      	ldr	r2, [r3, #8]
- 8000498:	f042 02c0 	orr.w	r2, r2, #192	; 0xc0
- 800049c:	609a      	str	r2, [r3, #8]
+ 80004a2:	689a      	ldr	r2, [r3, #8]
+ 80004a4:	f042 02c0 	orr.w	r2, r2, #192	; 0xc0
+ 80004a8:	609a      	str	r2, [r3, #8]
 
   // type output
   SYS_STATUS_LED2_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
- 800049e:	685a      	ldr	r2, [r3, #4]
- 80004a0:	f022 0208 	bic.w	r2, r2, #8
- 80004a4:	605a      	str	r2, [r3, #4]
+ 80004aa:	685a      	ldr	r2, [r3, #4]
+ 80004ac:	f022 0208 	bic.w	r2, r2, #8
+ 80004b0:	605a      	str	r2, [r3, #4]
   SYS_STATUS_LED2_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
- 80004a6:	685a      	ldr	r2, [r3, #4]
- 80004a8:	605a      	str	r2, [r3, #4]
+ 80004b2:	685a      	ldr	r2, [r3, #4]
+ 80004b4:	605a      	str	r2, [r3, #4]
 
   // pull up configuration
   SYS_STATUS_LED2_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
- 80004aa:	68da      	ldr	r2, [r3, #12]
- 80004ac:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
- 80004b0:	60da      	str	r2, [r3, #12]
+ 80004b6:	68da      	ldr	r2, [r3, #12]
+ 80004b8:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 80004bc:	60da      	str	r2, [r3, #12]
   SYS_STATUS_LED2_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
- 80004b2:	68da      	ldr	r2, [r3, #12]
- 80004b4:	f042 0280 	orr.w	r2, r2, #128	; 0x80
- 80004b8:	60da      	str	r2, [r3, #12]
+ 80004be:	68da      	ldr	r2, [r3, #12]
+ 80004c0:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+ 80004c4:	60da      	str	r2, [r3, #12]
 
   // -----------------------
   // Put LEDs line LOW.
   SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
- 80004ba:	695a      	ldr	r2, [r3, #20]
- 80004bc:	f022 0204 	bic.w	r2, r2, #4
- 80004c0:	615a      	str	r2, [r3, #20]
+ 80004c6:	695a      	ldr	r2, [r3, #20]
+ 80004c8:	f022 0204 	bic.w	r2, r2, #4
+ 80004cc:	615a      	str	r2, [r3, #20]
   SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
- 80004c2:	695a      	ldr	r2, [r3, #20]
- 80004c4:	f022 0208 	bic.w	r2, r2, #8
- 80004c8:	615a      	str	r2, [r3, #20]
+ 80004ce:	695a      	ldr	r2, [r3, #20]
+ 80004d0:	f022 0208 	bic.w	r2, r2, #8
+ 80004d4:	615a      	str	r2, [r3, #20]
   {
     //ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
 
   } // End if.
 
 } // End ArcadeIT_Status_LEDS_Init.
- 80004ca:	4770      	bx	lr
- 80004cc:	40023800 	.word	0x40023800
- 80004d0:	40021c00 	.word	0x40021c00
+ 80004d6:	4770      	bx	lr
+ 80004d8:	40023800 	.word	0x40023800
+ 80004dc:	40021c00 	.word	0x40021c00
 
-080004d4 <ArcadeIT_Status_LED1_Toggle>:
+080004e0 <ArcadeIT_Status_LED1_Toggle>:
   * PARAMETERS:  None.
   * RETURNS:     Nothing.
   */
 
   // Set LEDs line LOW or HIGH depending the current status of the LED.
   if (GPIOH->ODR & SYS_STATUS_LED1_PIN)
- 80004d4:	4b05      	ldr	r3, [pc, #20]	; (80004ec <ArcadeIT_Status_LED1_Toggle+0x18>)
- 80004d6:	695a      	ldr	r2, [r3, #20]
- 80004d8:	f012 0f04 	tst.w	r2, #4
+ 80004e0:	4b05      	ldr	r3, [pc, #20]	; (80004f8 <ArcadeIT_Status_LED1_Toggle+0x18>)
+ 80004e2:	695a      	ldr	r2, [r3, #20]
+ 80004e4:	f012 0f04 	tst.w	r2, #4
   {
     GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
- 80004dc:	695a      	ldr	r2, [r3, #20]
- 80004de:	bf14      	ite	ne
- 80004e0:	f022 0204 	bicne.w	r2, r2, #4
+ 80004e8:	695a      	ldr	r2, [r3, #20]
+ 80004ea:	bf14      	ite	ne
+ 80004ec:	f022 0204 	bicne.w	r2, r2, #4
   }
   else
   {
     GPIOH->ODR |= SYS_STATUS_LED1_PIN;
- 80004e4:	f042 0204 	orreq.w	r2, r2, #4
- 80004e8:	615a      	str	r2, [r3, #20]
+ 80004f0:	f042 0204 	orreq.w	r2, r2, #4
+ 80004f4:	615a      	str	r2, [r3, #20]
 
   } // End if.
 
 } // End ArcadeIT_Status_LED1_Toggle.
- 80004ea:	4770      	bx	lr
- 80004ec:	40021c00 	.word	0x40021c00
+ 80004f6:	4770      	bx	lr
+ 80004f8:	40021c00 	.word	0x40021c00
 
-080004f0 <ArcadeIT_Status_LED2_Toggle>:
+080004fc <ArcadeIT_Status_LED2_Toggle>:
   * PARAMETERS:  None.
   * RETURNS:     Nothing.
   */
 
   // Set LEDs line LOW or HIGH depending the current status of the LED.
   if (SYS_STATUS_LED2_PER->ODR & SYS_STATUS_LED2_PIN)
- 80004f0:	4b05      	ldr	r3, [pc, #20]	; (8000508 <ArcadeIT_Status_LED2_Toggle+0x18>)
- 80004f2:	695a      	ldr	r2, [r3, #20]
- 80004f4:	f012 0f08 	tst.w	r2, #8
+ 80004fc:	4b05      	ldr	r3, [pc, #20]	; (8000514 <ArcadeIT_Status_LED2_Toggle+0x18>)
+ 80004fe:	695a      	ldr	r2, [r3, #20]
+ 8000500:	f012 0f08 	tst.w	r2, #8
   {
     SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
- 80004f8:	695a      	ldr	r2, [r3, #20]
- 80004fa:	bf14      	ite	ne
- 80004fc:	f022 0208 	bicne.w	r2, r2, #8
+ 8000504:	695a      	ldr	r2, [r3, #20]
+ 8000506:	bf14      	ite	ne
+ 8000508:	f022 0208 	bicne.w	r2, r2, #8
   }
   else
   {
     SYS_STATUS_LED2_PER->ODR |= SYS_STATUS_LED2_PIN;
- 8000500:	f042 0208 	orreq.w	r2, r2, #8
- 8000504:	615a      	str	r2, [r3, #20]
+ 800050c:	f042 0208 	orreq.w	r2, r2, #8
+ 8000510:	615a      	str	r2, [r3, #20]
 
   } // End if.
 
 } // End ArcadeIT_Status_LED2_Toggle.
- 8000506:	4770      	bx	lr
- 8000508:	40021c00 	.word	0x40021c00
+ 8000512:	4770      	bx	lr
+ 8000514:	40021c00 	.word	0x40021c00
 
-0800050c <ArcadeIT_TestPad_Init>:
+08000518 <ArcadeIT_TestPad_Init>:
   * RETURNS:     Nothing.
   */
 
   uint32_t lPinPosition = (SYS_TESTPADS_PIN_NO * 2);
 
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
- 800050c:	4b18      	ldr	r3, [pc, #96]	; (8000570 <ArcadeIT_TestPad_Init+0x64>)
- 800050e:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 8000510:	0752      	lsls	r2, r2, #29
+ 8000518:	4b18      	ldr	r3, [pc, #96]	; (800057c <ArcadeIT_TestPad_Init+0x64>)
+ 800051a:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 800051c:	0752      	lsls	r2, r2, #29
 {
- 8000512:	b410      	push	{r4}
+ 800051e:	b410      	push	{r4}
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
- 8000514:	d403      	bmi.n	800051e <ArcadeIT_TestPad_Init+0x12>
- 8000516:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 8000518:	f042 0204 	orr.w	r2, r2, #4
- 800051c:	631a      	str	r2, [r3, #48]	; 0x30
+ 8000520:	d403      	bmi.n	800052a <ArcadeIT_TestPad_Init+0x12>
+ 8000522:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 8000524:	f042 0204 	orr.w	r2, r2, #4
+ 8000528:	631a      	str	r2, [r3, #48]	; 0x30
 
   // Configure MCO2 pin(PC9) in alternate function 0
-  SYS_TESTPADS_PER->MODER   &= ~(GPIO_MODER_MODER0 << lPinPosition);
- 800051e:	4b15      	ldr	r3, [pc, #84]	; (8000574 <ArcadeIT_TestPad_Init+0x68>)
+  SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
+ 800052a:	4b15      	ldr	r3, [pc, #84]	; (8000580 <ArcadeIT_TestPad_Init+0x68>)
   uint32_t lTmpReg = RCC->CFGR;
- 8000520:	4c13      	ldr	r4, [pc, #76]	; (8000570 <ArcadeIT_TestPad_Init+0x64>)
-  SYS_TESTPADS_PER->MODER   &= ~(GPIO_MODER_MODER0 << lPinPosition);
- 8000522:	681a      	ldr	r2, [r3, #0]
- 8000524:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
- 8000528:	601a      	str	r2, [r3, #0]
+ 800052c:	4c13      	ldr	r4, [pc, #76]	; (800057c <ArcadeIT_TestPad_Init+0x64>)
+  SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
+ 800052e:	681a      	ldr	r2, [r3, #0]
+ 8000530:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 8000534:	601a      	str	r2, [r3, #0]
   SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
- 800052a:	681a      	ldr	r2, [r3, #0]
- 800052c:	f442 2200 	orr.w	r2, r2, #524288	; 0x80000
- 8000530:	601a      	str	r2, [r3, #0]
+ 8000536:	681a      	ldr	r2, [r3, #0]
+ 8000538:	f442 2200 	orr.w	r2, r2, #524288	; 0x80000
+ 800053c:	601a      	str	r2, [r3, #0]
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
-  SYS_TESTPADS_PER->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << lPinPosition);
- 8000532:	689a      	ldr	r2, [r3, #8]
- 8000534:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
- 8000538:	609a      	str	r2, [r3, #8]
+  SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR9;
+ 800053e:	689a      	ldr	r2, [r3, #8]
+ 8000540:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 8000544:	609a      	str	r2, [r3, #8]
   SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
- 800053a:	689a      	ldr	r2, [r3, #8]
- 800053c:	f442 2240 	orr.w	r2, r2, #786432	; 0xc0000
- 8000540:	609a      	str	r2, [r3, #8]
+ 8000546:	689a      	ldr	r2, [r3, #8]
+ 8000548:	f442 2240 	orr.w	r2, r2, #786432	; 0xc0000
+ 800054c:	609a      	str	r2, [r3, #8]
 
   // type output
-  SYS_TESTPADS_PER->OTYPER  &= ~(GPIO_OTYPER_OT_0 << SYS_TESTPADS_PIN_NO);
- 8000542:	685a      	ldr	r2, [r3, #4]
- 8000544:	f422 7200 	bic.w	r2, r2, #512	; 0x200
- 8000548:	605a      	str	r2, [r3, #4]
+  SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_9;
+ 800054e:	685a      	ldr	r2, [r3, #4]
+ 8000550:	f422 7200 	bic.w	r2, r2, #512	; 0x200
+ 8000554:	605a      	str	r2, [r3, #4]
   SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
- 800054a:	685a      	ldr	r2, [r3, #4]
- 800054c:	605a      	str	r2, [r3, #4]
+ 8000556:	685a      	ldr	r2, [r3, #4]
+ 8000558:	605a      	str	r2, [r3, #4]
 
   // pull up configuration
-  SYS_TESTPADS_PER->PUPDR   &= ~(GPIO_PUPDR_PUPDR0 << lPinPosition);
- 800054e:	68da      	ldr	r2, [r3, #12]
- 8000550:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
- 8000554:	60da      	str	r2, [r3, #12]
+  SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR9;
+ 800055a:	68da      	ldr	r2, [r3, #12]
+ 800055c:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 8000560:	60da      	str	r2, [r3, #12]
   SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
- 8000556:	68da      	ldr	r2, [r3, #12]
- 8000558:	f442 2280 	orr.w	r2, r2, #262144	; 0x40000
- 800055c:	60da      	str	r2, [r3, #12]
+ 8000562:	68da      	ldr	r2, [r3, #12]
+ 8000564:	f442 2280 	orr.w	r2, r2, #262144	; 0x40000
+ 8000568:	60da      	str	r2, [r3, #12]
   uint32_t lTmpReg = RCC->CFGR;
- 800055e:	68a3      	ldr	r3, [r4, #8]
+ 800056a:	68a3      	ldr	r3, [r4, #8]
   lTmpReg  &= CFGR_MCO2_RESET_MASK;                 // Clear MCO2 and MCO2PRE[2:0] bits
- 8000560:	f023 4378 	bic.w	r3, r3, #4160749568	; 0xf8000000
- 8000564:	4319      	orrs	r1, r3
+ 800056c:	f023 4378 	bic.w	r3, r3, #4160749568	; 0xf8000000
+ 8000570:	4319      	orrs	r1, r3
   lTmpReg  |= pFrequencySystem | pFrequencyDivider; // Select MCO2 clock source and prescaler
- 8000566:	4301      	orrs	r1, r0
+ 8000572:	4301      	orrs	r1, r0
   RCC->CFGR = lTmpReg;
- 8000568:	60a1      	str	r1, [r4, #8]
+ 8000574:	60a1      	str	r1, [r4, #8]
     // Starts and configure the serial port.
     //ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);
 
   } // End if.
 
 } // End ArcadeIT_TestPads_Init.
- 800056a:	f85d 4b04 	ldr.w	r4, [sp], #4
- 800056e:	4770      	bx	lr
- 8000570:	40023800 	.word	0x40023800
- 8000574:	40020800 	.word	0x40020800
+ 8000576:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 800057a:	4770      	bx	lr
+ 800057c:	40023800 	.word	0x40023800
+ 8000580:	40020800 	.word	0x40020800
 
-08000578 <__libc_init_array>:
- 8000578:	b570      	push	{r4, r5, r6, lr}
- 800057a:	4e0d      	ldr	r6, [pc, #52]	; (80005b0 <__libc_init_array+0x38>)
- 800057c:	4c0d      	ldr	r4, [pc, #52]	; (80005b4 <__libc_init_array+0x3c>)
- 800057e:	1ba4      	subs	r4, r4, r6
- 8000580:	10a4      	asrs	r4, r4, #2
- 8000582:	2500      	movs	r5, #0
- 8000584:	42a5      	cmp	r5, r4
- 8000586:	d109      	bne.n	800059c <__libc_init_array+0x24>
- 8000588:	4e0b      	ldr	r6, [pc, #44]	; (80005b8 <__libc_init_array+0x40>)
- 800058a:	4c0c      	ldr	r4, [pc, #48]	; (80005bc <__libc_init_array+0x44>)
- 800058c:	f000 f818 	bl	80005c0 <_init>
- 8000590:	1ba4      	subs	r4, r4, r6
- 8000592:	10a4      	asrs	r4, r4, #2
- 8000594:	2500      	movs	r5, #0
- 8000596:	42a5      	cmp	r5, r4
- 8000598:	d105      	bne.n	80005a6 <__libc_init_array+0x2e>
- 800059a:	bd70      	pop	{r4, r5, r6, pc}
- 800059c:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80005a0:	4798      	blx	r3
- 80005a2:	3501      	adds	r5, #1
- 80005a4:	e7ee      	b.n	8000584 <__libc_init_array+0xc>
- 80005a6:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80005aa:	4798      	blx	r3
- 80005ac:	3501      	adds	r5, #1
- 80005ae:	e7f2      	b.n	8000596 <__libc_init_array+0x1e>
- 80005b0:	080005d8 	.word	0x080005d8
- 80005b4:	080005d8 	.word	0x080005d8
- 80005b8:	080005d8 	.word	0x080005d8
- 80005bc:	080005dc 	.word	0x080005dc
+08000584 <__libc_init_array>:
+ 8000584:	b570      	push	{r4, r5, r6, lr}
+ 8000586:	4e0d      	ldr	r6, [pc, #52]	; (80005bc <__libc_init_array+0x38>)
+ 8000588:	4c0d      	ldr	r4, [pc, #52]	; (80005c0 <__libc_init_array+0x3c>)
+ 800058a:	1ba4      	subs	r4, r4, r6
+ 800058c:	10a4      	asrs	r4, r4, #2
+ 800058e:	2500      	movs	r5, #0
+ 8000590:	42a5      	cmp	r5, r4
+ 8000592:	d109      	bne.n	80005a8 <__libc_init_array+0x24>
+ 8000594:	4e0b      	ldr	r6, [pc, #44]	; (80005c4 <__libc_init_array+0x40>)
+ 8000596:	4c0c      	ldr	r4, [pc, #48]	; (80005c8 <__libc_init_array+0x44>)
+ 8000598:	f000 f818 	bl	80005cc <_init>
+ 800059c:	1ba4      	subs	r4, r4, r6
+ 800059e:	10a4      	asrs	r4, r4, #2
+ 80005a0:	2500      	movs	r5, #0
+ 80005a2:	42a5      	cmp	r5, r4
+ 80005a4:	d105      	bne.n	80005b2 <__libc_init_array+0x2e>
+ 80005a6:	bd70      	pop	{r4, r5, r6, pc}
+ 80005a8:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80005ac:	4798      	blx	r3
+ 80005ae:	3501      	adds	r5, #1
+ 80005b0:	e7ee      	b.n	8000590 <__libc_init_array+0xc>
+ 80005b2:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 80005b6:	4798      	blx	r3
+ 80005b8:	3501      	adds	r5, #1
+ 80005ba:	e7f2      	b.n	80005a2 <__libc_init_array+0x1e>
+ 80005bc:	080005e4 	.word	0x080005e4
+ 80005c0:	080005e4 	.word	0x080005e4
+ 80005c4:	080005e4 	.word	0x080005e4
+ 80005c8:	080005e8 	.word	0x080005e8
 
-080005c0 <_init>:
- 80005c0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80005c2:	bf00      	nop
- 80005c4:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80005c6:	bc08      	pop	{r3}
- 80005c8:	469e      	mov	lr, r3
- 80005ca:	4770      	bx	lr
-
-080005cc <_fini>:
+080005cc <_init>:
  80005cc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
  80005ce:	bf00      	nop
  80005d0:	bcf8      	pop	{r3, r4, r5, r6, r7}
  80005d2:	bc08      	pop	{r3}
  80005d4:	469e      	mov	lr, r3
  80005d6:	4770      	bx	lr
+
+080005d8 <_fini>:
+ 80005d8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 80005da:	bf00      	nop
+ 80005dc:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 80005de:	bc08      	pop	{r3}
+ 80005e0:	469e      	mov	lr, r3
+ 80005e2:	4770      	bx	lr

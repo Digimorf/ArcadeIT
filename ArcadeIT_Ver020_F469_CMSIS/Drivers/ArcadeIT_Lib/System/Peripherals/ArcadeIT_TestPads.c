@@ -71,6 +71,65 @@
 
  MCO2 function is applied to pin PC9 using alternate function 0
 
+ These registers are 32 bit wide, values for each pin go from 0 to 3
+  GPIO port mode register (GPIOx_MODER) (x = A to K)
+  GPIO port speed register (GPIOx_OSPEEDR) (x = A to K)
+  GPIO port pull-up register (GPIOx_PUPDR) (x = A to K)
+
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------###########---------+
+ | PIN 15  | PIN 14  | PIN 13  | PIN 12  | PIN 11  | PIN 10  # PIN 09  # PIN 08  |
+ +----+----+----+----+----+----+----+----+----+----+----+----#----+----#----+----+
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 # 19 | 18 # 17 | 16 |
+ +----+----+----+----+----+----+----+----+----+----+----+----#----+----#----+----+
+ | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   # MODER   # MODER   |
+ | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR # OSPEEDR # OSPEEDR |
+ | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    # PUDR    # PUDR    |
+ |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  #  [1:0]  #  [1:0]  |
+ +----+----+----+----+----+----+----+----+----+----+----+----#----+----#----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw # rw | rw # rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----###########----+----+
+
+ |  0    0    0    0 .  0    0    0    0 |  1    1    1    1 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------+---------+---------+
+ | PIN 07  | PIN 06  | PIN 05  | PIN 04  | PIN 03  | PIN 02  | PIN 01  | PIN 00  |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 | 07 | 06 | 05 | 04 | 03 | 02 | 01 | 00 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   |
+ | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR |
+ | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    |
+ |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+
+ This register is 32 bit wide but only 16 are used since values for each pin
+ require only one bit.
+  GPIO port type register (GPIOx_OTYPER) (x = A to K)
+
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------+---------+---------+
+ |         |         |         |         |         |         |         |         |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+
+ |  0    0    0    0 .  0    0    1    0 |  0    0    0    0 .  0    0    0    0 |
+ +----+----+----+----+----+----######----+----+----+----+----+----+----+----+----+
+ |P15 |P14 |P13 |P12 |P11 |P10 #P09 #P08 |P07 |P06 |P05 |P04 |P03 |P02 |P01 |P00 |
+ +----+----+----+----+----+----#----#----+----+----+----+----+----+----+----+----+
+ | 15 | 14 | 13 | 12 | 11 | 10 # 09 # 08 | 07 | 06 | 05 | 04 | 03 | 02 | 01 | 00 |
+ +----+----+----+----+----+----#----#----+----+----+----+----+----+----+----+----+
+ | OT | OT | OT | OT | OT | OT # OT # OT | OT | OT | OT | OT | OT | OT | OT | OT |
+ +----+----+----+----+----+----#----#----+----+----+----+----+----+----+----+----+
+ | rw | rw | rw | rw | rw | rw # rw # rw | rw | rw | rw | rw | rw | rw | rw | rw |
+ +----+----+----+----+----+----######----+----+----+----+----+----+----+----+----+
+
  ******************************************************************************
  HISTORY
 
@@ -156,20 +215,20 @@ void ArcadeIT_TestPad_Init
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
 
   // Configure MCO2 pin(PC9) in alternate function 0
-  SYS_TESTPADS_PER->MODER   &= ~(GPIO_MODER_MODER0 << lPinPosition);
+  SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
   SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
-  SYS_TESTPADS_PER->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << lPinPosition);
+  SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR9;
   SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
 
   // type output
-  SYS_TESTPADS_PER->OTYPER  &= ~(GPIO_OTYPER_OT_0 << SYS_TESTPADS_PIN_NO);
+  SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_9;
   SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
 
   // pull up configuration
-  SYS_TESTPADS_PER->PUPDR   &= ~(GPIO_PUPDR_PUPDR0 << lPinPosition);
+  SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR9;
   SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
 
   ArcadeIT_TestPad_Set(pFrequencySystem, pFrequencyDivider);

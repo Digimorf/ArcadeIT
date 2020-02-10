@@ -553,16 +553,21 @@ void ArcadeIT_Test_Bench (void)
 
   ArcadeIT_ArcadeIT_Start();
 
-  while (1)
+  // Test suite
+#ifdef TEST
+  // Status LEDs
+  for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
   {
     ArcadeIT_Status_LED1_Toggle();
     ArcadeIT_System_Delay(250);
     ArcadeIT_Status_LED2_Toggle();
     ArcadeIT_System_Delay(250);
 
-    //ArcadeIT_Status_LED1_Toggle();
-    //ArcadeIT_Status_LED2_Toggle();
-    //ArcadeIT_System_Delay(500);
+  } // End if.
+#endif
+
+  while (1)
+  {
 
   } // End while.
 

@@ -1,4 +1,4 @@
-ArcadeIT_Status_LEDs.c:93:6:ArcadeIT_Status_LEDS_Init	0	static
+ArcadeIT_Status_LEDs.c:157:6:ArcadeIT_Status_LEDS_Init	0	static
 ArcadeIT_Status_LEDs.c:228:6:ArcadeIT_Status_LEDS_Set	0	static
 ArcadeIT_Status_LEDs.c:254:6:ArcadeIT_Status_LED1_Set	0	static
 ArcadeIT_Status_LEDs.c:278:6:ArcadeIT_Status_LED2_Set	0	static

@@ -61,6 +61,8 @@
 // Definitions
 // /////////////////////////////////////////////////////////////////////////////
 
+  #define TEST
+
   #define ARCADEIT_SYSTEM
 
   #define VECT_TAB_OFFSET        0x00 // Vector Table base offset field.

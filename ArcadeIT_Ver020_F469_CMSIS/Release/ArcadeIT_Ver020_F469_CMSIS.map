@@ -508,7 +508,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000000000      0x927 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
@@ -643,10 +643,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
- .debug_macro   0x0000000000000000      0x927 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
+ .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_line    0x0000000000000000      0x989 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
- .debug_str     0x0000000000000000    0xb81ec Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
+ .debug_str     0x0000000000000000    0xb81f2 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .comment       0x0000000000000000       0x7c Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_frame   0x0000000000000000      0x144 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .ARM.attributes
@@ -758,7 +758,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
  .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
  .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x927 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
  .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
@@ -863,7 +863,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
  .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
  .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x927 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
  .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
  .text          0x0000000000000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-errno.o)
@@ -1143,7 +1143,7 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000008000000                g_pfnVectors
                 0x00000000080001b4                . = ALIGN (0x4)
 
-.text           0x00000000080001b4      0x424
+.text           0x00000000080001b4      0x430
                 0x00000000080001b4                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000080001b4       0x40 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
@@ -1285,97 +1285,97 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x000000000800039c       0x50 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
                 0x000000000800039c                ArcadeIT_ArcadeIT_Start
  .text.ArcadeIT_Test_Bench
-                0x00000000080003ec       0x44 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                0x00000000080003ec       0x50 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
                 0x00000000080003ec                ArcadeIT_Test_Bench
  .text.ArcadeIT_Status_LEDS_Init
-                0x0000000008000430       0xa4 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                0x0000000008000430                ArcadeIT_Status_LEDS_Init
+                0x000000000800043c       0xa4 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x000000000800043c                ArcadeIT_Status_LEDS_Init
  .text.ArcadeIT_Status_LED1_Toggle
-                0x00000000080004d4       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                0x00000000080004d4                ArcadeIT_Status_LED1_Toggle
+                0x00000000080004e0       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x00000000080004e0                ArcadeIT_Status_LED1_Toggle
  .text.ArcadeIT_Status_LED2_Toggle
-                0x00000000080004f0       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                0x00000000080004f0                ArcadeIT_Status_LED2_Toggle
+                0x00000000080004fc       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x00000000080004fc                ArcadeIT_Status_LED2_Toggle
  .text.ArcadeIT_TestPad_Init
-                0x000000000800050c       0x6c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
-                0x000000000800050c                ArcadeIT_TestPad_Init
+                0x0000000008000518       0x6c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+                0x0000000008000518                ArcadeIT_TestPad_Init
  .text.__libc_init_array
-                0x0000000008000578       0x48 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
-                0x0000000008000578                __libc_init_array
+                0x0000000008000584       0x48 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+                0x0000000008000584                __libc_init_array
  *(.glue_7)
- .glue_7        0x00000000080005c0        0x0 linker stubs
+ .glue_7        0x00000000080005cc        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x00000000080005c0        0x0 linker stubs
+ .glue_7t       0x00000000080005cc        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x00000000080005c0        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .eh_frame      0x00000000080005cc        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.init)
- .init          0x00000000080005c0        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00000000080005c0                _init
- .init          0x00000000080005c4        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+ .init          0x00000000080005cc        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x00000000080005cc                _init
+ .init          0x00000000080005d0        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  *(.fini)
- .fini          0x00000000080005cc        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00000000080005cc                _fini
- .fini          0x00000000080005d0        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-                0x00000000080005d8                . = ALIGN (0x4)
-                0x00000000080005d8                _etext = .
+ .fini          0x00000000080005d8        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x00000000080005d8                _fini
+ .fini          0x00000000080005dc        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080005e4                _etext = .
 
-.vfp11_veneer   0x00000000080005d8        0x0
- .vfp11_veneer  0x00000000080005d8        0x0 linker stubs
+.vfp11_veneer   0x00000000080005e4        0x0
+ .vfp11_veneer  0x00000000080005e4        0x0 linker stubs
 
-.v4_bx          0x00000000080005d8        0x0
- .v4_bx         0x00000000080005d8        0x0 linker stubs
+.v4_bx          0x00000000080005e4        0x0
+ .v4_bx         0x00000000080005e4        0x0 linker stubs
 
-.iplt           0x00000000080005d8        0x0
- .iplt          0x00000000080005d8        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x00000000080005e4        0x0
+ .iplt          0x00000000080005e4        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rel.dyn        0x00000000080005d8        0x0
- .rel.iplt      0x00000000080005d8        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.rel.dyn        0x00000000080005e4        0x0
+ .rel.iplt      0x00000000080005e4        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rodata         0x00000000080005d8        0x0
-                0x00000000080005d8                . = ALIGN (0x4)
+.rodata         0x00000000080005e4        0x0
+                0x00000000080005e4                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
-                0x00000000080005d8                . = ALIGN (0x4)
+                0x00000000080005e4                . = ALIGN (0x4)
 
-.ARM.extab      0x00000000080005d8        0x0
-                0x00000000080005d8                . = ALIGN (0x4)
+.ARM.extab      0x00000000080005e4        0x0
+                0x00000000080005e4                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000080005d8                . = ALIGN (0x4)
+                0x00000000080005e4                . = ALIGN (0x4)
 
-.ARM            0x00000000080005d8        0x0
-                0x00000000080005d8                . = ALIGN (0x4)
-                0x00000000080005d8                __exidx_start = .
+.ARM            0x00000000080005e4        0x0
+                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080005e4                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080005d8                __exidx_end = .
-                0x00000000080005d8                . = ALIGN (0x4)
+                0x00000000080005e4                __exidx_end = .
+                0x00000000080005e4                . = ALIGN (0x4)
 
-.preinit_array  0x00000000080005d8        0x0
-                0x00000000080005d8                . = ALIGN (0x4)
-                0x00000000080005d8                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x00000000080005e4        0x0
+                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080005e4                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x00000000080005d8                PROVIDE (__preinit_array_end = .)
-                0x00000000080005d8                . = ALIGN (0x4)
+                0x00000000080005e4                PROVIDE (__preinit_array_end = .)
+                0x00000000080005e4                . = ALIGN (0x4)
 
-.init_array     0x00000000080005d8        0x4
-                0x00000000080005d8                . = ALIGN (0x4)
-                0x00000000080005d8                PROVIDE (__init_array_start = .)
+.init_array     0x00000000080005e4        0x4
+                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080005e4                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x00000000080005d8        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x00000000080005dc                PROVIDE (__init_array_end = .)
-                0x00000000080005dc                . = ALIGN (0x4)
+ .init_array    0x00000000080005e4        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x00000000080005e8                PROVIDE (__init_array_end = .)
+                0x00000000080005e8                . = ALIGN (0x4)
 
-.fini_array     0x00000000080005dc        0x4
-                0x00000000080005dc                . = ALIGN (0x4)
+.fini_array     0x00000000080005e8        0x4
+                0x00000000080005e8                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00000000080005dc        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .fini_array    0x00000000080005e8        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00000000080005e0                . = ALIGN (0x4)
-                0x00000000080005e0                _sidata = LOADADDR (.data)
+                0x00000000080005ec                . = ALIGN (0x4)
+                0x00000000080005ec                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000        0x0 load address 0x00000000080005e0
+.data           0x0000000020000000        0x0 load address 0x00000000080005ec
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -1383,11 +1383,11 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _edata = .
 
-.igot.plt       0x0000000020000000        0x0 load address 0x00000000080005e0
+.igot.plt       0x0000000020000000        0x0 load address 0x00000000080005ec
  .igot.plt      0x0000000020000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 0x0000000020000000                . = ALIGN (0x4)
 
-.bss            0x0000000020000000       0x34 load address 0x00000000080005e0
+.bss            0x0000000020000000       0x34 load address 0x00000000080005ec
                 0x0000000020000000                _sbss = .
                 0x0000000020000000                __bss_start__ = _sbss
  *(.bss)
@@ -1414,7 +1414,7 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000020000034                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x0000000020000034      0x604 load address 0x00000000080005e0
+                0x0000000020000034      0x604 load address 0x00000000080005ec
                 0x0000000020000038                . = ALIGN (0x8)
  *fill*         0x0000000020000034        0x4 
                 0x0000000020000038                PROVIDE (end = .)
@@ -1455,21 +1455,21 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x00000000000001b4       0x22 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(ArcadeIT_Ver020_F469_CMSIS.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x3c8b
+.debug_info     0x0000000000000000     0x3cac
  .debug_info    0x0000000000000000      0xa57 Core/Src/main.o
  .debug_info    0x0000000000000a57       0x9a Core/Src/stm32f4xx_it.o
  .debug_info    0x0000000000000af1       0x22 Core/Startup/startup_stm32f469iitx.o
- .debug_info    0x0000000000000b13     0x16f7 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_info    0x000000000000220a      0xd38 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_info    0x0000000000002f42      0xd49 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_info    0x0000000000000b13     0x1718 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_info    0x000000000000222b      0xd38 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_info    0x0000000000002f63      0xd49 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
 
-.debug_abbrev   0x0000000000000000      0xa6f
+.debug_abbrev   0x0000000000000000      0xa80
  .debug_abbrev  0x0000000000000000      0x1bc Core/Src/main.o
  .debug_abbrev  0x00000000000001bc       0x5f Core/Src/stm32f4xx_it.o
  .debug_abbrev  0x000000000000021b       0x12 Core/Startup/startup_stm32f469iitx.o
- .debug_abbrev  0x000000000000022d      0x403 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_abbrev  0x0000000000000630      0x20a Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_abbrev  0x000000000000083a      0x235 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_abbrev  0x000000000000022d      0x414 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_abbrev  0x0000000000000641      0x20a Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_abbrev  0x000000000000084b      0x235 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
 
 .debug_aranges  0x0000000000000000      0x178
  .debug_aranges
@@ -1493,7 +1493,7 @@ OUTPUT(ArcadeIT_Ver020_F469_CMSIS.elf elf32-littlearm)
  .debug_ranges  0x00000000000001a0       0x38 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
  .debug_ranges  0x00000000000001d8       0x30 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
 
-.debug_macro    0x0000000000000000    0x2204c
+.debug_macro    0x0000000000000000    0x22069
  .debug_macro   0x0000000000000000      0x282 Core/Src/main.o
  .debug_macro   0x0000000000000282      0xa78 Core/Src/main.o
  .debug_macro   0x0000000000000cfa       0x22 Core/Src/main.o
@@ -1542,39 +1542,39 @@ OUTPUT(ArcadeIT_Ver020_F469_CMSIS.elf elf32-littlearm)
  .debug_macro   0x0000000000002f8b      0x11f Core/Src/main.o
  .debug_macro   0x00000000000030aa    0x1d70d Core/Src/main.o
  .debug_macro   0x00000000000207b7       0x43 Core/Src/main.o
- .debug_macro   0x00000000000207fa      0x927 Core/Src/main.o
- .debug_macro   0x0000000000021121       0x24 Core/Src/stm32f4xx_it.o
- .debug_macro   0x0000000000021145       0x28 Core/Src/stm32f4xx_it.o
- .debug_macro   0x000000000002116d      0x2c6 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000021433       0x10 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000021443      0x460 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x00000000000218a3       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x00000000000218b9       0x20 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x00000000000218d9      0x20f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000021ae8      0x2b2 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000021d9a      0x2b2 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_macro   0x00000000000207fa      0x92f Core/Src/main.o
+ .debug_macro   0x0000000000021129       0x24 Core/Src/stm32f4xx_it.o
+ .debug_macro   0x000000000002114d       0x28 Core/Src/stm32f4xx_it.o
+ .debug_macro   0x0000000000021175      0x2cb Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021440       0x10 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021450      0x460 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x00000000000218b0       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x00000000000218c6       0x20 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x00000000000218e6      0x20f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021af5      0x2ba Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000021daf      0x2ba Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
 
-.debug_line     0x0000000000000000     0x2675
+.debug_line     0x0000000000000000     0x267b
  .debug_line    0x0000000000000000      0x790 Core/Src/main.o
  .debug_line    0x0000000000000790       0xf9 Core/Src/stm32f4xx_it.o
  .debug_line    0x0000000000000889       0x86 Core/Startup/startup_stm32f469iitx.o
- .debug_line    0x000000000000090f      0xbc8 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_line    0x00000000000014d7      0x8fc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_line    0x0000000000001dd3      0x8a2 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_line    0x000000000000090f      0xbcf Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_line    0x00000000000014de      0x8fb Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_line    0x0000000000001dd9      0x8a2 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
 
-.debug_str      0x0000000000000000    0xb827c
- .debug_str     0x0000000000000000    0xb58e2 Core/Src/main.o
-                                      0xb5b57 (size before relaxing)
- .debug_str     0x00000000000b58e2      0x193 Core/Src/stm32f4xx_it.o
+.debug_str      0x0000000000000000    0xb828a
+ .debug_str     0x0000000000000000    0xb58e8 Core/Src/main.o
+                                      0xb5b5d (size before relaxing)
+ .debug_str     0x00000000000b58e8      0x193 Core/Src/stm32f4xx_it.o
                                        0x2ef0 (size before relaxing)
- .debug_str     0x00000000000b5a75       0x36 Core/Startup/startup_stm32f469iitx.o
+ .debug_str     0x00000000000b5a7b       0x36 Core/Startup/startup_stm32f469iitx.o
                                          0x86 (size before relaxing)
- .debug_str     0x00000000000b5aab     0x266f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
-                                      0xb816c (size before relaxing)
- .debug_str     0x00000000000b811a       0xe3 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                                      0xb7994 (size before relaxing)
- .debug_str     0x00000000000b81fd       0x7f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
-                                      0xb793b (size before relaxing)
+ .debug_str     0x00000000000b5ab1     0x2677 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                                      0xb817a (size before relaxing)
+ .debug_str     0x00000000000b8128       0xe3 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                                      0xb799a (size before relaxing)
+ .debug_str     0x00000000000b820b       0x7f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+                                      0xb7941 (size before relaxing)
 
 .comment        0x0000000000000000       0x7b
  .comment       0x0000000000000000       0x7b Core/Src/main.o
@@ -1584,15 +1584,15 @@ OUTPUT(ArcadeIT_Ver020_F469_CMSIS.elf elf32-littlearm)
  .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
  .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
 
-.debug_frame    0x0000000000000000      0x2ac
+.debug_frame    0x0000000000000000      0x2b0
  .debug_frame   0x0000000000000000       0x38 Core/Src/main.o
  .debug_frame   0x0000000000000038       0x90 Core/Src/stm32f4xx_it.o
- .debug_frame   0x00000000000000c8      0x10c Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_frame   0x00000000000001d4       0x70 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_frame   0x0000000000000244       0x3c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_frame   0x0000000000000280       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000000c8      0x110 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_frame   0x00000000000001d8       0x70 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_frame   0x0000000000000248       0x3c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_frame   0x0000000000000284       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
 
-.debug_loc      0x0000000000000000      0x1bc
- .debug_loc     0x0000000000000000       0xe9 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_loc     0x00000000000000e9       0x2c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_loc     0x0000000000000115       0xa7 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+.debug_loc      0x0000000000000000      0x1e5
+ .debug_loc     0x0000000000000000      0x112 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_loc     0x0000000000000112       0x2c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .debug_loc     0x000000000000013e       0xa7 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
