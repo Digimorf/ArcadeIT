@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   000001b4  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00000430  080001b4  080001b4  000101b4  2**2
+  1 .text         000006f0  080001b4  080001b4  000101b4  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  080005e4  080005ec  000105ec  2**0
+  2 .rodata       00000000  080008a4  080008ac  000108ac  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  080005e4  080005e4  000105ec  2**0
+  3 .ARM.extab    00000000  080008a4  080008a4  000108ac  2**0
                   CONTENTS
-  4 .ARM          00000000  080005e4  080005e4  000105ec  2**0
+  4 .ARM          00000000  080008a4  080008a4  000108ac  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080005e4  080005ec  000105ec  2**0
+  5 .preinit_array 00000000  080008a4  080008ac  000108ac  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080005e4  080005e4  000105e4  2**2
+  6 .init_array   00000004  080008a4  080008a4  000108a4  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080005e8  080005e8  000105e8  2**2
+  7 .fini_array   00000004  080008a8  080008a8  000108a8  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         00000000  20000000  20000000  000105ec  2**0
+  8 .data         00000000  20000000  20000000  000108ac  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000034  20000000  080005ec  00020000  2**2
+  9 .bss          00000110  20000000  080008ac  00020000  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  20000034  080005ec  00020034  2**0
+ 10 ._user_heap_stack 00000600  20000110  080008ac  00020110  2**0
                   ALLOC
- 11 .ARM.attributes 00000030  00000000  00000000  000105ec  2**0
+ 11 .ARM.attributes 00000030  00000000  00000000  000108ac  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00003cac  00000000  00000000  0001061c  2**0
+ 12 .debug_info   00004a82  00000000  00000000  000108dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000a80  00000000  00000000  000142c8  2**0
+ 13 .debug_abbrev 00000cea  00000000  00000000  0001535e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000178  00000000  00000000  00014d48  2**3
+ 14 .debug_aranges 000001c0  00000000  00000000  00016048  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00000208  00000000  00000000  00014ec0  2**3
+ 15 .debug_ranges 00000268  00000000  00000000  00016208  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00022069  00000000  00000000  000150c8  2**0
+ 16 .debug_macro  00022499  00000000  00000000  00016470  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0000267b  00000000  00000000  00037131  2**0
+ 17 .debug_line   00003084  00000000  00000000  00038909  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000b828a  00000000  00000000  000397ac  2**0
+ 18 .debug_str    000b8c8a  00000000  00000000  0003b98d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  000f1a36  2**0
+ 19 .comment      0000007b  00000000  00000000  000f4617  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000002b0  00000000  00000000  000f1ab4  2**2
+ 20 .debug_frame  00000350  00000000  00000000  000f4694  2**2
                   CONTENTS, READONLY, DEBUGGING
- 21 .debug_loc    000001e5  00000000  00000000  000f1d64  2**0
+ 21 .debug_loc    0000045a  00000000  00000000  000f49e4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -64,7 +64,7 @@ Disassembly of section .text:
  80001ca:	bd10      	pop	{r4, pc}
  80001cc:	20000000 	.word	0x20000000
  80001d0:	00000000 	.word	0x00000000
- 80001d4:	080005cc 	.word	0x080005cc
+ 80001d4:	0800088c 	.word	0x0800088c
 
 080001d8 <frame_dummy>:
  80001d8:	b508      	push	{r3, lr}
@@ -76,7 +76,7 @@ Disassembly of section .text:
  80001e6:	bd08      	pop	{r3, pc}
  80001e8:	00000000 	.word	0x00000000
  80001ec:	20000004 	.word	0x20000004
- 80001f0:	080005cc 	.word	0x080005cc
+ 80001f0:	0800088c 	.word	0x0800088c
 
 080001f4 <main>:
 // /////////////////////////////////////////////////////////////////////////////
@@ -87,7 +87,7 @@ int main(void)
 {
  80001f4:	b508      	push	{r3, lr}
   ArcadeIT_Test_Bench();
- 80001f6:	f000 f8f9 	bl	80003ec <ArcadeIT_Test_Bench>
+ 80001f6:	f000 f90b 	bl	8000410 <ArcadeIT_Test_Bench>
 
   return 0;
 
@@ -226,7 +226,7 @@ LoopFillZerobss:
  800024a:	f000 f813 	bl	8000274 <ArcadeIT_System_Init>
 /* Call static constructors */
     bl __libc_init_array
- 800024e:	f000 f999 	bl	8000584 <__libc_init_array>
+ 800024e:	f000 faf9 	bl	8000844 <__libc_init_array>
 /* Call the application's entry point.*/
   bl  main
  8000252:	f7ff ffcf 	bl	80001f4 <main>
@@ -235,7 +235,7 @@ LoopFillZerobss:
  ldr   sp, =_estack     /* set stack pointer */
  8000258:	20050000 	.word	0x20050000
   ldr  r3, =_sidata
- 800025c:	080005ec 	.word	0x080005ec
+ 800025c:	080008ac 	.word	0x080008ac
   ldr  r0, =_sdata
  8000260:	20000000 	.word	0x20000000
   ldr  r3, =_edata
@@ -243,7 +243,7 @@ LoopFillZerobss:
   ldr  r2, =_sbss
  8000268:	20000000 	.word	0x20000000
   ldr  r3, = _ebss
- 800026c:	20000034 	.word	0x20000034
+ 800026c:	20000110 	.word	0x20000110
 
 08000270 <ADC_IRQHandler>:
  * @retval None       
@@ -440,10 +440,10 @@ void ArcadeIT_System_Init (void)
 
   // Decrement timers synchronized to the MCU in ms.
   gSystemTick++;
- 800036c:	4908      	ldr	r1, [pc, #32]	; (8000390 <SysTick_Handler+0x24>)
+ 800036c:	490b      	ldr	r1, [pc, #44]	; (800039c <SysTick_Handler+0x30>)
 
   if (gSecondaryTimer > 0)
- 800036e:	4a09      	ldr	r2, [pc, #36]	; (8000394 <SysTick_Handler+0x28>)
+ 800036e:	4a0c      	ldr	r2, [pc, #48]	; (80003a0 <SysTick_Handler+0x34>)
   gSystemTick++;
  8000370:	680b      	ldr	r3, [r1, #0]
  8000372:	3301      	adds	r3, #1
@@ -457,7 +457,7 @@ void ArcadeIT_System_Init (void)
  800037e:	6013      	str	r3, [r2, #0]
 
   if (gSystemTimer > 0)
- 8000380:	4b05      	ldr	r3, [pc, #20]	; (8000398 <SysTick_Handler+0x2c>)
+ 8000380:	4b08      	ldr	r3, [pc, #32]	; (80003a4 <SysTick_Handler+0x38>)
  8000382:	681a      	ldr	r2, [r3, #0]
  8000384:	b112      	cbz	r2, 800038c <SysTick_Handler+0x20>
     gSystemTimer--;
@@ -465,469 +465,963 @@ void ArcadeIT_System_Init (void)
  8000388:	3a01      	subs	r2, #1
  800038a:	601a      	str	r2, [r3, #0]
 
+  // Run the tasks scheduler.
+  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+ 800038c:	4b06      	ldr	r3, [pc, #24]	; (80003a8 <SysTick_Handler+0x3c>)
+ 800038e:	681b      	ldr	r3, [r3, #0]
+ 8000390:	05db      	lsls	r3, r3, #23
+ 8000392:	d400      	bmi.n	8000396 <SysTick_Handler+0x2a>
+
 void SysTick_Handler(void)
 {
   ArcadeIT_SysTick_Handler();
 
 } // End SysTick_Handler.
- 800038c:	4770      	bx	lr
- 800038e:	bf00      	nop
- 8000390:	20000028 	.word	0x20000028
- 8000394:	20000020 	.word	0x20000020
- 8000398:	2000002c 	.word	0x2000002c
+ 8000394:	4770      	bx	lr
+      ArcadeIT_Scheduler_Update ();
+ 8000396:	f000 b97d 	b.w	8000694 <ArcadeIT_Scheduler_Update>
+ 800039a:	bf00      	nop
+ 800039c:	20000028 	.word	0x20000028
+ 80003a0:	20000020 	.word	0x20000020
+ 80003a4:	2000002c 	.word	0x2000002c
+ 80003a8:	20000030 	.word	0x20000030
 
-0800039c <ArcadeIT_ArcadeIT_Start>:
+080003ac <ArcadeIT_ArcadeIT_Start>:
 
 } // end ArcadeIT_PowerUP_Systems
 
 // /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_ArcadeIT_Start (void)
 {
- 800039c:	b538      	push	{r3, r4, r5, lr}
+ 80003ac:	b538      	push	{r3, r4, r5, lr}
   if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
   {
     return (1UL);                                                   /* Reload value impossible */
   }
 
   SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
- 800039e:	4b0f      	ldr	r3, [pc, #60]	; (80003dc <ArcadeIT_ArcadeIT_Start+0x40>)
+ 80003ae:	4b13      	ldr	r3, [pc, #76]	; (80003fc <ArcadeIT_ArcadeIT_Start+0x50>)
     SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
- 80003a0:	4a0f      	ldr	r2, [pc, #60]	; (80003e0 <ArcadeIT_ArcadeIT_Start+0x44>)
+ 80003b0:	4a13      	ldr	r2, [pc, #76]	; (8000400 <ArcadeIT_ArcadeIT_Start+0x54>)
   SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
- 80003a2:	4910      	ldr	r1, [pc, #64]	; (80003e4 <ArcadeIT_ArcadeIT_Start+0x48>)
- 80003a4:	6059      	str	r1, [r3, #4]
+ 80003b2:	4914      	ldr	r1, [pc, #80]	; (8000404 <ArcadeIT_ArcadeIT_Start+0x58>)
+ 80003b4:	6059      	str	r1, [r3, #4]
     SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
- 80003a6:	21f0      	movs	r1, #240	; 0xf0
- 80003a8:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
+ 80003b6:	21f0      	movs	r1, #240	; 0xf0
+ 80003b8:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
+  // ---------------------------------------------------------------------------
   // Clock and timer system. Thjis must be called before the SD card initialization.
   // 1ms System Tick timer.
   ArcadeIT_SysTick_Init ();
-
   // ---------------------------------------------------------------------------
-  if (gSystems & ARCADEIT_SYSTEM_TESTPADS)
- 80003ac:	4c0e      	ldr	r4, [pc, #56]	; (80003e8 <ArcadeIT_ArcadeIT_Start+0x4c>)
+  if (gDevices & ARCADEIT_DEVICE_TESTPADS)
+ 80003bc:	4c12      	ldr	r4, [pc, #72]	; (8000408 <ArcadeIT_ArcadeIT_Start+0x5c>)
+ 80003be:	21c0      	movs	r1, #192	; 0xc0
   NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
   SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
- 80003ae:	2000      	movs	r0, #0
+ 80003c0:	2000      	movs	r0, #0
   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
- 80003b0:	2507      	movs	r5, #7
-    SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
- 80003b2:	21c0      	movs	r1, #192	; 0xc0
+ 80003c2:	2507      	movs	r5, #7
   SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
- 80003b4:	6098      	str	r0, [r3, #8]
+ 80003c4:	6098      	str	r0, [r3, #8]
   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
- 80003b6:	601d      	str	r5, [r3, #0]
+ 80003c6:	601d      	str	r5, [r3, #0]
     SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
- 80003b8:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
- 80003bc:	6823      	ldr	r3, [r4, #0]
- 80003be:	069a      	lsls	r2, r3, #26
- 80003c0:	d406      	bmi.n	80003d0 <ArcadeIT_ArcadeIT_Start+0x34>
+ 80003c8:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
+ 80003cc:	6823      	ldr	r3, [r4, #0]
+ 80003ce:	0399      	lsls	r1, r3, #14
+ 80003d0:	d40d      	bmi.n	80003ee <ArcadeIT_ArcadeIT_Start+0x42>
+      //ArcadeIT_TestPad_Init (RCC_MCO2Source_PLLCLK, RCC_MCO2Div_4); // 45 MHz
       //ArcadeIT_TestPad_Init (RCC_MCO2Source_HSE, RCC_MCO2Div_1);    //  8 MHz
 
     } // End if.
-
   // ---------------------------------------------------------------------------
-  if (gSystems & ARCADEIT_SYSTEM_STATUSLED)
- 80003c2:	075b      	lsls	r3, r3, #29
- 80003c4:	d400      	bmi.n	80003c8 <ArcadeIT_ArcadeIT_Start+0x2c>
+  if (gDevices & ARCADEIT_DEVICE_STATUSLED)
+ 80003d2:	03da      	lsls	r2, r3, #15
+ 80003d4:	d408      	bmi.n	80003e8 <ArcadeIT_ArcadeIT_Start+0x3c>
 
     } // End if.
+  // ---------------------------------------------------------------------------
+  // Systems scheduler task. This must be set AFTER the Systick has been initialized
+  // because uses the ISR function that is handled by the Systick.
+  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+ 80003d6:	4b0d      	ldr	r3, [pc, #52]	; (800040c <ArcadeIT_ArcadeIT_Start+0x60>)
+ 80003d8:	681b      	ldr	r3, [r3, #0]
+ 80003da:	05db      	lsls	r3, r3, #23
+ 80003dc:	d400      	bmi.n	80003e0 <ArcadeIT_ArcadeIT_Start+0x34>
+      ArcadeIT_Scheduler_Task_Init ();
 
+    } // End if.
   // ---------------------------------------------------------------------------
 
 } // End ArcadeIT_Start
- 80003c6:	bd38      	pop	{r3, r4, r5, pc}
- 80003c8:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+ 80003de:	bd38      	pop	{r3, r4, r5, pc}
+ 80003e0:	e8bd 4038 	ldmia.w	sp!, {r3, r4, r5, lr}
+      ArcadeIT_Scheduler_Task_Init ();
+ 80003e4:	f000 b906 	b.w	80005f4 <ArcadeIT_Scheduler_Task_Init>
       ArcadeIT_Status_LEDS_Init ();
- 80003cc:	f000 b836 	b.w	800043c <ArcadeIT_Status_LEDS_Init>
+ 80003e8:	f000 f860 	bl	80004ac <ArcadeIT_Status_LEDS_Init>
+ 80003ec:	e7f3      	b.n	80003d6 <ArcadeIT_ArcadeIT_Start+0x2a>
       ArcadeIT_TestPad_Init (RCC_MCO2Source_SYSCLK, RCC_MCO2Div_4);  //  45 MHz
- 80003d0:	f04f 5140 	mov.w	r1, #805306368	; 0x30000000
- 80003d4:	f000 f8a0 	bl	8000518 <ArcadeIT_TestPad_Init>
- 80003d8:	6823      	ldr	r3, [r4, #0]
- 80003da:	e7f2      	b.n	80003c2 <ArcadeIT_ArcadeIT_Start+0x26>
- 80003dc:	e000e010 	.word	0xe000e010
- 80003e0:	e000ed00 	.word	0xe000ed00
- 80003e4:	0002bf1f 	.word	0x0002bf1f
- 80003e8:	20000030 	.word	0x20000030
+ 80003ee:	f04f 5140 	mov.w	r1, #805306368	; 0x30000000
+ 80003f2:	f000 f8c9 	bl	8000588 <ArcadeIT_TestPad_Init>
+ 80003f6:	6823      	ldr	r3, [r4, #0]
+ 80003f8:	e7eb      	b.n	80003d2 <ArcadeIT_ArcadeIT_Start+0x26>
+ 80003fa:	bf00      	nop
+ 80003fc:	e000e010 	.word	0xe000e010
+ 8000400:	e000ed00 	.word	0xe000ed00
+ 8000404:	0002bf1f 	.word	0x0002bf1f
+ 8000408:	2000001c 	.word	0x2000001c
+ 800040c:	20000030 	.word	0x20000030
 
-080003ec <ArcadeIT_Test_Bench>:
+08000410 <ArcadeIT_Test_Bench>:
+
+// ////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_Test_Bench (void)
+{
+ 8000410:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
   // The following variables hold the flags that start the features/peripherals
   // of the ArcadeIT System. It could be possible to configure the ArcadeIT System from a
   // *.ini text file on the SD Card, or other sources.
 
   // System features.
-  gSystems = NONE
- 80003ec:	480f      	ldr	r0, [pc, #60]	; (800042c <ArcadeIT_Test_Bench+0x40>)
-      //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
-      //| ARCADEIT_SYSTEM_DMM           // The custom ArcadeIt Dynamic Memory Manager
-      //| ARCADEIT_SYSTEM_SCHEDULER     // The task scheduler system.
+  gUnits = NONE
+ 8000414:	4c20      	ldr	r4, [pc, #128]	; (8000498 <ArcadeIT_Test_Bench+0x88>)
+      //| ARCADEIT_UNIT_RTC           // Real time clock
+      //| ARCADEIT_UNIT_DMM           // The custom ArcadeIt Dynamic Memory Manager
+        | ARCADEIT_UNIT_SCHEDULER     // The task scheduler system.
       ;
 
   gStorage = NONE
- 80003ee:	4910      	ldr	r1, [pc, #64]	; (8000430 <ArcadeIT_Test_Bench+0x44>)
+ 8000416:	4a21      	ldr	r2, [pc, #132]	; (800049c <ArcadeIT_Test_Bench+0x8c>)
       //| ARCADEIT_STORAGE_RAM_DISK     // Ram disk with a FAT File system on the SRAM expansion
       //| ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
       ;
 
   gDevices = NONE
- 80003f0:	4a10      	ldr	r2, [pc, #64]	; (8000434 <ArcadeIT_Test_Bench+0x48>)
+ 8000418:	4f21      	ldr	r7, [pc, #132]	; (80004a0 <ArcadeIT_Test_Bench+0x90>)
+ 800041a:	4e22      	ldr	r6, [pc, #136]	; (80004a4 <ArcadeIT_Test_Bench+0x94>)
+  gUnits = NONE
+ 800041c:	f44f 7380 	mov.w	r3, #256	; 0x100
+  gStorage = NONE
+ 8000420:	2100      	movs	r1, #0
+  gUnits = NONE
+ 8000422:	6023      	str	r3, [r4, #0]
 {
- 80003f2:	b570      	push	{r4, r5, r6, lr}
-  gStorage = NONE
- 80003f4:	2300      	movs	r3, #0
-  gSystems = NONE
- 80003f6:	2524      	movs	r5, #36	; 0x24
- 80003f8:	6005      	str	r5, [r0, #0]
-  gStorage = NONE
- 80003fa:	600b      	str	r3, [r1, #0]
+ 8000424:	b082      	sub	sp, #8
   gDevices = NONE
- 80003fc:	6013      	str	r3, [r2, #0]
-       //| ARCADEIT_DEVICE_LCDS         // LCDs port
-       //| ARCADEIT_DEVICE_USB          // USB port
-       //| ARCADEIT_DEVICE_AUDIO        // Audio DAC port
+ 8000426:	f44f 3340 	mov.w	r3, #196608	; 0x30000
+  gStorage = NONE
+ 800042a:	6011      	str	r1, [r2, #0]
+  gDevices = NONE
+ 800042c:	603b      	str	r3, [r7, #0]
+      //| ARCADEIT_DEVICE_SERIAL_PORT   // Serial port USART 2
+        | ARCADEIT_DEVICE_STATUSLED     // Two Status LEDs
+        | ARCADEIT_DEVICE_TESTPADS      // System clock test pads
        ;
 
   ArcadeIT_ArcadeIT_Start();
- 80003fe:	f7ff ffcd 	bl	800039c <ArcadeIT_ArcadeIT_Start>
- 8000402:	4c0d      	ldr	r4, [pc, #52]	; (8000438 <ArcadeIT_Test_Bench+0x4c>)
- 8000404:	2504      	movs	r5, #4
+ 800042e:	f7ff ffbd 	bl	80003ac <ArcadeIT_ArcadeIT_Start>
+ 8000432:	2504      	movs	r5, #4
   gSystemTimer = pDelay;
- 8000406:	26fa      	movs	r6, #250	; 0xfa
+ 8000434:	f04f 08fa 	mov.w	r8, #250	; 0xfa
   // Test suite
 #ifdef TEST
   // Status LEDs
   for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
   {
     ArcadeIT_Status_LED1_Toggle();
- 8000408:	f000 f86a 	bl	80004e0 <ArcadeIT_Status_LED1_Toggle>
+ 8000438:	f000 f88a 	bl	8000550 <ArcadeIT_Status_LED1_Toggle>
   gSystemTimer = pDelay;
- 800040c:	6026      	str	r6, [r4, #0]
+ 800043c:	f8c6 8000 	str.w	r8, [r6]
   while (gSystemTimer);
- 800040e:	6823      	ldr	r3, [r4, #0]
- 8000410:	2b00      	cmp	r3, #0
- 8000412:	d1fc      	bne.n	800040e <ArcadeIT_Test_Bench+0x22>
+ 8000440:	6833      	ldr	r3, [r6, #0]
+ 8000442:	2b00      	cmp	r3, #0
+ 8000444:	d1fc      	bne.n	8000440 <ArcadeIT_Test_Bench+0x30>
     ArcadeIT_System_Delay(250);
     ArcadeIT_Status_LED2_Toggle();
- 8000414:	f000 f872 	bl	80004fc <ArcadeIT_Status_LED2_Toggle>
+ 8000446:	f000 f891 	bl	800056c <ArcadeIT_Status_LED2_Toggle>
   gSystemTimer = pDelay;
- 8000418:	6026      	str	r6, [r4, #0]
+ 800044a:	f8c6 8000 	str.w	r8, [r6]
   while (gSystemTimer);
- 800041a:	6823      	ldr	r3, [r4, #0]
- 800041c:	2b00      	cmp	r3, #0
- 800041e:	d1fc      	bne.n	800041a <ArcadeIT_Test_Bench+0x2e>
- 8000420:	3d01      	subs	r5, #1
+ 800044e:	6833      	ldr	r3, [r6, #0]
+ 8000450:	2b00      	cmp	r3, #0
+ 8000452:	d1fc      	bne.n	800044e <ArcadeIT_Test_Bench+0x3e>
+ 8000454:	3d01      	subs	r5, #1
   for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
- 8000422:	f015 05ff 	ands.w	r5, r5, #255	; 0xff
- 8000426:	d1ef      	bne.n	8000408 <ArcadeIT_Test_Bench+0x1c>
- 8000428:	e7fe      	b.n	8000428 <ArcadeIT_Test_Bench+0x3c>
- 800042a:	bf00      	nop
- 800042c:	20000030 	.word	0x20000030
- 8000430:	20000024 	.word	0x20000024
- 8000434:	2000001c 	.word	0x2000001c
- 8000438:	2000002c 	.word	0x2000002c
+ 8000456:	f015 05ff 	ands.w	r5, r5, #255	; 0xff
+ 800045a:	d1ed      	bne.n	8000438 <ArcadeIT_Test_Bench+0x28>
+  } // End if.
 
-0800043c <ArcadeIT_Status_LEDS_Init>:
+  // --------------------------------------------------------------------------
+  // We setup the scheduler to blink the Status LED 1 at 1Hz (every seconds).
+
+  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+ 800045c:	6822      	ldr	r2, [r4, #0]
+ 800045e:	f412 7280 	ands.w	r2, r2, #256	; 0x100
+ 8000462:	d002      	beq.n	800046a <ArcadeIT_Test_Bench+0x5a>
+  {
+    if (gDevices & ARCADEIT_DEVICE_STATUSLED)
+ 8000464:	683b      	ldr	r3, [r7, #0]
+ 8000466:	03db      	lsls	r3, r3, #15
+ 8000468:	d409      	bmi.n	800047e <ArcadeIT_Test_Bench+0x6e>
+ 800046a:	b902      	cbnz	r2, 800046e <ArcadeIT_Test_Bench+0x5e>
+ 800046c:	e7fe      	b.n	800046c <ArcadeIT_Test_Bench+0x5c>
+  {
+
+    // Periodic tasks
+    if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+    {
+      ArcadeIT_Scheduler_Run ();
+ 800046e:	f000 f9d7 	bl	8000820 <ArcadeIT_Scheduler_Run>
+ 8000472:	6822      	ldr	r2, [r4, #0]
+ 8000474:	f402 7280 	and.w	r2, r2, #256	; 0x100
+ 8000478:	2a00      	cmp	r2, #0
+ 800047a:	d0f7      	beq.n	800046c <ArcadeIT_Test_Bench+0x5c>
+ 800047c:	e7f7      	b.n	800046e <ArcadeIT_Test_Bench+0x5e>
+          ArcadeIT_Scheduler_Task_Set (
+ 800047e:	f44f 73fa 	mov.w	r3, #500	; 0x1f4
+ 8000482:	9300      	str	r3, [sp, #0]
+ 8000484:	462a      	mov	r2, r5
+ 8000486:	462b      	mov	r3, r5
+ 8000488:	4628      	mov	r0, r5
+ 800048a:	4907      	ldr	r1, [pc, #28]	; (80004a8 <ArcadeIT_Test_Bench+0x98>)
+ 800048c:	f000 f8d2 	bl	8000634 <ArcadeIT_Scheduler_Task_Set>
+ 8000490:	6822      	ldr	r2, [r4, #0]
+ 8000492:	f402 7280 	and.w	r2, r2, #256	; 0x100
+ 8000496:	e7e8      	b.n	800046a <ArcadeIT_Test_Bench+0x5a>
+ 8000498:	20000030 	.word	0x20000030
+ 800049c:	20000024 	.word	0x20000024
+ 80004a0:	2000001c 	.word	0x2000001c
+ 80004a4:	2000002c 	.word	0x2000002c
+ 80004a8:	08000551 	.word	0x08000551
+
+080004ac <ArcadeIT_Status_LEDS_Init>:
  */
 
   uint32_t lPinPosition = 0;
 
   // Turn on the MCU peripheral by enabling its Clock.
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOH) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOH;
- 800043c:	4b26      	ldr	r3, [pc, #152]	; (80004d8 <ArcadeIT_Status_LEDS_Init+0x9c>)
- 800043e:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 8000440:	0612      	lsls	r2, r2, #24
- 8000442:	d403      	bmi.n	800044c <ArcadeIT_Status_LEDS_Init+0x10>
- 8000444:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 8000446:	f042 0280 	orr.w	r2, r2, #128	; 0x80
- 800044a:	631a      	str	r2, [r3, #48]	; 0x30
+ 80004ac:	4b26      	ldr	r3, [pc, #152]	; (8000548 <ArcadeIT_Status_LEDS_Init+0x9c>)
+ 80004ae:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 80004b0:	0612      	lsls	r2, r2, #24
+ 80004b2:	d403      	bmi.n	80004bc <ArcadeIT_Status_LEDS_Init+0x10>
+ 80004b4:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 80004b6:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+ 80004ba:	631a      	str	r2, [r3, #48]	; 0x30
   // level as default.
   // -----------------------
   lPinPosition = (SYS_STATUS_LED1_PIN_NO * 2); // the position is a multiple of 2
 
   // GPIO pin(PH2) in output
   SYS_STATUS_LED1_PER->MODER   &= ~GPIO_MODER_MODER2;
- 800044c:	4b23      	ldr	r3, [pc, #140]	; (80004dc <ArcadeIT_Status_LEDS_Init+0xa0>)
- 800044e:	681a      	ldr	r2, [r3, #0]
- 8000450:	f022 0230 	bic.w	r2, r2, #48	; 0x30
- 8000454:	601a      	str	r2, [r3, #0]
+ 80004bc:	4b23      	ldr	r3, [pc, #140]	; (800054c <ArcadeIT_Status_LEDS_Init+0xa0>)
+ 80004be:	681a      	ldr	r2, [r3, #0]
+ 80004c0:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 80004c4:	601a      	str	r2, [r3, #0]
   SYS_STATUS_LED1_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
- 8000456:	681a      	ldr	r2, [r3, #0]
- 8000458:	f042 0210 	orr.w	r2, r2, #16
- 800045c:	601a      	str	r2, [r3, #0]
+ 80004c6:	681a      	ldr	r2, [r3, #0]
+ 80004c8:	f042 0210 	orr.w	r2, r2, #16
+ 80004cc:	601a      	str	r2, [r3, #0]
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED1_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
- 800045e:	689a      	ldr	r2, [r3, #8]
- 8000460:	f022 0230 	bic.w	r2, r2, #48	; 0x30
- 8000464:	609a      	str	r2, [r3, #8]
+ 80004ce:	689a      	ldr	r2, [r3, #8]
+ 80004d0:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 80004d4:	609a      	str	r2, [r3, #8]
   SYS_STATUS_LED1_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
- 8000466:	689a      	ldr	r2, [r3, #8]
- 8000468:	f042 0230 	orr.w	r2, r2, #48	; 0x30
- 800046c:	609a      	str	r2, [r3, #8]
+ 80004d6:	689a      	ldr	r2, [r3, #8]
+ 80004d8:	f042 0230 	orr.w	r2, r2, #48	; 0x30
+ 80004dc:	609a      	str	r2, [r3, #8]
 
   // type output
   SYS_STATUS_LED1_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
- 800046e:	685a      	ldr	r2, [r3, #4]
- 8000470:	f022 0204 	bic.w	r2, r2, #4
- 8000474:	605a      	str	r2, [r3, #4]
+ 80004de:	685a      	ldr	r2, [r3, #4]
+ 80004e0:	f022 0204 	bic.w	r2, r2, #4
+ 80004e4:	605a      	str	r2, [r3, #4]
   SYS_STATUS_LED1_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED1_PIN_NO);
- 8000476:	685a      	ldr	r2, [r3, #4]
- 8000478:	605a      	str	r2, [r3, #4]
+ 80004e6:	685a      	ldr	r2, [r3, #4]
+ 80004e8:	605a      	str	r2, [r3, #4]
 
   // pull up configuration
   SYS_STATUS_LED1_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
- 800047a:	68da      	ldr	r2, [r3, #12]
- 800047c:	f022 0230 	bic.w	r2, r2, #48	; 0x30
- 8000480:	60da      	str	r2, [r3, #12]
+ 80004ea:	68da      	ldr	r2, [r3, #12]
+ 80004ec:	f022 0230 	bic.w	r2, r2, #48	; 0x30
+ 80004f0:	60da      	str	r2, [r3, #12]
   SYS_STATUS_LED1_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
- 8000482:	68da      	ldr	r2, [r3, #12]
- 8000484:	f042 0220 	orr.w	r2, r2, #32
- 8000488:	60da      	str	r2, [r3, #12]
+ 80004f2:	68da      	ldr	r2, [r3, #12]
+ 80004f4:	f042 0220 	orr.w	r2, r2, #32
+ 80004f8:	60da      	str	r2, [r3, #12]
 
   // -----------------------
   lPinPosition = (SYS_STATUS_LED2_PIN_NO * 2); // the position is a multiple of 2
 
   // GPIO pin(PH3) in output
   SYS_STATUS_LED2_PER->MODER   &= ~GPIO_MODER_MODER3;
- 800048a:	681a      	ldr	r2, [r3, #0]
- 800048c:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
- 8000490:	601a      	str	r2, [r3, #0]
+ 80004fa:	681a      	ldr	r2, [r3, #0]
+ 80004fc:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 8000500:	601a      	str	r2, [r3, #0]
   SYS_STATUS_LED2_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
- 8000492:	681a      	ldr	r2, [r3, #0]
- 8000494:	f042 0240 	orr.w	r2, r2, #64	; 0x40
- 8000498:	601a      	str	r2, [r3, #0]
+ 8000502:	681a      	ldr	r2, [r3, #0]
+ 8000504:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 8000508:	601a      	str	r2, [r3, #0]
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED2_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
- 800049a:	689a      	ldr	r2, [r3, #8]
- 800049c:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
- 80004a0:	609a      	str	r2, [r3, #8]
+ 800050a:	689a      	ldr	r2, [r3, #8]
+ 800050c:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 8000510:	609a      	str	r2, [r3, #8]
   SYS_STATUS_LED2_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
- 80004a2:	689a      	ldr	r2, [r3, #8]
- 80004a4:	f042 02c0 	orr.w	r2, r2, #192	; 0xc0
- 80004a8:	609a      	str	r2, [r3, #8]
+ 8000512:	689a      	ldr	r2, [r3, #8]
+ 8000514:	f042 02c0 	orr.w	r2, r2, #192	; 0xc0
+ 8000518:	609a      	str	r2, [r3, #8]
 
   // type output
   SYS_STATUS_LED2_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
- 80004aa:	685a      	ldr	r2, [r3, #4]
- 80004ac:	f022 0208 	bic.w	r2, r2, #8
- 80004b0:	605a      	str	r2, [r3, #4]
+ 800051a:	685a      	ldr	r2, [r3, #4]
+ 800051c:	f022 0208 	bic.w	r2, r2, #8
+ 8000520:	605a      	str	r2, [r3, #4]
   SYS_STATUS_LED2_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
- 80004b2:	685a      	ldr	r2, [r3, #4]
- 80004b4:	605a      	str	r2, [r3, #4]
+ 8000522:	685a      	ldr	r2, [r3, #4]
+ 8000524:	605a      	str	r2, [r3, #4]
 
   // pull up configuration
   SYS_STATUS_LED2_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
- 80004b6:	68da      	ldr	r2, [r3, #12]
- 80004b8:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
- 80004bc:	60da      	str	r2, [r3, #12]
+ 8000526:	68da      	ldr	r2, [r3, #12]
+ 8000528:	f022 02c0 	bic.w	r2, r2, #192	; 0xc0
+ 800052c:	60da      	str	r2, [r3, #12]
   SYS_STATUS_LED2_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
- 80004be:	68da      	ldr	r2, [r3, #12]
- 80004c0:	f042 0280 	orr.w	r2, r2, #128	; 0x80
- 80004c4:	60da      	str	r2, [r3, #12]
+ 800052e:	68da      	ldr	r2, [r3, #12]
+ 8000530:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+ 8000534:	60da      	str	r2, [r3, #12]
 
   // -----------------------
   // Put LEDs line LOW.
   SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
- 80004c6:	695a      	ldr	r2, [r3, #20]
- 80004c8:	f022 0204 	bic.w	r2, r2, #4
- 80004cc:	615a      	str	r2, [r3, #20]
+ 8000536:	695a      	ldr	r2, [r3, #20]
+ 8000538:	f022 0204 	bic.w	r2, r2, #4
+ 800053c:	615a      	str	r2, [r3, #20]
   SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
- 80004ce:	695a      	ldr	r2, [r3, #20]
- 80004d0:	f022 0208 	bic.w	r2, r2, #8
- 80004d4:	615a      	str	r2, [r3, #20]
+ 800053e:	695a      	ldr	r2, [r3, #20]
+ 8000540:	f022 0208 	bic.w	r2, r2, #8
+ 8000544:	615a      	str	r2, [r3, #20]
   {
     //ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
 
   } // End if.
 
 } // End ArcadeIT_Status_LEDS_Init.
- 80004d6:	4770      	bx	lr
- 80004d8:	40023800 	.word	0x40023800
- 80004dc:	40021c00 	.word	0x40021c00
+ 8000546:	4770      	bx	lr
+ 8000548:	40023800 	.word	0x40023800
+ 800054c:	40021c00 	.word	0x40021c00
 
-080004e0 <ArcadeIT_Status_LED1_Toggle>:
+08000550 <ArcadeIT_Status_LED1_Toggle>:
   * PARAMETERS:  None.
   * RETURNS:     Nothing.
   */
 
   // Set LEDs line LOW or HIGH depending the current status of the LED.
   if (GPIOH->ODR & SYS_STATUS_LED1_PIN)
- 80004e0:	4b05      	ldr	r3, [pc, #20]	; (80004f8 <ArcadeIT_Status_LED1_Toggle+0x18>)
- 80004e2:	695a      	ldr	r2, [r3, #20]
- 80004e4:	f012 0f04 	tst.w	r2, #4
+ 8000550:	4b05      	ldr	r3, [pc, #20]	; (8000568 <ArcadeIT_Status_LED1_Toggle+0x18>)
+ 8000552:	695a      	ldr	r2, [r3, #20]
+ 8000554:	f012 0f04 	tst.w	r2, #4
   {
     GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
- 80004e8:	695a      	ldr	r2, [r3, #20]
- 80004ea:	bf14      	ite	ne
- 80004ec:	f022 0204 	bicne.w	r2, r2, #4
+ 8000558:	695a      	ldr	r2, [r3, #20]
+ 800055a:	bf14      	ite	ne
+ 800055c:	f022 0204 	bicne.w	r2, r2, #4
   }
   else
   {
     GPIOH->ODR |= SYS_STATUS_LED1_PIN;
- 80004f0:	f042 0204 	orreq.w	r2, r2, #4
- 80004f4:	615a      	str	r2, [r3, #20]
+ 8000560:	f042 0204 	orreq.w	r2, r2, #4
+ 8000564:	615a      	str	r2, [r3, #20]
 
   } // End if.
 
 } // End ArcadeIT_Status_LED1_Toggle.
- 80004f6:	4770      	bx	lr
- 80004f8:	40021c00 	.word	0x40021c00
+ 8000566:	4770      	bx	lr
+ 8000568:	40021c00 	.word	0x40021c00
 
-080004fc <ArcadeIT_Status_LED2_Toggle>:
+0800056c <ArcadeIT_Status_LED2_Toggle>:
   * PARAMETERS:  None.
   * RETURNS:     Nothing.
   */
 
   // Set LEDs line LOW or HIGH depending the current status of the LED.
   if (SYS_STATUS_LED2_PER->ODR & SYS_STATUS_LED2_PIN)
- 80004fc:	4b05      	ldr	r3, [pc, #20]	; (8000514 <ArcadeIT_Status_LED2_Toggle+0x18>)
- 80004fe:	695a      	ldr	r2, [r3, #20]
- 8000500:	f012 0f08 	tst.w	r2, #8
+ 800056c:	4b05      	ldr	r3, [pc, #20]	; (8000584 <ArcadeIT_Status_LED2_Toggle+0x18>)
+ 800056e:	695a      	ldr	r2, [r3, #20]
+ 8000570:	f012 0f08 	tst.w	r2, #8
   {
     SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
- 8000504:	695a      	ldr	r2, [r3, #20]
- 8000506:	bf14      	ite	ne
- 8000508:	f022 0208 	bicne.w	r2, r2, #8
+ 8000574:	695a      	ldr	r2, [r3, #20]
+ 8000576:	bf14      	ite	ne
+ 8000578:	f022 0208 	bicne.w	r2, r2, #8
   }
   else
   {
     SYS_STATUS_LED2_PER->ODR |= SYS_STATUS_LED2_PIN;
- 800050c:	f042 0208 	orreq.w	r2, r2, #8
- 8000510:	615a      	str	r2, [r3, #20]
+ 800057c:	f042 0208 	orreq.w	r2, r2, #8
+ 8000580:	615a      	str	r2, [r3, #20]
 
   } // End if.
 
 } // End ArcadeIT_Status_LED2_Toggle.
- 8000512:	4770      	bx	lr
- 8000514:	40021c00 	.word	0x40021c00
+ 8000582:	4770      	bx	lr
+ 8000584:	40021c00 	.word	0x40021c00
 
-08000518 <ArcadeIT_TestPad_Init>:
+08000588 <ArcadeIT_TestPad_Init>:
   * RETURNS:     Nothing.
   */
 
   uint32_t lPinPosition = (SYS_TESTPADS_PIN_NO * 2);
 
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
- 8000518:	4b18      	ldr	r3, [pc, #96]	; (800057c <ArcadeIT_TestPad_Init+0x64>)
- 800051a:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 800051c:	0752      	lsls	r2, r2, #29
+ 8000588:	4b18      	ldr	r3, [pc, #96]	; (80005ec <ArcadeIT_TestPad_Init+0x64>)
+ 800058a:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 800058c:	0752      	lsls	r2, r2, #29
 {
- 800051e:	b410      	push	{r4}
+ 800058e:	b410      	push	{r4}
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
- 8000520:	d403      	bmi.n	800052a <ArcadeIT_TestPad_Init+0x12>
- 8000522:	6b1a      	ldr	r2, [r3, #48]	; 0x30
- 8000524:	f042 0204 	orr.w	r2, r2, #4
- 8000528:	631a      	str	r2, [r3, #48]	; 0x30
+ 8000590:	d403      	bmi.n	800059a <ArcadeIT_TestPad_Init+0x12>
+ 8000592:	6b1a      	ldr	r2, [r3, #48]	; 0x30
+ 8000594:	f042 0204 	orr.w	r2, r2, #4
+ 8000598:	631a      	str	r2, [r3, #48]	; 0x30
 
   // Configure MCO2 pin(PC9) in alternate function 0
   SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
- 800052a:	4b15      	ldr	r3, [pc, #84]	; (8000580 <ArcadeIT_TestPad_Init+0x68>)
+ 800059a:	4b15      	ldr	r3, [pc, #84]	; (80005f0 <ArcadeIT_TestPad_Init+0x68>)
   uint32_t lTmpReg = RCC->CFGR;
- 800052c:	4c13      	ldr	r4, [pc, #76]	; (800057c <ArcadeIT_TestPad_Init+0x64>)
+ 800059c:	4c13      	ldr	r4, [pc, #76]	; (80005ec <ArcadeIT_TestPad_Init+0x64>)
   SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
- 800052e:	681a      	ldr	r2, [r3, #0]
- 8000530:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
- 8000534:	601a      	str	r2, [r3, #0]
+ 800059e:	681a      	ldr	r2, [r3, #0]
+ 80005a0:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 80005a4:	601a      	str	r2, [r3, #0]
   SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
- 8000536:	681a      	ldr	r2, [r3, #0]
- 8000538:	f442 2200 	orr.w	r2, r2, #524288	; 0x80000
- 800053c:	601a      	str	r2, [r3, #0]
+ 80005a6:	681a      	ldr	r2, [r3, #0]
+ 80005a8:	f442 2200 	orr.w	r2, r2, #524288	; 0x80000
+ 80005ac:	601a      	str	r2, [r3, #0]
 
   // Maximum frequency allowed is 100MHz, so keep it in mind when you want
   // to test 180MHz, you have to set the divider at least 2
   SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR9;
- 800053e:	689a      	ldr	r2, [r3, #8]
- 8000540:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
- 8000544:	609a      	str	r2, [r3, #8]
+ 80005ae:	689a      	ldr	r2, [r3, #8]
+ 80005b0:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 80005b4:	609a      	str	r2, [r3, #8]
   SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
- 8000546:	689a      	ldr	r2, [r3, #8]
- 8000548:	f442 2240 	orr.w	r2, r2, #786432	; 0xc0000
- 800054c:	609a      	str	r2, [r3, #8]
+ 80005b6:	689a      	ldr	r2, [r3, #8]
+ 80005b8:	f442 2240 	orr.w	r2, r2, #786432	; 0xc0000
+ 80005bc:	609a      	str	r2, [r3, #8]
 
   // type output
   SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_9;
- 800054e:	685a      	ldr	r2, [r3, #4]
- 8000550:	f422 7200 	bic.w	r2, r2, #512	; 0x200
- 8000554:	605a      	str	r2, [r3, #4]
+ 80005be:	685a      	ldr	r2, [r3, #4]
+ 80005c0:	f422 7200 	bic.w	r2, r2, #512	; 0x200
+ 80005c4:	605a      	str	r2, [r3, #4]
   SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
- 8000556:	685a      	ldr	r2, [r3, #4]
- 8000558:	605a      	str	r2, [r3, #4]
+ 80005c6:	685a      	ldr	r2, [r3, #4]
+ 80005c8:	605a      	str	r2, [r3, #4]
 
   // pull up configuration
   SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR9;
- 800055a:	68da      	ldr	r2, [r3, #12]
- 800055c:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
- 8000560:	60da      	str	r2, [r3, #12]
+ 80005ca:	68da      	ldr	r2, [r3, #12]
+ 80005cc:	f422 2240 	bic.w	r2, r2, #786432	; 0xc0000
+ 80005d0:	60da      	str	r2, [r3, #12]
   SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
- 8000562:	68da      	ldr	r2, [r3, #12]
- 8000564:	f442 2280 	orr.w	r2, r2, #262144	; 0x40000
- 8000568:	60da      	str	r2, [r3, #12]
+ 80005d2:	68da      	ldr	r2, [r3, #12]
+ 80005d4:	f442 2280 	orr.w	r2, r2, #262144	; 0x40000
+ 80005d8:	60da      	str	r2, [r3, #12]
   uint32_t lTmpReg = RCC->CFGR;
- 800056a:	68a3      	ldr	r3, [r4, #8]
+ 80005da:	68a3      	ldr	r3, [r4, #8]
   lTmpReg  &= CFGR_MCO2_RESET_MASK;                 // Clear MCO2 and MCO2PRE[2:0] bits
- 800056c:	f023 4378 	bic.w	r3, r3, #4160749568	; 0xf8000000
- 8000570:	4319      	orrs	r1, r3
+ 80005dc:	f023 4378 	bic.w	r3, r3, #4160749568	; 0xf8000000
+ 80005e0:	4319      	orrs	r1, r3
   lTmpReg  |= pFrequencySystem | pFrequencyDivider; // Select MCO2 clock source and prescaler
- 8000572:	4301      	orrs	r1, r0
+ 80005e2:	4301      	orrs	r1, r0
   RCC->CFGR = lTmpReg;
- 8000574:	60a1      	str	r1, [r4, #8]
+ 80005e4:	60a1      	str	r1, [r4, #8]
     // Starts and configure the serial port.
     //ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);
 
   } // End if.
 
 } // End ArcadeIT_TestPads_Init.
- 8000576:	f85d 4b04 	ldr.w	r4, [sp], #4
- 800057a:	4770      	bx	lr
- 800057c:	40023800 	.word	0x40023800
- 8000580:	40020800 	.word	0x40020800
+ 80005e6:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 80005ea:	4770      	bx	lr
+ 80005ec:	40023800 	.word	0x40023800
+ 80005f0:	40020800 	.word	0x40020800
 
-08000584 <__libc_init_array>:
- 8000584:	b570      	push	{r4, r5, r6, lr}
- 8000586:	4e0d      	ldr	r6, [pc, #52]	; (80005bc <__libc_init_array+0x38>)
- 8000588:	4c0d      	ldr	r4, [pc, #52]	; (80005c0 <__libc_init_array+0x3c>)
- 800058a:	1ba4      	subs	r4, r4, r6
- 800058c:	10a4      	asrs	r4, r4, #2
- 800058e:	2500      	movs	r5, #0
- 8000590:	42a5      	cmp	r5, r4
- 8000592:	d109      	bne.n	80005a8 <__libc_init_array+0x24>
- 8000594:	4e0b      	ldr	r6, [pc, #44]	; (80005c4 <__libc_init_array+0x40>)
- 8000596:	4c0c      	ldr	r4, [pc, #48]	; (80005c8 <__libc_init_array+0x44>)
- 8000598:	f000 f818 	bl	80005cc <_init>
- 800059c:	1ba4      	subs	r4, r4, r6
- 800059e:	10a4      	asrs	r4, r4, #2
- 80005a0:	2500      	movs	r5, #0
- 80005a2:	42a5      	cmp	r5, r4
- 80005a4:	d105      	bne.n	80005b2 <__libc_init_array+0x2e>
- 80005a6:	bd70      	pop	{r4, r5, r6, pc}
- 80005a8:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80005ac:	4798      	blx	r3
- 80005ae:	3501      	adds	r5, #1
- 80005b0:	e7ee      	b.n	8000590 <__libc_init_array+0xc>
- 80005b2:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 80005b6:	4798      	blx	r3
- 80005b8:	3501      	adds	r5, #1
- 80005ba:	e7f2      	b.n	80005a2 <__libc_init_array+0x1e>
- 80005bc:	080005e4 	.word	0x080005e4
- 80005c0:	080005e4 	.word	0x080005e4
- 80005c4:	080005e4 	.word	0x080005e4
- 80005c8:	080005e8 	.word	0x080005e8
+080005f4 <ArcadeIT_Scheduler_Task_Init>:
+  */
 
-080005cc <_init>:
- 80005cc:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80005ce:	bf00      	nop
- 80005d0:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80005d2:	bc08      	pop	{r3}
- 80005d4:	469e      	mov	lr, r3
- 80005d6:	4770      	bx	lr
+  uint8_t lTask = 0;
+  for (lTask = 0; lTask < ARCADEIT_SCHEDULER_MAX_TASKS; lTask++)
+  {
+    gArcadeITTasks[lTask].current_cycle = 0;
+ 80005f4:	4b0e      	ldr	r3, [pc, #56]	; (8000630 <ArcadeIT_Scheduler_Task_Init+0x3c>)
+ 80005f6:	2200      	movs	r2, #0
+    gArcadeITTasks[lTask].cycles = 0;
+ 80005f8:	e9c3 2200 	strd	r2, r2, [r3]
+    gArcadeITTasks[lTask].time_period = 0;
+    gArcadeITTasks[lTask].time_current = 0;
+ 80005fc:	e9c3 2202 	strd	r2, r2, [r3, #8]
+    gArcadeITTasks[lTask].function = NULL;
+ 8000600:	611a      	str	r2, [r3, #16]
+    gArcadeITTasks[lTask].cycles = 0;
+ 8000602:	e9c3 220b 	strd	r2, r2, [r3, #44]	; 0x2c
+    gArcadeITTasks[lTask].time_current = 0;
+ 8000606:	e9c3 220d 	strd	r2, r2, [r3, #52]	; 0x34
+    gArcadeITTasks[lTask].function = NULL;
+ 800060a:	63da      	str	r2, [r3, #60]	; 0x3c
+    gArcadeITTasks[lTask].cycles = 0;
+ 800060c:	e9c3 2216 	strd	r2, r2, [r3, #88]	; 0x58
+    gArcadeITTasks[lTask].time_current = 0;
+ 8000610:	e9c3 2218 	strd	r2, r2, [r3, #96]	; 0x60
+    gArcadeITTasks[lTask].function = NULL;
+ 8000614:	669a      	str	r2, [r3, #104]	; 0x68
+    gArcadeITTasks[lTask].cycles = 0;
+ 8000616:	e9c3 2221 	strd	r2, r2, [r3, #132]	; 0x84
+    gArcadeITTasks[lTask].time_current = 0;
+ 800061a:	e9c3 2223 	strd	r2, r2, [r3, #140]	; 0x8c
+    gArcadeITTasks[lTask].function = NULL;
+ 800061e:	f8c3 2094 	str.w	r2, [r3, #148]	; 0x94
+    gArcadeITTasks[lTask].cycles = 0;
+ 8000622:	e9c3 222c 	strd	r2, r2, [r3, #176]	; 0xb0
+    gArcadeITTasks[lTask].time_current = 0;
+ 8000626:	e9c3 222e 	strd	r2, r2, [r3, #184]	; 0xb8
+    gArcadeITTasks[lTask].function = NULL;
+ 800062a:	f8c3 20c0 	str.w	r2, [r3, #192]	; 0xc0
+  {
+    //ArcadeIT_Serial_Port_String_Send(TEXT_SCHEDULER_INITED);
 
-080005d8 <_fini>:
- 80005d8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 80005da:	bf00      	nop
- 80005dc:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 80005de:	bc08      	pop	{r3}
- 80005e0:	469e      	mov	lr, r3
- 80005e2:	4770      	bx	lr
+  } // End if.
+
+} // End ArcadeIT_Scheduler_Task_Init.
+ 800062e:	4770      	bx	lr
+ 8000630:	20000034 	.word	0x20000034
+
+08000634 <ArcadeIT_Scheduler_Task_Set>:
+  void *pFunctionPtr,        // The pointer to the function to execute.
+  void *pParameters,         // The pointer to the parameters used by the function.
+  uint32_t pCycles,          // The number of time that this task has to be executed. 0 = infinite.
+  uint32_t pTimePeriod       // The time period in ms to elapse before the next execution.
+)
+{
+ 8000634:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+ 8000638:	469e      	mov	lr, r3
+  RETURNS:      Nothing.
+  */
+
+  if (pParameters != NULL)
+  {
+    gArcadeITTasks[id].num_parameters = ((uint32_t*)pParameters)[PAR_1];
+ 800063a:	4f15      	ldr	r7, [pc, #84]	; (8000690 <ArcadeIT_Scheduler_Task_Set+0x5c>)
+{
+ 800063c:	9b06      	ldr	r3, [sp, #24]
+  if (pParameters != NULL)
+ 800063e:	b1ba      	cbz	r2, 8000670 <ArcadeIT_Scheduler_Task_Set+0x3c>
+    gArcadeITTasks[id].num_parameters = ((uint32_t*)pParameters)[PAR_1];
+ 8000640:	242c      	movs	r4, #44	; 0x2c
+ 8000642:	fb04 7400 	mla	r4, r4, r0, r7
+ 8000646:	f892 8000 	ldrb.w	r8, [r2]
+ 800064a:	f884 8014 	strb.w	r8, [r4, #20]
+ 800064e:	2600      	movs	r6, #0
+
+    // Copy parameters.
+    uint8_t lPars = 0;
+    for (lPars = 0; lPars < gArcadeITTasks[id].num_parameters+1; lPars++)
+    {
+      gArcadeITTasks[id].parameters[lPars] = ((uint32_t*)pParameters)[lPars];
+ 8000650:	eb00 0c80 	add.w	ip, r0, r0, lsl #2
+ 8000654:	4634      	mov	r4, r6
+ 8000656:	eb00 0c4c 	add.w	ip, r0, ip, lsl #1
+ 800065a:	eb0c 0504 	add.w	r5, ip, r4
+ 800065e:	3506      	adds	r5, #6
+ 8000660:	f852 4024 	ldr.w	r4, [r2, r4, lsl #2]
+ 8000664:	f847 4025 	str.w	r4, [r7, r5, lsl #2]
+ 8000668:	3601      	adds	r6, #1
+    for (lPars = 0; lPars < gArcadeITTasks[id].num_parameters+1; lPars++)
+ 800066a:	b2f4      	uxtb	r4, r6
+ 800066c:	45a0      	cmp	r8, r4
+ 800066e:	d2f4      	bcs.n	800065a <ArcadeIT_Scheduler_Task_Set+0x26>
+
+    } // End for.
+
+  } // End if.
+
+  gArcadeITTasks[id].current_cycle = 0;
+ 8000670:	222c      	movs	r2, #44	; 0x2c
+ 8000672:	fb02 f000 	mul.w	r0, r2, r0
+ 8000676:	183a      	adds	r2, r7, r0
+  gArcadeITTasks[id].cycles = pCycles;
+ 8000678:	f847 e000 	str.w	lr, [r7, r0]
+  gArcadeITTasks[id].current_cycle = 0;
+ 800067c:	2000      	movs	r0, #0
+  gArcadeITTasks[id].time_period = pTimePeriod;
+  gArcadeITTasks[id].time_current = gArcadeITTasks[id].time_period;
+  gArcadeITTasks[id].function = pFunctionPtr;
+  gArcadeITTasks[id].execute = FALSE;
+ 800067e:	f882 0028 	strb.w	r0, [r2, #40]	; 0x28
+  gArcadeITTasks[id].time_current = gArcadeITTasks[id].time_period;
+ 8000682:	e9c2 3302 	strd	r3, r3, [r2, #8]
+  gArcadeITTasks[id].function = pFunctionPtr;
+ 8000686:	6111      	str	r1, [r2, #16]
+  gArcadeITTasks[id].current_cycle = 0;
+ 8000688:	6050      	str	r0, [r2, #4]
+
+} // End ArcadeIT_Scheduler_Task_Set.
+ 800068a:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+ 800068e:	bf00      	nop
+ 8000690:	20000034 	.word	0x20000034
+
+08000694 <ArcadeIT_Scheduler_Update>:
+
+  uint8_t lTask = 0;
+  for (lTask = 0; lTask < ARCADEIT_SCHEDULER_MAX_TASKS; lTask++)
+  {
+    // If the task "lTask" is set there must be a function set, so we process this task.
+    if (gArcadeITTasks[lTask].function != NULL)
+ 8000694:	4b61      	ldr	r3, [pc, #388]	; (800081c <ArcadeIT_Scheduler_Update+0x188>)
+ 8000696:	691a      	ldr	r2, [r3, #16]
+{
+ 8000698:	b410      	push	{r4}
+    if (gArcadeITTasks[lTask].function != NULL)
+ 800069a:	b11a      	cbz	r2, 80006a4 <ArcadeIT_Scheduler_Update+0x10>
+    {
+      if (gArcadeITTasks[lTask].execute == FALSE)
+ 800069c:	f893 2028 	ldrb.w	r2, [r3, #40]	; 0x28
+ 80006a0:	2a00      	cmp	r2, #0
+ 80006a2:	d05d      	beq.n	8000760 <ArcadeIT_Scheduler_Update+0xcc>
+    if (gArcadeITTasks[lTask].function != NULL)
+ 80006a4:	6bda      	ldr	r2, [r3, #60]	; 0x3c
+ 80006a6:	b11a      	cbz	r2, 80006b0 <ArcadeIT_Scheduler_Update+0x1c>
+      if (gArcadeITTasks[lTask].execute == FALSE)
+ 80006a8:	f893 2054 	ldrb.w	r2, [r3, #84]	; 0x54
+ 80006ac:	2a00      	cmp	r2, #0
+ 80006ae:	d04a      	beq.n	8000746 <ArcadeIT_Scheduler_Update+0xb2>
+    if (gArcadeITTasks[lTask].function != NULL)
+ 80006b0:	6e9a      	ldr	r2, [r3, #104]	; 0x68
+ 80006b2:	b112      	cbz	r2, 80006ba <ArcadeIT_Scheduler_Update+0x26>
+      if (gArcadeITTasks[lTask].execute == FALSE)
+ 80006b4:	f893 2080 	ldrb.w	r2, [r3, #128]	; 0x80
+ 80006b8:	b3ba      	cbz	r2, 800072a <ArcadeIT_Scheduler_Update+0x96>
+    if (gArcadeITTasks[lTask].function != NULL)
+ 80006ba:	f8d3 2094 	ldr.w	r2, [r3, #148]	; 0x94
+ 80006be:	b112      	cbz	r2, 80006c6 <ArcadeIT_Scheduler_Update+0x32>
+      if (gArcadeITTasks[lTask].execute == FALSE)
+ 80006c0:	f893 20ac 	ldrb.w	r2, [r3, #172]	; 0xac
+ 80006c4:	b1f2      	cbz	r2, 8000704 <ArcadeIT_Scheduler_Update+0x70>
+    if (gArcadeITTasks[lTask].function != NULL)
+ 80006c6:	f8d3 20c0 	ldr.w	r2, [r3, #192]	; 0xc0
+ 80006ca:	b1c2      	cbz	r2, 80006fe <ArcadeIT_Scheduler_Update+0x6a>
+      if (gArcadeITTasks[lTask].execute == FALSE)
+ 80006cc:	f893 20d8 	ldrb.w	r2, [r3, #216]	; 0xd8
+ 80006d0:	b9aa      	cbnz	r2, 80006fe <ArcadeIT_Scheduler_Update+0x6a>
+      {
+        // Update the time period.
+        gArcadeITTasks[lTask].time_current--;
+ 80006d2:	f8d3 20bc 	ldr.w	r2, [r3, #188]	; 0xbc
+ 80006d6:	3a01      	subs	r2, #1
+ 80006d8:	f8c3 20bc 	str.w	r2, [r3, #188]	; 0xbc
+        if (gArcadeITTasks[lTask].time_current == 0)
+ 80006dc:	b97a      	cbnz	r2, 80006fe <ArcadeIT_Scheduler_Update+0x6a>
+          gArcadeITTasks[lTask].execute = TRUE;
+
+          // If the timer is over we check if to execute the task. If the number of
+          // cycles is 0 the task is always executed, otherwise we count the number
+          // of cycles. When we reach the maximum number we reset this task.
+          if (gArcadeITTasks[lTask].cycles)
+ 80006de:	f8d3 10b0 	ldr.w	r1, [r3, #176]	; 0xb0
+          gArcadeITTasks[lTask].execute = TRUE;
+ 80006e2:	2001      	movs	r0, #1
+ 80006e4:	f883 00d8 	strb.w	r0, [r3, #216]	; 0xd8
+          if (gArcadeITTasks[lTask].cycles)
+ 80006e8:	2900      	cmp	r1, #0
+ 80006ea:	d068      	beq.n	80007be <ArcadeIT_Scheduler_Update+0x12a>
+          {
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 80006ec:	e9d3 042d 	ldrd	r0, r4, [r3, #180]	; 0xb4
+
+            gArcadeITTasks[lTask].current_cycle++;
+ 80006f0:	3001      	adds	r0, #1
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 80006f2:	4281      	cmp	r1, r0
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 80006f4:	f8c3 40bc 	str.w	r4, [r3, #188]	; 0xbc
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 80006f8:	d066      	beq.n	80007c8 <ArcadeIT_Scheduler_Update+0x134>
+            gArcadeITTasks[lTask].current_cycle++;
+ 80006fa:	f8c3 00b4 	str.w	r0, [r3, #180]	; 0xb4
+
+    } // End if.
+
+  } // End for.
+
+} // End ArcadeIT_Scheduler_Update.
+ 80006fe:	f85d 4b04 	ldr.w	r4, [sp], #4
+ 8000702:	4770      	bx	lr
+        gArcadeITTasks[lTask].time_current--;
+ 8000704:	f8d3 2090 	ldr.w	r2, [r3, #144]	; 0x90
+ 8000708:	3a01      	subs	r2, #1
+ 800070a:	f8c3 2090 	str.w	r2, [r3, #144]	; 0x90
+        if (gArcadeITTasks[lTask].time_current == 0)
+ 800070e:	2a00      	cmp	r2, #0
+ 8000710:	d1d9      	bne.n	80006c6 <ArcadeIT_Scheduler_Update+0x32>
+          if (gArcadeITTasks[lTask].cycles)
+ 8000712:	f8d3 1084 	ldr.w	r1, [r3, #132]	; 0x84
+          gArcadeITTasks[lTask].execute = TRUE;
+ 8000716:	2001      	movs	r0, #1
+ 8000718:	f883 00ac 	strb.w	r0, [r3, #172]	; 0xac
+          if (gArcadeITTasks[lTask].cycles)
+ 800071c:	2900      	cmp	r1, #0
+ 800071e:	d144      	bne.n	80007aa <ArcadeIT_Scheduler_Update+0x116>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 8000720:	f8d3 208c 	ldr.w	r2, [r3, #140]	; 0x8c
+ 8000724:	f8c3 2090 	str.w	r2, [r3, #144]	; 0x90
+ 8000728:	e7cd      	b.n	80006c6 <ArcadeIT_Scheduler_Update+0x32>
+        gArcadeITTasks[lTask].time_current--;
+ 800072a:	6e5a      	ldr	r2, [r3, #100]	; 0x64
+ 800072c:	3a01      	subs	r2, #1
+ 800072e:	665a      	str	r2, [r3, #100]	; 0x64
+        if (gArcadeITTasks[lTask].time_current == 0)
+ 8000730:	2a00      	cmp	r2, #0
+ 8000732:	d1c2      	bne.n	80006ba <ArcadeIT_Scheduler_Update+0x26>
+          if (gArcadeITTasks[lTask].cycles)
+ 8000734:	6d99      	ldr	r1, [r3, #88]	; 0x58
+          gArcadeITTasks[lTask].execute = TRUE;
+ 8000736:	2001      	movs	r0, #1
+ 8000738:	f883 0080 	strb.w	r0, [r3, #128]	; 0x80
+          if (gArcadeITTasks[lTask].cycles)
+ 800073c:	2900      	cmp	r1, #0
+ 800073e:	d12c      	bne.n	800079a <ArcadeIT_Scheduler_Update+0x106>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 8000740:	6e1a      	ldr	r2, [r3, #96]	; 0x60
+ 8000742:	665a      	str	r2, [r3, #100]	; 0x64
+ 8000744:	e7b9      	b.n	80006ba <ArcadeIT_Scheduler_Update+0x26>
+        gArcadeITTasks[lTask].time_current--;
+ 8000746:	6b9a      	ldr	r2, [r3, #56]	; 0x38
+ 8000748:	3a01      	subs	r2, #1
+ 800074a:	639a      	str	r2, [r3, #56]	; 0x38
+        if (gArcadeITTasks[lTask].time_current == 0)
+ 800074c:	2a00      	cmp	r2, #0
+ 800074e:	d1af      	bne.n	80006b0 <ArcadeIT_Scheduler_Update+0x1c>
+          if (gArcadeITTasks[lTask].cycles)
+ 8000750:	6ad9      	ldr	r1, [r3, #44]	; 0x2c
+          gArcadeITTasks[lTask].execute = TRUE;
+ 8000752:	2001      	movs	r0, #1
+ 8000754:	f883 0054 	strb.w	r0, [r3, #84]	; 0x54
+          if (gArcadeITTasks[lTask].cycles)
+ 8000758:	b9b9      	cbnz	r1, 800078a <ArcadeIT_Scheduler_Update+0xf6>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 800075a:	6b5a      	ldr	r2, [r3, #52]	; 0x34
+ 800075c:	639a      	str	r2, [r3, #56]	; 0x38
+ 800075e:	e7a7      	b.n	80006b0 <ArcadeIT_Scheduler_Update+0x1c>
+        gArcadeITTasks[lTask].time_current--;
+ 8000760:	68da      	ldr	r2, [r3, #12]
+ 8000762:	3a01      	subs	r2, #1
+ 8000764:	60da      	str	r2, [r3, #12]
+        if (gArcadeITTasks[lTask].time_current == 0)
+ 8000766:	2a00      	cmp	r2, #0
+ 8000768:	d19c      	bne.n	80006a4 <ArcadeIT_Scheduler_Update+0x10>
+          if (gArcadeITTasks[lTask].cycles)
+ 800076a:	6819      	ldr	r1, [r3, #0]
+          gArcadeITTasks[lTask].execute = TRUE;
+ 800076c:	2001      	movs	r0, #1
+ 800076e:	f883 0028 	strb.w	r0, [r3, #40]	; 0x28
+          if (gArcadeITTasks[lTask].cycles)
+ 8000772:	b911      	cbnz	r1, 800077a <ArcadeIT_Scheduler_Update+0xe6>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 8000774:	689a      	ldr	r2, [r3, #8]
+ 8000776:	60da      	str	r2, [r3, #12]
+ 8000778:	e794      	b.n	80006a4 <ArcadeIT_Scheduler_Update+0x10>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 800077a:	e9d3 0401 	ldrd	r0, r4, [r3, #4]
+            gArcadeITTasks[lTask].current_cycle++;
+ 800077e:	3001      	adds	r0, #1
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 8000780:	4281      	cmp	r1, r0
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 8000782:	60dc      	str	r4, [r3, #12]
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 8000784:	d042      	beq.n	800080c <ArcadeIT_Scheduler_Update+0x178>
+            gArcadeITTasks[lTask].current_cycle++;
+ 8000786:	6058      	str	r0, [r3, #4]
+ 8000788:	e78c      	b.n	80006a4 <ArcadeIT_Scheduler_Update+0x10>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 800078a:	e9d3 040c 	ldrd	r0, r4, [r3, #48]	; 0x30
+            gArcadeITTasks[lTask].current_cycle++;
+ 800078e:	3001      	adds	r0, #1
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 8000790:	4281      	cmp	r1, r0
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 8000792:	639c      	str	r4, [r3, #56]	; 0x38
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 8000794:	d032      	beq.n	80007fc <ArcadeIT_Scheduler_Update+0x168>
+            gArcadeITTasks[lTask].current_cycle++;
+ 8000796:	6318      	str	r0, [r3, #48]	; 0x30
+ 8000798:	e78a      	b.n	80006b0 <ArcadeIT_Scheduler_Update+0x1c>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 800079a:	e9d3 0417 	ldrd	r0, r4, [r3, #92]	; 0x5c
+            gArcadeITTasks[lTask].current_cycle++;
+ 800079e:	3001      	adds	r0, #1
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 80007a0:	4281      	cmp	r1, r0
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 80007a2:	665c      	str	r4, [r3, #100]	; 0x64
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 80007a4:	d022      	beq.n	80007ec <ArcadeIT_Scheduler_Update+0x158>
+            gArcadeITTasks[lTask].current_cycle++;
+ 80007a6:	65d8      	str	r0, [r3, #92]	; 0x5c
+ 80007a8:	e787      	b.n	80006ba <ArcadeIT_Scheduler_Update+0x26>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 80007aa:	e9d3 0422 	ldrd	r0, r4, [r3, #136]	; 0x88
+            gArcadeITTasks[lTask].current_cycle++;
+ 80007ae:	3001      	adds	r0, #1
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 80007b0:	4281      	cmp	r1, r0
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 80007b2:	f8c3 4090 	str.w	r4, [r3, #144]	; 0x90
+            if (gArcadeITTasks[lTask].current_cycle == gArcadeITTasks[lTask].cycles)
+ 80007b6:	d010      	beq.n	80007da <ArcadeIT_Scheduler_Update+0x146>
+            gArcadeITTasks[lTask].current_cycle++;
+ 80007b8:	f8c3 0088 	str.w	r0, [r3, #136]	; 0x88
+ 80007bc:	e783      	b.n	80006c6 <ArcadeIT_Scheduler_Update+0x32>
+            gArcadeITTasks[lTask].time_current = gArcadeITTasks[lTask].time_period;
+ 80007be:	f8d3 20b8 	ldr.w	r2, [r3, #184]	; 0xb8
+ 80007c2:	f8c3 20bc 	str.w	r2, [r3, #188]	; 0xbc
+} // End ArcadeIT_Scheduler_Update.
+ 80007c6:	e79a      	b.n	80006fe <ArcadeIT_Scheduler_Update+0x6a>
+  gArcadeITTasks[id].cycles = 0;
+ 80007c8:	e9c3 222c 	strd	r2, r2, [r3, #176]	; 0xb0
+  gArcadeITTasks[id].time_current = 0;
+ 80007cc:	e9c3 222e 	strd	r2, r2, [r3, #184]	; 0xb8
+  gArcadeITTasks[id].function = NULL;
+ 80007d0:	f8c3 20c0 	str.w	r2, [r3, #192]	; 0xc0
+  gArcadeITTasks[id].execute = FALSE;
+ 80007d4:	f883 20d8 	strb.w	r2, [r3, #216]	; 0xd8
+ 80007d8:	e791      	b.n	80006fe <ArcadeIT_Scheduler_Update+0x6a>
+  gArcadeITTasks[id].cycles = 0;
+ 80007da:	e9c3 2221 	strd	r2, r2, [r3, #132]	; 0x84
+  gArcadeITTasks[id].time_current = 0;
+ 80007de:	e9c3 2223 	strd	r2, r2, [r3, #140]	; 0x8c
+  gArcadeITTasks[id].function = NULL;
+ 80007e2:	f8c3 2094 	str.w	r2, [r3, #148]	; 0x94
+  gArcadeITTasks[id].execute = FALSE;
+ 80007e6:	f883 20ac 	strb.w	r2, [r3, #172]	; 0xac
+ 80007ea:	e76c      	b.n	80006c6 <ArcadeIT_Scheduler_Update+0x32>
+  gArcadeITTasks[id].cycles = 0;
+ 80007ec:	e9c3 2216 	strd	r2, r2, [r3, #88]	; 0x58
+  gArcadeITTasks[id].time_current = 0;
+ 80007f0:	e9c3 2218 	strd	r2, r2, [r3, #96]	; 0x60
+  gArcadeITTasks[id].function = NULL;
+ 80007f4:	669a      	str	r2, [r3, #104]	; 0x68
+  gArcadeITTasks[id].execute = FALSE;
+ 80007f6:	f883 2080 	strb.w	r2, [r3, #128]	; 0x80
+ 80007fa:	e75e      	b.n	80006ba <ArcadeIT_Scheduler_Update+0x26>
+  gArcadeITTasks[id].cycles = 0;
+ 80007fc:	e9c3 220b 	strd	r2, r2, [r3, #44]	; 0x2c
+  gArcadeITTasks[id].time_current = 0;
+ 8000800:	e9c3 220d 	strd	r2, r2, [r3, #52]	; 0x34
+  gArcadeITTasks[id].function = NULL;
+ 8000804:	63da      	str	r2, [r3, #60]	; 0x3c
+  gArcadeITTasks[id].execute = FALSE;
+ 8000806:	f883 2054 	strb.w	r2, [r3, #84]	; 0x54
+ 800080a:	e751      	b.n	80006b0 <ArcadeIT_Scheduler_Update+0x1c>
+  gArcadeITTasks[id].cycles = 0;
+ 800080c:	e9c3 2200 	strd	r2, r2, [r3]
+  gArcadeITTasks[id].time_current = 0;
+ 8000810:	e9c3 2202 	strd	r2, r2, [r3, #8]
+  gArcadeITTasks[id].function = NULL;
+ 8000814:	611a      	str	r2, [r3, #16]
+  gArcadeITTasks[id].execute = FALSE;
+ 8000816:	f883 2028 	strb.w	r2, [r3, #40]	; 0x28
+ 800081a:	e743      	b.n	80006a4 <ArcadeIT_Scheduler_Update+0x10>
+ 800081c:	20000034 	.word	0x20000034
+
+08000820 <ArcadeIT_Scheduler_Run>:
+
+// /////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_Scheduler_Run(void)
+{
+ 8000820:	b570      	push	{r4, r5, r6, lr}
+ 8000822:	4c07      	ldr	r4, [pc, #28]	; (8000840 <ArcadeIT_Scheduler_Run+0x20>)
+    {
+        // Here we call the function set for this task.
+        gArcadeITTasks[lTask].function(gArcadeITTasks[lTask].parameters);
+
+        // Unmark the function.
+        gArcadeITTasks[lTask].execute = FALSE;
+ 8000824:	2600      	movs	r6, #0
+ 8000826:	f104 05dc 	add.w	r5, r4, #220	; 0xdc
+    if (gArcadeITTasks[lTask].execute)
+ 800082a:	7c23      	ldrb	r3, [r4, #16]
+ 800082c:	b123      	cbz	r3, 8000838 <ArcadeIT_Scheduler_Run+0x18>
+        gArcadeITTasks[lTask].function(gArcadeITTasks[lTask].parameters);
+ 800082e:	f854 3c08 	ldr.w	r3, [r4, #-8]
+ 8000832:	4620      	mov	r0, r4
+ 8000834:	4798      	blx	r3
+        gArcadeITTasks[lTask].execute = FALSE;
+ 8000836:	7426      	strb	r6, [r4, #16]
+ 8000838:	342c      	adds	r4, #44	; 0x2c
+  for (lTask = 0; lTask < ARCADEIT_SCHEDULER_MAX_TASKS; lTask++)
+ 800083a:	42ac      	cmp	r4, r5
+ 800083c:	d1f5      	bne.n	800082a <ArcadeIT_Scheduler_Run+0xa>
+
+    } // End if.
+
+  } // End for.
+
+} // End ArcadeIT_Scheduler_Run.
+ 800083e:	bd70      	pop	{r4, r5, r6, pc}
+ 8000840:	2000004c 	.word	0x2000004c
+
+08000844 <__libc_init_array>:
+ 8000844:	b570      	push	{r4, r5, r6, lr}
+ 8000846:	4e0d      	ldr	r6, [pc, #52]	; (800087c <__libc_init_array+0x38>)
+ 8000848:	4c0d      	ldr	r4, [pc, #52]	; (8000880 <__libc_init_array+0x3c>)
+ 800084a:	1ba4      	subs	r4, r4, r6
+ 800084c:	10a4      	asrs	r4, r4, #2
+ 800084e:	2500      	movs	r5, #0
+ 8000850:	42a5      	cmp	r5, r4
+ 8000852:	d109      	bne.n	8000868 <__libc_init_array+0x24>
+ 8000854:	4e0b      	ldr	r6, [pc, #44]	; (8000884 <__libc_init_array+0x40>)
+ 8000856:	4c0c      	ldr	r4, [pc, #48]	; (8000888 <__libc_init_array+0x44>)
+ 8000858:	f000 f818 	bl	800088c <_init>
+ 800085c:	1ba4      	subs	r4, r4, r6
+ 800085e:	10a4      	asrs	r4, r4, #2
+ 8000860:	2500      	movs	r5, #0
+ 8000862:	42a5      	cmp	r5, r4
+ 8000864:	d105      	bne.n	8000872 <__libc_init_array+0x2e>
+ 8000866:	bd70      	pop	{r4, r5, r6, pc}
+ 8000868:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 800086c:	4798      	blx	r3
+ 800086e:	3501      	adds	r5, #1
+ 8000870:	e7ee      	b.n	8000850 <__libc_init_array+0xc>
+ 8000872:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 8000876:	4798      	blx	r3
+ 8000878:	3501      	adds	r5, #1
+ 800087a:	e7f2      	b.n	8000862 <__libc_init_array+0x1e>
+ 800087c:	080008a4 	.word	0x080008a4
+ 8000880:	080008a4 	.word	0x080008a4
+ 8000884:	080008a4 	.word	0x080008a4
+ 8000888:	080008a8 	.word	0x080008a8
+
+0800088c <_init>:
+ 800088c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800088e:	bf00      	nop
+ 8000890:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8000892:	bc08      	pop	{r3}
+ 8000894:	469e      	mov	lr, r3
+ 8000896:	4770      	bx	lr
+
+08000898 <_fini>:
+ 8000898:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 800089a:	bf00      	nop
+ 800089c:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 800089e:	bc08      	pop	{r3}
+ 80008a0:	469e      	mov	lr, r3
+ 80008a2:	4770      	bx	lr

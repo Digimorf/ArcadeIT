@@ -13,7 +13,7 @@
  *           (C)2020 www.digimorf.com, www.arcadeit.net
  *
  * @author  Francesco De Simone
- * @file    ArcadeIT_TestPads.c
+ * @file    ArcadeIT_TestPads.h
  * @version V0.13
  * @date    17-07-2018
  * @last    08-02-2020
@@ -143,103 +143,39 @@
  ******************************************************************************
 */
 
+#ifndef _ARCADEIT_TESTPADS_H_
+#define _ARCADEIT_TESTPADS_H_
+
 // C standard libraries.
 #include <stdio.h>
 #include <stdint.h>
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "System/ArcadeIT_Common.h"
-#include "System/ArcadeIT_Utilities.h"
-#include "System/ArcadeIT_Firmware.h"
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
 
-// ArcadeIT! Peripherals and buses.
-#include "System/Peripherals/ArcadeIT_TestPads.h"
-//#include "System/Peripherals/ArcadeIT_Serial_Port.h"
+// /////////////////////////////////////////////////////////////////////////////
+// Defines.
+// /////////////////////////////////////////////////////////////////////////////
 
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
 // /////////////////////////////////////////////////////////////////////////////
-void ArcadeIT_TestPad_Set
-(
-    uint32_t pFrequencySystem,  // clock source output to testpad
-    uint32_t pFrequencyDivider  // the frequency divider
-)
-{
-  /*
-  * DESCRIPTION: This function is used to set the frequency of the test pad.
-  * PARAMETERS:  pFrequencySystem    clock source output to testpad
-  *              pFrequencyDivider   the frequency divider
-  * RETURNS:     Nothing.
-  *
-  * In ArcadeIT_Firmware.h
-  *
-  * Source
-  *  RCC_MCO2Source_SYSCLK
-  *  RCC_MCO2Source_PLLI2SCLK
-  *  RCC_MCO2Source_HSE
-  *  RCC_MCO2Source_PLLCLK
-  *
-  * Divider
-  *  RCC_MCO2Div_1
-  *  RCC_MCO2Div_2
-  *  RCC_MCO2Div_3
-  *  RCC_MCO2Div_4
-  *  RCC_MCO2Div_5
-  *
-  */
-
-  uint32_t lTmpReg = RCC->CFGR;
-  lTmpReg  &= CFGR_MCO2_RESET_MASK;                 // Clear MCO2 and MCO2PRE[2:0] bits
-  lTmpReg  |= pFrequencySystem | pFrequencyDivider; // Select MCO2 clock source and prescaler
-  RCC->CFGR = lTmpReg;
-
-} // End ArcadeIT_TestPad_Set.
-
-// -----------------------------------------------------------------------------
 void ArcadeIT_TestPad_Init
 (
     uint32_t pFrequencySystem,  // What frequency source to test.
     uint32_t pFrequencyDivider  // What divider to test.
-)
-{
-  /*
-  * DESCRIPTION: This function is used to initialize the hardware that drives
-  *              the test pads. Output SYSCLK/4 clock on MCO2 pin(PC9)
-  * PARAMETERS:  None.
-  * RETURNS:     Nothing.
-  */
-
-  uint32_t lPinPosition = (SYS_TESTPADS_PIN_NO * 2);
-
-  if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
-
-  // Configure MCO2 pin(PC9) in alternate function 0
-  SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
-  SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
-
-  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
-  // to test 180MHz, you have to set the divider at least 2
-  SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR9;
-  SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
-
-  // type output
-  SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_9;
-  SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
-
-  // pull up configuration
-  SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR9;
-  SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
-
-  ArcadeIT_TestPad_Set(pFrequencySystem, pFrequencyDivider);
-
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
-  {
-    // Starts and configure the serial port.
-    //ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);
-
-  } // End if.
-
-} // End ArcadeIT_TestPads_Init.
-
+);
+//------------------------------------------------------------------------------
+void ArcadeIT_TestPad_DeInit(void);
+//------------------------------------------------------------------------------
+void ArcadeIT_TestPad_Frequency
+(
+    uint32_t pFrequencySystem,  // clock source output to testpad
+    uint32_t pFrequencyDivider  // the frequency divider
+);
 // /////////////////////////////////////////////////////////////////////////////
+
+#endif // __ARCADEIT_TESTPADS_H_

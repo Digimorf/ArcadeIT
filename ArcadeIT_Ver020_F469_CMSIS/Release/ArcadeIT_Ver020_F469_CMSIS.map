@@ -53,6 +53,7 @@ Allocating common symbols
 Common symbol       size              file
 
 errno               0x4               c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-reent.o)
+gArcadeITTasks      0xdc              Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
 Discarded input sections
 
@@ -445,6 +446,11 @@ Discarded input sections
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .text          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .data          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .bss           0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
@@ -461,7 +467,7 @@ Discarded input sections
  .text.ArcadeIT_If_VBlank
                 0x0000000000000000        0x4 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .text.ArcadeIT_SysTick_Handler
-                0x0000000000000000       0x30 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .text.ArcadeIT_PowerUP_Systems
                 0x0000000000000000      0x2bc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .debug_macro   0x0000000000000000      0xa78 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
@@ -508,7 +514,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000000000      0x925 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000000000       0x29 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
@@ -643,228 +652,345 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
- .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
+ .debug_macro   0x0000000000000000      0x925 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
- .debug_line    0x0000000000000000      0x989 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
- .debug_str     0x0000000000000000    0xb81f2 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
+ .debug_line    0x0000000000000000      0x9ed Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
+ .debug_str     0x0000000000000000    0xb81d0 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .comment       0x0000000000000000       0x7c Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .debug_frame   0x0000000000000000      0x144 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
  .ARM.attributes
                 0x0000000000000000       0x35 Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .text          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .data          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .bss           0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .text          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .data          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .bss           0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
  .text.ArcadeIT_Status_LEDS_Set
-                0x0000000000000000       0x38 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x0000000000000000       0x38 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
  .text.ArcadeIT_Status_LED1_Set
-                0x0000000000000000       0x24 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x0000000000000000       0x24 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
  .text.ArcadeIT_Status_LED2_Set
-                0x0000000000000000       0x24 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0xa78 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x18 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x94 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x3c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x34 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x57 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x97 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x330 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0xfd Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x1f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x1a3 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x6a Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0xd7 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x3d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x145 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0xef Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x1df Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x35 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x460 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x32 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x28 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0xd9 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000     0x102d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .text          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .data          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .bss           0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+                0x0000000000000000       0x24 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0xa78 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x18 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x94 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x3c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x34 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x57 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x97 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x330 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0xfd Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x1f Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x1a3 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x6a Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0xd7 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x3d Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x145 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0xef Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x1df Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x35 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x460 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x32 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x28 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0xd9 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000     0x102d Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x925 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .text          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .data          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .bss           0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
  .text.ArcadeIT_TestPad_Set
-                0x0000000000000000       0x14 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0xa78 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x18 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x94 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x3c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x34 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x57 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x97 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x330 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0xfd Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x1f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x1a3 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x6a Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0xd7 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x3d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x145 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0xef Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x1df Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x35 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x460 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x32 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x28 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0xd9 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000     0x102d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x92f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+                0x0000000000000000       0x14 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0xa78 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x18 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x94 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x3c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x34 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x57 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x97 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x330 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0xfd Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x1f Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x1a3 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x6a Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0xd7 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x3d Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x145 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0xef Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x1df Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x35 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x460 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x32 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x28 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0xd9 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000     0x102d Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x925 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .group         0x0000000000000000        0xc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .text          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .data          0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .bss           0x0000000000000000        0x0 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .text.ArcadeIT_Scheduler_Task_Unset
+                0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .text.ArcadeIT_Scheduler_Task_Running
+                0x0000000000000000       0x18 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0xa78 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x18 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x94 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x3c Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x34 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x57 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x97 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x330 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0xfd Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x1f Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x1a3 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x6a Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x52 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0xd7 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x3d Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x145 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0xef Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x1df Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x10 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x35 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x460 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x40 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x20 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x32 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x28 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x1c Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x22 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0xd9 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000     0x102d Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x11f Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000    0x1d70d Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x43 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x925 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x20f Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x29 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000      0x111 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_macro   0x0000000000000000       0x16 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
  .text          0x0000000000000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-errno.o)
  .data          0x0000000000000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-errno.o)
  .bss           0x0000000000000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-errno.o)
@@ -1110,8 +1236,9 @@ LOAD Core/Src/system_stm32f4xx.o
 LOAD Core/Startup/startup_stm32f469iitx.o
 LOAD Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
 LOAD Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o
-LOAD Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-LOAD Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+LOAD Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+LOAD Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+LOAD Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 START GROUP
 LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a
 LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libm.a
@@ -1143,7 +1270,7 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000008000000                g_pfnVectors
                 0x00000000080001b4                . = ALIGN (0x4)
 
-.text           0x00000000080001b4      0x430
+.text           0x00000000080001b4      0x6f0
                 0x00000000080001b4                . = ALIGN (0x4)
  *(.text)
  .text          0x00000000080001b4       0x40 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
@@ -1279,103 +1406,115 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000008000274       0xf8 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
                 0x0000000008000274                ArcadeIT_System_Init
  .text.SysTick_Handler
-                0x000000000800036c       0x30 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                0x000000000800036c       0x40 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
                 0x000000000800036c                SysTick_Handler
  .text.ArcadeIT_ArcadeIT_Start
-                0x000000000800039c       0x50 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
-                0x000000000800039c                ArcadeIT_ArcadeIT_Start
+                0x00000000080003ac       0x64 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                0x00000000080003ac                ArcadeIT_ArcadeIT_Start
  .text.ArcadeIT_Test_Bench
-                0x00000000080003ec       0x50 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
-                0x00000000080003ec                ArcadeIT_Test_Bench
+                0x0000000008000410       0x9c Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                0x0000000008000410                ArcadeIT_Test_Bench
  .text.ArcadeIT_Status_LEDS_Init
-                0x000000000800043c       0xa4 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                0x000000000800043c                ArcadeIT_Status_LEDS_Init
+                0x00000000080004ac       0xa4 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+                0x00000000080004ac                ArcadeIT_Status_LEDS_Init
  .text.ArcadeIT_Status_LED1_Toggle
-                0x00000000080004e0       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                0x00000000080004e0                ArcadeIT_Status_LED1_Toggle
+                0x0000000008000550       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+                0x0000000008000550                ArcadeIT_Status_LED1_Toggle
  .text.ArcadeIT_Status_LED2_Toggle
-                0x00000000080004fc       0x1c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                0x00000000080004fc                ArcadeIT_Status_LED2_Toggle
+                0x000000000800056c       0x1c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+                0x000000000800056c                ArcadeIT_Status_LED2_Toggle
  .text.ArcadeIT_TestPad_Init
-                0x0000000008000518       0x6c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
-                0x0000000008000518                ArcadeIT_TestPad_Init
+                0x0000000008000588       0x6c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+                0x0000000008000588                ArcadeIT_TestPad_Init
+ .text.ArcadeIT_Scheduler_Task_Init
+                0x00000000080005f4       0x40 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+                0x00000000080005f4                ArcadeIT_Scheduler_Task_Init
+ .text.ArcadeIT_Scheduler_Task_Set
+                0x0000000008000634       0x60 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+                0x0000000008000634                ArcadeIT_Scheduler_Task_Set
+ .text.ArcadeIT_Scheduler_Update
+                0x0000000008000694      0x18c Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+                0x0000000008000694                ArcadeIT_Scheduler_Update
+ .text.ArcadeIT_Scheduler_Run
+                0x0000000008000820       0x24 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+                0x0000000008000820                ArcadeIT_Scheduler_Run
  .text.__libc_init_array
-                0x0000000008000584       0x48 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
-                0x0000000008000584                __libc_init_array
+                0x0000000008000844       0x48 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+                0x0000000008000844                __libc_init_array
  *(.glue_7)
- .glue_7        0x00000000080005cc        0x0 linker stubs
+ .glue_7        0x000000000800088c        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x00000000080005cc        0x0 linker stubs
+ .glue_7t       0x000000000800088c        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x00000000080005cc        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .eh_frame      0x000000000800088c        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.init)
- .init          0x00000000080005cc        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00000000080005cc                _init
- .init          0x00000000080005d0        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+ .init          0x000000000800088c        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x000000000800088c                _init
+ .init          0x0000000008000890        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  *(.fini)
- .fini          0x00000000080005d8        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x00000000080005d8                _fini
- .fini          0x00000000080005dc        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-                0x00000000080005e4                . = ALIGN (0x4)
-                0x00000000080005e4                _etext = .
+ .fini          0x0000000008000898        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x0000000008000898                _fini
+ .fini          0x000000000800089c        0x8 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x00000000080008a4                . = ALIGN (0x4)
+                0x00000000080008a4                _etext = .
 
-.vfp11_veneer   0x00000000080005e4        0x0
- .vfp11_veneer  0x00000000080005e4        0x0 linker stubs
+.vfp11_veneer   0x00000000080008a4        0x0
+ .vfp11_veneer  0x00000000080008a4        0x0 linker stubs
 
-.v4_bx          0x00000000080005e4        0x0
- .v4_bx         0x00000000080005e4        0x0 linker stubs
+.v4_bx          0x00000000080008a4        0x0
+ .v4_bx         0x00000000080008a4        0x0 linker stubs
 
-.iplt           0x00000000080005e4        0x0
- .iplt          0x00000000080005e4        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x00000000080008a4        0x0
+ .iplt          0x00000000080008a4        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rel.dyn        0x00000000080005e4        0x0
- .rel.iplt      0x00000000080005e4        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.rel.dyn        0x00000000080008a4        0x0
+ .rel.iplt      0x00000000080008a4        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rodata         0x00000000080005e4        0x0
-                0x00000000080005e4                . = ALIGN (0x4)
+.rodata         0x00000000080008a4        0x0
+                0x00000000080008a4                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
-                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080008a4                . = ALIGN (0x4)
 
-.ARM.extab      0x00000000080005e4        0x0
-                0x00000000080005e4                . = ALIGN (0x4)
+.ARM.extab      0x00000000080008a4        0x0
+                0x00000000080008a4                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080008a4                . = ALIGN (0x4)
 
-.ARM            0x00000000080005e4        0x0
-                0x00000000080005e4                . = ALIGN (0x4)
-                0x00000000080005e4                __exidx_start = .
+.ARM            0x00000000080008a4        0x0
+                0x00000000080008a4                . = ALIGN (0x4)
+                0x00000000080008a4                __exidx_start = .
  *(.ARM.exidx*)
-                0x00000000080005e4                __exidx_end = .
-                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080008a4                __exidx_end = .
+                0x00000000080008a4                . = ALIGN (0x4)
 
-.preinit_array  0x00000000080005e4        0x0
-                0x00000000080005e4                . = ALIGN (0x4)
-                0x00000000080005e4                PROVIDE (__preinit_array_start = .)
+.preinit_array  0x00000000080008a4        0x0
+                0x00000000080008a4                . = ALIGN (0x4)
+                0x00000000080008a4                PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x00000000080005e4                PROVIDE (__preinit_array_end = .)
-                0x00000000080005e4                . = ALIGN (0x4)
+                0x00000000080008a4                PROVIDE (__preinit_array_end = .)
+                0x00000000080008a4                . = ALIGN (0x4)
 
-.init_array     0x00000000080005e4        0x4
-                0x00000000080005e4                . = ALIGN (0x4)
-                0x00000000080005e4                PROVIDE (__init_array_start = .)
+.init_array     0x00000000080008a4        0x4
+                0x00000000080008a4                . = ALIGN (0x4)
+                0x00000000080008a4                PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x00000000080005e4        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x00000000080005e8                PROVIDE (__init_array_end = .)
-                0x00000000080005e8                . = ALIGN (0x4)
+ .init_array    0x00000000080008a4        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x00000000080008a8                PROVIDE (__init_array_end = .)
+                0x00000000080008a8                . = ALIGN (0x4)
 
-.fini_array     0x00000000080005e8        0x4
-                0x00000000080005e8                . = ALIGN (0x4)
+.fini_array     0x00000000080008a8        0x4
+                0x00000000080008a8                . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00000000080005e8        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .fini_array    0x00000000080008a8        0x4 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x00000000080005ec                . = ALIGN (0x4)
-                0x00000000080005ec                _sidata = LOADADDR (.data)
+                0x00000000080008ac                . = ALIGN (0x4)
+                0x00000000080008ac                _sidata = LOADADDR (.data)
 
-.data           0x0000000020000000        0x0 load address 0x00000000080005ec
+.data           0x0000000020000000        0x0 load address 0x00000000080008ac
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _sdata = .
  *(.data)
@@ -1383,11 +1522,11 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                _edata = .
 
-.igot.plt       0x0000000020000000        0x0 load address 0x00000000080005ec
+.igot.plt       0x0000000020000000        0x0 load address 0x00000000080008ac
  .igot.plt      0x0000000020000000        0x0 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 0x0000000020000000                . = ALIGN (0x4)
 
-.bss            0x0000000020000000       0x34 load address 0x00000000080005ec
+.bss            0x0000000020000000      0x110 load address 0x00000000080008ac
                 0x0000000020000000                _sbss = .
                 0x0000000020000000                __bss_start__ = _sbss
  *(.bss)
@@ -1406,24 +1545,25 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .bss.gSystemTimer
                 0x000000002000002c        0x4 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
                 0x000000002000002c                gSystemTimer
- .bss.gSystems  0x0000000020000030        0x4 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
-                0x0000000020000030                gSystems
+ .bss.gUnits    0x0000000020000030        0x4 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                0x0000000020000030                gUnits
  *(COMMON)
-                0x0000000020000034                . = ALIGN (0x4)
-                0x0000000020000034                _ebss = .
-                0x0000000020000034                __bss_end__ = _ebss
+ COMMON         0x0000000020000034       0xdc Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+                0x0000000020000034                gArcadeITTasks
+                0x0000000020000110                . = ALIGN (0x4)
+                0x0000000020000110                _ebss = .
+                0x0000000020000110                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x0000000020000034      0x604 load address 0x00000000080005ec
-                0x0000000020000038                . = ALIGN (0x8)
- *fill*         0x0000000020000034        0x4 
-                0x0000000020000038                PROVIDE (end = .)
+                0x0000000020000110      0x600 load address 0x00000000080008ac
+                0x0000000020000110                . = ALIGN (0x8)
+                0x0000000020000110                PROVIDE (end = .)
                 [!provide]                        PROVIDE (_end = .)
-                0x0000000020000238                . = (. + _Min_Heap_Size)
- *fill*         0x0000000020000038      0x200 
-                0x0000000020000638                . = (. + _Min_Stack_Size)
- *fill*         0x0000000020000238      0x400 
-                0x0000000020000638                . = ALIGN (0x8)
+                0x0000000020000310                . = (. + _Min_Heap_Size)
+ *fill*         0x0000000020000110      0x200 
+                0x0000000020000710                . = (. + _Min_Stack_Size)
+ *fill*         0x0000000020000310      0x400 
+                0x0000000020000710                . = ALIGN (0x8)
 
 /DISCARD/
  libc.a(*)
@@ -1446,32 +1586,36 @@ LOAD c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .ARM.attributes
                 0x00000000000000e1       0x35 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .ARM.attributes
-                0x0000000000000116       0x35 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x0000000000000116       0x35 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
  .ARM.attributes
-                0x000000000000014b       0x35 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+                0x000000000000014b       0x35 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
  .ARM.attributes
-                0x0000000000000180       0x34 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+                0x0000000000000180       0x35 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
  .ARM.attributes
-                0x00000000000001b4       0x22 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x00000000000001b5       0x34 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+ .ARM.attributes
+                0x00000000000001e9       0x22 c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
 OUTPUT(ArcadeIT_Ver020_F469_CMSIS.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000     0x3cac
+.debug_info     0x0000000000000000     0x4a82
  .debug_info    0x0000000000000000      0xa57 Core/Src/main.o
  .debug_info    0x0000000000000a57       0x9a Core/Src/stm32f4xx_it.o
  .debug_info    0x0000000000000af1       0x22 Core/Startup/startup_stm32f469iitx.o
- .debug_info    0x0000000000000b13     0x1718 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_info    0x000000000000222b      0xd38 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_info    0x0000000000002f63      0xd49 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_info    0x0000000000000b13     0x1886 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_info    0x0000000000002399      0xd38 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_info    0x00000000000030d1      0xd49 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_info    0x0000000000003e1a      0xc68 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_abbrev   0x0000000000000000      0xa80
+.debug_abbrev   0x0000000000000000      0xcea
  .debug_abbrev  0x0000000000000000      0x1bc Core/Src/main.o
  .debug_abbrev  0x00000000000001bc       0x5f Core/Src/stm32f4xx_it.o
  .debug_abbrev  0x000000000000021b       0x12 Core/Startup/startup_stm32f469iitx.o
- .debug_abbrev  0x000000000000022d      0x414 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_abbrev  0x0000000000000641      0x20a Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_abbrev  0x000000000000084b      0x235 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_abbrev  0x000000000000022d      0x42a Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_abbrev  0x0000000000000657      0x20a Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_abbrev  0x0000000000000861      0x235 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_abbrev  0x0000000000000a96      0x254 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_aranges  0x0000000000000000      0x178
+.debug_aranges  0x0000000000000000      0x1c0
  .debug_aranges
                 0x0000000000000000       0x28 Core/Src/main.o
  .debug_aranges
@@ -1481,118 +1625,130 @@ OUTPUT(ArcadeIT_Ver020_F469_CMSIS.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000090       0x78 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
  .debug_aranges
-                0x0000000000000108       0x48 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
+                0x0000000000000108       0x48 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
  .debug_aranges
-                0x0000000000000150       0x28 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+                0x0000000000000150       0x28 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_aranges
+                0x0000000000000178       0x48 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_ranges   0x0000000000000000      0x208
+.debug_ranges   0x0000000000000000      0x268
  .debug_ranges  0x0000000000000000       0x18 Core/Src/main.o
  .debug_ranges  0x0000000000000018       0x30 Core/Src/stm32f4xx_it.o
  .debug_ranges  0x0000000000000048       0x20 Core/Startup/startup_stm32f469iitx.o
- .debug_ranges  0x0000000000000068      0x138 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_ranges  0x00000000000001a0       0x38 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_ranges  0x00000000000001d8       0x30 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_ranges  0x0000000000000068      0x148 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_ranges  0x00000000000001b0       0x38 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_ranges  0x00000000000001e8       0x30 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_ranges  0x0000000000000218       0x50 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_macro    0x0000000000000000    0x22069
- .debug_macro   0x0000000000000000      0x282 Core/Src/main.o
- .debug_macro   0x0000000000000282      0xa78 Core/Src/main.o
- .debug_macro   0x0000000000000cfa       0x22 Core/Src/main.o
- .debug_macro   0x0000000000000d1c       0x40 Core/Src/main.o
- .debug_macro   0x0000000000000d5c       0x18 Core/Src/main.o
- .debug_macro   0x0000000000000d74       0x94 Core/Src/main.o
- .debug_macro   0x0000000000000e08       0x3c Core/Src/main.o
- .debug_macro   0x0000000000000e44       0x34 Core/Src/main.o
- .debug_macro   0x0000000000000e78       0x16 Core/Src/main.o
- .debug_macro   0x0000000000000e8e       0x57 Core/Src/main.o
- .debug_macro   0x0000000000000ee5       0x97 Core/Src/main.o
- .debug_macro   0x0000000000000f7c      0x330 Core/Src/main.o
- .debug_macro   0x00000000000012ac       0xfd Core/Src/main.o
- .debug_macro   0x00000000000013a9       0x10 Core/Src/main.o
- .debug_macro   0x00000000000013b9       0x52 Core/Src/main.o
- .debug_macro   0x000000000000140b       0x1f Core/Src/main.o
- .debug_macro   0x000000000000142a       0x43 Core/Src/main.o
- .debug_macro   0x000000000000146d       0x20 Core/Src/main.o
- .debug_macro   0x000000000000148d      0x1a3 Core/Src/main.o
- .debug_macro   0x0000000000001630       0x10 Core/Src/main.o
- .debug_macro   0x0000000000001640       0x6a Core/Src/main.o
- .debug_macro   0x00000000000016aa       0x1c Core/Src/main.o
- .debug_macro   0x00000000000016c6       0x52 Core/Src/main.o
- .debug_macro   0x0000000000001718       0x40 Core/Src/main.o
- .debug_macro   0x0000000000001758       0x10 Core/Src/main.o
- .debug_macro   0x0000000000001768       0x40 Core/Src/main.o
- .debug_macro   0x00000000000017a8       0xd7 Core/Src/main.o
- .debug_macro   0x000000000000187f       0x1c Core/Src/main.o
- .debug_macro   0x000000000000189b       0x3d Core/Src/main.o
- .debug_macro   0x00000000000018d8       0x16 Core/Src/main.o
- .debug_macro   0x00000000000018ee      0x145 Core/Src/main.o
- .debug_macro   0x0000000000001a33       0xef Core/Src/main.o
- .debug_macro   0x0000000000001b22      0x1df Core/Src/main.o
- .debug_macro   0x0000000000001d01       0x16 Core/Src/main.o
- .debug_macro   0x0000000000001d17       0x35 Core/Src/main.o
- .debug_macro   0x0000000000001d4c       0x16 Core/Src/main.o
- .debug_macro   0x0000000000001d62       0x29 Core/Src/main.o
- .debug_macro   0x0000000000001d8b       0x22 Core/Src/main.o
- .debug_macro   0x0000000000001dad       0x40 Core/Src/main.o
- .debug_macro   0x0000000000001ded       0x32 Core/Src/main.o
- .debug_macro   0x0000000000001e1f       0x28 Core/Src/main.o
- .debug_macro   0x0000000000001e47       0x1c Core/Src/main.o
- .debug_macro   0x0000000000001e63       0x22 Core/Src/main.o
- .debug_macro   0x0000000000001e85       0xd9 Core/Src/main.o
- .debug_macro   0x0000000000001f5e     0x102d Core/Src/main.o
- .debug_macro   0x0000000000002f8b      0x11f Core/Src/main.o
- .debug_macro   0x00000000000030aa    0x1d70d Core/Src/main.o
- .debug_macro   0x00000000000207b7       0x43 Core/Src/main.o
- .debug_macro   0x00000000000207fa      0x92f Core/Src/main.o
- .debug_macro   0x0000000000021129       0x24 Core/Src/stm32f4xx_it.o
- .debug_macro   0x000000000002114d       0x28 Core/Src/stm32f4xx_it.o
- .debug_macro   0x0000000000021175      0x2cb Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000021440       0x10 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000021450      0x460 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x00000000000218b0       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x00000000000218c6       0x20 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x00000000000218e6      0x20f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_macro   0x0000000000021af5      0x2ba Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_macro   0x0000000000021daf      0x2ba Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+.debug_macro    0x0000000000000000    0x22499
+ .debug_macro   0x0000000000000000      0x27e Core/Src/main.o
+ .debug_macro   0x000000000000027e      0xa78 Core/Src/main.o
+ .debug_macro   0x0000000000000cf6       0x22 Core/Src/main.o
+ .debug_macro   0x0000000000000d18       0x40 Core/Src/main.o
+ .debug_macro   0x0000000000000d58       0x18 Core/Src/main.o
+ .debug_macro   0x0000000000000d70       0x94 Core/Src/main.o
+ .debug_macro   0x0000000000000e04       0x3c Core/Src/main.o
+ .debug_macro   0x0000000000000e40       0x34 Core/Src/main.o
+ .debug_macro   0x0000000000000e74       0x16 Core/Src/main.o
+ .debug_macro   0x0000000000000e8a       0x57 Core/Src/main.o
+ .debug_macro   0x0000000000000ee1       0x97 Core/Src/main.o
+ .debug_macro   0x0000000000000f78      0x330 Core/Src/main.o
+ .debug_macro   0x00000000000012a8       0xfd Core/Src/main.o
+ .debug_macro   0x00000000000013a5       0x10 Core/Src/main.o
+ .debug_macro   0x00000000000013b5       0x52 Core/Src/main.o
+ .debug_macro   0x0000000000001407       0x1f Core/Src/main.o
+ .debug_macro   0x0000000000001426       0x43 Core/Src/main.o
+ .debug_macro   0x0000000000001469       0x20 Core/Src/main.o
+ .debug_macro   0x0000000000001489      0x1a3 Core/Src/main.o
+ .debug_macro   0x000000000000162c       0x10 Core/Src/main.o
+ .debug_macro   0x000000000000163c       0x6a Core/Src/main.o
+ .debug_macro   0x00000000000016a6       0x1c Core/Src/main.o
+ .debug_macro   0x00000000000016c2       0x52 Core/Src/main.o
+ .debug_macro   0x0000000000001714       0x40 Core/Src/main.o
+ .debug_macro   0x0000000000001754       0x10 Core/Src/main.o
+ .debug_macro   0x0000000000001764       0x40 Core/Src/main.o
+ .debug_macro   0x00000000000017a4       0xd7 Core/Src/main.o
+ .debug_macro   0x000000000000187b       0x1c Core/Src/main.o
+ .debug_macro   0x0000000000001897       0x3d Core/Src/main.o
+ .debug_macro   0x00000000000018d4       0x16 Core/Src/main.o
+ .debug_macro   0x00000000000018ea      0x145 Core/Src/main.o
+ .debug_macro   0x0000000000001a2f       0xef Core/Src/main.o
+ .debug_macro   0x0000000000001b1e      0x1df Core/Src/main.o
+ .debug_macro   0x0000000000001cfd       0x16 Core/Src/main.o
+ .debug_macro   0x0000000000001d13       0x35 Core/Src/main.o
+ .debug_macro   0x0000000000001d48       0x16 Core/Src/main.o
+ .debug_macro   0x0000000000001d5e       0x29 Core/Src/main.o
+ .debug_macro   0x0000000000001d87       0x22 Core/Src/main.o
+ .debug_macro   0x0000000000001da9       0x40 Core/Src/main.o
+ .debug_macro   0x0000000000001de9       0x32 Core/Src/main.o
+ .debug_macro   0x0000000000001e1b       0x28 Core/Src/main.o
+ .debug_macro   0x0000000000001e43       0x1c Core/Src/main.o
+ .debug_macro   0x0000000000001e5f       0x22 Core/Src/main.o
+ .debug_macro   0x0000000000001e81       0xd9 Core/Src/main.o
+ .debug_macro   0x0000000000001f5a     0x102d Core/Src/main.o
+ .debug_macro   0x0000000000002f87      0x11f Core/Src/main.o
+ .debug_macro   0x00000000000030a6    0x1d70d Core/Src/main.o
+ .debug_macro   0x00000000000207b3       0x43 Core/Src/main.o
+ .debug_macro   0x00000000000207f6      0x925 Core/Src/main.o
+ .debug_macro   0x000000000002111b       0x24 Core/Src/stm32f4xx_it.o
+ .debug_macro   0x000000000002113f       0x28 Core/Src/stm32f4xx_it.o
+ .debug_macro   0x0000000000021167      0x308 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x000000000002146f       0x10 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x000000000002147f      0x460 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x00000000000218df       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x00000000000218f5       0x20 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021915      0x20f Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021b24      0x111 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021c35       0x16 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_macro   0x0000000000021c4b      0x2b1 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_macro   0x0000000000021efc      0x2b1 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_macro   0x00000000000221ad      0x2ec Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_line     0x0000000000000000     0x267b
+.debug_line     0x0000000000000000     0x3084
  .debug_line    0x0000000000000000      0x790 Core/Src/main.o
  .debug_line    0x0000000000000790       0xf9 Core/Src/stm32f4xx_it.o
  .debug_line    0x0000000000000889       0x86 Core/Startup/startup_stm32f469iitx.o
- .debug_line    0x000000000000090f      0xbcf Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_line    0x00000000000014de      0x8fb Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_line    0x0000000000001dd9      0x8a2 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_line    0x000000000000090f      0xc44 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_line    0x0000000000001553      0x8f3 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_line    0x0000000000001e46      0x89a Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_line    0x00000000000026e0      0x9a4 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_str      0x0000000000000000    0xb828a
- .debug_str     0x0000000000000000    0xb58e8 Core/Src/main.o
-                                      0xb5b5d (size before relaxing)
- .debug_str     0x00000000000b58e8      0x193 Core/Src/stm32f4xx_it.o
+.debug_str      0x0000000000000000    0xb8c8a
+ .debug_str     0x0000000000000000    0xb58c6 Core/Src/main.o
+                                      0xb5b3b (size before relaxing)
+ .debug_str     0x00000000000b58c6      0x193 Core/Src/stm32f4xx_it.o
                                        0x2ef0 (size before relaxing)
- .debug_str     0x00000000000b5a7b       0x36 Core/Startup/startup_stm32f469iitx.o
+ .debug_str     0x00000000000b5a59       0x36 Core/Startup/startup_stm32f469iitx.o
                                          0x86 (size before relaxing)
- .debug_str     0x00000000000b5ab1     0x2677 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
-                                      0xb817a (size before relaxing)
- .debug_str     0x00000000000b8128       0xe3 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
-                                      0xb799a (size before relaxing)
- .debug_str     0x00000000000b820b       0x7f Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
-                                      0xb7941 (size before relaxing)
+ .debug_str     0x00000000000b5a8f     0x2ffc Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+                                      0xb8bc9 (size before relaxing)
+ .debug_str     0x00000000000b8a8b       0xdf Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+                                      0xb7974 (size before relaxing)
+ .debug_str     0x00000000000b8b6a       0x7b Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+                                      0xb791b (size before relaxing)
+ .debug_str     0x00000000000b8be5       0xa5 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+                                      0xb822c (size before relaxing)
 
 .comment        0x0000000000000000       0x7b
  .comment       0x0000000000000000       0x7b Core/Src/main.o
                                          0x7c (size before relaxing)
  .comment       0x000000000000007b       0x7c Core/Src/stm32f4xx_it.o
  .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .comment       0x000000000000007b       0x7c Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
 
-.debug_frame    0x0000000000000000      0x2b0
+.debug_frame    0x0000000000000000      0x350
  .debug_frame   0x0000000000000000       0x38 Core/Src/main.o
  .debug_frame   0x0000000000000038       0x90 Core/Src/stm32f4xx_it.o
- .debug_frame   0x00000000000000c8      0x110 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_frame   0x00000000000001d8       0x70 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_frame   0x0000000000000248       0x3c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
- .debug_frame   0x0000000000000284       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+ .debug_frame   0x00000000000000c8      0x118 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
+ .debug_frame   0x00000000000001e0       0x70 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_frame   0x0000000000000250       0x3c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_frame   0x000000000000028c       0x98 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o
+ .debug_frame   0x0000000000000324       0x2c c:/st/stm32cubeide_1.2.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610/tools/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
 
-.debug_loc      0x0000000000000000      0x1e5
+.debug_loc      0x0000000000000000      0x45a
  .debug_loc     0x0000000000000000      0x112 Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o
- .debug_loc     0x0000000000000112       0x2c Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o
- .debug_loc     0x000000000000013e       0xa7 Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o
+ .debug_loc     0x0000000000000112       0x2c Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o
+ .debug_loc     0x000000000000013e       0xa7 Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o
+ .debug_loc     0x00000000000001e5      0x275 Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o

@@ -69,9 +69,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-// ArcadeIT Libraries
-#include "ArcadeIT_Common.h"
-#include "ArcadeIT_Firmware.h"
+// ArcadeIT Libraries.
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Firmware.h>
 
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions

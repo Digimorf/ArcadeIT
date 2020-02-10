@@ -45,10 +45,10 @@
 #include <stdint.h>
 #include <inttypes.h>
 
-// ArcadeIT! Libraries.
-#include "ArcadeIT_Common.h"
-#include "ArcadeIT_Utilities.h"
-#include "ArcadeIT_Firmware.h"
+// ArcadeIT Libraries.
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
 
 #if 0
 // ArcadeIT! Storage libraries.
@@ -58,13 +58,15 @@
 
 // ArcadeIT! System clocks and counters.
 #include "System/Peripherals/ArcadeIT_RTC.h"
-#include "System/Peripherals/ArcadeIT_Scheduler.h"
+#endif
+#include "System/Units/ArcadeIT_Scheduler.h"
+#if 0
 #include "System/Peripherals/ArcadeIT_DMM.h"
 #endif
 
 // ArcadeIT! Peripherals and buses.
-#include "System/Peripherals/ArcadeIT_TestPads.h"
-#include "System/Peripherals/ArcadeIT_Status_LEDs.h"
+#include <Devices/ArcadeIT_TestPads.h>
+#include <Devices/ArcadeIT_Status_LEDs.h>
 
 #if 0
 #include "System/Peripherals/ArcadeIT_Serial_Port.h"
@@ -120,7 +122,7 @@ extern Shell_Command_t gCurrentCommand;
 // Globals
 // //////////////////////////////////////////////////////////////////////////////
 
-uint32_t gDevices = 0, gSystems = 0, gStorage = 0; // Flags for the activation of the systems
+uint32_t gDevices = 0, gUnits = 0, gStorage = 0; // Flags for the activation of the systems
 
 __IO uint32_t gSystemTimer = 0, gSecondaryTimer = 0, gSystemTick = 0;
 
@@ -337,11 +339,11 @@ void ArcadeIT_SysTick_Handler (void)
     gSystemTimer--;
 
   // Run the tasks scheduler.
-  if (gSystems & ARCADEIT_SYSTEM_SCHEDULER)
-    {
-     // ArcadeIT_Scheduler_Update ();
+  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+  {
+      ArcadeIT_Scheduler_Update ();
 
-    } // End if.
+  } // End if.
 
 } // end ArcadeIT_SysTick_Handler.
 
@@ -362,15 +364,15 @@ void ArcadeIT_PowerUP_Systems (void)
    */
 
   // ArcadeIT_TestPad_Init GPIOC
-  if (gSystems & ARCADEIT_SYSTEM_TESTPADS)
+  if (gDevices & ARCADEIT_DEVICE_TESTPADS)
     if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
 
   // ArcadeIT_Status_LEDS_Init GPIOH
-  if (gSystems & ARCADEIT_SYSTEM_STATUSLED)
+  if (gDevices & ARCADEIT_DEVICE_STATUSLED)
     if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOH) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOH;
 
   // ArcadeIT_BUS_Port_Init GPIOD, GPIOE, GPIOF, GPIOG, GPIOI, FMC
-  if (gSystems & ARCADEIT_SYSTEM_BUS)
+  if (gDevices & ARCADEIT_DEVICE_BUS)
   {
     if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOD) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOD;
     if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOE) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOE;
@@ -400,11 +402,11 @@ void ArcadeIT_PowerUP_Systems (void)
   } // End if.
 
   // ArcadeIT_RTC_Init PWR
-  if (gSystems & ARCADEIT_SYSTEM_RTC)
+  if (gUnits & ARCADEIT_UNIT_RTC)
     if ((RCC->APB1ENR & RCC_APB1Periph_PWR) == FALSE) RCC->APB1ENR |= RCC_APB1Periph_PWR;
 
   // ArcadeIT_Serial_Port_Init GPIOA, USART2, DMA1
-  if (gDevices& ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
   {
     if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOA) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOA;
     if ((RCC->APB1ENR & RCC_APB1Periph_USART2) == FALSE) RCC->APB1ENR |= RCC_APB1Periph_USART2;
@@ -473,9 +475,8 @@ void ArcadeIT_ArcadeIT_Start (void)
   // Clock and timer system. Thjis must be called before the SD card initialization.
   // 1ms System Tick timer.
   ArcadeIT_SysTick_Init ();
-
   // ---------------------------------------------------------------------------
-  if (gSystems & ARCADEIT_SYSTEM_TESTPADS)
+  if (gDevices & ARCADEIT_DEVICE_TESTPADS)
     {
       /*
       *
@@ -504,15 +505,22 @@ void ArcadeIT_ArcadeIT_Start (void)
       //ArcadeIT_TestPad_Init (RCC_MCO2Source_HSE, RCC_MCO2Div_1);    //  8 MHz
 
     } // End if.
-
   // ---------------------------------------------------------------------------
-  if (gSystems & ARCADEIT_SYSTEM_STATUSLED)
+  if (gDevices & ARCADEIT_DEVICE_STATUSLED)
     {
       // Start LED Status system.
       ArcadeIT_Status_LEDS_Init ();
 
     } // End if.
+  // ---------------------------------------------------------------------------
+  // Systems scheduler task. This must be set AFTER the Systick has been initialized
+  // because uses the ISR function that is handled by the Systick.
+  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+    {
+      // Start the scheduler system.
+      ArcadeIT_Scheduler_Task_Init ();
 
+    } // End if.
   // ---------------------------------------------------------------------------
 
 } // End ArcadeIT_Start
@@ -525,13 +533,10 @@ void ArcadeIT_Test_Bench (void)
   // *.ini text file on the SD Card, or other sources.
 
   // System features.
-  gSystems = NONE
-      //| ARCADEIT_SYSTEM_RTC           // Real time clock
-        | ARCADEIT_SYSTEM_STATUSLED     // Two Status LEDs
-        | ARCADEIT_SYSTEM_TESTPADS      // System clock test pads
-      //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
-      //| ARCADEIT_SYSTEM_DMM           // The custom ArcadeIt Dynamic Memory Manager
-      //| ARCADEIT_SYSTEM_SCHEDULER     // The task scheduler system.
+  gUnits = NONE
+      //| ARCADEIT_UNIT_RTC           // Real time clock
+      //| ARCADEIT_UNIT_DMM           // The custom ArcadeIt Dynamic Memory Manager
+        | ARCADEIT_UNIT_SCHEDULER     // The task scheduler system.
       ;
 
   gStorage = NONE
@@ -540,15 +545,19 @@ void ArcadeIT_Test_Bench (void)
       ;
 
   gDevices = NONE
-       //| ARCADEIT_DEVICE_SERIAL_PORT  // Serial port USART 2
-       //| ARCADEIT_DEVICE_SPI1         // SPI 1 port
-       //| ARCADEIT_DEVICE_EXPANSION    // SLOTS expansion
-       //| ARCADEIT_DEVICE_RAM_MODULE   // SRAM expansion
-       //| ARCADEIT_DEVICE_PARALLEL     // Parallel port
-       //| ARCADEIT_DEVICE_VGA          // VGA port
-       //| ARCADEIT_DEVICE_LCDS         // LCDs port
-       //| ARCADEIT_DEVICE_USB          // USB port
-       //| ARCADEIT_DEVICE_AUDIO        // Audio DAC port
+      //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
+      //| ARCADEIT_DEVICE_RAM_MODULE    // SRAM expansion
+      //| ARCADEIT_DEVICE_EXPANSION     // SLOTS expansion
+      //| ARCADEIT_DEVICE_SPI1          // SPI 1 port
+      //| ARCADEIT_DEVICE_I2C           // I2C port
+      //| ARCADEIT_DEVICE_LCDS          // LCDs port
+      //| ARCADEIT_DEVICE_VGA           // VGA port
+      //| ARCADEIT_DEVICE_AUDIO         // Audio DAC port
+      //| ARCADEIT_DEVICE_PARALLEL      // Parallel port
+      //| ARCADEIT_DEVICE_USB           // USB port
+      //| ARCADEIT_DEVICE_SERIAL_PORT   // Serial port USART 2
+        | ARCADEIT_DEVICE_STATUSLED     // Two Status LEDs
+        | ARCADEIT_DEVICE_TESTPADS      // System clock test pads
        ;
 
   ArcadeIT_ArcadeIT_Start();
@@ -564,10 +573,38 @@ void ArcadeIT_Test_Bench (void)
     ArcadeIT_System_Delay(250);
 
   } // End if.
+
+  // --------------------------------------------------------------------------
+  // We setup the scheduler to blink the Status LED 1 at 1Hz (every seconds).
+
+  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+  {
+    if (gDevices & ARCADEIT_DEVICE_STATUSLED)
+    {
+          ArcadeIT_Scheduler_Task_Set (
+              0,
+              (void*) ArcadeIT_Status_LED1_Toggle,
+              NULL,
+              ARCADEIT_SCHEDULER_REPEAT_INFINITELY,
+              ARCADEIT_PAUSE_HALF_SECOND
+              );
+
+     } // End if.
+
+  } // End if.
+
+  // --------------------------------------------------------------------------
 #endif
 
   while (1)
   {
+
+    // Periodic tasks
+    if (gUnits & ARCADEIT_UNIT_SCHEDULER)
+    {
+      ArcadeIT_Scheduler_Run ();
+
+    } // End if.
 
   } // End while.
 

@@ -6,5 +6,6 @@
 "Core/Startup/startup_stm32f469iitx.o"
 "Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o"
 "Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o"
-"Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_Status_LEDs.o"
-"Drivers/ArcadeIT_Lib/System/Peripherals/ArcadeIT_TestPads.o"
+"Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Status_LEDs.o"
+"Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_TestPads.o"
+"Drivers/ArcadeIT_Lib/System/Units/ArcadeIT_Scheduler.o"

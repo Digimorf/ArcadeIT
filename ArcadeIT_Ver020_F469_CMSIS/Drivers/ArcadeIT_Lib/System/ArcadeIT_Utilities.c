@@ -52,9 +52,9 @@
 #include <string.h>
 
 // ArcadeIT Libraries.
-#include "ArcadeIT_Common.h"
-#include "ArcadeIT_Utilities.h"
-#include "ArcadeIT_Firmware.h"
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
 
 // /////////////////////////////////////////////////////////////////////////////
 // Macros

@@ -52,10 +52,7 @@
 #include "stm32f4xx.h"
 
 // ArcadeIT Libraries.
-#include "ArcadeIT_Common.h"
-
-// ArcadeIT! Storage libraries.
-//#include "System/Disk/ArcadeIT_Storage.h"
+#include <System/ArcadeIT_Common.h>
 
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions
@@ -478,29 +475,33 @@
 // -----------------------------------------------------------------------------
 // This is the list of devices/systems and drivers that can be connected to the system.
 // -----------------------------------------------------------------------------
-  #define ARCADEIT_DEVICE_RAM_MODULE       0x00001
-  #define ARCADEIT_DEVICE_SPI1             0x00002
-  #define ARCADEIT_DEVICE_LCDS             0x00004
-  #define ARCADEIT_DEVICE_RGB              0x00008
-  #define ARCADEIT_DEVICE_VGA              0x00010
-  #define ARCADEIT_DEVICE_PARALLEL         0x00020
-  #define ARCADEIT_DEVICE_USB              0x00040
-  #define ARCADEIT_DEVICE_SERIAL_PORT      0x00080
-  #define ARCADEIT_DEVICE_AUDIO            0x00100
-  #define ARCADEIT_DEVICE_EXPANSION        0x00200
-  #define ARCADEIT_DEVICE_I2C              0x00400
-
-  #define ARCADEIT_SYSTEM_RTC              0x00001
-  #define ARCADEIT_SYSTEM_SCHEDULER        0x00002
-  #define ARCADEIT_SYSTEM_STATUSLED        0x00004
-  #define ARCADEIT_SYSTEM_BUS              0x00008
-  #define ARCADEIT_SYSTEM_DMM              0x00010
-  #define ARCADEIT_SYSTEM_TESTPADS         0x00020
-
+  #define ARCADEIT_DEVICE_BUS              0x00001
+  #define ARCADEIT_DEVICE_RAM_MODULE       0x00002
+  #define ARCADEIT_DEVICE_EXPANSION        0x00004
+  // ---------
+  #define ARCADEIT_DEVICE_SPI1             0x00010
+  #define ARCADEIT_DEVICE_I2C              0x00020
+  // ---------
+  #define ARCADEIT_DEVICE_LCDS             0x00100
+  #define ARCADEIT_DEVICE_VGA              0x00200
+  #define ARCADEIT_DEVICE_AUDIO            0x00400
+  // ---------
+  #define ARCADEIT_DEVICE_PARALLEL         0x01000
+  #define ARCADEIT_DEVICE_USB              0x02000
+  #define ARCADEIT_DEVICE_SERIAL_PORT      0x04000
+  // ---------
+  #define ARCADEIT_DEVICE_STATUSLED        0x10000
+  #define ARCADEIT_DEVICE_TESTPADS         0x20000
+  // ---------
+  #define ARCADEIT_UNIT_RTC                0x00001
+  #define ARCADEIT_UNIT_DMM                0x00010
+  #define ARCADEIT_UNIT_SCHEDULER          0x00100
+  // ---------
   #define ARCADEIT_STORAGE_RAM_DISK        0x00001
   #define ARCADEIT_STORAGE_SD_CARD_SPI1    0x00002
 
   #define ARCADEIT_TERMINAL_OUTPUT_SERIAL  0x00001
+
   #define ARCADEIT_TERMINAL_OUTPUT_VGA     0x00010
   #define ARCADEIT_TERMINAL_INPUT_SERIAL   0x00002
   #define ARCADEIT_TERMINAL_INPUT_USB      0x00020

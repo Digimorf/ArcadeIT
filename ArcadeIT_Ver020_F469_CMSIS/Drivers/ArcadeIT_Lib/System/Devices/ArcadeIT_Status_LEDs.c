@@ -13,7 +13,7 @@
  *           (C)2020 www.digimorf.com, www.arcadeit.net
  *
  * @author  Francesco De Simone
- * @file    ArcadeIT_Status-LEDs.h
+ * @file    ArcadeIT_Status-LEDs.c
  * @version V0.13
  * @date    15-06-2017
  * @last    08-02-2020
@@ -137,52 +137,209 @@
  ******************************************************************************
  */
 
-// /////////////////////////////////////////////////////////////////////////////
-// Includes.
-// /////////////////////////////////////////////////////////////////////////////
-
-#ifndef _ARCADEIT_STATUS_LEDS_H_
-#define _ARCADEIT_STATUS_LEDS_H_
-
 // C standard libraries.
 #include <stdio.h>
 #include <stdint.h>
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "System/ArcadeIT_Common.h"
-#include "System/ArcadeIT_Utilities.h"
-#include "System/ArcadeIT_Firmware.h"
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
 
-// /////////////////////////////////////////////////////////////////////////////
-// Definitions.
-// /////////////////////////////////////////////////////////////////////////////
+// ArcadeIT! devices.
+#include <Devices/ArcadeIT_Status_LEDs.h>
+//#include "System/Peripherals/ArcadeIT_Serial_Port.h"
 
-// /////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
 // Functions.
-// /////////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_Status_LEDS_Init(void)
+{
+  /*
+  * DESCRIPTION: This function is used to initialize the hardware that drives
+  *              the GPIOs connected to the two status LEDs.
+  * PARAMETERS:  None.
+  * RETURNS:     Nothing.
+  *
+ */
 
-void ArcadeIT_Status_LEDS_Init(void);
-// -----------------------------------------------------------------------------
+  uint32_t lPinPosition = 0;
+
+  // Turn on the MCU peripheral by enabling its Clock.
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOH) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOH;
+
+  // Configure the output lines connected to the Status LEDs as output, LOW
+  // level as default.
+  // -----------------------
+  lPinPosition = (SYS_STATUS_LED1_PIN_NO * 2); // the position is a multiple of 2
+
+  // GPIO pin(PH2) in output
+  SYS_STATUS_LED1_PER->MODER   &= ~GPIO_MODER_MODER2;
+  SYS_STATUS_LED1_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
+
+  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
+  // to test 180MHz, you have to set the divider at least 2
+  SYS_STATUS_LED1_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
+  SYS_STATUS_LED1_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+
+  // type output
+  SYS_STATUS_LED1_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
+  SYS_STATUS_LED1_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED1_PIN_NO);
+
+  // pull up configuration
+  SYS_STATUS_LED1_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
+  SYS_STATUS_LED1_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+
+  // -----------------------
+  lPinPosition = (SYS_STATUS_LED2_PIN_NO * 2); // the position is a multiple of 2
+
+  // GPIO pin(PH3) in output
+  SYS_STATUS_LED2_PER->MODER   &= ~GPIO_MODER_MODER3;
+  SYS_STATUS_LED2_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
+
+  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
+  // to test 180MHz, you have to set the divider at least 2
+  SYS_STATUS_LED2_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
+  SYS_STATUS_LED2_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+
+  // type output
+  SYS_STATUS_LED2_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
+  SYS_STATUS_LED2_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
+
+  // pull up configuration
+  SYS_STATUS_LED2_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
+  SYS_STATUS_LED2_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+
+  // -----------------------
+  // Put LEDs line LOW.
+  SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
+  SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
+
+  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  {
+    //ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
+
+  } // End if.
+
+} // End ArcadeIT_Status_LEDS_Init.
+
+// //////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_Status_LEDS_Set
 (
   void *pParameters   // The pointer to the array of parameters.
-);
-// -----------------------------------------------------------------------------
+)
+{
+  /*
+  * DESCRIPTION: This function is used to set the value of the status LEDs.
+  * PARAMETERS:  See above.
+  * RETURNS:     Nothing.
+  */
+
+  // Put LEDs line LOW.
+  GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
+  SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
+
+  if (((uint32_t*)pParameters)[PAR_1])
+  {
+    // Compute the output value according to the parameter provided.
+    GPIOH->ODR |= ((uint16_t)(((uint32_t*)pParameters)[PAR_2]) & (uint16_t)1) ? SYS_STATUS_LED1_PIN : (uint16_t)0;
+    SYS_STATUS_LED2_PER->ODR |= ((uint16_t)(((uint32_t*)pParameters)[PAR_2]) & (uint16_t)2) ? SYS_STATUS_LED2_PIN : (uint16_t)0;
+
+  } // End if.
+
+} // End ArcadeIT_Status_LEDS_Set.
+
+// /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_Status_LED1_Set
 (
   void *pParameters   // The pointer to the array of parameters.
-);
-// -----------------------------------------------------------------------------
+)
+{
+  /*
+  * DESCRIPTION: This function is used to set the value of the status LEDs.
+  * PARAMETERS:  See above.
+  * RETURNS:     Nothing.
+  */
+
+  if (((uint32_t*)pParameters)[PAR_1])
+  {
+    // Set LEDs line LOW.
+    GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
+
+    // Compute the output value according to the parameter provided.
+    GPIOH->ODR |= (uint16_t)(((uint32_t*)pParameters)[PAR_2]) ? SYS_STATUS_LED1_PIN : (uint16_t)0;
+
+  } // End if.
+
+} // End ArcadeIT_Status_LED1_Set.
+
+// /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_Status_LED2_Set
 (
   void *pParameters   // The pointer to the array of parameters.
-);
-// -----------------------------------------------------------------------------
-void ArcadeIT_Status_LED1_Toggle(void);
-// -----------------------------------------------------------------------------
-void ArcadeIT_Status_LED2_Toggle(void);
+)
+{
+  /*
+  * DESCRIPTION: This function is used to set the value of the status LEDs.
+  * PARAMETERS:  pValue is the value that the status LEDs should assume.
+  * RETURNS:     Nothing.
+  */
+
+  if (((uint32_t*)pParameters)[PAR_1])
+  {
+    // Set LEDs line LOW.
+    SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
+
+    // Compute the output value according to the parameter provided.
+    SYS_STATUS_LED2_PER->ODR |= (uint16_t)(((uint32_t*)pParameters)[PAR_2]) ? SYS_STATUS_LED2_PIN : (uint16_t)0;
+
+  } // End if..
+
+} // End ArcadeIT_Status_LED2_Set.
 
 // /////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_Status_LED1_Toggle(void)
+{
+  /*
+  * DESCRIPTION: This function is used to set the value of the status LEDs.
+  * PARAMETERS:  None.
+  * RETURNS:     Nothing.
+  */
 
-#endif // _ARCADEIT_STATUS_LEDS_H_
+  // Set LEDs line LOW or HIGH depending the current status of the LED.
+  if (GPIOH->ODR & SYS_STATUS_LED1_PIN)
+  {
+    GPIOH->ODR &= ~(SYS_STATUS_LED1_PIN);
+  }
+  else
+  {
+    GPIOH->ODR |= SYS_STATUS_LED1_PIN;
+
+  } // End if.
+
+} // End ArcadeIT_Status_LED1_Toggle.
+
+// /////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_Status_LED2_Toggle(void)
+{
+  /*
+  * DESCRIPTION: This function is used to set the value of the status LEDs.
+  * PARAMETERS:  None.
+  * RETURNS:     Nothing.
+  */
+
+  // Set LEDs line LOW or HIGH depending the current status of the LED.
+  if (SYS_STATUS_LED2_PER->ODR & SYS_STATUS_LED2_PIN)
+  {
+    SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
+  }
+  else
+  {
+    SYS_STATUS_LED2_PER->ODR |= SYS_STATUS_LED2_PIN;
+
+  } // End if.
+
+} // End ArcadeIT_Status_LED2_Toggle.
+
+// /////////////////////////////////////////////////////////////////////////////
