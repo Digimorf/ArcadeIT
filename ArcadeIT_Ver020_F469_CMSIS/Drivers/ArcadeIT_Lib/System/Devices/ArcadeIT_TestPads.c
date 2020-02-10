@@ -205,7 +205,7 @@ void ArcadeIT_TestPad_Init
 {
   /*
   * DESCRIPTION: This function is used to initialize the hardware that drives
-  *              the test pads. Output SYSCLK/4 clock on MCO2 pin(PC9)
+  *              the test pads. Output SYSCLK/4 clock on pin PC9
   * PARAMETERS:  None.
   * RETURNS:     Nothing.
   */
@@ -214,7 +214,7 @@ void ArcadeIT_TestPad_Init
 
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
 
-  // Configure MCO2 pin(PC9) in alternate function 0
+  // Configure pin PC9 in alternate function 0 (MCO2)
   SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
   SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
 
@@ -231,12 +231,13 @@ void ArcadeIT_TestPad_Init
   SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR9;
   SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
 
+  // Shows a message to serial port as debug
   ArcadeIT_TestPad_Set(pFrequencySystem, pFrequencyDivider);
 
   if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
   {
     // Starts and configure the serial port.
-    //ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);
+    ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);
 
   } // End if.
 

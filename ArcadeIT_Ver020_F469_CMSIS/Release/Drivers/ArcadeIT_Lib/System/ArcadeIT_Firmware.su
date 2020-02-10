@@ -1,5 +1,5 @@
 ArcadeIT_Firmware.c:157:6:ArcadeIT_SysTick_Deinit	0	static
-ArcadeIT_Firmware.c:170:5:ArcadeIT_SysTick_Init	8	static
+ArcadeIT_Firmware.c:170:5:ArcadeIT_SysTick_Init	16	static
 ArcadeIT_Firmware.c:199:6:ArcadeIT_System_Delay	0	static
 ArcadeIT_Firmware.c:216:6:ArcadeIT_System_Init	16	static
 ArcadeIT_Firmware.c:280:6:ArcadeIT_System_Reset	0	static,ignoring_inline_asm
@@ -9,4 +9,4 @@ ArcadeIT_Firmware.c:324:6:ArcadeIT_SysTick_Handler	0	static
 ArcadeIT_Firmware.c:350:6:SysTick_Handler	0	static
 ArcadeIT_Firmware.c:357:6:ArcadeIT_PowerUP_Systems	0	static
 ArcadeIT_Firmware.c:463:6:ArcadeIT_ArcadeIT_Start	16	static
-ArcadeIT_Firmware.c:529:6:ArcadeIT_Test_Bench	32	static
+ArcadeIT_Firmware.c:540:6:ArcadeIT_Test_Bench	296	static

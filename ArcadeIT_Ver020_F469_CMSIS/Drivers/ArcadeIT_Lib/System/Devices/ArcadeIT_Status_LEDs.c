@@ -216,9 +216,10 @@ void ArcadeIT_Status_LEDS_Init(void)
   SYS_STATUS_LED1_PER->ODR &= ~(SYS_STATUS_LED1_PIN);
   SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
 
+  // Shows a message to serial port as debug
   if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
   {
-    //ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
+    ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
 
   } // End if.
 

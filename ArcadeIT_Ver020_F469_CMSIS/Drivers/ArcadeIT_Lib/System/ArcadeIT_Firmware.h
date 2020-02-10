@@ -62,87 +62,85 @@
 
   #define ARCADEIT_SYSTEM
 
-  #define VECT_TAB_OFFSET        0x00 // Vector Table base offset field.
+  #define VECT_TAB_OFFSET                     0x00 // Vector Table base offset field.
 
-  #define HSE_STARTUP_TIMEOUT    360000000
-  #define HSE_VALUE              8000000
-  #define PLL_M                  4   // PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_M) * PLL_N
-  #define PLL_Q                  7   // USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLLQ
-  #define PLL_N                  180
-  #define PLL_P                  2   // SYSCLK = PLL_VCO / PLL_P
+  #define HSE_STARTUP_TIMEOUT                 360000000
+  #define HSE_VALUE                           8000000
+  #define PLL_M                               4   // PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_M) * PLL_N
+  #define PLL_Q                               7   // USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLLQ
+  #define PLL_N                               180
+  #define PLL_P                               2   // SYSCLK = PLL_VCO / PLL_P
 
-  #define GPIO_Pin_0             ((uint16_t)0x0001)
-  #define GPIO_Pin_1             ((uint16_t)0x0002)
-  #define GPIO_Pin_2             ((uint16_t)0x0004)
-  #define GPIO_Pin_3             ((uint16_t)0x0008)
-  #define GPIO_Pin_4             ((uint16_t)0x0010)
-  #define GPIO_Pin_5             ((uint16_t)0x0020)
-  #define GPIO_Pin_6             ((uint16_t)0x0040)
-  #define GPIO_Pin_7             ((uint16_t)0x0080)
-  #define GPIO_Pin_8             ((uint16_t)0x0100)
-  #define GPIO_Pin_9             ((uint16_t)0x0200)
-  #define GPIO_Pin_10            ((uint16_t)0x0400)
-  #define GPIO_Pin_11            ((uint16_t)0x0800)
-  #define GPIO_Pin_12            ((uint16_t)0x1000)
-  #define GPIO_Pin_13            ((uint16_t)0x2000)
-  #define GPIO_Pin_14            ((uint16_t)0x4000)
-  #define GPIO_Pin_15            ((uint16_t)0x8000)
+  #define GPIO_Pin_0                          ((uint16_t)0x0001)
+  #define GPIO_Pin_1                          ((uint16_t)0x0002)
+  #define GPIO_Pin_2                          ((uint16_t)0x0004)
+  #define GPIO_Pin_3                          ((uint16_t)0x0008)
+  #define GPIO_Pin_4                          ((uint16_t)0x0010)
+  #define GPIO_Pin_5                          ((uint16_t)0x0020)
+  #define GPIO_Pin_6                          ((uint16_t)0x0040)
+  #define GPIO_Pin_7                          ((uint16_t)0x0080)
+  #define GPIO_Pin_8                          ((uint16_t)0x0100)
+  #define GPIO_Pin_9                          ((uint16_t)0x0200)
+  #define GPIO_Pin_10                         ((uint16_t)0x0400)
+  #define GPIO_Pin_11                         ((uint16_t)0x0800)
+  #define GPIO_Pin_12                         ((uint16_t)0x1000)
+  #define GPIO_Pin_13                         ((uint16_t)0x2000)
+  #define GPIO_Pin_14                         ((uint16_t)0x4000)
+  #define GPIO_Pin_15                         ((uint16_t)0x8000)
 
-  #define GPIO_Speed_2MHz        0x00 // Low speed
-  #define GPIO_Speed_25MHz       0x01 // Medium speed
-  #define GPIO_Speed_50MHz       0x02 // Fast speed
-  #define GPIO_Speed_100MHz      0x03 // High speed
+  #define GPIO_Speed_2MHz                     0x00 // Low speed
+  #define GPIO_Speed_25MHz                    0x01 // Medium speed
+  #define GPIO_Speed_50MHz                    0x02 // Fast speed
+  #define GPIO_Speed_100MHz                   0x03 // High speed
 
-  #define GPIO_OType_PP          0x00
-  #define GPIO_OType_OD          0x01
+  #define GPIO_OType_PP                       0x00
+  #define GPIO_OType_OD                       0x01
 
-  #define GPIO_PuPd_NOPULL       0x00
-  #define GPIO_PuPd_UP           0x01
-  #define GPIO_PuPd_DOWN         0x02
+  #define GPIO_PuPd_NOPULL                    0x00
+  #define GPIO_PuPd_UP                        0x01
+  #define GPIO_PuPd_DOWN                      0x02
 
-  #define GPIO_Mode_IN           0x00 // GPIO Input Mode
-  #define GPIO_Mode_OUT          0x01 // GPIO Output Mode
-  #define GPIO_Mode_AF           0x02 // GPIO Alternate function Mode
-  #define GPIO_Mode_AN           0x03 // GPIO Analog Mode
+  #define GPIO_Mode_IN                        0x00 // GPIO Input Mode
+  #define GPIO_Mode_OUT                       0x01 // GPIO Output Mode
+  #define GPIO_Mode_AF                        0x02 // GPIO Alternate function Mode
+  #define GPIO_Mode_AN                        0x03 // GPIO Analog Mode
 
-  #define RCC_AHB1Periph_GPIOA   ((uint32_t)0x00000001)
-  #define RCC_AHB1Periph_GPIOB   ((uint32_t)0x00000002)
-  #define RCC_AHB1Periph_GPIOC   ((uint32_t)0x00000004)
-  #define RCC_AHB1Periph_GPIOD   ((uint32_t)0x00000008)
-  #define RCC_AHB1Periph_GPIOE   ((uint32_t)0x00000010)
-  #define RCC_AHB1Periph_GPIOF   ((uint32_t)0x00000020)
-  #define RCC_AHB1Periph_GPIOG   ((uint32_t)0x00000040)
-  #define RCC_AHB1Periph_GPIOH   ((uint32_t)0x00000080)
-  #define RCC_AHB1Periph_GPIOI   ((uint32_t)0x00000100)
-  #define RCC_AHB1Periph_DMA1    ((uint32_t)0x00200000)
-  #define RCC_AHB1Periph_DMA2    ((uint32_t)0x00400000)
-  #define RCC_AHB1Periph_DMA2D   ((uint32_t)0x00800000)
-  #define RCC_AHB2Periph_OTG_FS  ((uint32_t)0x00000080)
-  #define RCC_AHB3Periph_FMC     ((uint32_t)0x00000001)
+  #define RCC_AHB1Periph_GPIOA                ((uint32_t)0x00000001)
+  #define RCC_AHB1Periph_GPIOB                ((uint32_t)0x00000002)
+  #define RCC_AHB1Periph_GPIOC                ((uint32_t)0x00000004)
+  #define RCC_AHB1Periph_GPIOD                ((uint32_t)0x00000008)
+  #define RCC_AHB1Periph_GPIOE                ((uint32_t)0x00000010)
+  #define RCC_AHB1Periph_GPIOF                ((uint32_t)0x00000020)
+  #define RCC_AHB1Periph_GPIOG                ((uint32_t)0x00000040)
+  #define RCC_AHB1Periph_GPIOH                ((uint32_t)0x00000080)
+  #define RCC_AHB1Periph_GPIOI                ((uint32_t)0x00000100)
+  #define RCC_AHB1Periph_DMA1                 ((uint32_t)0x00200000)
+  #define RCC_AHB1Periph_DMA2                 ((uint32_t)0x00400000)
+  #define RCC_AHB1Periph_DMA2D                ((uint32_t)0x00800000)
+  #define RCC_AHB2Periph_OTG_FS               ((uint32_t)0x00000080)
+  #define RCC_AHB3Periph_FMC                  ((uint32_t)0x00000001)
 
-  #define RCC_APB1Periph_TIM2    ((uint32_t)0x00000001)
-  #define RCC_APB1Periph_TIM6    ((uint32_t)0x00000010)
-  #define RCC_APB1Periph_USART2  ((uint32_t)0x00020000)
-  #define RCC_APB1Periph_PWR     ((uint32_t)0x10000000)
-  #define RCC_APB1Periph_DAC     ((uint32_t)0x20000000)
-  #define RCC_APB2Periph_TIM1    ((uint32_t)0x00000001)
-  #define RCC_APB2Periph_TIM8    ((uint32_t)0x00000002)
-  #define RCC_APB2Periph_SPI1    ((uint32_t)0x00001000)
-  #define RCC_APB2Periph_SYSCFG  ((uint32_t)0x00004000)
-
-  //#define ARCADEIT_DEMOMODE
-
-  #define NORMAL        0
-  #define IRQ           1
-  #define DMA           2
+  #define RCC_APB1Periph_TIM2                 ((uint32_t)0x00000001)
+  #define RCC_APB1Periph_TIM6                 ((uint32_t)0x00000010)
+  #define RCC_APB1Periph_USART2               ((uint32_t)0x00020000)
+  #define RCC_APB1Periph_PWR                  ((uint32_t)0x10000000)
+  #define RCC_APB1Periph_DAC                  ((uint32_t)0x20000000)
+  #define RCC_APB2Periph_TIM1                 ((uint32_t)0x00000001)
+  #define RCC_APB2Periph_TIM8                 ((uint32_t)0x00000002)
+  #define RCC_APB2Periph_SPI1                 ((uint32_t)0x00001000)
+  #define RCC_APB2Periph_SYSCFG               ((uint32_t)0x00004000)
 
   // Hardware RCC ports
-  #define RCC_AHB1ENR   RCC->AHB1ENR
-  #define RCC_AHB2ENR   RCC->AHB2ENR
-  #define RCC_AHB3ENR   RCC->AHB3ENR
-  #define RCC_APB1ENR   RCC->APB1ENR
-  #define RCC_APB2ENR   RCC->APB2ENR
+  #define RCC_AHB1ENR                         RCC->AHB1ENR
+  #define RCC_AHB2ENR                         RCC->AHB2ENR
+  #define RCC_AHB3ENR                         RCC->AHB3ENR
+  #define RCC_APB1ENR                         RCC->APB1ENR
+  #define RCC_APB2ENR                         RCC->APB2ENR
 
+  static __I uint8_t APBAHBPrescTable[16] = {0, 0, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 6, 7, 8, 9};
+
+// ---------------------------------------------------------------------------------------
+  #define TEXT_ARCADEIT_INIT "Initializing ArcadeIT! System...\n\r"
 // ---------------------------------------------------------------------------------------
 // Peripherals: Test pads
 // ---------------------------------------------------------------------------------------
@@ -266,16 +264,16 @@
   #define SYS_SERIAL_TX_RCC_PER          RCC_AHB1Periph_GPIOA
   #define SYS_SERIAL_TX_PER              GPIOA
   #define SYS_SERIAL_TX_PIN              GPIO_Pin_2
-  #define SYS_SERIAL_TX_SOURCE           GPIO_PinSource2
-  #define SYS_SERIAL_TX_AF               GPIO_AF_USART2
+  #define SYS_SERIAL_TX_PIN_NO           2
+  #define SYS_SERIAL_TX_AF               ((uint8_t)0x07)  /* USART2 Alternate Function mapping  */
 
   #define SYS_SERIAL_RX_RCC_REG          RCC_AHB1ENR
   #define SYS_SERIAL_RX_RCC_CMD          RCC_AHB1PeriphClockCmd
   #define SYS_SERIAL_RX_RCC_PER          RCC_AHB1Periph_GPIOA
   #define SYS_SERIAL_RX_PER              GPIOA
   #define SYS_SERIAL_RX_PIN              GPIO_Pin_3
-  #define SYS_SERIAL_RX_SOURCE           GPIO_PinSource3
-  #define SYS_SERIAL_RX_AF               GPIO_AF_USART2
+  #define SYS_SERIAL_RX_PIN_NO           3
+  #define SYS_SERIAL_RX_AF               ((uint8_t)0x07)  /* USART2 Alternate Function mapping  */
 
   #define SYS_SERIAL_IRQ                 USART2_IRQn
   #define SYS_SERIAL_IRQ_HANDLER         USART2_IRQHandler
@@ -285,13 +283,35 @@
   #define SYS_SERIAL_RCC_PER             RCC_APB1Periph_USART2
   #define SYS_SERIAL_PORT                USART2
 
-  #define SYS_SERIAL_SR                  *(uint16_t*)(((uint32_t)0x40000000) + 0x4400)
-  #define SYS_SERIAL_DR                  *(uint16_t*)(((uint32_t)0x40000000) + 0x4400 + 4)
+  #define SYS_SERIAL_StopBits_1               ((uint16_t)0x0000)
+  #define SYS_SERIAL_WordLength_8b            ((uint16_t)0x0000)
+  #define SYS_SERIAL_Parity_No                ((uint16_t)0x0000)
+  #define SYS_SERIAL_Mode_Rx                  ((uint16_t)0x0004)
+  #define SYS_SERIAL_Mode_Tx                  ((uint16_t)0x0008)
+  #define SYS_SERIAL_HardwareFlowControl_None ((uint16_t)0x0000)
+
+  // USART CR1 register clear Mask ((~(uint16_t)0xE9F3))
+  #define CR1_CLEAR_MASK            ((uint16_t)(USART_CR1_M | USART_CR1_PCE | \
+                                                USART_CR1_PS | USART_CR1_TE | \
+                                                USART_CR1_RE))
+
+  // USART CR2 register clock bits clear Mask ((~(uint16_t)0xF0FF))
+  #define CR2_CLOCK_CLEAR_MASK      ((uint16_t)(USART_CR2_CLKEN | USART_CR2_CPOL | \
+                                                USART_CR2_CPHA | USART_CR2_LBCL))
+
+  // USART CR3 register clear Mask ((~(uint16_t)0xFCFF))
+  #define CR3_CLEAR_MASK            ((uint16_t)(USART_CR3_RTSE | USART_CR3_CTSE))
+
+  #define SYS_SERIAL_FLAG_TXE            ((uint16_t)0x0080)
+  #define SYS_SERIAL_FLAG_RXNE           ((uint16_t)0x0020)
+  #define SYS_SERIAL_FLAG_IDLE           ((uint16_t)0x0010)
 
   #define SYS_SERIAL_RX_Block_Size       64
   #define SYS_SERIAL_TX_Block_Size       256
 
   #define SYS_SERIAL_SPEED               115200
+
+  #define TEXT_SERIAL_PORT_INITED        "Serial port enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: I2C
@@ -465,12 +485,12 @@
 
 // -----------------------------------------------------------------------------
 // System settings.
-  #define ARCADEIT_RELEASE_YEAR          18
-  #define ARCADEIT_RELEASE_MONTH         10
-  #define ARCADEIT_RELEASE_DAY           5
-  #define ARCADEIT_RELEASE_HOURS         8
-  #define ARCADEIT_RELEASE_MINUTES       25
-  #define ARCADEIT_RELEASE_SECONDS       10
+  #define ARCADEIT_RELEASE_YEAR            18
+  #define ARCADEIT_RELEASE_MONTH           10
+  #define ARCADEIT_RELEASE_DAY             5
+  #define ARCADEIT_RELEASE_HOURS           8
+  #define ARCADEIT_RELEASE_MINUTES         25
+  #define ARCADEIT_RELEASE_SECONDS         10
 
 // -----------------------------------------------------------------------------
 // This is the list of devices/systems and drivers that can be connected to the system.
@@ -506,66 +526,66 @@
   #define ARCADEIT_TERMINAL_INPUT_SERIAL   0x00002
   #define ARCADEIT_TERMINAL_INPUT_USB      0x00020
 
-  #define TERMINAL_SERIAL 0
-  #define TERMINAL_VGA    1
-  #define TERMINAL_LCD    2
+  #define TERMINAL_SERIAL                  0
+  #define TERMINAL_VGA                     1
+  #define TERMINAL_LCD                     2
 
-  #define TERMINAL_DEBUG  TERMINAL_SERIAL
-  #define TERMINAL_ACTIVE TERMINAL_VGA
+  #define TERMINAL_DEBUG                   TERMINAL_SERIAL
+  #define TERMINAL_ACTIVE                  TERMINAL_VGA
 
   #define SYSTEM_TIMESTAMP_LEN             18
 
-  #define MEMORY_MCU       0
-  #define MEMORY_BOARD     1
-  #define MEMORY_EXPANSION 2
+  #define MEMORY_MCU                       0
+  #define MEMORY_BOARD                     1
+  #define MEMORY_EXPANSION                 2
 
 // Timer counters used by the Systick system. These counters are
 // decremented every interrupt generated by the Systick interrupt routine.
 // The user can monitor one of these counters in order to perform delays and other
 // Time based tasks.
-#define ARCADEIT_SECOND            1
-#define ARCADEIT_MILLISECOND       1000
-#define ARCADEIT_MICROSECOND       1000000
-#define ARCADEIT_NANOSECOND        1000000000
+#define ARCADEIT_SECOND                    1
+#define ARCADEIT_MILLISECOND               1000
+#define ARCADEIT_MICROSECOND               1000000
+#define ARCADEIT_NANOSECOND                1000000000
 
-#define TEXT_SCHEDULER_INITED      "Tasks scheduler enabled.\n\r"
+#define TEXT_SCHEDULER_INITED              "Tasks scheduler enabled.\n\r"
 
-#define EDITOR_TEXT_STATS_NAME     "Code Editor V1.0"
-#define SHELL_TEXT_STATS_NAME      "Shell V1.0"
+#define EDITOR_TEXT_STATS_NAME             "Code Editor V1.0"
+#define SHELL_TEXT_STATS_NAME              "Shell V1.0"
 
-#define TAB_TO_SPACES              4
-#define TAB_CHARACTER              ASCII_SPACE
+#define TAB_TO_SPACES                      4
+#define TAB_CHARACTER                      ASCII_SPACE
 
-#define ARCADEIT_PAUSE_HALF_SECOND 500
-#define ARCADEIT_PAUSE_SECOND      1000
-#define ARCADEIT_PAUSE_5_SECONDS   5000
-#define ARCADEIT_PAUSE_10_SECONDS  10000
+#define ARCADEIT_PAUSE_HALF_SECOND         500
+#define ARCADEIT_PAUSE_SECOND              1000
+#define ARCADEIT_PAUSE_5_SECONDS           5000
+#define ARCADEIT_PAUSE_10_SECONDS          10000
 
-#define DUMMY_BYTE                 0xFF
-#define ARCADEIT_DUMMY_BYTE        0xFF
+#define DUMMY_BYTE                         0xFF
+#define ARCADEIT_DUMMY_BYTE                0xFF
 
-#define ARCADEIT_SAM_RAM_SIZE      128*1024
+#define ARCADEIT_SAM_RAM_SIZE              128*1024
 
 // -----------------------------------------------------------------------------
-#define MAXIMUM_PARAMETERS_PER_FN  8
-#define PAR_1                      0
-#define PAR_2                      1
-#define PAR_3                      2
-#define PAR_4                      3
-#define PAR_5                      4
-#define PAR_6                      5
-#define PAR_7                      6
-#define PAR_8                      7
+#define MAXIMUM_PARAMETERS_PER_FN          8
+#define PAR_1                              0
+#define PAR_2                              1
+#define PAR_3                              2
+#define PAR_4                              3
+#define PAR_5                              4
+#define PAR_6                              5
+#define PAR_7                              6
+#define PAR_8                              7
 
 // -----------------------------------------------------------------------------
 //#define ABUF_INIT {NULL, 0}
 
-#define NVIC_VIDEO_PRIORITY   0
-#define NVIC_AUDIO_PRIORITY   1
-#define NVIC_USART_PRIORITY   2
-#define NVIC_SYSTICK_PRIORITY 3
-#define NVIC_USB_PRIORITY     4
-#define NVIC_LCD_PRIORITY     5
+#define NVIC_VIDEO_PRIORITY                0
+#define NVIC_AUDIO_PRIORITY                1
+#define NVIC_USART_PRIORITY                2
+#define NVIC_SYSTICK_PRIORITY              3
+#define NVIC_USB_PRIORITY                  4
+#define NVIC_LCD_PRIORITY                  5
 
 // /////////////////////////////////////////////////////////////////////////////
 // Macros

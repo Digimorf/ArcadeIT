@@ -65,11 +65,11 @@
 #endif
 
 // ArcadeIT! Peripherals and buses.
-#include <Devices/ArcadeIT_TestPads.h>
-#include <Devices/ArcadeIT_Status_LEDs.h>
+#include <System/Devices/ArcadeIT_TestPads.h>
+#include <System/Devices/ArcadeIT_Status_LEDs.h>
+#include <System/Devices/ArcadeIT_Serial_Port.h>
 
 #if 0
-#include "System/Peripherals/ArcadeIT_Serial_Port.h"
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
 #include "System/Peripherals/ArcadeIT_SPI_Port.h"
 #include "System/Peripherals/ArcadeIT_BUS_Port.h"
@@ -185,10 +185,10 @@ int ArcadeIT_SysTick_Init (void)
   NVIC_SetPriority (SysTick_IRQn, NVIC_SYSTICK_PRIORITY << 2);
 
   if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
-    {
-      //ArcadeIT_Serial_Port_String_Send (TEXT_SYSTICK_INITED);
+  {
+    ArcadeIT_Serial_Port_String_Send (TEXT_SYSTICK_INITED);
 
-    } // End if.
+  } // End if.
 
   // And return the status.
   return lRetStatus;
@@ -462,66 +462,77 @@ void ArcadeIT_PowerUP_Systems (void)
 // /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_ArcadeIT_Start (void)
 {
-  /*
+  /*S
    * DESCRIPTION: Starts all the systems according to the activation flags stored
    *              into global variables: gSystems, gStorage, gDevices.
    * PARAMETERS:  None.
    * RETURNS:     Nothing
    */
 
-  //ArcadeIT_PowerUP_Systems ();
+  // ---------------------------------------------------------------------------
+  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  {
+    // Starts and configure the serial port.
+    ArcadeIT_Serial_Port_Init (SYS_SERIAL_SPEED);
 
+  } // End if.
   // ---------------------------------------------------------------------------
   // Clock and timer system. Thjis must be called before the SD card initialization.
   // 1ms System Tick timer.
   ArcadeIT_SysTick_Init ();
+
   // ---------------------------------------------------------------------------
   if (gDevices & ARCADEIT_DEVICE_TESTPADS)
-    {
-      /*
-      *
-      * Source
-      *  RCC_MCO2Source_SYSCLK
-      *  RCC_MCO2Source_PLLI2SCLK
-      *  RCC_MCO2Source_HSE
-      *  RCC_MCO2Source_PLLCLK
-      *
-      * Divider
-      *  RCC_MCO2Div_1
-      *  RCC_MCO2Div_2
-      *  RCC_MCO2Div_3
-      *  RCC_MCO2Div_4
-      *  RCC_MCO2Div_5
-      *
-      *  You can test the correct frequency of the MCU by using an oscilloscope
-      *  or a logic analyzer on the testpad of the motherboard. The tests below
-      *  should give you the values shown.
-      *
-      */
+  {
+    /*
+    *
+    * Source
+    *  RCC_MCO2Source_SYSCLK
+    *  RCC_MCO2Source_PLLI2SCLK
+    *  RCC_MCO2Source_HSE
+    *  RCC_MCO2Source_PLLCLK
+    *
+    * Divider
+    *  RCC_MCO2Div_1
+    *  RCC_MCO2Div_2
+    *  RCC_MCO2Div_3
+    *  RCC_MCO2Div_4
+    *  RCC_MCO2Div_5
+    *
+    *  You can test the correct frequency of the MCU by using an oscilloscope
+    *  or a logic analyzer on the testpad of the motherboard. The tests below
+    *  should give you the values shown.
+    *
+    */
 
-      ArcadeIT_TestPad_Init (RCC_MCO2Source_SYSCLK, RCC_MCO2Div_4);  //  45 MHz
+    ArcadeIT_TestPad_Init (RCC_MCO2Source_SYSCLK, RCC_MCO2Div_4);  //  45 MHz
 
-      //ArcadeIT_TestPad_Init (RCC_MCO2Source_PLLCLK, RCC_MCO2Div_4); // 45 MHz
-      //ArcadeIT_TestPad_Init (RCC_MCO2Source_HSE, RCC_MCO2Div_1);    //  8 MHz
+    //ArcadeIT_TestPad_Init (RCC_MCO2Source_PLLCLK, RCC_MCO2Div_4); // 45 MHz
+    //ArcadeIT_TestPad_Init (RCC_MCO2Source_HSE, RCC_MCO2Div_1);    //  8 MHz
 
-    } // End if.
+  } // End if.
   // ---------------------------------------------------------------------------
   if (gDevices & ARCADEIT_DEVICE_STATUSLED)
-    {
-      // Start LED Status system.
-      ArcadeIT_Status_LEDS_Init ();
+  {
+    // Start LED Status system.
+    ArcadeIT_Status_LEDS_Init ();
 
-    } // End if.
+  } // End if.
   // ---------------------------------------------------------------------------
   // Systems scheduler task. This must be set AFTER the Systick has been initialized
   // because uses the ISR function that is handled by the Systick.
   if (gUnits & ARCADEIT_UNIT_SCHEDULER)
-    {
-      // Start the scheduler system.
-      ArcadeIT_Scheduler_Task_Init ();
+  {
+    // Start the scheduler system.
+    ArcadeIT_Scheduler_Task_Init ();
 
-    } // End if.
+  } // End if.
   // ---------------------------------------------------------------------------
+
+
+
+  // ---------------------------------------------------------------------------
+  ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
 
 } // End ArcadeIT_Start
 
@@ -555,15 +566,15 @@ void ArcadeIT_Test_Bench (void)
       //| ARCADEIT_DEVICE_AUDIO         // Audio DAC port
       //| ARCADEIT_DEVICE_PARALLEL      // Parallel port
       //| ARCADEIT_DEVICE_USB           // USB port
-      //| ARCADEIT_DEVICE_SERIAL_PORT   // Serial port USART 2
+        | ARCADEIT_DEVICE_SERIAL_PORT   // Serial port USART 2
         | ARCADEIT_DEVICE_STATUSLED     // Two Status LEDs
         | ARCADEIT_DEVICE_TESTPADS      // System clock test pads
        ;
 
   ArcadeIT_ArcadeIT_Start();
 
-  // Test suite
-#ifdef TEST
+#ifdef TEST // Test suite
+  // ===========================================================================
   // Status LEDs
   for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
   {
@@ -573,7 +584,6 @@ void ArcadeIT_Test_Bench (void)
     ArcadeIT_System_Delay(250);
 
   } // End if.
-
   // --------------------------------------------------------------------------
   // We setup the scheduler to blink the Status LED 1 at 1Hz (every seconds).
 
@@ -594,6 +604,33 @@ void ArcadeIT_Test_Bench (void)
   } // End if.
 
   // --------------------------------------------------------------------------
+  // Shows 256 colors over the serial terminal
+  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  {
+    char lString[256];
+
+    ArcadeIT_Serial_Port_String_Send("ANSI colors table on serial terminal:\n\r");
+
+    for (uint8_t lRow = 0; lRow < 16; lRow++)
+    {
+      for (uint8_t lCol = 0; lCol < 16; lCol++)
+      {
+        sprintf(lString, ATTR_COLOR_256_BG, lRow * 16 + lCol);
+        ArcadeIT_Serial_Port_String_Send(lString);
+        sprintf(lString, " %03d ", lRow * 16 + lCol);
+        ArcadeIT_Serial_Port_String_Send(lString);
+
+      } // end for
+
+      ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+
+    } // end for
+
+    sprintf(lString, ATTR_COLOR_256_BG, 20);
+    ArcadeIT_Serial_Port_String_Send(lString);
+
+  } // End if.
+  // ===========================================================================
 #endif
 
   while (1)
