@@ -1,6 +1,6 @@
-ArcadeIT_Status_LEDs.c:157:6:ArcadeIT_Status_LEDS_Init	0	static
-ArcadeIT_Status_LEDs.c:229:6:ArcadeIT_Status_LEDS_Set	0	static
-ArcadeIT_Status_LEDs.c:255:6:ArcadeIT_Status_LED1_Set	0	static
-ArcadeIT_Status_LEDs.c:279:6:ArcadeIT_Status_LED2_Set	0	static
-ArcadeIT_Status_LEDs.c:303:6:ArcadeIT_Status_LED1_Toggle	0	static
-ArcadeIT_Status_LEDs.c:325:6:ArcadeIT_Status_LED2_Toggle	0	static
+ArcadeIT_Status_LEDs.c:93:6:ArcadeIT_Status_LEDS_Init	0	static
+ArcadeIT_Status_LEDs.c:165:6:ArcadeIT_Status_LEDS_Set	0	static
+ArcadeIT_Status_LEDs.c:191:6:ArcadeIT_Status_LED1_Set	0	static
+ArcadeIT_Status_LEDs.c:215:6:ArcadeIT_Status_LED2_Set	0	static
+ArcadeIT_Status_LEDs.c:239:6:ArcadeIT_Status_LED1_Toggle	0	static
+ArcadeIT_Status_LEDs.c:261:6:ArcadeIT_Status_LED2_Toggle	0	static

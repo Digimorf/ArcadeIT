@@ -118,6 +118,10 @@ extern unsigned char *gBootImage8BPP[4];
 extern unsigned char *gBootImage24BPP[4];
 extern Shell_Command_t gCurrentCommand;
 */
+
+// external files used for demos
+extern const unsigned char gANSIDemo1[7352];
+
 // //////////////////////////////////////////////////////////////////////////////
 // Globals
 // //////////////////////////////////////////////////////////////////////////////
@@ -605,11 +609,12 @@ void ArcadeIT_Test_Bench (void)
 
   // --------------------------------------------------------------------------
   // Shows 256 colors over the serial terminal
+  char lString[256];
   if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
   {
-    char lString[256];
-
+    ArcadeIT_System_Delay(2000);
     ArcadeIT_Serial_Port_String_Send("ANSI colors table on serial terminal:\n\r");
+    ArcadeIT_System_Delay(2000);
 
     for (uint8_t lRow = 0; lRow < 16; lRow++)
     {
@@ -628,6 +633,25 @@ void ArcadeIT_Test_Bench (void)
 
     sprintf(lString, ATTR_COLOR_256_BG, 20);
     ArcadeIT_Serial_Port_String_Send(lString);
+
+  } // End if.
+  // --------------------------------------------------------------------------
+  // Shows ANSI artwork over the serial terminal
+  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  {
+    ArcadeIT_System_Delay(2000);
+    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+    ArcadeIT_Serial_Port_String_Send("ANSI art on serial terminal:\n\r");
+    ArcadeIT_System_Delay(2000);
+
+    unsigned char *lANSIArtPtr = (unsigned char *)&gANSIDemo1[0];
+    for (uint16_t lChar = 0; lChar < 7352; lChar++)
+    {
+      ArcadeIT_Serial_Port_Char_Send(*lANSIArtPtr++);
+
+    } // end for
+
+    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
 
   } // End if.
   // ===========================================================================

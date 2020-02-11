@@ -47,6 +47,58 @@
  is used to test the STM32F469 microcontroller configuration by measuring the
  different frequencies, HCLK, SYS etc.
 
+ ******************************************************************************
+ HISTORY
+
+ 17-07-2018:
+ - Creation date of the library structure.
+
+ 06-02-2020:
+ - Converted to pure CMSIS.
+ - Moved on GitHub
+
+ ******************************************************************************
+*/
+
+#ifndef _ARCADEIT_TESTPADS_H_
+#define _ARCADEIT_TESTPADS_H_
+
+// C standard libraries.
+#include <stdio.h>
+#include <stdint.h>
+#include <inttypes.h>
+
+// ArcadeIT Libraries.
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
+
+// /////////////////////////////////////////////////////////////////////////////
+// Defines.
+// /////////////////////////////////////////////////////////////////////////////
+
+// /////////////////////////////////////////////////////////////////////////////
+// Functions.
+// /////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_TestPad_Init
+(
+    uint32_t pFrequencySystem,  // What frequency source to test.
+    uint32_t pFrequencyDivider  // What divider to test.
+);
+//------------------------------------------------------------------------------
+void ArcadeIT_TestPad_DeInit(void);
+//------------------------------------------------------------------------------
+void ArcadeIT_TestPad_Frequency
+(
+    uint32_t pFrequencySystem,  // clock source output to testpad
+    uint32_t pFrequencyDivider  // the frequency divider
+);
+// /////////////////////////////////////////////////////////////////////////////
+
+#endif // __ARCADEIT_TESTPADS_H_
+
+/*
+
  From: RM0386, Reference manual, page 144
 
  6.2.10 Clock-out capability
@@ -67,9 +119,26 @@
     The selected clock to output onto MCO must not exceed 100 MHz (the maximum I/O
     speed).
 
- From: RM0386, Datasheet, page 76, Table 12. Alternate function
+ From: RM0386, Reference manual, page 150
 
- MCO2 function is applied to pin PC9 using alternate function 0
+ 6.3.3 RCC clock configuration register (RCC_CFGR)
+
+ We need to configure the MCO2 function to use a particular clock source and the
+ prescaler that we want to divide the frequency by. In our case we set these two
+ parameters with a specific function.
+
+ source is configured by setting bits 31..30 of the register, whie the prescaler
+ is set by setting bits 29..27.
+
+ -
+
+ From: RM0386, Reference manual, page 165
+
+ 6.3.10 RCC AHB1 peripheral clock enable register (RCC_AHB1ENR)
+
+ We first need to enable the clock of the GPIO port C by enabling the corresponding
+ flag in register RCC_AHB1ENR: Bit 2 is called GPIOCEN (GPIOC clock enable).
+ Then we can configure the GPIOC pin 9.
 
  These registers are 32 bit wide, values for each pin go from 0 to 3
   GPIO port mode register (GPIOx_MODER) (x = A to K)
@@ -130,52 +199,45 @@
  | rw | rw | rw | rw | rw | rw # rw # rw | rw | rw | rw | rw | rw | rw | rw | rw |
  +----+----+----+----+----+----######----+----+----+----+----+----+----+----+----+
 
- ******************************************************************************
- HISTORY
+ -
 
- 17-07-2018:
- - Creation date of the library structure.
+ From: RM0386, Datasheet, page 76, Table 12. Alternate function
 
- 06-02-2020:
- - Converted to pure CMSIS.
- - Moved on GitHub
+ MCO2 function is applied to pin PC9 using alternate function 0
 
- ******************************************************************************
-*/
+ -
 
-#ifndef _ARCADEIT_TESTPADS_H_
-#define _ARCADEIT_TESTPADS_H_
+ From: RM0386, Reference manual, page 211
 
-// C standard libraries.
-#include <stdio.h>
-#include <stdint.h>
-#include <inttypes.h>
+ 7.4.10 GPIO alternate function high register (GPIOx_AFRH)
 
-// ArcadeIT Libraries.
-#include <System/ArcadeIT_Common.h>
-#include <System/ArcadeIT_Utilities.h>
-#include <System/ArcadeIT_Firmware.h>
+ Since we have sixteen different alternate functions, 4 bits are needed for each
+ pin to be configured. So two registers are used for pins 7..0 and pins 15..8,
+ respectvely registers GPIOx_AFRL and GPIOx_AFRH.
 
-// /////////////////////////////////////////////////////////////////////////////
-// Defines.
-// /////////////////////////////////////////////////////////////////////////////
+  For MCO2 we use pin 9, so the high register GPIOx_AFRH is used.
 
-// /////////////////////////////////////////////////////////////////////////////
-// Functions.
-// /////////////////////////////////////////////////////////////////////////////
-void ArcadeIT_TestPad_Init
-(
-    uint32_t pFrequencySystem,  // What frequency source to test.
-    uint32_t pFrequencyDivider  // What divider to test.
-);
-//------------------------------------------------------------------------------
-void ArcadeIT_TestPad_DeInit(void);
-//------------------------------------------------------------------------------
-void ArcadeIT_TestPad_Frequency
-(
-    uint32_t pFrequencySystem,  // clock source output to testpad
-    uint32_t pFrequencyDivider  // the frequency divider
-);
-// /////////////////////////////////////////////////////////////////////////////
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------+---------+---------+
+ |      PIN 15       |      PIN 14       |      PIN 13       |      PIN 12       |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ |    AFRH15[3:0]    |    AFRH14[3:0]    |    AFRH13[3:0]    |    AFRH12[3:0]    |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
 
-#endif // __ARCADEIT_TESTPADS_H_
+                                             alternate fn 0
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------#####################---------+---------+
+ |      PIN 11       |      PIN 10       #      PIN 09       #      PIN 08       |
+ +----+----+----+----+----+----+----+----#----+----+----+----#----+----+----+----+
+ | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 # 07 | 06 | 05 | 04 # 03 | 02 | 01 | 00 |
+ +----+----+----+----+----+----+----+----#----+----+----+----#----+----+----+----+
+ |    AFRH11[3:0]    |    AFRH10[3:0]    #    AFRH09[3:0]    #    AFRH08[3:0]    |
+ +----+----+----+----+----+----+----+----#----+----+----+----#----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw # rw | rw | rw | rw # rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----#####################----+----+----+----+
+
+ */

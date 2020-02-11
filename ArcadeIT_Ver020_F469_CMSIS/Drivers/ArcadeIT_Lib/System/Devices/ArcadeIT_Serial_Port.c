@@ -28,21 +28,6 @@
  TOFIX
 
  ******************************************************************************
- HISTORY
- 16-06-2017:
- - Creation date of the library structure.
-
- 21-06-2017:
- - Ported the project on Atollic TrueStudio.
-
- 21-09-2017:
- - Cleaned the code from the specific memory location positioning of the functions.
- - Moved functions to different files for better reference.
-
- 15-10-2018:
- - Cleaned code and optimized it for portability.
-
- ******************************************************************************
  HARDWARE USED
 
  1.3 - Serial port
@@ -63,6 +48,21 @@
  | o |   3 RX
  | o  |  4 GND
  '----'
+
+ ******************************************************************************
+ HISTORY
+ 16-06-2017:
+ - Creation date of the library structure.
+
+ 21-06-2017:
+ - Ported the project on Atollic TrueStudio.
+
+ 21-09-2017:
+ - Cleaned the code from the specific memory location positioning of the functions.
+ - Moved functions to different files for better reference.
+
+ 15-10-2018:
+ - Cleaned code and optimized it for portability.
 
  ******************************************************************************
  */

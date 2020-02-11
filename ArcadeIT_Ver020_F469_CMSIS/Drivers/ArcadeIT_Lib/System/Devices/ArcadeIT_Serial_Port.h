@@ -10,13 +10,13 @@
  * -----------------------------------------------------------------
  *                       P E R I P H E R A L S
  * -----------------------------------------------------------------
- *           (C)2018 www.digimorf.com, www.arcadeit.net
+ *           (C)2020 www.digimorf.com, www.arcadeit.net
  *
  * @author  Francesco De Simone
  * @file    ArcadeIT_Serial_Port.h
  * @version V0.13
  * @date    16-06-2017
- * @last    15-10-2018
+ * @last    11-02-2020
  * @brief   This library is used to drive the Serial port at low level. This
  *          port can be used for the debug of the ArcadeIT! system or for data
  *          transfer.
@@ -26,21 +26,6 @@
 
  ******************************************************************************
  TOFIX
-
- ******************************************************************************
- HISTORY
- 16-06-2017:
- - Creation date of the library structure.
-
- 21-06-2017:
- - Ported the project on Atollic TrueStudio.
-
- 21-09-2017:
- - Cleaned the code from the specific memory location positioning of the functions.
- - Moved functions to different files for better reference.
-
- 15-10-2018:
- - Cleaned code and optimized it for portability.
 
  ******************************************************************************
  HARDWARE USED
@@ -66,19 +51,22 @@
   | o  |  4 GND
   '----'
 
- From: RM0386, Reference manual, page 168
+ ******************************************************************************
+ HISTORY
+ 16-06-2017:
+ - Creation date of the library structure.
 
- 6.3.13 RCC APB1 peripheral clock enable register (RCC_APB1ENR)
+ 21-06-2017:
+ - Ported the project on Atollic TrueStudio.
 
- We first need t enable the clock of the USART2 by enabling the corresponding
- flag in register RCC_APB1ENR: Bit 17 is called USART2EN (USART2 clock enable).
- Then we can configure the USART2...
+ 21-09-2017:
+ - Cleaned the code from the specific memory location positioning of the functions.
+ - Moved functions to different files for better reference.
 
- From: RM0386, Reference manual, page 1036
+ 15-10-2018:
+ - Cleaned code and optimized it for portability.
 
- 30 Universal synchronous receiver transmitter (USART)
-
- ***************************************************************************************************************************
+ *******************************************************************************
  */
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -288,3 +276,132 @@ void ArcadeIT_Serial_Port_String_Send
 
 #endif // _ARCADEIT_SERIAL_PORT_H_
 
+/*
+
+ From: RM0386, Reference manual, page 165
+
+ 6.3.10 RCC AHB1 peripheral clock enable register (RCC_AHB1ENR)
+
+ We first need to enable the clock of the GPIO port A by enabling the corresponding
+ flag in register RCC_AHB1ENR: Bit 0 is called GPIOAEN (GPIOA clock enable).
+ Then we can configure the GPIOA pins 2 and 3.
+
+ These registers are 32 bit wide, values for each pin go from 0 to 3
+  GPIO port mode register (GPIOx_MODER) (x = A to K)
+  GPIO port speed register (GPIOx_OSPEEDR) (x = A to K)
+  GPIO port pull-up register (GPIOx_PUPDR) (x = A to K)
+
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------+---------+---------+
+ | PIN 15  | PIN 14  | PIN 13  | PIN 12  | PIN 11  | PIN 10  | PIN 09  | PIN 08  |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   | MODER   |
+ | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR |
+ | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    | PUDR    |
+ |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+
+ |  0    0    0    0 .  0    0    0    0 |  1    1    1    1 .  0    0    0    0 |
+ +---------+---------+---------+---------#####################---------+---------+
+ | PIN 07  | PIN 06  | PIN 05  | PIN 04  # PIN 03  # PIN 02  # PIN 01  | PIN 00  |
+ +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+ | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 # 07 | 06 # 05 | 04 # 03 | 02 | 01 | 00 |
+ +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+ | MODER   | MODER   | MODER   | MODER   # MODER   # MODER   # MODER   | MODER   |
+ | OSPEEDR | OSPEEDR | OSPEEDR | OSPEEDR # OSPEEDR # OSPEEDR # OSPEEDR | OSPEEDR |
+ | PUDR    | PUDR    | PUDR    | PUDR    # PUDR    # PUDR    # PUDR    | PUDR    |
+ |  [1:0]  |  [1:0]  |  [1:0]  |  [1:0]  #  [1:0]  #  [1:0]  #  [1:0]  |  [1:0]  |
+ +----+----+----+----+----+----+----+----#----+----#----+----#----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw # rw | rw # rw | rw # rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----#####################----+----+----+----+
+
+ This register is 32 bit wide but only 16 are used since values for each pin
+ require only one bit.
+  GPIO port type register (GPIOx_OTYPER) (x = A to K)
+
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------+---------+---------+
+ |         |         |         |         |         |         |         |         |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |    |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+
+ |  0    0    0    0 .  0    0    1    0 |  0    0    0    0 .  1    1    0    0 |
+ +----+----+----+----+----+----+----+----+----+----+----+----###########----+----+
+ |P15 |P14 |P13 |P12 |P11 |P10 |P09 |P08 |P07 |P06 |P05 |P04 #P03 #P02 #P01 |P00 |
+ +----+----+----+----+----+----+----+----+----+----+----+----#----#----#----+----+
+ | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 | 07 | 06 | 05 | 04 # 03 # 02 # 01 | 00 |
+ +----+----+----+----+----+----+----+----+----+----+----+----#----#----#----+----+
+ | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT | OT # OT # OT # OT | OT |
+ +----+----+----+----+----+----+----+----+----+----+----+----#----#----#----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw # rw # rw # rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----###########----+----+
+
+ -
+
+ From: RM0386, Datasheet, page 74, Table 12. Alternate function
+
+ USART2 function is applied to pins PA2, PA3 using alternate function 7
+
+ -
+
+ From: RM0386, Reference manual, page 210
+
+ 7.4.9 GPIO alternate function low register (GPIOx_AFRL)
+
+ Since we have sixteen different alternate functions, 4 bits are needed for each
+ pin to be configured. So two registers are used for pins 7..0 and pins 15..8,
+ respectvely registers GPIOx_AFRL and GPIOx_AFRH.
+
+ For USART2 we use pins 2 and 3, so the low register GPIOx_AFRL is used.
+
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +---------+---------+---------+---------+---------+---------+---------+---------+
+ |      PIN 07       |      PIN 06       |      PIN 05       |      PIN 04       |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 31 | 30 | 29 | 28 | 27 | 26 | 25 | 24 | 23 | 22 | 21 | 20 | 19 | 18 | 17 | 16 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ |    AFRH07[3:0]    |    AFRH06[3:0]    |    AFRH05[3:0]    |    AFRH04[3:0]    |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+
+     alternate fn 7      alternate fn 7
+ |  0    1    1    1 .  0    1    1    1 |  0    0    0    0 .  0    0    0    0 |
+ #########################################---------+---------+---------+---------+
+ #      PIN 03       #      PIN 02       #      PIN 01       |      PIN 00       |
+ #----+----+----+----#----+----+----+----#----+----+----+----+----+----+----+----+
+ # 15 | 14 | 13 | 12 # 11 | 10 | 09 | 08 # 07 | 06 | 05 | 04 | 03 | 02 | 01 | 00 |
+ #----+----+----+----#----+----+----+----#----+----+----+----+----+----+----+----+
+ #    AFRH03[3:0]    #    AFRH02[3:0]    #    AFRH01[3:0]    |    AFRH00[3:0]    |
+ #----+----+----+----#----+----+----+----#----+----+----+----+----+----+----+----+
+ # rw | rw | rw | rw # rw | rw | rw | rw # rw | rw | rw | rw | rw | rw | rw | rw |
+ #########################################----+----+----+----+----+----+----+----+
+
+ -
+
+ From: RM0386, Reference manual, page 168
+
+ 6.3.13 RCC APB1 peripheral clock enable register (RCC_APB1ENR)
+
+ We first need to enable the clock of the USART2 by enabling the corresponding
+ flag in register RCC_APB1ENR: Bit 17 is called USART2EN (USART2 clock enable).
+ Then we can configure the USART2...
+
+ -
+
+ From: RM0386, Reference manual, page 1036
+
+ 30 Universal synchronous receiver transmitter (USART)
+
+
+
+ */
