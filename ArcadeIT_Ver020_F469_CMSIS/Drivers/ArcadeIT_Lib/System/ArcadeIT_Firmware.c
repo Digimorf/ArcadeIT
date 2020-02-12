@@ -247,9 +247,9 @@ void ArcadeIT_System_Init (void)
     // PCLK2 = HCLK / 2
     RCC->CFGR |= RCC_CFGR_PPRE2_DIV2;
     // PCLK1 = HCLK / 4
-    RCC->CFGR |= RCC_CFGR_PPRE1_DIV4;
+    RCC->CFGR |= RCC_CFGR_PPRE1_DIV4; // 0x00001400U
     // Configure the main PLL
-    RCC->PLLCFGR = PLL_M | (PLL_N << 6) | (((PLL_P >> 1) -1) << 16) | (RCC_PLLCFGR_PLLSRC_HSE) | (PLL_Q << 24);
+    RCC->PLLCFGR = PLL_M | (PLL_N << 6) | (((PLL_P >> 1) - 1) << 16) | (RCC_PLLCFGR_PLLSRC_HSE) | (PLL_Q << 24);
     // Enable the main PLL
     RCC->CR |= RCC_CR_PLLON;
     // Wait till the main PLL is ready
@@ -613,8 +613,10 @@ void ArcadeIT_Test_Bench (void)
   if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
   {
     ArcadeIT_System_Delay(2000);
+
+    ArcadeIT_Status_LED2_Toggle();
+
     ArcadeIT_Serial_Port_String_Send("ANSI colors table on serial terminal:\n\r");
-    ArcadeIT_System_Delay(2000);
 
     for (uint8_t lRow = 0; lRow < 16; lRow++)
     {
@@ -634,15 +636,20 @@ void ArcadeIT_Test_Bench (void)
     sprintf(lString, ATTR_COLOR_256_BG, 20);
     ArcadeIT_Serial_Port_String_Send(lString);
 
+    ArcadeIT_Status_LED2_Toggle();
+
   } // End if.
   // --------------------------------------------------------------------------
   // Shows ANSI artwork over the serial terminal
   if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
   {
     ArcadeIT_System_Delay(2000);
+
+    ArcadeIT_Status_LED2_Toggle();
+
     ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
     ArcadeIT_Serial_Port_String_Send("ANSI art on serial terminal:\n\r");
-    ArcadeIT_System_Delay(2000);
+    ArcadeIT_System_Delay(1000);
 
     unsigned char *lANSIArtPtr = (unsigned char *)&gANSIDemo1[0];
     for (uint16_t lChar = 0; lChar < 7352; lChar++)
@@ -652,6 +659,8 @@ void ArcadeIT_Test_Bench (void)
     } // end for
 
     ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+
+    ArcadeIT_Status_LED2_Toggle();
 
   } // End if.
   // ===========================================================================

@@ -1,4 +1,4 @@
 ArcadeIT_Serial_Port.c:98:6:ArcadeIT_Serial_Port_Char_Send	0	static
 ArcadeIT_Serial_Port.c:118:9:ArcadeIT_Serial_Port_Char_Get	0	static
 ArcadeIT_Serial_Port.c:147:6:ArcadeIT_Serial_Port_String_Send	4	static
-ArcadeIT_Serial_Port.c:170:6:ArcadeIT_Serial_Port_Init	16	static
+ArcadeIT_Serial_Port.c:170:6:ArcadeIT_Serial_Port_Init	8	static

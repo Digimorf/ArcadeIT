@@ -19,6 +19,8 @@ OBJCOPY_BIN :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
+Drivers/ArcadeIT_Lib/Demofiles/ANSIGfx \
 Drivers/ArcadeIT_Lib/System \
-Drivers/ArcadeIT_Lib/System/Peripherals \
+Drivers/ArcadeIT_Lib/System/Devices \
+Drivers/ArcadeIT_Lib/System/Units \
 

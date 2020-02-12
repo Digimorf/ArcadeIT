@@ -8,8 +8,10 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Drivers/ArcadeIT_Lib/System/Peripherals/subdir.mk
+-include Drivers/ArcadeIT_Lib/System/Units/subdir.mk
+-include Drivers/ArcadeIT_Lib/System/Devices/subdir.mk
 -include Drivers/ArcadeIT_Lib/System/subdir.mk
+-include Drivers/ArcadeIT_Lib/Demofiles/ANSIGfx/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include subdir.mk

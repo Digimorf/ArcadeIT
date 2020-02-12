@@ -85,7 +85,7 @@
 
 // ArcadeIT! devices.
 #include <Devices/ArcadeIT_Status_LEDs.h>
-//#include "System/Peripherals/ArcadeIT_Serial_Port.h"
+#include <Devices/ArcadeIT_Serial_Port.h>
 
 // //////////////////////////////////////////////////////////////////////////////
 // Functions.

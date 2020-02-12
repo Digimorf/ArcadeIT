@@ -72,7 +72,7 @@
 
 // ArcadeIT! devices.
 #include <Devices/ArcadeIT_TestPads.h>
-//#include "System/Peripherals/ArcadeIT_Serial_Port.h"
+#include <Devices/ArcadeIT_Serial_Port.h>
 
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.

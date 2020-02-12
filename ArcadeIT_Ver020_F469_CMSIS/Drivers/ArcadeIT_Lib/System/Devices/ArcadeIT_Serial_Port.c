@@ -13,13 +13,13 @@
  *           (C)2020 www.digimorf.com, www.arcadeit.net
  *
  * @author  Francesco De Simone
- * @file    ArcadeIT_Serial_Port.c
+ * @file    ArcadeIT_Serial_Port.h
  * @version V0.13
  * @date    16-06-2017
- * @last    10-02-2020
+ * @last    12-02-2020
  * @brief   This library is used to drive the Serial port at low level. This
  *          port can be used for the debug of the ArcadeIT! system or for data
- *          transfer in the future.
+ *          transfer.
  *
  ******************************************************************************
  TOADD
@@ -32,22 +32,24 @@
 
  1.3 - Serial port
 
- ArcadeIT! Motherboard CN7 - Serial Port
+  ArcadeIT! Motherboard CN7 - Serial Port
 
- Pin  GPIO Function    Serial interface
- ---------------------------------------
- 3.3V VDD  3.3V        CN7-1
- 042  PA2  SYS_SERIAL_PORT TX   CN7-2
- 047  PA3  SYS_SERIAL_PORT RX   CN7-3
- GND  VSS  GND         CN7-4
+  Pin  GPIO Function    Serial interface
+  ---------------------------------------
+  3.3V VDD  3.3V        CN7-1
+  042  PA2  USART2 TX   CN7-2
+  047  PA3  USART2 RX   CN7-3
+  GND  VSS  GND         CN7-4
 
- Serial port  / CN7
- .----.
- | o  |  1 3.3V
- | o |   2 TX
- | o |   3 RX
- | o  |  4 GND
- '----'
+ ArcadeIT! mainboard:
+
+  Serial port  / CN7
+  .----.
+  | o  |  1 3.3V
+  | o |   2 TX
+  | o |   3 RX
+  | o  |  4 GND
+  '----'
 
  ******************************************************************************
  HISTORY
@@ -64,7 +66,14 @@
  15-10-2018:
  - Cleaned code and optimized it for portability.
 
- ******************************************************************************
+ 11-02-2020:
+ - Ported to STM32CubeIDE and stored into GitHUB.
+
+ 12-02-2020:
+ - Cleaned the code that initializes the USART and added more info to the in-code
+   documentation.
+
+ *******************************************************************************
  */
 
 // C standard libraries.
@@ -84,14 +93,6 @@
 // Global elements.
 // /////////////////////////////////////////////////////////////////////////////
 
-uint16_t gUSART_TX_Block_Index = 0;
-char gUSART_TX_Block[SYS_SERIAL_TX_Block_Size];
-
-uint16_t gUSART_RX_Block_Index = 0;
-char gUSART_RX_Block[SYS_SERIAL_RX_Block_Size];
-
-__IO uint8_t gUSART_TX_Transfer = FALSE, gUSART_RX_Transfer = FALSE;
-
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
 // /////////////////////////////////////////////////////////////////////////////
@@ -106,10 +107,12 @@ void ArcadeIT_Serial_Port_Char_Send
    * RETURNS:     Nothing.
    */
 
-  // wait until data register is empty.
+  // wait until data register is empty. The status register should have the flag
+  // Transmit data register empty
   while ((SYS_SERIAL_PORT->SR & SYS_SERIAL_FLAG_TXE) == RESET);
 
-  // send the character.
+  // send the character. We put the data into the data register so that the USART
+  // start transmit it.
   SYS_SERIAL_PORT->DR = (pCharacter & (uint16_t)0x01FF);
 
 } // End ArcadeIT_Serial_Port_Char_Send.
@@ -125,10 +128,11 @@ uint8_t ArcadeIT_Serial_Port_Char_Get(void)
 
   char lCharacter = 0;
 
-  // else test for character ready?
+  // test for character ready, we check the status register for Read data register
+  // not empty, so a byte has been received and is ready for us.
   if (SYS_SERIAL_PORT->SR & SYS_SERIAL_FLAG_RXNE)
   {
-    // retrieve a character...
+    // retrieve a character from the data register...
     lCharacter = (char)(SYS_SERIAL_PORT->DR & 0x01FF);
 
     // return character.
@@ -277,8 +281,33 @@ void ArcadeIT_Serial_Port_Init
   SYS_SERIAL_PORT->CR3 = (uint16_t)tmpreg;
 
 /*---------------------------- USART BRR Configuration -----------------------*/
+
+  /* From: RM0386, Reference manual, page 1050
+
+     30.4.4 Fractional baud rate generation
+
+     BAUD = freq / (8*(2-OVER8) * USARTDIV)
+
+     we need to read this equation finding USARTDIV
+
+     BAUD * 8 * (2-OVER8) * USARTDIV = freq
+     USARTDIV = freq / (BAUD * 8 * (2 - OVER8))
+
+     We don't use the oversample, so OVER8 = 0
+
+     USASRTDIV = 45Mhz / (115200 * 8 * 2)
+     USASRTDIV = 45000000 / ‭1843200
+     ‬
+     USASRTDIV = 24.4140625
+     Mantissa = 24
+     Fraction = 0.4140625
+
+     So we need to calcuate the two values using fixed point math using 4 bits for
+     fraction and the rest for mantissa.‬‬
+*/
+
   /* Configure the USART Baud Rate */
-  apbclock = ((((HSE_VALUE / (RCC->PLLCFGR & RCC_PLLCFGR_PLLM)) * ((RCC->PLLCFGR & RCC_PLLCFGR_PLLN) >> 6))/((((RCC->PLLCFGR & RCC_PLLCFGR_PLLP) >>16) + 1 ) *2)) >> (APBAHBPrescTable[(RCC->CFGR & RCC_CFGR_HPRE) >> 4])) >> APBAHBPrescTable[(RCC->CFGR & RCC_CFGR_PPRE1) >> 10];
+  apbclock = (((HSE_VALUE / PLL_M) * PLL_N) / PLL_P) >> 2; // for the ArcadeIT! should be 45MHz
 
   /* Determine the integer part */
   if ((SYS_SERIAL_PORT->CR1 & USART_CR1_OVER8) != 0)
@@ -290,11 +319,21 @@ void ArcadeIT_Serial_Port_Init
   {
     /* Integer part computing in case Oversampling mode is 16 Samples */
     integerdivider = ((25 * apbclock) / (4 * pBaud));
+    // 25 * 45000000 / 4 * 115200
+    // 1125000000 / 460800
+    // ‭2441‬
   }
   tmpreg = (integerdivider / 100) << 4;
+  // ‭2441 / 100 * 16
+  // ‭24 * 16 (FOUND 24, we already shift this left of 4 bits to create room for fraction)
+  // ‭384 (0x18 << 4 = 0x180)‬
 
   /* Determine the fractional part */
   fractionaldivider = integerdivider - (100 * (tmpreg >> 4));
+  // ‭2441 - 100 * 384 / 16
+  // ‭2441 - 38400 / 16
+  // ‭2441 - 2400
+  // 41 (FOUND 41)
 
   /* Implement the fractional part in the register */
   if ((SYS_SERIAL_PORT->CR1 & USART_CR1_OVER8) != 0)
@@ -304,17 +343,23 @@ void ArcadeIT_Serial_Port_Init
   else /* if ((USARTx->CR1 & USART_CR1_OVER8) == 0) */
   {
     tmpreg |= ((((fractionaldivider * 16) + 50) / 100)) & ((uint8_t)0x0F);
+    // (41 * 16 + 50 / 100) & 0x0F
+    // (656 + 50 / 100) & 0x0F
+    // (706 / 100) & 0x0F
+    // 7 & 0x0F
+    // 384 | 7
+    // BRR register
+    // m = mantissa, f = fraction
+    // mmmmmmmmm   ffff
+    // 0x180     |  0x7
   }
 
   /* Write to USART BRR register */
   SYS_SERIAL_PORT->BRR = (uint16_t)tmpreg;
 
+  // Enable the USART2
   SYS_SERIAL_PORT->CR1 |= USART_CR1_UE;
 
-  // Welcome
-  ArcadeIT_Serial_Port_String_Send(ERASE_SCREEN);
-  ArcadeIT_Serial_Port_String_Send(CURSOR_HOME);
-  ArcadeIT_Serial_Port_String_Send(TEXT_ARCADEIT_INIT);
   ArcadeIT_Serial_Port_String_Send(TEXT_SERIAL_PORT_INITED);
 
 } // End ArcadeIT_Serial_Port_Init.

@@ -66,6 +66,13 @@
  15-10-2018:
  - Cleaned code and optimized it for portability.
 
+ 11-02-2020:
+ - Ported to STM32CubeIDE and stored into GitHUB.
+
+ 12-02-2020:
+ - Cleaned the code that initializes the USART and added more info to the in-code
+   documentation.
+
  *******************************************************************************
  */
 
@@ -277,6 +284,89 @@ void ArcadeIT_Serial_Port_String_Send
 #endif // _ARCADEIT_SERIAL_PORT_H_
 
 /*
+ From: RM0386, Reference manual, page 1040
+
+ Figure 327. USART block diagram
+
+ Considering the common use of a serial port in embedded systems, we need only
+ two signals to configure, RX and TX. But we need also to configure the clock
+ of the USART so that it reaches the desired BAUD rate.
+
+ First, the BAUD is a common measure of symbol rate, one of the components that
+ determine the speed of communication over a data channel. That said, the basic
+ symbol that can be transmitted is a Bit (1 or 0), so we can consider the BAUD
+ rate to correspond to bps, or Bits per second.
+
+ Usually we use to transfer characters or bytes over the serial port. That means
+ 8 bits of data for each. But actually there are more bits transferred, because
+ the system that receives data needs to understand when a byte starts and finishes.
+
+ THat's why start/stop bits are used.
+
+ Take a look at Figure 328, page 1041 of the reference manual.
+
+ The ArcadeIT will use a simple and common configuration, that we could represent
+ with: 115000/8-N-1, that means:
+
+ BAUD rate/word length in bits/Parity bit/Stop bit.
+
+ The Parity bit is used as a test to see if a byte has been transferred correctly
+ when set to E or O, Even or Odd. N means None, so no test. This is a simple way
+ to verify the transfer. I won't explain here this theory, but you can find enough
+ information on internet.
+
+ Going back to the BAUD rate, considering 8 bits + 1 stop bit, we need to transfer
+ 9 bits for each character we send. Typical BAUD rates used in embedded projects
+ are: 9600, 57600, and 115200.
+ 9600 BAUD    -> ~1066 bytes per second
+ 57600 BAUD   -> ~6400 bytes per second
+ 115200 BAUD  -> ~12800 bytes per second
+
+ Why we need to understand all this? Because we need to set the clock of the USART
+ peripheral, and we need to do some math to calculate the values to store into
+ the registers.
+
+ For now consider that in one second the STM32F469 runs 180000000 cycles, but the
+ BUS used by the USART2 is the APB1, which is clocked at 45MHz
+
+ -
+
+ From: RM0386, Reference manual, page 1050
+
+ 30.4.4 Fractional baud rate generation
+
+ In order to calculate the correct value to store into the register BRR that drives
+ the transmission clock we use the formula
+
+ BAUD = freq / (8*(2-OVER8) * USARTDIV)
+
+ we need to read this equation finding USARTDIV which is the value to put into BRR
+
+ BAUD * 8 * (2-OVER8) * USARTDIV = freq
+ USARTDIV = freq / (BAUD * 8 * (2 - OVER8))
+
+ We don't use the oversample, so OVER8 = 0
+
+ USASRTDIV = 45Mhz / (115200 * 8 * 2)
+ USASRTDIV = 45000000 / ‭1843200
+ ‬
+ USASRTDIV = 24.4140625
+ Mantissa = 24
+ Fraction = 0.4140625
+
+ So we need to calcuate the two values using fixed point math using 4 bits for
+ fraction and the rest for mantissa and then store them into the BRR register:
+
+ |  0    0    0    0 .  0    0    0    0 |  0    0    0    0 .  0    0    0    0 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | 15 | 14 | 13 | 12 | 11 | 10 | 09 | 08 | 07 | 06 | 05 | 04 | 03 | 02 | 01 | 00 |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ |                      MANTISSA                             |      FRACTION     |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+ | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw | rw |
+ +----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+----+
+
+ -
 
  From: RM0386, Reference manual, page 165
 
@@ -398,10 +488,7 @@ void ArcadeIT_Serial_Port_String_Send
 
  -
 
- From: RM0386, Reference manual, page 1036
-
- 30 Universal synchronous receiver transmitter (USART)
-
-
+ When everything is set we can enable the USART by setting the
+ Bit 13 UE: USART enable of the CR1 register.
 
  */
