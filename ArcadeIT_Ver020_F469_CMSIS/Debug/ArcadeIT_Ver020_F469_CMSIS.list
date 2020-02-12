@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  12 .debug_info   00006565  00000000  00000000  00020094  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 000010ba  00000000  00000000  000265f9  2**0
+ 13 .debug_abbrev 000010a8  00000000  00000000  000265f9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00000248  00000000  00000000  000276b8  2**3
+ 14 .debug_aranges 00000248  00000000  00000000  000276a8  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 000001d8  00000000  00000000  00027900  2**3
+ 15 .debug_ranges 000001d8  00000000  00000000  000278f0  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00022d79  00000000  00000000  00027ad8  2**0
+ 16 .debug_macro  00022877  00000000  00000000  00027ac8  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00003f68  00000000  00000000  0004a851  2**0
+ 17 .debug_line   00003efc  00000000  00000000  0004a33f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000b9c4d  00000000  00000000  0004e7b9  2**0
+ 18 .debug_str    000b81e2  00000000  00000000  0004e23b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  00108406  2**0
+ 19 .comment      0000007b  00000000  00000000  0010641d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000724  00000000  00000000  00108484  2**2
+ 20 .debug_frame  00000724  00000000  00000000  00106498  2**2
                   CONTENTS, READONLY, DEBUGGING
- 21 .debug_loc    0000057f  00000000  00000000  00108ba8  2**0
+ 21 .debug_loc    0000057f  00000000  00000000  00106bbc  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -388,27 +388,27 @@ Infinite_Loop:
 int ArcadeIT_SysTick_Init (void)
 {
  800034c:	b508      	push	{r3, lr}
-  if ((ticks - 1UL) > SysTick_LOAD_RELOAD_Msk)
-  {
-    return (1UL);                                                   /* Reload value impossible */
-  }
+ */
+__STATIC_INLINE uint32_t SysTick_Config(uint32_t ticks)
+{
+  if ((ticks - 1) > SysTick_LOAD_RELOAD_Msk)  return (1);      /* Reload value impossible */
 
-  SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
+  SysTick->LOAD  = ticks - 1;                                  /* set reload register */
  800034e:	4b0c      	ldr	r3, [pc, #48]	; (8000380 <ArcadeIT_SysTick_Init+0x34>)
  8000350:	4a0c      	ldr	r2, [pc, #48]	; (8000384 <ArcadeIT_SysTick_Init+0x38>)
  8000352:	605a      	str	r2, [r3, #4]
-    SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
+    SCB->SHP[((uint32_t)(IRQn) & 0xF)-4] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set Priority for Cortex-M  System Interrupts */
  8000354:	4a0c      	ldr	r2, [pc, #48]	; (8000388 <ArcadeIT_SysTick_Init+0x3c>)
  8000356:	21f0      	movs	r1, #240	; 0xf0
  8000358:	f882 1023 	strb.w	r1, [r2, #35]	; 0x23
-  NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
-  SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
+  NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority for Systick Interrupt */
+  SysTick->VAL   = 0;                                          /* Load the SysTick Counter Value */
  800035c:	2100      	movs	r1, #0
  800035e:	6099      	str	r1, [r3, #8]
   SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
  8000360:	2107      	movs	r1, #7
  8000362:	6019      	str	r1, [r3, #0]
-    SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
+    SCB->SHP[((uint32_t)(IRQn) & 0xF)-4] = ((priority << (8 - __NVIC_PRIO_BITS)) & 0xff); } /* set Priority for Cortex-M  System Interrupts */
  8000364:	23c0      	movs	r3, #192	; 0xc0
  8000366:	f882 3023 	strb.w	r3, [r2, #35]	; 0x23
   lRetStatus = SysTick_Config(ARCADEIT_HCLKS_PER_MS);

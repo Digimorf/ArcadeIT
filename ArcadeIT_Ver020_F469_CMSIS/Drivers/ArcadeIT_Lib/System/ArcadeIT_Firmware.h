@@ -44,14 +44,14 @@
 // Include
 // /////////////////////////////////////////////////////////////////////////////
 
+#include <stm32f469xx.h>
+#include <stm32f4xx.h>
+
 // C standard libraries.
 #include <stdio.h>
 #include <stdint.h>
 
 // STM32 definitions.
-#include "stm32f4xx.h"
-
-// ArcadeIT Libraries.
 #include <System/ArcadeIT_Common.h>
 
 // /////////////////////////////////////////////////////////////////////////////

@@ -23,4 +23,14 @@ Drivers/ArcadeIT_Lib/Demofiles/ANSIGfx \
 Drivers/ArcadeIT_Lib/System \
 Drivers/ArcadeIT_Lib/System/Devices \
 Drivers/ArcadeIT_Lib/System/Units \
+Drivers/CMSIS/DSP_Lib/Source/BasicMathFunctions \
+Drivers/CMSIS/DSP_Lib/Source/CommonTables \
+Drivers/CMSIS/DSP_Lib/Source/ComplexMathFunctions \
+Drivers/CMSIS/DSP_Lib/Source/ControllerFunctions \
+Drivers/CMSIS/DSP_Lib/Source/FastMathFunctions \
+Drivers/CMSIS/DSP_Lib/Source/FilteringFunctions \
+Drivers/CMSIS/DSP_Lib/Source/MatrixFunctions \
+Drivers/CMSIS/DSP_Lib/Source/StatisticsFunctions \
+Drivers/CMSIS/DSP_Lib/Source/SupportFunctions \
+Drivers/CMSIS/DSP_Lib/Source/TransformFunctions \
 

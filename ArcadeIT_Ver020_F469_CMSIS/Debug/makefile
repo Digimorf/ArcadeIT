@@ -8,6 +8,16 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Drivers/CMSIS/DSP_Lib/Source/TransformFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/SupportFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/StatisticsFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/MatrixFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/FilteringFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/FastMathFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/ControllerFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/ComplexMathFunctions/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/CommonTables/subdir.mk
+-include Drivers/CMSIS/DSP_Lib/Source/BasicMathFunctions/subdir.mk
 -include Drivers/ArcadeIT_Lib/System/Units/subdir.mk
 -include Drivers/ArcadeIT_Lib/System/Devices/subdir.mk
 -include Drivers/ArcadeIT_Lib/System/subdir.mk
