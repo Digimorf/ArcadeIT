@@ -1,0 +1,4 @@
+io.c:37:6:printc	8	static
+io.c:42:6:prints	8	static
+io.c:10:6:ansi_setcolor	8	static
+io.c:17:6:ansi_gotoxy	24	static

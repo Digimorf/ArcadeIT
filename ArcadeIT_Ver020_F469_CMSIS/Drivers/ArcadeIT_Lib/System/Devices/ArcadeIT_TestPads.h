@@ -74,8 +74,32 @@
 #include <System/ArcadeIT_Firmware.h>
 
 // /////////////////////////////////////////////////////////////////////////////
-// Defines.
+// Defineitions.
 // /////////////////////////////////////////////////////////////////////////////
+
+#define CFGR_MCO2_RESET_MASK      ((uint32_t)0x07FFFFFF)
+
+#define RCC_MCO2Source_SYSCLK     ((uint32_t)0x00000000)
+#define RCC_MCO2Source_PLLI2SCLK  ((uint32_t)0x40000000)
+#define RCC_MCO2Source_HSE        ((uint32_t)0x80000000)
+#define RCC_MCO2Source_PLLCLK     ((uint32_t)0xC0000000)
+
+#define RCC_MCO2Div_1             ((uint32_t)0x00000000)
+#define RCC_MCO2Div_2             ((uint32_t)0x20000000)
+#define RCC_MCO2Div_3             ((uint32_t)0x28000000)
+#define RCC_MCO2Div_4             ((uint32_t)0x30000000)
+#define RCC_MCO2Div_5             ((uint32_t)0x38000000)
+
+#define SYS_TESTPADS_RCC_REG      RCC_AHB1ENR
+#define SYS_TESTPADS_RCC_CMD      RCC_AHB1PeriphClockCmd
+#define SYS_TESTPADS_RCC_PER      RCC_AHB1Periph_GPIOC
+#define SYS_TESTPADS_PER          GPIOC
+#define SYS_TESTPADS_PIN          GPIO_Pin_9
+#define SYS_TESTPADS_PIN_NO       9
+#define SYS_TESTPADS_DIV          RCC_MCO2Div_4
+#define SYS_TESTPADS_SRCCLK       RCC_MCO2Source_SYSCLK
+
+#define TEXT_TEST_PADS_INITED     "Clock test pad enabled.\n\r"
 
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
@@ -93,7 +117,10 @@ void ArcadeIT_TestPad_Frequency
     uint32_t pFrequencySystem,  // clock source output to testpad
     uint32_t pFrequencyDivider  // the frequency divider
 );
+// -----------------------------------------------------------------------------
+
 // /////////////////////////////////////////////////////////////////////////////
+
 
 #endif // __ARCADEIT_TESTPADS_H_
 

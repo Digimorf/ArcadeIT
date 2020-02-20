@@ -90,7 +90,7 @@ void ArcadeIT_Scheduler_Task_Init(void)
 
   } // End for.
 
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     //ArcadeIT_Serial_Port_String_Send(TEXT_SCHEDULER_INITED);
 

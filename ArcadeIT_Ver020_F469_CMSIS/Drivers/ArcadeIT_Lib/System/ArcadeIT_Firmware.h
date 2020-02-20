@@ -123,6 +123,7 @@
   #define RCC_APB1Periph_TIM2                 ((uint32_t)0x00000001)
   #define RCC_APB1Periph_TIM6                 ((uint32_t)0x00000010)
   #define RCC_APB1Periph_USART2               ((uint32_t)0x00020000)
+  #define RCC_APB1Periph_I2C2                 ((uint32_t)0x00400000)
   #define RCC_APB1Periph_PWR                  ((uint32_t)0x10000000)
   #define RCC_APB1Periph_DAC                  ((uint32_t)0x20000000)
   #define RCC_APB2Periph_TIM1                 ((uint32_t)0x00000001)
@@ -144,28 +145,6 @@
 // ---------------------------------------------------------------------------------------
 // Peripherals: Test pads
 // ---------------------------------------------------------------------------------------
-  #define CFGR_MCO2_RESET_MASK                ((uint32_t)0x07FFFFFF)
-
-  #define RCC_MCO2Source_SYSCLK               ((uint32_t)0x00000000)
-  #define RCC_MCO2Source_PLLI2SCLK            ((uint32_t)0x40000000)
-  #define RCC_MCO2Source_HSE                  ((uint32_t)0x80000000)
-  #define RCC_MCO2Source_PLLCLK               ((uint32_t)0xC0000000)
-
-  #define RCC_MCO2Div_1                       ((uint32_t)0x00000000)
-  #define RCC_MCO2Div_2                       ((uint32_t)0x20000000)
-  #define RCC_MCO2Div_3                       ((uint32_t)0x28000000)
-  #define RCC_MCO2Div_4                       ((uint32_t)0x30000000)
-  #define RCC_MCO2Div_5                       ((uint32_t)0x38000000)
-
-  #define SYS_TESTPADS_RCC_REG                RCC_AHB1ENR
-  #define SYS_TESTPADS_RCC_CMD                RCC_AHB1PeriphClockCmd
-  #define SYS_TESTPADS_RCC_PER                RCC_AHB1Periph_GPIOC
-  #define SYS_TESTPADS_PER                    GPIOC
-  #define SYS_TESTPADS_PIN                    GPIO_Pin_9
-  #define SYS_TESTPADS_PIN_NO                 9
-  #define SYS_TESTPADS_DIV                    RCC_MCO2Div_4
-  #define SYS_TESTPADS_SRCCLK                 RCC_MCO2Source_SYSCLK
-  #define TEXT_TEST_PADS_INITED               "Clock test pad enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: AUDIO
@@ -257,100 +236,10 @@
 // ---------------------------------------------------------------------------------------
 // Peripherals: Serial port
 // ---------------------------------------------------------------------------------------
-  #define ARCADEIT_SERIAL_METHOD         NORMAL
-
-  #define SYS_SERIAL_TX_RCC_REG          RCC_AHB1ENR
-  #define SYS_SERIAL_TX_RCC_CMD          RCC_AHB1PeriphClockCmd
-  #define SYS_SERIAL_TX_RCC_PER          RCC_AHB1Periph_GPIOA
-  #define SYS_SERIAL_TX_PER              GPIOA
-  #define SYS_SERIAL_TX_PIN              GPIO_Pin_2
-  #define SYS_SERIAL_TX_PIN_NO           2
-  #define SYS_SERIAL_TX_AF               ((uint8_t)0x07)  /* USART2 Alternate Function mapping  */
-
-  #define SYS_SERIAL_RX_RCC_REG          RCC_AHB1ENR
-  #define SYS_SERIAL_RX_RCC_CMD          RCC_AHB1PeriphClockCmd
-  #define SYS_SERIAL_RX_RCC_PER          RCC_AHB1Periph_GPIOA
-  #define SYS_SERIAL_RX_PER              GPIOA
-  #define SYS_SERIAL_RX_PIN              GPIO_Pin_3
-  #define SYS_SERIAL_RX_PIN_NO           3
-  #define SYS_SERIAL_RX_AF               ((uint8_t)0x07)  /* USART2 Alternate Function mapping  */
-
-  #define SYS_SERIAL_IRQ                 USART2_IRQn
-  #define SYS_SERIAL_IRQ_HANDLER         USART2_IRQHandler
-
-  #define SYS_SERIAL_RCC_REG             RCC_APB1ENR
-  #define SYS_SERIAL_RCC_CMD             RCC_APB1PeriphClockCmd
-  #define SYS_SERIAL_RCC_PER             RCC_APB1Periph_USART2
-  #define SYS_SERIAL_PORT                USART2
-
-  #define SYS_SERIAL_StopBits_1               ((uint16_t)0x0000)
-  #define SYS_SERIAL_WordLength_8b            ((uint16_t)0x0000)
-  #define SYS_SERIAL_Parity_No                ((uint16_t)0x0000)
-  #define SYS_SERIAL_Mode_Rx                  ((uint16_t)0x0004)
-  #define SYS_SERIAL_Mode_Tx                  ((uint16_t)0x0008)
-  #define SYS_SERIAL_HardwareFlowControl_None ((uint16_t)0x0000)
-
-  // USART CR1 register clear Mask ((~(uint16_t)0xE9F3))
-  #define CR1_CLEAR_MASK            ((uint16_t)(USART_CR1_M | USART_CR1_PCE | \
-                                                USART_CR1_PS | USART_CR1_TE | \
-                                                USART_CR1_RE))
-
-  // USART CR2 register clock bits clear Mask ((~(uint16_t)0xF0FF))
-  #define CR2_CLOCK_CLEAR_MASK      ((uint16_t)(USART_CR2_CLKEN | USART_CR2_CPOL | \
-                                                USART_CR2_CPHA | USART_CR2_LBCL))
-
-  // USART CR3 register clear Mask ((~(uint16_t)0xFCFF))
-  #define CR3_CLEAR_MASK            ((uint16_t)(USART_CR3_RTSE | USART_CR3_CTSE))
-
-  #define SYS_SERIAL_FLAG_TXE            ((uint16_t)0x0080)
-  #define SYS_SERIAL_FLAG_RXNE           ((uint16_t)0x0020)
-  #define SYS_SERIAL_FLAG_IDLE           ((uint16_t)0x0010)
-
-  #define SYS_SERIAL_RX_Block_Size       64
-  #define SYS_SERIAL_TX_Block_Size       256
-
-  #define SYS_SERIAL_SPEED               115200
-
-  #define TEXT_SERIAL_PORT_INITED        "Serial port enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: I2C
 // ---------------------------------------------------------------------------------------
-  #define SYS_I2C_TIMEOUT             250
-  #define SYS_I2C_METHOD              NORMAL
-
-  #define SYS_I2C_DMA_RCC_REG         RCC_AHB1ENR
-  #define SYS_I2C_DMA_RCC_CMD         RCC_AHB1PeriphClockCmd
-  #define SYS_I2C_DMA_RCC_PER         RCC_AHB1Periph_DMA2
-  #define SYS_I2C_DMA_PORT            DMA2
-
-  #define SYS_I2C_DMA_MOSI_STREAM     DMA2_Stream3 // tx
-  #define SYS_I2C_DMA_MOSI_STREAM_CH  DMA_Channel_3
-
-  #define SYS_I2C_DMA_MISO_STREAM     DMA2_Stream2 // rx
-  #define SYS_I2C_DMA_MISO_STREAM_CH  DMA_Channel_3
-
-  #define SYS_I2C_RCC_REG             RCC_APB2ENR
-  #define SYS_I2C_RCC_CMD             RCC_APB2PeriphClockCmd
-  #define SYS_I2C_RCC_PER             RCC_APB2Periph_SPI1
-  #define SYS_I2C_PORT                SPI1
-  #define SYS_I2C_AF                  GPIO_AF_SPI1
-
-  #define SYS_I2C_SCK_RCC_REG         RCC_AHB1ENR
-  #define SYS_I2C_SCK_RCC_CMD         RCC_AHB1PeriphClockCmd
-  #define SYS_I2C_SCK_RCC_PER         RCC_AHB1Periph_GPIOH
-  #define SYS_I2C_SCK_PER             GPIOH
-  #define SYS_I2C_SCK_PIN             GPIO_Pin_4
-  #define SYS_I2C_SCK_SRC             GPIO_PinSource4
-
-  #define SYS_I2C_SDA_RCC_REG         RCC_AHB1ENR
-  #define SYS_I2C_SDA_RCC_CMD         RCC_AHB1PeriphClockCmd
-  #define SYS_I2C_SDA_RCC_PER         RCC_AHB1Periph_GPIOH
-  #define SYS_I2C_SDA_PER             GPIOH
-  #define SYS_I2C_SDA_PIN             GPIO_Pin_5
-  #define SYS_I2C_SDA_SRC             GPIO_PinSource5
-
-  #define TEXT_I2C_PORT_INITED        "I2C port enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: SPI1
@@ -431,21 +320,6 @@
 // ---------------------------------------------------------------------------------------
 // Peripherals: Status LEDs
 // ---------------------------------------------------------------------------------------
-  #define SYS_STATUS_LED1_RCC_REG        RCC_AHB1ENR
-  #define SYS_STATUS_LED1_RCC_CMD        RCC_AHB1PeriphClockCmd
-  #define SYS_STATUS_LED1_RCC_PER        RCC_AHB1Periph_GPIOH
-  #define SYS_STATUS_LED1_PER            GPIOH
-  #define SYS_STATUS_LED1_PIN            GPIO_Pin_2
-  #define SYS_STATUS_LED1_PIN_NO         2
-
-  #define SYS_STATUS_LED2_RCC_REG        RCC_AHB1ENR
-  #define SYS_STATUS_LED2_RCC_CMD        RCC_AHB1PeriphClockCmd
-  #define SYS_STATUS_LED2_RCC_PER        RCC_AHB1Periph_GPIOH
-  #define SYS_STATUS_LED2_PER            GPIOH
-  #define SYS_STATUS_LED2_PIN            GPIO_Pin_3
-  #define SYS_STATUS_LED2_PIN_NO         3
-
-  #define TEXT_STATUS_LEDS_INITED        "Status LEDs enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: USB
@@ -508,7 +382,7 @@
   // ---------
   #define ARCADEIT_DEVICE_PARALLEL         0x01000
   #define ARCADEIT_DEVICE_USB              0x02000
-  #define ARCADEIT_DEVICE_SERIAL_PORT      0x04000
+  #define ARCADEIT_DEVICE_SERIAL           0x04000
   // ---------
   #define ARCADEIT_DEVICE_STATUSLED        0x10000
   #define ARCADEIT_DEVICE_TESTPADS         0x20000
@@ -543,55 +417,56 @@
 // decremented every interrupt generated by the Systick interrupt routine.
 // The user can monitor one of these counters in order to perform delays and other
 // Time based tasks.
-#define ARCADEIT_SECOND                    1
-#define ARCADEIT_MILLISECOND               1000
-#define ARCADEIT_MICROSECOND               1000000
-#define ARCADEIT_NANOSECOND                1000000000
 
-#define TEXT_SCHEDULER_INITED              "Tasks scheduler enabled.\n\r"
+  #define ARCADEIT_SECOND                  1
+  #define ARCADEIT_MILLISECOND             1000
+  #define ARCADEIT_MICROSECOND             1000000
+  #define ARCADEIT_NANOSECOND              1000000000
 
-#define EDITOR_TEXT_STATS_NAME             "Code Editor V1.0"
-#define SHELL_TEXT_STATS_NAME              "Shell V1.0"
+  #define TEXT_SCHEDULER_INITED            "Tasks scheduler enabled.\n\r"
 
-#define TAB_TO_SPACES                      4
-#define TAB_CHARACTER                      ASCII_SPACE
+  #define EDITOR_TEXT_STATS_NAME           "Code Editor V1.0"
+  #define SHELL_TEXT_STATS_NAME            "Shell V1.0"
 
-#define ARCADEIT_PAUSE_HALF_SECOND         500
-#define ARCADEIT_PAUSE_SECOND              1000
-#define ARCADEIT_PAUSE_5_SECONDS           5000
-#define ARCADEIT_PAUSE_10_SECONDS          10000
+  #define TAB_TO_SPACES                    4
+  #define TAB_CHARACTER                    ASCII_SPACE
 
-#define DUMMY_BYTE                         0xFF
-#define ARCADEIT_DUMMY_BYTE                0xFF
+  #define ARCADEIT_PAUSE_HALF_SECOND       500
+  #define ARCADEIT_PAUSE_SECOND            1000
+  #define ARCADEIT_PAUSE_5_SECONDS         5000
+  #define ARCADEIT_PAUSE_10_SECONDS        10000
 
-#define ARCADEIT_SAM_RAM_SIZE              128*1024
+  #define DUMMY_BYTE                       0xFF
+  #define ARCADEIT_DUMMY_BYTE              0xFF
+
+  #define ARCADEIT_SAM_RAM_SIZE            128*1024
 
 // -----------------------------------------------------------------------------
-#define MAXIMUM_PARAMETERS_PER_FN          8
-#define PAR_1                              0
-#define PAR_2                              1
-#define PAR_3                              2
-#define PAR_4                              3
-#define PAR_5                              4
-#define PAR_6                              5
-#define PAR_7                              6
-#define PAR_8                              7
+  #define MAXIMUM_PARAMETERS_PER_FN        8
+  #define PAR_1                            0
+  #define PAR_2                            1
+  #define PAR_3                            2
+  #define PAR_4                            3
+  #define PAR_5                            4
+  #define PAR_6                            5
+  #define PAR_7                            6
+  #define PAR_8                            7
 
 // -----------------------------------------------------------------------------
 //#define ABUF_INIT {NULL, 0}
 
-#define NVIC_VIDEO_PRIORITY                0
-#define NVIC_AUDIO_PRIORITY                1
-#define NVIC_USART_PRIORITY                2
-#define NVIC_SYSTICK_PRIORITY              3
-#define NVIC_USB_PRIORITY                  4
-#define NVIC_LCD_PRIORITY                  5
+  #define NVIC_VIDEO_PRIORITY              0
+  #define NVIC_AUDIO_PRIORITY              1
+  #define NVIC_USART_PRIORITY              2
+  #define NVIC_SYSTICK_PRIORITY            3
+  #define NVIC_USB_PRIORITY                4
+  #define NVIC_LCD_PRIORITY                5
 
 // /////////////////////////////////////////////////////////////////////////////
 // Macros
 // /////////////////////////////////////////////////////////////////////////////
 
-#define SYS_MCU_CYCLES	DWT->CYCCNT
+#define SYS_MCU_CYCLES  DWT->CYCCNT
 
 // /////////////////////////////////////////////////////////////////////////////
 // Types

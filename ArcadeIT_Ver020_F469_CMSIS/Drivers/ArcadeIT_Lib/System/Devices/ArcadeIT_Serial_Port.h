@@ -96,6 +96,59 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions.
 // /////////////////////////////////////////////////////////////////////////////
+  #define SYS_SERIAL_TX_RCC_REG               RCC_AHB1ENR
+  #define SYS_SERIAL_TX_RCC_CMD               RCC_AHB1PeriphClockCmd
+  #define SYS_SERIAL_TX_RCC_PER               RCC_AHB1Periph_GPIOA
+  #define SYS_SERIAL_TX_PER                   GPIOA
+  #define SYS_SERIAL_TX_PIN                   GPIO_Pin_2
+  #define SYS_SERIAL_TX_PIN_NO                2
+  #define SYS_SERIAL_TX_AF                    ((uint8_t)0x07)
+
+  #define SYS_SERIAL_RX_RCC_REG               RCC_AHB1ENR
+  #define SYS_SERIAL_RX_RCC_CMD               RCC_AHB1PeriphClockCmd
+  #define SYS_SERIAL_RX_RCC_PER               RCC_AHB1Periph_GPIOA
+  #define SYS_SERIAL_RX_PER                   GPIOA
+  #define SYS_SERIAL_RX_PIN                   GPIO_Pin_3
+  #define SYS_SERIAL_RX_PIN_NO                3
+  #define SYS_SERIAL_RX_AF                    ((uint8_t)0x07)
+
+  #define SYS_SERIAL_IRQ                      USART2_IRQn
+  #define SYS_SERIAL_IRQ_HANDLER              USART2_IRQHandler
+
+  #define SYS_SERIAL_RCC_REG                  RCC_APB1ENR
+  #define SYS_SERIAL_RCC_CMD                  RCC_APB1PeriphClockCmd
+  #define SYS_SERIAL_RCC_PER                  RCC_APB1Periph_USART2
+  #define SYS_SERIAL_PORT                     USART2
+
+  #define SYS_SERIAL_StopBits_1               ((uint16_t)0x0000)
+  #define SYS_SERIAL_WordLength_8b            ((uint16_t)0x0000)
+  #define SYS_SERIAL_Parity_No                ((uint16_t)0x0000)
+  #define SYS_SERIAL_Mode_Rx                  ((uint16_t)0x0004)
+  #define SYS_SERIAL_Mode_Tx                  ((uint16_t)0x0008)
+  #define SYS_SERIAL_HardwareFlowControl_None ((uint16_t)0x0000)
+
+  // USART CR1 register clear Mask ((~(uint16_t)0xE9F3))
+  #define CR1_CLEAR_MASK            ((uint16_t)(USART_CR1_M | USART_CR1_PCE | \
+                                                USART_CR1_PS | USART_CR1_TE | \
+                                                USART_CR1_RE))
+
+  // USART CR2 register clock bits clear Mask ((~(uint16_t)0xF0FF))
+  #define CR2_CLOCK_CLEAR_MASK      ((uint16_t)(USART_CR2_CLKEN | USART_CR2_CPOL | \
+                                                USART_CR2_CPHA | USART_CR2_LBCL))
+
+  // USART CR3 register clear Mask ((~(uint16_t)0xFCFF))
+  #define CR3_CLEAR_MASK            ((uint16_t)(USART_CR3_RTSE | USART_CR3_CTSE))
+
+  #define SYS_SERIAL_FLAG_TXE            ((uint16_t)0x0080)
+  #define SYS_SERIAL_FLAG_RXNE           ((uint16_t)0x0020)
+  #define SYS_SERIAL_FLAG_IDLE           ((uint16_t)0x0010)
+
+  #define SYS_SERIAL_RX_Block_Size       64
+  #define SYS_SERIAL_TX_Block_Size       256
+
+  #define SYS_SERIAL_SPEED               115200
+
+  #define TEXT_SERIAL_PORT_INITED        "Serial port enabled.\n\r"
 
 // VT100 ESCAPE SEQUENCES //////////////////////////////////////////////////////
 // Device Status
@@ -134,9 +187,9 @@
 // Set alternate font.
 #define FONT_SET_G1                      "\x1b)"
 // Gfx mode on.
-#define FONT_GFX_ON                      "\x1b(0"
+#define FONT_GFX_ON                      "\x1b(0" // DEC special graphics table as G0
 // Gfx mode off.
-#define FONT_GFX_OFF                     "\x1b(B"
+#define FONT_GFX_OFF                     "\x1b(B" // ASCII table as G0
 
 // Cursor Control
 // --------------
@@ -253,7 +306,8 @@
 // 256 indexed colors.
 #define ATTR_COLOR_256_BG                 "\x1B[48;5;%d\x6d"
 #define ATTR_COLOR_256_FG                 "\x1B[38;5;%d\x6d"
-#define ANSI_PIXEL_256_FGBG               "\x1B[38;5;%d\x6d\x1B[48;5;%d\x6d "
+#define ANSI_COLOR_256_FGBG               "\x1B[38;5;%d\x6d\x1B[48;5;%d\x6d"
+#define ANSI_PIXEL_256_FGBG               ANSI_COLOR_256_FGBG
 
 // RGB colors.
 #define ATTR_COLOR_RGB_BG                 "\x1B[48;2;%d;%d;%x6d"
@@ -262,7 +316,6 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
 // /////////////////////////////////////////////////////////////////////////////
-
 void ArcadeIT_Serial_Port_Init
 (
   uint32_t pBaud   // Baud rate to set the serial port to.
@@ -449,7 +502,7 @@ void ArcadeIT_Serial_Port_String_Send
 
  Since we have sixteen different alternate functions, 4 bits are needed for each
  pin to be configured. So two registers are used for pins 7..0 and pins 15..8,
- respectvely registers GPIOx_AFRL and GPIOx_AFRH.
+ respectively registers GPIOx_AFRL and GPIOx_AFRH.
 
  For USART2 we use pins 2 and 3, so the low register GPIOx_AFRL is used.
 

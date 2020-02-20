@@ -151,7 +151,7 @@ void ArcadeIT_TestPad_Init
   // Shows a message to serial port as debug
   ArcadeIT_TestPad_Set(pFrequencySystem, pFrequencyDivider);
 
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     // Starts and configure the serial port.
     ArcadeIT_Serial_Port_String_Send(TEXT_TEST_PADS_INITED);

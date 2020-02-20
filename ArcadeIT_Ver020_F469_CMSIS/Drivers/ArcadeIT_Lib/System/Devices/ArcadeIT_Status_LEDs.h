@@ -93,11 +93,25 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions.
 // /////////////////////////////////////////////////////////////////////////////
+#define SYS_STATUS_LED1_RCC_REG        RCC_AHB1ENR
+#define SYS_STATUS_LED1_RCC_CMD        RCC_AHB1PeriphClockCmd
+#define SYS_STATUS_LED1_RCC_PER        RCC_AHB1Periph_GPIOH
+#define SYS_STATUS_LED1_PER            GPIOH
+#define SYS_STATUS_LED1_PIN            GPIO_Pin_2
+#define SYS_STATUS_LED1_PIN_NO         2
+
+#define SYS_STATUS_LED2_RCC_REG        RCC_AHB1ENR
+#define SYS_STATUS_LED2_RCC_CMD        RCC_AHB1PeriphClockCmd
+#define SYS_STATUS_LED2_RCC_PER        RCC_AHB1Periph_GPIOH
+#define SYS_STATUS_LED2_PER            GPIOH
+#define SYS_STATUS_LED2_PIN            GPIO_Pin_3
+#define SYS_STATUS_LED2_PIN_NO         3
+
+#define TEXT_STATUS_LEDS_INITED        "Status LEDs enabled.\n\r"
 
 // /////////////////////////////////////////////////////////////////////////////
 // Functions.
 // /////////////////////////////////////////////////////////////////////////////
-
 void ArcadeIT_Status_LEDS_Init(void);
 // -----------------------------------------------------------------------------
 void ArcadeIT_Status_LEDS_Set
@@ -118,6 +132,7 @@ void ArcadeIT_Status_LED2_Set
 void ArcadeIT_Status_LED1_Toggle(void);
 // -----------------------------------------------------------------------------
 void ArcadeIT_Status_LED2_Toggle(void);
+// -----------------------------------------------------------------------------
 
 // /////////////////////////////////////////////////////////////////////////////
 

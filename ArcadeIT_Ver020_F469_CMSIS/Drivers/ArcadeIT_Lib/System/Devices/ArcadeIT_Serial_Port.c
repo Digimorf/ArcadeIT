@@ -183,7 +183,9 @@ void ArcadeIT_Serial_Port_Init
    * RETURNS:     Nothing.
    */
 
-  uint32_t lPinPosition = (SYS_SERIAL_TX_PIN_NO * 2);
+  uint32_t lPinPosition;
+
+  lPinPosition = (SYS_SERIAL_TX_PIN_NO * 2);
 
   // ArcadeIT_Serial_Port_Init
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOA) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOA;
@@ -206,10 +208,10 @@ void ArcadeIT_Serial_Port_Init
   SYS_SERIAL_TX_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_NOPULL) << lPinPosition);
 
   // Connect PXx to USARTx_Tx and Rx.
-  SYS_SERIAL_TX_PER->AFR[SYS_SERIAL_TX_PIN_NO >> 0x03] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SERIAL_TX_PIN_NO & (uint32_t)0x07) * 4));
-  SYS_SERIAL_TX_PER->AFR[SYS_SERIAL_TX_PIN_NO >> 0x03] =
-      SYS_SERIAL_TX_PER->AFR[SYS_SERIAL_TX_PIN_NO >> 0x03]
-      | ((uint32_t)(SYS_SERIAL_TX_AF) << ((uint32_t)((uint32_t)SYS_SERIAL_TX_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_SERIAL_TX_PER->AFR[0] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SERIAL_TX_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_SERIAL_TX_PER->AFR[0] |=  ((uint32_t)(SYS_SERIAL_TX_AF) << ((uint32_t)((uint32_t)SYS_SERIAL_TX_PIN_NO & (uint32_t)0x07) * 4));
+
+  lPinPosition = (SYS_SERIAL_RX_PIN_NO * 2);
 
   // Configure the pin PA3 as alternate function 7 (USART Rx).
   SYS_SERIAL_RX_PER->MODER   &= ~GPIO_MODER_MODER3;
@@ -227,10 +229,8 @@ void ArcadeIT_Serial_Port_Init
   SYS_SERIAL_RX_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_NOPULL) << lPinPosition);
 
   // Connect PXx to USARTx_Tx and Rx.
-  SYS_SERIAL_RX_PER->AFR[SYS_SERIAL_RX_PIN_NO >> 0x03] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SERIAL_RX_PIN_NO & (uint32_t)0x07) * 4)) ;
-  SYS_SERIAL_RX_PER->AFR[SYS_SERIAL_RX_PIN_NO >> 0x03] =
-      SYS_SERIAL_RX_PER->AFR[SYS_SERIAL_RX_PIN_NO >> 0x03]
-      | ((uint32_t)(SYS_SERIAL_RX_AF) << ((uint32_t)((uint32_t)SYS_SERIAL_RX_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_SERIAL_RX_PER->AFR[0] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SERIAL_RX_PIN_NO & (uint32_t)0x07) * 4)) ;
+  SYS_SERIAL_RX_PER->AFR[0] |= ((uint32_t)(SYS_SERIAL_RX_AF) << ((uint32_t)((uint32_t)SYS_SERIAL_RX_PIN_NO & (uint32_t)0x07) * 4));
 
   // When the two pins TX and RX are configured we setup the USART2
   uint32_t tmpreg = 0x00, apbclock = 0x00;
@@ -359,6 +359,8 @@ void ArcadeIT_Serial_Port_Init
 
   // Enable the USART2
   SYS_SERIAL_PORT->CR1 |= USART_CR1_UE;
+
+  ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
 
   ArcadeIT_Serial_Port_String_Send(TEXT_SERIAL_PORT_INITED);
 

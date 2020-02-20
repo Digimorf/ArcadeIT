@@ -64,10 +64,15 @@
 #include "System/Peripherals/ArcadeIT_DMM.h"
 #endif
 
+
+// ArcadeIT! Applications
+#include <Applications/Terminal/ArcadeIT_Terminal_Serial.h>
+
 // ArcadeIT! Peripherals and buses.
 #include <System/Devices/ArcadeIT_TestPads.h>
 #include <System/Devices/ArcadeIT_Status_LEDs.h>
 #include <System/Devices/ArcadeIT_Serial_Port.h>
+#include <System/Devices/ArcadeIT_I2C_Port.h>
 
 #if 0
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
@@ -188,7 +193,7 @@ int ArcadeIT_SysTick_Init (void)
   // Sets the priority of the interrupt
   NVIC_SetPriority (SysTick_IRQn, NVIC_SYSTICK_PRIORITY << 2);
 
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     ArcadeIT_Serial_Port_String_Send (TEXT_SYSTICK_INITED);
 
@@ -410,7 +415,7 @@ void ArcadeIT_PowerUP_Systems (void)
     if ((RCC->APB1ENR & RCC_APB1Periph_PWR) == FALSE) RCC->APB1ENR |= RCC_APB1Periph_PWR;
 
   // ArcadeIT_Serial_Port_Init GPIOA, USART2, DMA1
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOA) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOA;
     if ((RCC->APB1ENR & RCC_APB1Periph_USART2) == FALSE) RCC->APB1ENR |= RCC_APB1Periph_USART2;
@@ -427,6 +432,13 @@ void ArcadeIT_PowerUP_Systems (void)
     if ((RCC->APB2ENR & RCC_APB2Periph_SPI1) == FALSE) RCC->APB2ENR |= RCC_APB2Periph_SPI1;
 
   } // End if.
+
+  // ArcadeIT_I2C_Port_Init GPIOH
+  if (gDevices & ARCADEIT_DEVICE_I2C)
+  {
+    if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOH) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOH;
+
+  } // end if
 
   // ArcadeIT_VGA_Init GPIOA, GPIOB, DMA2, TIM8
   if (gDevices & ARCADEIT_DEVICE_VGA)
@@ -466,7 +478,7 @@ void ArcadeIT_PowerUP_Systems (void)
 // /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_ArcadeIT_Start (void)
 {
-  /*S
+  /*
    * DESCRIPTION: Starts all the systems according to the activation flags stored
    *              into global variables: gSystems, gStorage, gDevices.
    * PARAMETERS:  None.
@@ -474,7 +486,7 @@ void ArcadeIT_ArcadeIT_Start (void)
    */
 
   // ---------------------------------------------------------------------------
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     // Starts and configure the serial port.
     ArcadeIT_Serial_Port_Init (SYS_SERIAL_SPEED);
@@ -532,8 +544,12 @@ void ArcadeIT_ArcadeIT_Start (void)
 
   } // End if.
   // ---------------------------------------------------------------------------
+  if (gDevices & ARCADEIT_DEVICE_I2C)
+  {
+    // Starts and configure the serial port.
+    ArcadeIT_I2C_Port_Init(100000);
 
-
+  } // End if.
 
   // ---------------------------------------------------------------------------
   ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
@@ -564,13 +580,13 @@ void ArcadeIT_Test_Bench (void)
       //| ARCADEIT_DEVICE_RAM_MODULE    // SRAM expansion
       //| ARCADEIT_DEVICE_EXPANSION     // SLOTS expansion
       //| ARCADEIT_DEVICE_SPI1          // SPI 1 port
-      //| ARCADEIT_DEVICE_I2C           // I2C port
+        | ARCADEIT_DEVICE_I2C           // I2C port
       //| ARCADEIT_DEVICE_LCDS          // LCDs port
       //| ARCADEIT_DEVICE_VGA           // VGA port
       //| ARCADEIT_DEVICE_AUDIO         // Audio DAC port
       //| ARCADEIT_DEVICE_PARALLEL      // Parallel port
       //| ARCADEIT_DEVICE_USB           // USB port
-        | ARCADEIT_DEVICE_SERIAL_PORT   // Serial port USART 2
+        | ARCADEIT_DEVICE_SERIAL        // Serial port USART 2
         | ARCADEIT_DEVICE_STATUSLED     // Two Status LEDs
         | ARCADEIT_DEVICE_TESTPADS      // System clock test pads
        ;
@@ -608,11 +624,14 @@ void ArcadeIT_Test_Bench (void)
   } // End if.
 
   // --------------------------------------------------------------------------
-  // Shows 256 colors over the serial terminal
   char lString[256];
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  // --------------------------------------------------------------------------
+  // Shows 256 colors over the serial terminal
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
-    ArcadeIT_System_Delay(2000);
+    ArcadeIT_System_Delay(5000);
+
+    ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
 
     ArcadeIT_Status_LED2_Toggle();
 
@@ -639,11 +658,14 @@ void ArcadeIT_Test_Bench (void)
     ArcadeIT_Status_LED2_Toggle();
 
   } // End if.
+
   // --------------------------------------------------------------------------
   // Shows ANSI artwork over the serial terminal
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
-    ArcadeIT_System_Delay(2000);
+    ArcadeIT_System_Delay(5000);
+
+    ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
 
     ArcadeIT_Status_LED2_Toggle();
 
@@ -663,6 +685,144 @@ void ArcadeIT_Test_Bench (void)
     ArcadeIT_Status_LED2_Toggle();
 
   } // End if.
+
+  // --------------------------------------------------------------------------
+  // Shows terminal TUI ANSI widgets demo over the serial terminal
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
+  {
+    ArcadeIT_System_Delay(5000);
+
+    ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
+
+    ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
+
+    label_t  title1   = {1, 0, 220, 18, "OUTPUT1", LABEL_SKIN4_ANSI};
+    frame_t  window1 = {1, 1, 40, 10, 27, 18, title1, FRAME_SKIN_ANSI};
+    slider_h_t sliderh1 = {2, 39, 9, false, 0.0, 10.0, 2.0, 0.0, 0, 0, SLIDER_SKIN_ANSI};
+    slider_v_t sliderv1 = {38, 2, 9, false, 0.0, 10.0, 2.0, 0.0, 0, 0, SLIDER_SKIN_ANSI};
+
+    ArcadeIT_System_Delay(2000);
+    ArcadeIT_Status_LED2_Toggle();
+
+    frame_draw(&window1);
+
+    slider_h_refresh(&sliderh1);
+    slider_v_refresh(&sliderv1);
+
+    char lBufferfg[100], lBufferbg[100];
+    uint8_t lFlags = WINDOW_SLIDER_H | WINDOW_SLIDER_V | WINDOW_TITLE;
+    window_t window2 = {"Window", 1, 6, 20, 10, 0, 0, WINDOW_SKIN_ANSI, lBufferfg, lBufferbg, lFlags};
+    window_draw(&window2);
+    ArcadeIT_System_Delay(2000);
+
+    ArcadeIT_Status_LED2_Toggle();
+
+  } // End if.
+
+  // ---------------------------------------------------------------------------
+  // I2C Tests
+  if (gDevices & ARCADEIT_DEVICE_I2C)
+  {
+    /*
+       This test reads and writes a block of data from/to an I2C 32KB EEPROM
+       24LC256
+                                                      ArcadeIT!
+       Write Protect = 0                                CN15
+       Address = 0                                     +-----+
+                                                       |     |
+                                     Pull-up resistors |     |
+               .-------------.      .-----o-------o----|  1  | VCC
+             .-|             |-.    |     |       |    |     |
+       .-----|1|A0        VCC|8|----'    .-.     .-.   |     |
+       |     '-|             |-'       R1| |   R2| |   |     |
+       |     .-|             |-.     4.7K| | 4.7K| |   |     |
+       o-----|2|A1 24LC256 WP|7|----.    '-'     '-'   |     |
+       |     '-|   EEPROM    |-'    |     |       |    |     |
+       |     .-|   I2C       |-.    |     |       |    |     |
+       o-----|3|A2        SCL|6|----)- ---o-------)----|  3  | SCL
+       |     '-|             |-'    |             |    |     |
+       |     .-|             |-.    |             |    |     |
+       o-----|4|GND       SDA|5|----)- -----------o----|  2  | SDA
+       |     '-|             |-'    |                  |     |
+       |       '-------------'      |                  |     |
+       |                            |             .----|  4  | GND
+       |                            |             |    |     |
+      ===                          ===           ===   |     |
+      GND                          GND           GND   +-----+
+                                                         I2C
+       */
+
+    uint8_t lDataRead = 0x0, lDataToWrite = 0xA5;
+    uint16_t lAddress = 0x0000;
+
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      ArcadeIT_System_Delay(5000);
+
+      ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
+
+      sprintf(lString, "Writing '0x%02X' to memory @ 0x%04X ", lDataToWrite, lAddress);
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+    } // end if
+
+    // Write byte to the memory starting from address 0
+    // Start condition
+    ArcadeIT_I2C_StartCommunication();
+    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_MODE_SELECT);
+    // Send byte: Control byte
+    ArcadeIT_I2C_Send7bitAddress(0xA0, I2C_Direction_Transmitter);
+    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
+    // Send bytes: Set internal 16-bit address
+    ArcadeIT_I2C_Send(lAddress >> 8);
+    ArcadeIT_I2C_Send(lAddress & 0xFF);
+    // Send byte: Data byte
+    ArcadeIT_I2C_Send(lDataToWrite);
+    // End condition
+    ArcadeIT_I2C_EndCommunication();
+    // Wait for internal write operation completed
+    ArcadeIT_System_Delay(5);
+
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      ArcadeIT_Serial_Port_String_Send("-> done!\r\n");
+
+      sprintf(lString, "Reading memory @ 0x%04X ", lAddress);
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+    } // end if
+
+    // Read byte to the memory starting from address 0
+    // Start condition
+    ArcadeIT_I2C_StartCommunication();
+    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_MODE_SELECT);
+    // Send byte: Control byte
+    ArcadeIT_I2C_Send7bitAddress(0xA0, I2C_Direction_Transmitter);
+    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
+    // Send bytes: Set internal 16-bit address
+    ArcadeIT_I2C_Send(lAddress >> 8);
+    ArcadeIT_I2C_Send(lAddress & 0xFF);
+    // Address set, restart communication to switch master in receive mode
+    ArcadeIT_I2C_StartCommunication();
+    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_MODE_SELECT);
+    // Send byte: Control byte
+    ArcadeIT_I2C_Send7bitAddress(0xA0, I2C_Direction_Receiver);
+    // receive a byte without sending an Acknowledge
+    ArcadeIT_I2C_Receive(&lDataRead, I2C_NOACK);
+    // End condition
+    ArcadeIT_I2C_EndCommunication();
+
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      sprintf(lString, "-> 0x%02X, ", lDataRead);
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+      ArcadeIT_Serial_Port_String_Send(lDataRead == lDataToWrite ? "correct\r\n" : "wrong!\r\n");
+
+    } // end if
+
+  } // end if
+
   // ===========================================================================
 #endif
 

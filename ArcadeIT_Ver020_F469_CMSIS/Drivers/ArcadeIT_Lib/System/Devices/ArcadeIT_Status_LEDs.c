@@ -138,7 +138,6 @@ void ArcadeIT_Status_LEDS_Init(void)
   // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED2_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
   SYS_STATUS_LED2_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
-
   // type output
   SYS_STATUS_LED2_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
   SYS_STATUS_LED2_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
@@ -153,7 +152,7 @@ void ArcadeIT_Status_LEDS_Init(void)
   SYS_STATUS_LED2_PER->ODR &= ~(SYS_STATUS_LED2_PIN);
 
   // Shows a message to serial port as debug
-  if (gDevices & ARCADEIT_DEVICE_SERIAL_PORT)
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     ArcadeIT_Serial_Port_String_Send(TEXT_STATUS_LEDS_INITED);
 
