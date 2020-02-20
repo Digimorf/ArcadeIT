@@ -107,7 +107,6 @@
 
 int main(void)
 {
-  //263 7660 BWAH
   ArcadeIT_Test_Bench();
 
   return 0;

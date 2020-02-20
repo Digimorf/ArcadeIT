@@ -244,78 +244,6 @@
 // ---------------------------------------------------------------------------------------
 // Peripherals: SPI1
 // ---------------------------------------------------------------------------------------
-  #define SYS_SD_SPI_TIMEOUT             250
-  #define SYS_SD_SPI_METHOD              DMA
-
-  // SPI Clock = APB2 / pre scaler = 90MHz / prescaler
-  #define SYS_SD_SPI_HIGH                SPI_BaudRatePrescaler_2
-  #define SYS_SD_SPI_LOW                 SPI_BaudRatePrescaler_256
-  #define SYS_SD_SPI_SPEED               SYS_SD_SPI_HIGH
-
-  #define SYS_SD_SPI_DMA_RCC_REG         RCC_AHB1ENR
-  #define SYS_SD_SPI_DMA_RCC_CMD         RCC_AHB1PeriphClockCmd
-  #define SYS_SD_SPI_DMA_RCC_PER         RCC_AHB1Periph_DMA2
-  #define SYS_SD_SPI_DMA_PORT            DMA2
-
-  #define SYS_SD_SPI_DMA_MOSI_STREAM     DMA2_Stream3 // tx
-  #define SYS_SD_SPI_DMA_MOSI_STREAM_CH  DMA_Channel_3
-
-  #define SYS_SD_SPI_DMA_MISO_STREAM     DMA2_Stream2 // rx
-  #define SYS_SD_SPI_DMA_MISO_STREAM_CH  DMA_Channel_3
-
-  #define SYS_SD_SPI_RCC_REG             RCC_APB2ENR
-  #define SYS_SD_SPI_RCC_CMD             RCC_APB2PeriphClockCmd
-  #define SYS_SD_SPI_RCC_PER             RCC_APB2Periph_SPI1
-  #define SYS_SD_SPI_PORT                SPI1
-  #define SYS_SD_SPI_AF                  GPIO_AF_SPI1
-
-  #define SYS_SD_SPI_SCK_RCC_REG         RCC_AHB1ENR
-  #define SYS_SD_SPI_SCK_RCC_CMD         RCC_AHB1PeriphClockCmd
-  #define SYS_SD_SPI_SCK_RCC_PER         RCC_AHB1Periph_GPIOA
-  #define SYS_SD_SPI_SCK_PER             GPIOA
-  #define SYS_SD_SPI_SCK_PIN             GPIO_Pin_5
-  #define SYS_SD_SPI_SCK_SRC             GPIO_PinSource5
-
-  #define SYS_SD_SPI_MOSI_RCC_REG        RCC_AHB1ENR
-  #define SYS_SD_SPI_MOSI_RCC_CMD        RCC_AHB1PeriphClockCmd
-  #define SYS_SD_SPI_MOSI_RCC_PER        RCC_AHB1Periph_GPIOA
-  #define SYS_SD_SPI_MOSI_PER            GPIOA
-  #define SYS_SD_SPI_MOSI_PIN            GPIO_Pin_7
-  #define SYS_SD_SPI_MOSI_SRC            GPIO_PinSource7
-
-  #define SYS_SD_SPI_MISO_RCC_REG        RCC_AHB1ENR
-  #define SYS_SD_SPI_MISO_RCC_CMD        RCC_AHB1PeriphClockCmd
-  #define SYS_SD_SPI_MISO_RCC_PER        RCC_AHB1Periph_GPIOA
-  #define SYS_SD_SPI_MISO_PER            GPIOA
-  #define SYS_SD_SPI_MISO_PIN            GPIO_Pin_6
-  #define SYS_SD_SPI_MISO_SRC            GPIO_PinSource6
-
-  #define SYS_SD_SPI_CS_RCC_REG          RCC_AHB1ENR
-  #define SYS_SD_SPI_CS_RCC_CMD          RCC_AHB1PeriphClockCmd
-  #define SYS_SD_SPI_CS_RCC_PER          RCC_AHB1Periph_GPIOC
-  #define SYS_SD_SPI_CS_PER              GPIOC
-  #define SYS_SD_SPI_CS_PIN              GPIO_Pin_4
-
-  #define USE_DETECT_PIN                 FALSE
-
-  #define SYS_SD_DETECT_RCC_REG          RCC_AHB1ENR
-  #define SYS_SD_DETECT_RCC_CMD          RCC_AHB1PeriphClockCmd
-  #define SYS_SD_DETECT_RCC_PER          RCC_AHB1Periph_GPIOC
-  #define SYS_SD_DETECT_EXT_PER          EXTI_PortSourceGPIOC
-  #define SYS_SD_DETECT_PER              GPIOC
-  #define SYS_SD_DETECT_PIN              GPIO_Pin_5
-  #define SYS_SD_DETECT_SRC              GPIO_PinSource5
-  #define SYS_SD_SPI_PORT_IRQ            EXTI9_5_IRQn
-  #define SYS_SD_SPI_PORT_IRQHANDLER     EXTI9_5_IRQHandler
-
-  // < MACROS >
-  #define SYS_SPI_SLOW()                 { SYS_SD_SPI_PORT->CR1 = (SYS_SD_SPI_PORT->CR1 & ~0x38) | SYS_SD_SPI_LOW;   }   /* Set SCLK = PCLK / 256 */
-  #define SYS_SPI_FAST()                 { SYS_SD_SPI_PORT->CR1 = (SYS_SD_SPI_PORT->CR1 & ~0x38) | SYS_SD_SPI_HIGH;  }   /* Set SCLK = PCLK / 2 */
-
-  #define SYS_SPI_CS_LOW()               GPIO_ResetBits(SYS_SD_SPI_CS_PER, SYS_SD_SPI_CS_PIN)
-  #define SYS_SPI_CS_HIGH()              GPIO_SetBits(SYS_SD_SPI_CS_PER, SYS_SD_SPI_CS_PIN)
-
-  #define TEXT_SPI_PORT_INITED           "SPI port enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: Status LEDs
@@ -329,42 +257,42 @@
   #define ARCADEIT_USB_KEYBOARD_BUFFER_SIZE 64 // bytes
   #define ARCADEIT_USB_TIMER_REFRESH        50 // ms
 
-  #define TEXT_USB_PORT_INITED              "USB port enabled.\n\r"
+  #define TEXT_USB_PORT_INITED   "USB port enabled.\n\r"
 
 // -----------------------------------------------------------------------------
 // Peripherals: VGA
 // -----------------------------------------------------------------------------
 // TODO
-  #define TEXT_VGA_PORT_INITED              "VGA port enabled.\n\r"
+  #define TEXT_VGA_PORT_INITED   "VGA port enabled.\n\r"
 
 // -----------------------------------------------------------------------------
 // Peripherals: Systick
 // -----------------------------------------------------------------------------
 
-  #define TEXT_SYSTICK_INITED               "Systick counter enabled.\n\r"
-  #define SYS_ACTION_TIMEOUT                4000
-  #define ARCADEIT_HCLKS_PER_MS             180000
+  #define TEXT_SYSTICK_INITED    "Systick counter enabled.\n\r"
+  #define SYS_ACTION_TIMEOUT     4000
+  #define ARCADEIT_HCLKS_PER_MS  180000
 
-  #define NVIC_PriorityGroup_0              ((uint32_t)0x700) /*!< 0 bits for pre-emption priority 4 bits for subpriority */
-  #define NVIC_PriorityGroup_1              ((uint32_t)0x600) /*!< 1 bits for pre-emption priority 3 bits for subpriority */
-  #define NVIC_PriorityGroup_2              ((uint32_t)0x500) /*!< 2 bits for pre-emption priority 2 bits for subpriority */
-  #define NVIC_PriorityGroup_3              ((uint32_t)0x400) /*!< 3 bits for pre-emption priority 1 bits for subpriority */
-  #define NVIC_PriorityGroup_4              ((uint32_t)0x300) /*!< 4 bits for pre-emption priority 0 bits for subpriority */
+  #define NVIC_PriorityGroup_0   ((uint32_t)0x700) /*!< 0 bits for pre-emption priority 4 bits for subpriority */
+  #define NVIC_PriorityGroup_1   ((uint32_t)0x600) /*!< 1 bits for pre-emption priority 3 bits for subpriority */
+  #define NVIC_PriorityGroup_2   ((uint32_t)0x500) /*!< 2 bits for pre-emption priority 2 bits for subpriority */
+  #define NVIC_PriorityGroup_3   ((uint32_t)0x400) /*!< 3 bits for pre-emption priority 1 bits for subpriority */
+  #define NVIC_PriorityGroup_4   ((uint32_t)0x300) /*!< 4 bits for pre-emption priority 0 bits for subpriority */
 
 // -----------------------------------------------------------------------------
 // Peripherals: Dynamic Memory Manager
 // -----------------------------------------------------------------------------
 
-  #define TEXT_DMM_ENABLED                  "DMM (Dynamic Memory Manager) enabled.\n\r"
+  #define TEXT_DMM_ENABLED          "DMM (Dynamic Memory Manager) enabled.\n\r"
 
 // -----------------------------------------------------------------------------
 // System settings.
-  #define ARCADEIT_RELEASE_YEAR            18
-  #define ARCADEIT_RELEASE_MONTH           10
-  #define ARCADEIT_RELEASE_DAY             5
-  #define ARCADEIT_RELEASE_HOURS           8
-  #define ARCADEIT_RELEASE_MINUTES         25
-  #define ARCADEIT_RELEASE_SECONDS         10
+  #define ARCADEIT_RELEASE_YEAR     20
+  #define ARCADEIT_RELEASE_MONTH    10
+  #define ARCADEIT_RELEASE_DAY      5
+  #define ARCADEIT_RELEASE_HOURS    8
+  #define ARCADEIT_RELEASE_MINUTES  25
+  #define ARCADEIT_RELEASE_SECONDS  10
 
 // -----------------------------------------------------------------------------
 // This is the list of devices/systems and drivers that can be connected to the system.

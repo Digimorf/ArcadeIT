@@ -72,11 +72,11 @@
 #include <System/Devices/ArcadeIT_TestPads.h>
 #include <System/Devices/ArcadeIT_Status_LEDs.h>
 #include <System/Devices/ArcadeIT_Serial_Port.h>
+#include <System/Devices/ArcadeIT_SPI_Port.h>
 #include <System/Devices/ArcadeIT_I2C_Port.h>
 
 #if 0
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
-#include "System/Peripherals/ArcadeIT_SPI_Port.h"
 #include "System/Peripherals/ArcadeIT_BUS_Port.h"
 #include "System/Peripherals/ArcadeIT_Parallel_Port.h"
 
@@ -544,6 +544,13 @@ void ArcadeIT_ArcadeIT_Start (void)
 
   } // End if.
   // ---------------------------------------------------------------------------
+  // Start the SPI Port
+  if (gDevices & ARCADEIT_DEVICE_SPI1)
+    {
+      ArcadeIT_SPI_Port_Init ();
+
+    } // End if.
+  // ---------------------------------------------------------------------------
   if (gDevices & ARCADEIT_DEVICE_I2C)
   {
     // Starts and configure the serial port.
@@ -579,7 +586,7 @@ void ArcadeIT_Test_Bench (void)
       //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
       //| ARCADEIT_DEVICE_RAM_MODULE    // SRAM expansion
       //| ARCADEIT_DEVICE_EXPANSION     // SLOTS expansion
-      //| ARCADEIT_DEVICE_SPI1          // SPI 1 port
+        | ARCADEIT_DEVICE_SPI1          // SPI 1 port
         | ARCADEIT_DEVICE_I2C           // I2C port
       //| ARCADEIT_DEVICE_LCDS          // LCDs port
       //| ARCADEIT_DEVICE_VGA           // VGA port
@@ -625,17 +632,17 @@ void ArcadeIT_Test_Bench (void)
 
   // --------------------------------------------------------------------------
   char lString[256];
+
   // --------------------------------------------------------------------------
   // Shows 256 colors over the serial terminal
   if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     ArcadeIT_System_Delay(5000);
-
     ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-
     ArcadeIT_Status_LED2_Toggle();
 
     ArcadeIT_Serial_Port_String_Send("ANSI colors table on serial terminal:\n\r");
+    ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
 
     for (uint8_t lRow = 0; lRow < 16; lRow++)
     {
@@ -652,9 +659,8 @@ void ArcadeIT_Test_Bench (void)
 
     } // end for
 
-    sprintf(lString, ATTR_COLOR_256_BG, 20);
-    ArcadeIT_Serial_Port_String_Send(lString);
-
+    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+    ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
     ArcadeIT_Status_LED2_Toggle();
 
   } // End if.
@@ -664,14 +670,11 @@ void ArcadeIT_Test_Bench (void)
   if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     ArcadeIT_System_Delay(5000);
-
     ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-
     ArcadeIT_Status_LED2_Toggle();
 
-    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
     ArcadeIT_Serial_Port_String_Send("ANSI art on serial terminal:\n\r");
-    ArcadeIT_System_Delay(1000);
+    ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
 
     unsigned char *lANSIArtPtr = (unsigned char *)&gANSIDemo1[0];
     for (uint16_t lChar = 0; lChar < 7352; lChar++)
@@ -681,7 +684,7 @@ void ArcadeIT_Test_Bench (void)
     } // end for
 
     ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-
+    ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
     ArcadeIT_Status_LED2_Toggle();
 
   } // End if.
@@ -691,9 +694,10 @@ void ArcadeIT_Test_Bench (void)
   if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     ArcadeIT_System_Delay(5000);
-
     ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
+    ArcadeIT_Status_LED2_Toggle();
 
+    ArcadeIT_Serial_Port_String_Send("TUI widgets for serial terminal:\n\r");
     ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
 
     label_t  title1   = {1, 0, 220, 18, "OUTPUT1", LABEL_SKIN4_ANSI};
@@ -713,8 +717,9 @@ void ArcadeIT_Test_Bench (void)
     uint8_t lFlags = WINDOW_SLIDER_H | WINDOW_SLIDER_V | WINDOW_TITLE;
     window_t window2 = {"Window", 1, 6, 20, 10, 0, 0, WINDOW_SKIN_ANSI, lBufferfg, lBufferbg, lFlags};
     window_draw(&window2);
-    ArcadeIT_System_Delay(2000);
 
+    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+    ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
     ArcadeIT_Status_LED2_Toggle();
 
   } // End if.
@@ -758,8 +763,10 @@ void ArcadeIT_Test_Bench (void)
     if (gDevices & ARCADEIT_DEVICE_SERIAL)
     {
       ArcadeIT_System_Delay(5000);
-
       ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
+      ArcadeIT_Status_LED2_Toggle();
+
+      ArcadeIT_Serial_Port_String_Send("I2C test for EEPROM:\n\r");
 
       sprintf(lString, "Writing '0x%02X' to memory @ 0x%04X ", lDataToWrite, lAddress);
       ArcadeIT_Serial_Port_String_Send(lString);
@@ -819,7 +826,11 @@ void ArcadeIT_Test_Bench (void)
 
       ArcadeIT_Serial_Port_String_Send(lDataRead == lDataToWrite ? "correct\r\n" : "wrong!\r\n");
 
+      ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+      ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
     } // end if
+
+    ArcadeIT_Status_LED2_Toggle();
 
   } // end if
 

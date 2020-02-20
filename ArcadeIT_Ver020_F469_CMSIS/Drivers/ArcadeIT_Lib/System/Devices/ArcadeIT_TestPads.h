@@ -90,12 +90,11 @@
 #define RCC_MCO2Div_4             ((uint32_t)0x30000000)
 #define RCC_MCO2Div_5             ((uint32_t)0x38000000)
 
-#define SYS_TESTPADS_RCC_REG      RCC_AHB1ENR
-#define SYS_TESTPADS_RCC_CMD      RCC_AHB1PeriphClockCmd
-#define SYS_TESTPADS_RCC_PER      RCC_AHB1Periph_GPIOC
+#define SYS_TESTPADS_AF           ((uint8_t)0x0)
 #define SYS_TESTPADS_PER          GPIOC
 #define SYS_TESTPADS_PIN          GPIO_Pin_9
 #define SYS_TESTPADS_PIN_NO       9
+
 #define SYS_TESTPADS_DIV          RCC_MCO2Div_4
 #define SYS_TESTPADS_SRCCLK       RCC_MCO2Source_SYSCLK
 

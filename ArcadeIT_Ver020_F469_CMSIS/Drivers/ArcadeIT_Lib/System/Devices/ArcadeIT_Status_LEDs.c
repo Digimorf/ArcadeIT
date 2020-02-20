@@ -113,17 +113,10 @@ void ArcadeIT_Status_LEDS_Init(void)
   // GPIO pin(PH2) in output
   SYS_STATUS_LED1_PER->MODER   &= ~GPIO_MODER_MODER2;
   SYS_STATUS_LED1_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
-
-  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
-  // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED1_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
   SYS_STATUS_LED1_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
-
-  // type output
   SYS_STATUS_LED1_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
   SYS_STATUS_LED1_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED1_PIN_NO);
-
-  // pull up configuration
   SYS_STATUS_LED1_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
   SYS_STATUS_LED1_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
 
@@ -133,16 +126,10 @@ void ArcadeIT_Status_LEDS_Init(void)
   // GPIO pin(PH3) in output
   SYS_STATUS_LED2_PER->MODER   &= ~GPIO_MODER_MODER3;
   SYS_STATUS_LED2_PER->MODER   |= (((uint32_t)GPIO_Mode_OUT) << lPinPosition);
-
-  // Maximum frequency allowed is 100MHz, so keep it in mind when you want
-  // to test 180MHz, you have to set the divider at least 2
   SYS_STATUS_LED2_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
   SYS_STATUS_LED2_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
-  // type output
   SYS_STATUS_LED2_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
   SYS_STATUS_LED2_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_STATUS_LED2_PIN_NO);
-
-  // pull up configuration
   SYS_STATUS_LED2_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
   SYS_STATUS_LED2_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
 

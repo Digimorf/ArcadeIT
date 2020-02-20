@@ -127,11 +127,13 @@ void ArcadeIT_TestPad_Init
   * RETURNS:     Nothing.
   */
 
-  uint32_t lPinPosition = (SYS_TESTPADS_PIN_NO * 2);
+  uint32_t lPinPosition;
 
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOC) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOC;
 
   // Configure pin PC9 in alternate function 0 (MCO2)
+  lPinPosition = (SYS_TESTPADS_PIN_NO * 2);
+
   SYS_TESTPADS_PER->MODER   &= ~GPIO_MODER_MODER9;
   SYS_TESTPADS_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
 
@@ -139,18 +141,16 @@ void ArcadeIT_TestPad_Init
   // to test 180MHz, you have to set the divider at least 2
   SYS_TESTPADS_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR9;
   SYS_TESTPADS_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
-
-  // type output
   SYS_TESTPADS_PER->OTYPER  &= ~GPIO_OTYPER_OT_9;
   SYS_TESTPADS_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_TESTPADS_PIN_NO);
-
-  // pull up configuration
   SYS_TESTPADS_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR9;
   SYS_TESTPADS_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
+  SYS_TESTPADS_PER->AFR[1] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_TESTPADS_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_TESTPADS_PER->AFR[1] |=  ((uint32_t)(SYS_TESTPADS_AF) << ((uint32_t)((uint32_t)SYS_TESTPADS_PIN_NO & (uint32_t)0x07) * 4));
 
-  // Shows a message to serial port as debug
   ArcadeIT_TestPad_Set(pFrequencySystem, pFrequencyDivider);
 
+  // Shows a message to serial port as debug
   if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
     // Starts and configure the serial port.

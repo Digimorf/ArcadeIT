@@ -185,50 +185,34 @@ void ArcadeIT_Serial_Port_Init
 
   uint32_t lPinPosition;
 
-  lPinPosition = (SYS_SERIAL_TX_PIN_NO * 2);
-
   // ArcadeIT_Serial_Port_Init
   if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOA) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOA;
   if ((RCC->APB1ENR & RCC_APB1Periph_USART2) == FALSE) RCC->APB1ENR |= RCC_APB1Periph_USART2;
   if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA1) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA1;
 
   // Configure the pin PA2 as alternate function 7 (USART Tx).
+  lPinPosition = (SYS_SERIAL_TX_PIN_NO * 2);
   SYS_SERIAL_TX_PER->MODER   &= ~GPIO_MODER_MODER2;
   SYS_SERIAL_TX_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
-
   SYS_SERIAL_TX_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR2;
   SYS_SERIAL_TX_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_50MHz) << lPinPosition);
-
-  // type output
   SYS_SERIAL_TX_PER->OTYPER  &= ~GPIO_OTYPER_OT_2;
   SYS_SERIAL_TX_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_SERIAL_TX_PIN_NO);
-
-  // pull up configuration
   SYS_SERIAL_TX_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR2;
   SYS_SERIAL_TX_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_NOPULL) << lPinPosition);
-
-  // Connect PXx to USARTx_Tx and Rx.
   SYS_SERIAL_TX_PER->AFR[0] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SERIAL_TX_PIN_NO & (uint32_t)0x07) * 4));
   SYS_SERIAL_TX_PER->AFR[0] |=  ((uint32_t)(SYS_SERIAL_TX_AF) << ((uint32_t)((uint32_t)SYS_SERIAL_TX_PIN_NO & (uint32_t)0x07) * 4));
 
-  lPinPosition = (SYS_SERIAL_RX_PIN_NO * 2);
-
   // Configure the pin PA3 as alternate function 7 (USART Rx).
+  lPinPosition = (SYS_SERIAL_RX_PIN_NO * 2);
   SYS_SERIAL_RX_PER->MODER   &= ~GPIO_MODER_MODER3;
   SYS_SERIAL_RX_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
-
   SYS_SERIAL_RX_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR3;
   SYS_SERIAL_RX_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_50MHz) << lPinPosition);
-
-  // type output
   SYS_SERIAL_RX_PER->OTYPER  &= ~GPIO_OTYPER_OT_3;
   SYS_SERIAL_RX_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_SERIAL_RX_PIN_NO);
-
-  // pull up configuration
   SYS_SERIAL_RX_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR3;
   SYS_SERIAL_RX_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_NOPULL) << lPinPosition);
-
-  // Connect PXx to USARTx_Tx and Rx.
   SYS_SERIAL_RX_PER->AFR[0] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SERIAL_RX_PIN_NO & (uint32_t)0x07) * 4)) ;
   SYS_SERIAL_RX_PER->AFR[0] |= ((uint32_t)(SYS_SERIAL_RX_AF) << ((uint32_t)((uint32_t)SYS_SERIAL_RX_PIN_NO & (uint32_t)0x07) * 4));
 
@@ -243,17 +227,17 @@ void ArcadeIT_Serial_Port_Init
   // Clear STOP[13:12] bits
   tmpreg &= (uint32_t)~((uint32_t)USART_CR2_STOP);
 
-  /* Configure the USART Stop Bits, Clock, CPOL, CPHA and LastBit :
-      Set STOP[13:12] bits according to USART_StopBits value */
+  // Configure the USART Stop Bits, Clock, CPOL, CPHA and LastBit :
+  // Set STOP[13:12] bits according to USART_StopBits value
   tmpreg |= (uint32_t)SYS_SERIAL_StopBits_1;
 
-  /* Write to USART CR2 */
+  // Write to USART CR2
   SYS_SERIAL_PORT->CR2 = (uint16_t)tmpreg;
 
-/*---------------------------- USART CR1 Configuration -----------------------*/
+  // USART CR1 Configuration
   tmpreg = SYS_SERIAL_PORT->CR1;
 
-  /* Clear M, PCE, PS, TE and RE bits */
+  // Clear M, PCE, PS, TE and RE bits
   tmpreg &= (uint32_t)~((uint32_t)CR1_CLEAR_MASK);
 
   /* Configure the USART Word Length, Parity and mode:
@@ -264,24 +248,23 @@ void ArcadeIT_Serial_Port_Init
                     | SYS_SERIAL_Parity_No
                     |(SYS_SERIAL_Mode_Rx | SYS_SERIAL_Mode_Tx));
 
-  /* Write to USART CR1 */
+  // Write to USART CR1
   SYS_SERIAL_PORT->CR1 = (uint16_t)tmpreg;
 
-/*---------------------------- USART CR3 Configuration -----------------------*/
+  // USART CR3 Configuration
   tmpreg = SYS_SERIAL_PORT->CR3;
 
-  /* Clear CTSE and RTSE bits */
+  // Clear CTSE and RTSE bits
   tmpreg &= (uint32_t)~((uint32_t)CR3_CLEAR_MASK);
 
-  /* Configure the USART HFC :
-      Set CTSE and RTSE bits according to USART_HardwareFlowControl value */
+  // Configure the USART HFC :
+  //   Set CTSE and RTSE bits according to USART_HardwareFlowControl value
   tmpreg |= SYS_SERIAL_HardwareFlowControl_None;
 
-  /* Write to USART CR3 */
+  // Write to USART CR3
   SYS_SERIAL_PORT->CR3 = (uint16_t)tmpreg;
 
-/*---------------------------- USART BRR Configuration -----------------------*/
-
+  // USART BRR Configuration
   /* From: RM0386, Reference manual, page 1050
 
      30.4.4 Fractional baud rate generation
@@ -306,18 +289,18 @@ void ArcadeIT_Serial_Port_Init
      fraction and the rest for mantissa.‬‬
 */
 
-  /* Configure the USART Baud Rate */
+  // Configure the USART Baud Rate
   apbclock = (((HSE_VALUE / PLL_M) * PLL_N) / PLL_P) >> 2; // for the ArcadeIT! should be 45MHz
 
-  /* Determine the integer part */
+  // Determine the integer part
   if ((SYS_SERIAL_PORT->CR1 & USART_CR1_OVER8) != 0)
   {
-    /* Integer part computing in case Oversampling mode is 8 Samples */
+    // Integer part computing in case Oversampling mode is 8 Samples
     integerdivider = ((25 * apbclock) / (2 * pBaud));
   }
-  else /* if ((USARTx->CR1 & USART_CR1_OVER8) == 0) */
+  else // if ((USARTx->CR1 & USART_CR1_OVER8) == 0)
   {
-    /* Integer part computing in case Oversampling mode is 16 Samples */
+    // Integer part computing in case Oversampling mode is 16 Samples
     integerdivider = ((25 * apbclock) / (4 * pBaud));
     // 25 * 45000000 / 4 * 115200
     // 1125000000 / 460800
@@ -328,19 +311,19 @@ void ArcadeIT_Serial_Port_Init
   // ‭24 * 16 (FOUND 24, we already shift this left of 4 bits to create room for fraction)
   // ‭384 (0x18 << 4 = 0x180)‬
 
-  /* Determine the fractional part */
+  // Determine the fractional part
   fractionaldivider = integerdivider - (100 * (tmpreg >> 4));
   // ‭2441 - 100 * 384 / 16
   // ‭2441 - 38400 / 16
   // ‭2441 - 2400
   // 41 (FOUND 41)
 
-  /* Implement the fractional part in the register */
+  // Implement the fractional part in the register
   if ((SYS_SERIAL_PORT->CR1 & USART_CR1_OVER8) != 0)
   {
     tmpreg |= ((((fractionaldivider * 8) + 50) / 100)) & ((uint8_t)0x07);
   }
-  else /* if ((USARTx->CR1 & USART_CR1_OVER8) == 0) */
+  else // if ((USARTx->CR1 & USART_CR1_OVER8) == 0)
   {
     tmpreg |= ((((fractionaldivider * 16) + 50) / 100)) & ((uint8_t)0x0F);
     // (41 * 16 + 50 / 100) & 0x0F
@@ -354,7 +337,7 @@ void ArcadeIT_Serial_Port_Init
     // 0x180     |  0x7
   }
 
-  /* Write to USART BRR register */
+  // Write to USART BRR register
   SYS_SERIAL_PORT->BRR = (uint16_t)tmpreg;
 
   // Enable the USART2

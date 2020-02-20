@@ -275,41 +275,28 @@ void ArcadeIT_I2C_Port_Init(
   // Configure the pin PH4 as alternate function 4 (I2C SCL).
   SYS_I2C_SCL_PER->MODER   &= ~GPIO_MODER_MODER4;
   SYS_I2C_SCL_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
-
   SYS_I2C_SCL_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR4;
   SYS_I2C_SCL_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_2MHz) << lPinPosition);
-
-  // type output
   SYS_I2C_SCL_PER->OTYPER  &= ~GPIO_OTYPER_OT_4;
   SYS_I2C_SCL_PER->OTYPER  |= (uint16_t)(GPIO_OType_OD << SYS_I2C_SCL_PIN_NO);
-
-  // pull up configuration
   SYS_I2C_SCL_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR4;
   SYS_I2C_SCL_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_NOPULL) << lPinPosition);
-
-  SYS_I2C_SCL_PER->AFR[0] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_I2C_SCL_PIN_NO & (uint32_t)0x07) * 4));
-  SYS_I2C_SCL_PER->AFR[0] |= ((uint32_t)(SYS_I2C_AF) << ((uint32_t)((uint32_t)SYS_I2C_SCL_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_I2C_SCL_PER->AFR[0]  &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_I2C_SCL_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_I2C_SCL_PER->AFR[0]  |= ((uint32_t)(SYS_I2C_AF) << ((uint32_t)((uint32_t)SYS_I2C_SCL_PIN_NO & (uint32_t)0x07) * 4));
 
   lPinPosition = (SYS_I2C_SDA_PIN_NO * 2);
 
   // Configure the pin PH5 as alternate function 4 (I2C SDA).
   SYS_I2C_SDA_PER->MODER   &= ~GPIO_MODER_MODER5;
   SYS_I2C_SDA_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
-
   SYS_I2C_SDA_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR5;
   SYS_I2C_SDA_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_2MHz) << lPinPosition);
-
-  // type output
   SYS_I2C_SDA_PER->OTYPER  &= ~GPIO_OTYPER_OT_5;
   SYS_I2C_SDA_PER->OTYPER  |= (uint16_t)(GPIO_OType_OD << SYS_I2C_SDA_PIN_NO);
-
-  // pull up configuration
   SYS_I2C_SDA_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR5;
   SYS_I2C_SDA_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_NOPULL) << lPinPosition);
-
   SYS_I2C_SDA_PER->AFR[0] &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_I2C_SDA_PIN_NO & (uint32_t)0x07) * 4)) ;
   SYS_I2C_SDA_PER->AFR[0] |= ((uint32_t)(SYS_I2C_AF) << ((uint32_t)((uint32_t)SYS_I2C_SDA_PIN_NO & (uint32_t)0x07) * 4));
-
 
   // reset the I2C peripheral
   I2C2->CR1 |= I2C_CR1_SWRST;

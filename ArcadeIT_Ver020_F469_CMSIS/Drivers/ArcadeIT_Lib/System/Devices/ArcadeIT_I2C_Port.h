@@ -70,85 +70,74 @@
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "System/ArcadeIT_Common.h"
-#include "System/ArcadeIT_Utilities.h"
-#include "System/ArcadeIT_Firmware.h"
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
 
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions.
 // /////////////////////////////////////////////////////////////////////////////
 
-  #define SYS_I2C_RCC_REG                 RCC_APB1ENR
-  #define SYS_I2C_RCC_CMD                 RCC_APB1PeriphClockCmd
-  #define SYS_I2C_RCC_PER                 RCC_APB1Periph_I2C2
-  #define SYS_I2C_PORT                    I2C2
-  #define SYS_I2C_AF                      ((uint8_t)0x04)
+#define SYS_I2C_PORT                    I2C2
+#define SYS_I2C_AF                      ((uint8_t)0x04)
 
-  #define SYS_I2C_SCL_RCC_REG             RCC_AHB1ENR
-  #define SYS_I2C_SCL_RCC_CMD             RCC_AHB1PeriphClockCmd
-  #define SYS_I2C_SCL_RCC_PER             RCC_AHB1Periph_GPIOH
-  #define SYS_I2C_SCL_PER                 GPIOH
-  #define SYS_I2C_SCL_PIN                 GPIO_Pin_4
-  #define SYS_I2C_SCL_PIN_NO              4
-  #define SYS_I2C_SCL_SRC                 GPIO_PinSource4
+#define SYS_I2C_SCL_PER                 GPIOH
+#define SYS_I2C_SCL_PIN                 GPIO_Pin_4
+#define SYS_I2C_SCL_PIN_NO              4
 
-  #define SYS_I2C_SDA_RCC_REG             RCC_AHB1ENR
-  #define SYS_I2C_SDA_RCC_CMD             RCC_AHB1PeriphClockCmd
-  #define SYS_I2C_SDA_RCC_PER             RCC_AHB1Periph_GPIOH
-  #define SYS_I2C_SDA_PER                 GPIOH
-  #define SYS_I2C_SDA_PIN                 GPIO_Pin_5
-  #define SYS_I2C_SDA_PIN_NO              5
-  #define SYS_I2C_SDA_SRC                 GPIO_PinSource5
+#define SYS_I2C_SDA_PER                 GPIOH
+#define SYS_I2C_SDA_PIN                 GPIO_Pin_5
+#define SYS_I2C_SDA_PIN_NO              5
 
-  #define I2C_Mode_I2C                    ((uint16_t)0x0000)
-  #define I2C_Mode_SMBusDevice            ((uint16_t)0x0002)
-  #define I2C_Mode_SMBusHost              ((uint16_t)0x000A)
-  #define I2C_DutyCycle_16_9              ((uint16_t)0x4000)
-  #define I2C_DutyCycle_2                 ((uint16_t)0xBFFF)
-  #define I2C_AcknowledgedAddress_7bit    ((uint16_t)0x4000)
-  #define I2C_AcknowledgedAddress_10bit   ((uint16_t)0xC000)
-  #define I2C_Ack_Enable                  ((uint16_t)0x0400)
-  #define I2C_Ack_Disable                 ((uint16_t)0x0000)
+#define I2C_Mode_I2C                    ((uint16_t)0x0000)
+#define I2C_Mode_SMBusDevice            ((uint16_t)0x0002)
+#define I2C_Mode_SMBusHost              ((uint16_t)0x000A)
+#define I2C_DutyCycle_16_9              ((uint16_t)0x4000)
+#define I2C_DutyCycle_2                 ((uint16_t)0xBFFF)
+#define I2C_AcknowledgedAddress_7bit    ((uint16_t)0x4000)
+#define I2C_AcknowledgedAddress_10bit   ((uint16_t)0xC000)
+#define I2C_Ack_Enable                  ((uint16_t)0x0400)
+#define I2C_Ack_Disable                 ((uint16_t)0x0000)
 
-  #define TEXT_I2C_INITED                 "I2C port enabled.\n\r"
+#define TEXT_I2C_INITED                 "I2C port enabled.\n\r"
 
-  #define FLAG_MASK                       ((uint32_t)0x00FFFFFF)
-  #define ITEN_MASK                       ((uint32_t)0x07000000)
+#define FLAG_MASK                       ((uint32_t)0x00FFFFFF)
+#define ITEN_MASK                       ((uint32_t)0x07000000)
 
-  #define I2C_Direction_Transmitter       ((uint8_t)0x00)
-  #define I2C_Direction_Receiver          ((uint8_t)0x01)
+#define I2C_Direction_Transmitter       ((uint8_t)0x00)
+#define I2C_Direction_Receiver          ((uint8_t)0x01)
 
-  #define I2C_ACK                         1
-  #define I2C_NOACK                       0
+#define I2C_ACK                         1
+#define I2C_NOACK                       0
 
-  #define I2C_TIMEOUT_TIME                180000000
-  #define I2C_DUTY_2                      0
-  #define I2C_DUTY_16_9                   1
+#define I2C_TIMEOUT_TIME                180000000
+#define I2C_DUTY_2                      0
+#define I2C_DUTY_16_9                   1
 
-  // SR2 register flags
-  #define I2C_FLAG_DUALF                  ((uint32_t)0x00800000)
-  #define I2C_FLAG_SMBHOST                ((uint32_t)0x00400000)
-  #define I2C_FLAG_SMBDEFAULT             ((uint32_t)0x00200000)
-  #define I2C_FLAG_GENCALL                ((uint32_t)0x00100000)
-  #define I2C_FLAG_TRA                    ((uint32_t)0x00040000)
-  #define I2C_FLAG_BUSY                   ((uint32_t)0x00020000)
-  #define I2C_FLAG_MSL                    ((uint32_t)0x00010000)
+// SR2 register flags
+#define I2C_FLAG_DUALF                  ((uint32_t)0x00800000)
+#define I2C_FLAG_SMBHOST                ((uint32_t)0x00400000)
+#define I2C_FLAG_SMBDEFAULT             ((uint32_t)0x00200000)
+#define I2C_FLAG_GENCALL                ((uint32_t)0x00100000)
+#define I2C_FLAG_TRA                    ((uint32_t)0x00040000)
+#define I2C_FLAG_BUSY                   ((uint32_t)0x00020000)
+#define I2C_FLAG_MSL                    ((uint32_t)0x00010000)
 
-  // SR1 register flags
-  #define I2C_FLAG_SMBALERT               ((uint32_t)0x10008000)
-  #define I2C_FLAG_TIMEOUT                ((uint32_t)0x10004000)
-  #define I2C_FLAG_PECERR                 ((uint32_t)0x10001000)
-  #define I2C_FLAG_OVR                    ((uint32_t)0x10000800)
-  #define I2C_FLAG_AF                     ((uint32_t)0x10000400)
-  #define I2C_FLAG_ARLO                   ((uint32_t)0x10000200)
-  #define I2C_FLAG_BERR                   ((uint32_t)0x10000100)
-  #define I2C_FLAG_TXE                    ((uint32_t)0x10000080)
-  #define I2C_FLAG_RXNE                   ((uint32_t)0x10000040)
-  #define I2C_FLAG_STOPF                  ((uint32_t)0x10000010)
-  #define I2C_FLAG_ADD10                  ((uint32_t)0x10000008)
-  #define I2C_FLAG_BTF                    ((uint32_t)0x10000004)
-  #define I2C_FLAG_ADDR                   ((uint32_t)0x10000002)
-  #define I2C_FLAG_SB                     ((uint32_t)0x10000001)
+// SR1 register flags
+#define I2C_FLAG_SMBALERT               ((uint32_t)0x10008000)
+#define I2C_FLAG_TIMEOUT                ((uint32_t)0x10004000)
+#define I2C_FLAG_PECERR                 ((uint32_t)0x10001000)
+#define I2C_FLAG_OVR                    ((uint32_t)0x10000800)
+#define I2C_FLAG_AF                     ((uint32_t)0x10000400)
+#define I2C_FLAG_ARLO                   ((uint32_t)0x10000200)
+#define I2C_FLAG_BERR                   ((uint32_t)0x10000100)
+#define I2C_FLAG_TXE                    ((uint32_t)0x10000080)
+#define I2C_FLAG_RXNE                   ((uint32_t)0x10000040)
+#define I2C_FLAG_STOPF                  ((uint32_t)0x10000010)
+#define I2C_FLAG_ADD10                  ((uint32_t)0x10000008)
+#define I2C_FLAG_BTF                    ((uint32_t)0x10000004)
+#define I2C_FLAG_ADDR                   ((uint32_t)0x10000002)
+#define I2C_FLAG_SB                     ((uint32_t)0x10000001)
 
 // I2C Master Events (Events grouped in order of communication)
 /*

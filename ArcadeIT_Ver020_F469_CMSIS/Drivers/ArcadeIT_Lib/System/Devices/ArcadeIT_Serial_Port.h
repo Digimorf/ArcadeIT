@@ -96,17 +96,11 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions.
 // /////////////////////////////////////////////////////////////////////////////
-  #define SYS_SERIAL_TX_RCC_REG               RCC_AHB1ENR
-  #define SYS_SERIAL_TX_RCC_CMD               RCC_AHB1PeriphClockCmd
-  #define SYS_SERIAL_TX_RCC_PER               RCC_AHB1Periph_GPIOA
   #define SYS_SERIAL_TX_PER                   GPIOA
   #define SYS_SERIAL_TX_PIN                   GPIO_Pin_2
   #define SYS_SERIAL_TX_PIN_NO                2
   #define SYS_SERIAL_TX_AF                    ((uint8_t)0x07)
 
-  #define SYS_SERIAL_RX_RCC_REG               RCC_AHB1ENR
-  #define SYS_SERIAL_RX_RCC_CMD               RCC_AHB1PeriphClockCmd
-  #define SYS_SERIAL_RX_RCC_PER               RCC_AHB1Periph_GPIOA
   #define SYS_SERIAL_RX_PER                   GPIOA
   #define SYS_SERIAL_RX_PIN                   GPIO_Pin_3
   #define SYS_SERIAL_RX_PIN_NO                3
@@ -115,9 +109,6 @@
   #define SYS_SERIAL_IRQ                      USART2_IRQn
   #define SYS_SERIAL_IRQ_HANDLER              USART2_IRQHandler
 
-  #define SYS_SERIAL_RCC_REG                  RCC_APB1ENR
-  #define SYS_SERIAL_RCC_CMD                  RCC_APB1PeriphClockCmd
-  #define SYS_SERIAL_RCC_PER                  RCC_APB1Periph_USART2
   #define SYS_SERIAL_PORT                     USART2
 
   #define SYS_SERIAL_StopBits_1               ((uint16_t)0x0000)
