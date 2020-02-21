@@ -16,7 +16,7 @@
  * @file    ArcadeIT_SPI_Port.h
  * @version V0.13
  * @date    26-07-2017
- * @last    20-02-2020
+ * @last    21-02-2020
  * @brief   This library is used to drive the SPI port at low level.
  *
  ******************************************************************************
@@ -144,7 +144,6 @@ uint8_t ArcadeIT_SPI_Port_RW_Byte
 
 } // End ArcadeIT_SPI_Port_RW_Byte.
 
-#if SYS_SD_SPI_METHOD == NORMAL
 // /////////////////////////////////////////////////////////////////////////////
 void ArcadeIT_SPI_Port_Read_Buffer
 (
@@ -152,6 +151,12 @@ void ArcadeIT_SPI_Port_Read_Buffer
   uint32_t pNumberOfBytes // Number of bytes to receive.
 )
 {
+  /*
+  * DESCRIPTION: This function is used to read a block of memory from the SPI port.
+  * PARAMETERS:  See above.
+  * RETURNS:     Nothing.
+  */
+
   uint8_t lData;
 
   for (uint32_t lBytes = 0; lBytes < pNumberOfBytes; lBytes++)
@@ -171,6 +176,11 @@ void ArcadeIT_SPI_Port_Write_Buffer
   uint32_t pNumberOfBytes // Number of bytes to send.
 )
 {
+  /*
+  * DESCRIPTION: This function is used to write a block of memory to the SPI port.
+  * PARAMETERS:  See above.
+  * RETURNS:     Nothing.
+  */
 
   for (uint32_t lBytes = 0; lBytes < pNumberOfBytes; lBytes++)
   {
@@ -181,88 +191,10 @@ void ArcadeIT_SPI_Port_Write_Buffer
 
 } // End ArcadeIT_SPI_Port_Write_Buffer.
 
-#elif SYS_SD_SPI_METHOD == DMA
-
 // /////////////////////////////////////////////////////////////////////////////
-void ArcadeIT_SPI_Port_Read_Buffer
-(
-  uint8_t *pBuffer,       // Pointer to data buffer.
-  uint32_t pNumberOfBytes // Number of bytes to receive.
-)
-{
-  uint32_t rw_workbyte = DUMMY_BYTE;
-
-  // Rx buffer.
-  SYS_SD_SPI_DMA_MISO_STREAM->CR &= ((uint32_t)~(DMA_SxCR_MINC | DMA_SxCR_PINC | DMA_SxCR_DIR ));
-  SYS_SD_SPI_DMA_MISO_STREAM->CR |= ( DMA_DIR_PeripheralToMemory | DMA_MemoryInc_Enable | DMA_PeripheralInc_Disable );
-  SYS_SD_SPI_DMA_MISO_STREAM->NDTR = (uint16_t)pNumberOfBytes;
-  SYS_SD_SPI_DMA_MISO_STREAM->PAR = (uint32_t)&SYS_SD_SPI_PORT->DR;
-  SYS_SD_SPI_DMA_MISO_STREAM->M0AR = (uint32_t)pBuffer;
-
-  // Tx dummy byte.
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR &= ((uint32_t)~(DMA_SxCR_MINC | DMA_SxCR_PINC | DMA_SxCR_DIR ));
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR |= ( DMA_DIR_MemoryToPeripheral | DMA_MemoryInc_Disable | DMA_PeripheralInc_Disable );
-  SYS_SD_SPI_DMA_MOSI_STREAM->NDTR = (uint16_t)pNumberOfBytes;
-  SYS_SD_SPI_DMA_MOSI_STREAM->PAR = (uint32_t)&SYS_SD_SPI_PORT->DR;
-  SYS_SD_SPI_DMA_MOSI_STREAM->M0AR = (uint32_t)&rw_workbyte;
-
-  SYS_SD_SPI_PORT->CR2 |= SPI_I2S_DMAReq_Rx | SPI_I2S_DMAReq_Tx;
-  SYS_SD_SPI_DMA_MISO_STREAM->CR |= (uint32_t)DMA_SxCR_EN;
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR |= (uint32_t)DMA_SxCR_EN;
-
-  while (DMA_GetFlagStatus(SYS_SD_SPI_DMA_MISO_STREAM, DMA_FLAG_TCIF2)==RESET);
-  while (DMA_GetFlagStatus(SYS_SD_SPI_DMA_MOSI_STREAM, DMA_FLAG_TCIF3)==RESET);
-
-  DMA_ClearFlag(SYS_SD_SPI_DMA_MISO_STREAM, DMA_FLAG_TCIF2);
-  DMA_ClearFlag(SYS_SD_SPI_DMA_MOSI_STREAM, DMA_FLAG_TCIF3);
-
-  SYS_SD_SPI_PORT->CR2 &= (uint16_t)~SPI_I2S_DMAReq_Rx | SPI_I2S_DMAReq_Tx;
-  SYS_SD_SPI_DMA_MISO_STREAM->CR &= ~(uint32_t)DMA_SxCR_EN;
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR &= ~(uint32_t)DMA_SxCR_EN;
-
-} // End ArcadeIT_SPI_Port_Read_Buffer.
-
-// /////////////////////////////////////////////////////////////////////////////
-void ArcadeIT_SPI_Port_Write_Buffer
-(
-  uint8_t *pBuffer,       // Pointer to data buffer.
-  uint32_t pNumberOfBytes // Number of bytes to send.
-)
-{
-  uint32_t rw_workbyte = DUMMY_BYTE;
-
-  // Rx buffer.
-  SYS_SD_SPI_DMA_MISO_STREAM->CR &= ((uint32_t)~(DMA_SxCR_MINC | DMA_SxCR_PINC | DMA_SxCR_DIR ));
-  SYS_SD_SPI_DMA_MISO_STREAM->CR |= ( DMA_DIR_PeripheralToMemory | DMA_MemoryInc_Disable | DMA_PeripheralInc_Disable );
-  SYS_SD_SPI_DMA_MISO_STREAM->NDTR = (uint16_t)pNumberOfBytes;
-  SYS_SD_SPI_DMA_MISO_STREAM->PAR = (uint32_t)&SYS_SD_SPI_PORT->DR;
-  SYS_SD_SPI_DMA_MISO_STREAM->M0AR = (uint32_t)&rw_workbyte;
-
-  // Tx dummy byte.
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR &= ((uint32_t)~(DMA_SxCR_MINC | DMA_SxCR_PINC | DMA_SxCR_DIR ));
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR |= ( DMA_DIR_MemoryToPeripheral | DMA_MemoryInc_Enable | DMA_PeripheralInc_Disable );
-  SYS_SD_SPI_DMA_MOSI_STREAM->NDTR = (uint16_t)pNumberOfBytes;
-  SYS_SD_SPI_DMA_MOSI_STREAM->PAR = (uint32_t)&SYS_SD_SPI_PORT->DR;
-  SYS_SD_SPI_DMA_MOSI_STREAM->M0AR = (uint32_t)pBuffer;
-
-  SYS_SD_SPI_PORT->CR2 |= SPI_I2S_DMAReq_Rx | SPI_I2S_DMAReq_Tx;
-  SYS_SD_SPI_DMA_MISO_STREAM->CR |= (uint32_t)DMA_SxCR_EN;
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR |= (uint32_t)DMA_SxCR_EN;
-
-  while (DMA_GetFlagStatus(SYS_SD_SPI_DMA_MISO_STREAM, DMA_FLAG_TCIF2)==RESET);
-  while (DMA_GetFlagStatus(SYS_SD_SPI_DMA_MOSI_STREAM, DMA_FLAG_TCIF3)==RESET);
-
-  DMA_ClearFlag(SYS_SD_SPI_DMA_MISO_STREAM, DMA_FLAG_TCIF2);
-  DMA_ClearFlag(SYS_SD_SPI_DMA_MOSI_STREAM, DMA_FLAG_TCIF3);
-
-  SYS_SD_SPI_PORT->CR2 &= (uint16_t)~SPI_I2S_DMAReq_Rx | SPI_I2S_DMAReq_Tx;
-  SYS_SD_SPI_DMA_MISO_STREAM->CR &= ~(uint32_t)DMA_SxCR_EN;
-  SYS_SD_SPI_DMA_MOSI_STREAM->CR &= ~(uint32_t)DMA_SxCR_EN;
-
-} // End ArcadeIT_SPI_Port_Write_Buffer.
-#endif
-// /////////////////////////////////////////////////////////////////////////////
-int ArcadeIT_SPI_Port_Init (void)
+int ArcadeIT_SPI_Port_Init (
+  uint16_t pClock // the clock frequency to set the SPI port
+  )
 {
   /*
    * DESCRIPTION: Enables and configures the SPI port of the ArcadeIT! system.
@@ -286,9 +218,10 @@ int ArcadeIT_SPI_Port_Init (void)
   SYS_SD_SPI_SCK_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR5;
   SYS_SD_SPI_SCK_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
   SYS_SD_SPI_SCK_PER->OTYPER  &= ~GPIO_OTYPER_OT_5;
-  SYS_SD_SPI_SCK_PER->OTYPER  |= (uint16_t)(GPIO_OType_OD << SYS_SD_SPI_SCK_PIN_NO);
+  SYS_SD_SPI_SCK_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_SD_SPI_SCK_PIN_NO);
   SYS_SD_SPI_SCK_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR5;
   SYS_SD_SPI_SCK_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+
   SYS_SD_SPI_SCK_PER->AFR[0]  &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SD_SPI_SCK_PIN_NO & (uint32_t)0x07) * 4));
   SYS_SD_SPI_SCK_PER->AFR[0]  |= ((uint32_t)(SYS_SD_SPI_AF) << ((uint32_t)((uint32_t)SYS_SD_SPI_SCK_PIN_NO & (uint32_t)0x07) * 4));
 
@@ -300,25 +233,27 @@ int ArcadeIT_SPI_Port_Init (void)
   SYS_SD_SPI_MOSI_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR7;
   SYS_SD_SPI_MOSI_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
   SYS_SD_SPI_MOSI_PER->OTYPER  &= ~GPIO_OTYPER_OT_7;
-  SYS_SD_SPI_MOSI_PER->OTYPER  |= (uint16_t)(GPIO_OType_OD << SYS_SD_SPI_MOSI_PIN_NO);
+  SYS_SD_SPI_MOSI_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_SD_SPI_MOSI_PIN_NO);
   SYS_SD_SPI_MOSI_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR7;
   SYS_SD_SPI_MOSI_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
+
   SYS_SD_SPI_MOSI_PER->AFR[0]  &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SD_SPI_MOSI_PIN_NO & (uint32_t)0x07) * 4));
   SYS_SD_SPI_MOSI_PER->AFR[0]  |= ((uint32_t)(SYS_SD_SPI_AF) << ((uint32_t)((uint32_t)SYS_SD_SPI_MOSI_PIN_NO & (uint32_t)0x07) * 4));
 
-  // Configure the output line MOSI as alternate function.
-  lPinPosition = (SYS_SD_SPI_MOSI_PIN_NO * 2);
+  // Configure the output line MISO as alternate function.
+  lPinPosition = (SYS_SD_SPI_MISO_PIN_NO * 2);
 
-  SYS_SD_SPI_MOSI_PER->MODER   &= ~GPIO_MODER_MODER7;
-  SYS_SD_SPI_MOSI_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
-  SYS_SD_SPI_MOSI_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR7;
-  SYS_SD_SPI_MOSI_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
-  SYS_SD_SPI_MOSI_PER->OTYPER  &= ~GPIO_OTYPER_OT_7;
-  SYS_SD_SPI_MOSI_PER->OTYPER  |= (uint16_t)(GPIO_OType_OD << SYS_SD_SPI_MOSI_PIN_NO);
-  SYS_SD_SPI_MOSI_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR7;
-  SYS_SD_SPI_MOSI_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_DOWN) << lPinPosition);
-  SYS_SD_SPI_MOSI_PER->AFR[0]  &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SD_SPI_MOSI_PIN_NO & (uint32_t)0x07) * 4));
-  SYS_SD_SPI_MOSI_PER->AFR[0]  |= ((uint32_t)(SYS_SD_SPI_AF) << ((uint32_t)((uint32_t)SYS_SD_SPI_MOSI_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_SD_SPI_MISO_PER->MODER   &= ~GPIO_MODER_MODER6;
+  SYS_SD_SPI_MISO_PER->MODER   |= (((uint32_t)GPIO_Mode_AF) << lPinPosition);
+  SYS_SD_SPI_MISO_PER->OSPEEDR &= ~GPIO_OSPEEDER_OSPEEDR6;
+  SYS_SD_SPI_MISO_PER->OSPEEDR |= ((uint32_t)(GPIO_Speed_100MHz) << lPinPosition);
+  SYS_SD_SPI_MISO_PER->OTYPER  &= ~GPIO_OTYPER_OT_6;
+  SYS_SD_SPI_MISO_PER->OTYPER  |= (uint16_t)(GPIO_OType_PP << SYS_SD_SPI_MISO_PIN_NO);
+  SYS_SD_SPI_MISO_PER->PUPDR   &= ~GPIO_PUPDR_PUPDR6;
+  SYS_SD_SPI_MISO_PER->PUPDR   |= (((uint32_t)GPIO_PuPd_UP) << lPinPosition);
+
+  SYS_SD_SPI_MISO_PER->AFR[0]  &= ~((uint32_t)0xF << ((uint32_t)((uint32_t)SYS_SD_SPI_MISO_PIN_NO & (uint32_t)0x07) * 4));
+  SYS_SD_SPI_MISO_PER->AFR[0]  |= ((uint32_t)(SYS_SD_SPI_AF) << ((uint32_t)((uint32_t)SYS_SD_SPI_MISO_PIN_NO & (uint32_t)0x07) * 4));
 
   // Configure the output line CS as a normal output GPIO.
   lPinPosition = (SYS_SD_SPI_CS_PIN_NO * 2);
@@ -336,34 +271,6 @@ int ArcadeIT_SPI_Port_Init (void)
   // CS1 0 1 0 1
   SYS_SPI_CS_HIGH();
 
-  #if (USE_DETECT_PIN == TRUE)
-  // Configure the input line SD Detect as a normal input GPIO, but this will be
-  // connected to an EXTI interrupt.
-  lGPIO_InitStructure.GPIO_Pin   = SYS_SD_DETECT_PIN;
-  lGPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN;
-  lGPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  lGPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-  lGPIO_InitStructure.GPIO_PuPd  = GPIO_PuPd_UP;
-  GPIO_Init (SYS_SD_DETECT_PER, &lGPIO_InitStructure);
-
-  // Configure the interrupt line on the SD detect.
-  // Connect EXTI8 Line to SD Detect pin
-  SYSCFG_EXTILineConfig(SYS_SD_DETECT_EXT_PER, SYS_SD_DETECT_SRC);
-
-  //  Configure EXTI8 line
-  lEXTI_InitStructure.EXTI_Line    = SYS_SD_DETECT_SRC;
-  lEXTI_InitStructure.EXTI_Mode    = EXTI_Mode_Interrupt;
-  lEXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling; // either edge issues an interrupt
-  lEXTI_InitStructure.EXTI_LineCmd = ENABLE;
-  EXTI_Init(&lEXTI_InitStructure);
-
-  // Enable and set EXTI4_15 Interrupt
-  lNVIC_InitStructure.NVIC_IRQChannel                   = SYS_SD_SPI_PORT_IRQ;
-  lNVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  lNVIC_InitStructure.NVIC_IRQChannelCmd                = ENABLE;
-  NVIC_Init(&lNVIC_InitStructure);
-  #endif
-
   // SPI configuration.
   // Reset SPI
   RCC->APB2RSTR |= RCC_APB2Periph_SPI1;
@@ -376,46 +283,10 @@ int ArcadeIT_SPI_Port_Init (void)
                          | SPI_CPOL_Low
                          | SPI_CPHA_1Edge
                          | SPI_NSS_Soft
-                         | SYS_SD_SPI_SPEED
+                         | pClock
                          | SPI_FirstBit_MSB);
 
   SYS_SD_SPI_PORT->CR1 |= SPI_CR1_SPE;
-
-#if (SYS_SD_SPI_METHOD == DMA)
-  // DMA Streams
-  DMA_InitTypeDef         lDMA_InitStructure;
-
-  if ((SYS_SD_SPI_DMA_RCC_REG & SYS_SD_SPI_DMA_RCC_PER) == FALSE) SYS_SD_SPI_DMA_RCC_CMD(SYS_SD_SPI_DMA_RCC_PER, ENABLE);
-
-  DMA_DeInit(SYS_SD_SPI_DMA_MOSI_STREAM); //SPI1_TX_DMA_STREAM
-  DMA_DeInit(SYS_SD_SPI_DMA_MISO_STREAM); //SPI1_RX_DMA_STREAM
-  DMA_StructInit(&lDMA_InitStructure);
-
-  lDMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
-  lDMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_1QuarterFull;
-  lDMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-  lDMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-  lDMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-  lDMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-  lDMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)NULL;
-  lDMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&SYS_SD_SPI_PORT->DR;
-  lDMA_InitStructure.DMA_BufferSize = (uint16_t)1;
-  lDMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-  lDMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
-  lDMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-  lDMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-  lDMA_InitStructure.DMA_Priority = DMA_Priority_High;
-
-  // Configure Tx DMA.
-  lDMA_InitStructure.DMA_Channel = SYS_SD_SPI_DMA_MOSI_STREAM_CH;
-  lDMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-  DMA_Init(SYS_SD_SPI_DMA_MOSI_STREAM, &lDMA_InitStructure);
-
-  // Configure Rx DMA.
-  lDMA_InitStructure.DMA_Channel = SYS_SD_SPI_DMA_MISO_STREAM_CH;
-  lDMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
-  DMA_Init(SYS_SD_SPI_DMA_MISO_STREAM, &lDMA_InitStructure);
-#endif
 
   if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {

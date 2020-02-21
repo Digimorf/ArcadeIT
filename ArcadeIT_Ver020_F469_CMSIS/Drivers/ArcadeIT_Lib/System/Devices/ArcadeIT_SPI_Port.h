@@ -16,7 +16,7 @@
  * @file    ArcadeIT_SPI_Port.h
  * @version V0.13
  * @date    26-07-2017
- * @last    20-02-2020
+ * @last    21-02-2020
  * @brief   This library is used to drive the SPI port at low level.
  *
  ******************************************************************************
@@ -90,14 +90,23 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Definitions.
 // /////////////////////////////////////////////////////////////////////////////
-#define SPI_BaudRatePrescaler_2        ((uint16_t)0x0000)
-#define SPI_BaudRatePrescaler_4        ((uint16_t)0x0008)
-#define SPI_BaudRatePrescaler_8        ((uint16_t)0x0010)
-#define SPI_BaudRatePrescaler_16       ((uint16_t)0x0018)
-#define SPI_BaudRatePrescaler_32       ((uint16_t)0x0020)
-#define SPI_BaudRatePrescaler_64       ((uint16_t)0x0028)
-#define SPI_BaudRatePrescaler_128      ((uint16_t)0x0030)
-#define SPI_BaudRatePrescaler_256      ((uint16_t)0x0038)
+#define SPI_BaudRatePrescaler_2         ((uint16_t)0x0000) // 50.00 MHz
+#define SPI_BaudRatePrescaler_4         ((uint16_t)0x0008) // 25.00 MHz
+#define SPI_BaudRatePrescaler_8         ((uint16_t)0x0010) // 12.50 MHz
+#define SPI_BaudRatePrescaler_16        ((uint16_t)0x0018) //  6.25 MHz
+#define SPI_BaudRatePrescaler_32        ((uint16_t)0x0020) //  3.12 MHz
+#define SPI_BaudRatePrescaler_64        ((uint16_t)0x0028) //  1.56 MHz
+#define SPI_BaudRatePrescaler_128       ((uint16_t)0x0030) //  0.78 MHz
+#define SPI_BaudRatePrescaler_256       ((uint16_t)0x0038) //  0.39 MHz
+
+#define SPI_FREQ_50_00_MHz              SPI_BaudRatePrescaler_2
+#define SPI_FREQ_25_00_MHz              SPI_BaudRatePrescaler_4
+#define SPI_FREQ_12_50_MHz              SPI_BaudRatePrescaler_8
+#define SPI_FREQ_6_25_MHz               SPI_BaudRatePrescaler_16
+#define SPI_FREQ_3_12_MHz               SPI_BaudRatePrescaler_32
+#define SPI_FREQ_1_56_MHz               SPI_BaudRatePrescaler_64
+#define SPI_FREQ_0_78_MHz               SPI_BaudRatePrescaler_128
+#define SPI_FREQ_0_39_MHz               SPI_BaudRatePrescaler_256
 
 #define SPI_Direction_2Lines_FullDuplex ((uint16_t)0x0000)
 #define SPI_Mode_Master                 ((uint16_t)0x0104)
@@ -106,72 +115,70 @@
 #define SPI_CPHA_1Edge                  ((uint16_t)0x0000)
 #define SPI_NSS_Soft                    ((uint16_t)0x0200)
 #define SPI_FirstBit_MSB                ((uint16_t)0x0000)
-#define SPI_I2S_FLAG_RXNE              ((uint16_t)0x0001)
-#define SPI_I2S_FLAG_TXE               ((uint16_t)0x0002)
+#define SPI_I2S_FLAG_RXNE               ((uint16_t)0x0001)
+#define SPI_I2S_FLAG_TXE                ((uint16_t)0x0002)
 
-#define DMA_Channel_0                  ((uint32_t)0x00000000)
-#define DMA_Channel_1                  ((uint32_t)0x02000000)
-#define DMA_Channel_2                  ((uint32_t)0x04000000)
-#define DMA_Channel_3                  ((uint32_t)0x06000000)
-#define DMA_Channel_4                  ((uint32_t)0x08000000)
-#define DMA_Channel_5                  ((uint32_t)0x0A000000)
-#define DMA_Channel_6                  ((uint32_t)0x0C000000)
-#define DMA_Channel_7                  ((uint32_t)0x0E000000)
+#define DMA_Channel_0                   ((uint32_t)0x00000000)
+#define DMA_Channel_1                   ((uint32_t)0x02000000)
+#define DMA_Channel_2                   ((uint32_t)0x04000000)
+#define DMA_Channel_3                   ((uint32_t)0x06000000)
+#define DMA_Channel_4                   ((uint32_t)0x08000000)
+#define DMA_Channel_5                   ((uint32_t)0x0A000000)
+#define DMA_Channel_6                   ((uint32_t)0x0C000000)
+#define DMA_Channel_7                   ((uint32_t)0x0E000000)
 
-#define SYS_SD_SPI_TIMEOUT             250
+#define SYS_SD_SPI_TIMEOUT              250
 #define NORMAL 0
 #define DMA    1
-#define SYS_SD_SPI_METHOD              NORMAL//DMA
+#define SYS_SD_SPI_METHOD               NORMAL//DMA
 
 // SPI Clock = APB2 / pre scaler = 90MHz / prescaler
-#define SYS_SD_SPI_HIGH                SPI_BaudRatePrescaler_2
-#define SYS_SD_SPI_LOW                 SPI_BaudRatePrescaler_256
-#define SYS_SD_SPI_SPEED               SYS_SD_SPI_HIGH
+#define SYS_SD_SPI_SPEED                SPI_FREQ_3_12_MHz
 
-#define SYS_SD_SPI_DMA_PORT            DMA2
+#define SYS_SD_SPI_DMA_PORT             DMA2
 
-#define SYS_SD_SPI_DMA_MOSI_STREAM     DMA2_Stream3 // tx
-#define SYS_SD_SPI_DMA_MOSI_STREAM_CH  DMA_Channel_3
+#define SYS_SD_SPI_DMA_MOSI_STREAM      DMA2_Stream3 // tx
+#define SYS_SD_SPI_DMA_MOSI_STREAM_CH   DMA_Channel_3
 
-#define SYS_SD_SPI_DMA_MISO_STREAM     DMA2_Stream2 // rx
-#define SYS_SD_SPI_DMA_MISO_STREAM_CH  DMA_Channel_3
+#define SYS_SD_SPI_DMA_MISO_STREAM      DMA2_Stream2 // rx
+#define SYS_SD_SPI_DMA_MISO_STREAM_CH   DMA_Channel_3
 
-#define SYS_SD_SPI_PORT                SPI1
-#define SYS_SD_SPI_AF                  ((uint8_t)0x05)
+#define SYS_SD_SPI_PORT                 SPI1
+#define SYS_SD_SPI_AF                   ((uint8_t)0x05)
 
-#define SYS_SD_SPI_SCK_PER             GPIOA
-#define SYS_SD_SPI_SCK_PIN             GPIO_Pin_5
-#define SYS_SD_SPI_SCK_PIN_NO          5
+#define SYS_SD_SPI_SCK_PER              GPIOA
+#define SYS_SD_SPI_SCK_PIN              GPIO_Pin_5
+#define SYS_SD_SPI_SCK_PIN_NO           5
 
-#define SYS_SD_SPI_MOSI_PER            GPIOA
-#define SYS_SD_SPI_MOSI_PIN            GPIO_Pin_7
-#define SYS_SD_SPI_MOSI_PIN_NO         7
+#define SYS_SD_SPI_MOSI_PER             GPIOA
+#define SYS_SD_SPI_MOSI_PIN             GPIO_Pin_7
+#define SYS_SD_SPI_MOSI_PIN_NO          7
 
-#define SYS_SD_SPI_MISO_PER            GPIOA
-#define SYS_SD_SPI_MISO_PIN            GPIO_Pin_6
-#define SYS_SD_SPI_MISO_PIN_NO         6
+#define SYS_SD_SPI_MISO_PER             GPIOA
+#define SYS_SD_SPI_MISO_PIN             GPIO_Pin_6
+#define SYS_SD_SPI_MISO_PIN_NO          6
 
-#define SYS_SD_SPI_CS_PER              GPIOC
-#define SYS_SD_SPI_CS_PIN              GPIO_Pin_4
-#define SYS_SD_SPI_CS_PIN_NO           4
+#define SYS_SD_SPI_CS_PER               GPIOC
+#define SYS_SD_SPI_CS_PIN               GPIO_Pin_4
+#define SYS_SD_SPI_CS_PIN_NO            4
 
-#define USE_DETECT_PIN                 FALSE
+#define USE_DETECT_PIN                  FALSE
 
-#define SYS_SD_DETECT_EXT_PER          EXTI_PortSourceGPIOC
-#define SYS_SD_DETECT_PER              GPIOC
-#define SYS_SD_DETECT_PIN              GPIO_Pin_5
-#define SYS_SD_DETECT_PIN_NO           5
-#define SYS_SD_SPI_PORT_IRQ            EXTI9_5_IRQn
-#define SYS_SD_SPI_PORT_IRQHANDLER     EXTI9_5_IRQHandler
+#define SYS_SD_DETECT_EXT_PER           EXTI_PortSourceGPIOC
+#define SYS_SD_DETECT_PER               GPIOC
+#define SYS_SD_DETECT_PIN               GPIO_Pin_5
+#define SYS_SD_DETECT_PIN_NO            5
+#define SYS_SD_SPI_PORT_IRQ             EXTI9_5_IRQn
+#define SYS_SD_SPI_PORT_IRQHANDLER      EXTI9_5_IRQHandler
 
 // MACROS
-#define SYS_SPI_SLOW()                 { SYS_SD_SPI_PORT->CR1 = (SYS_SD_SPI_PORT->CR1 & ~0x38) | SYS_SD_SPI_LOW;   }   /* Set SCLK = PCLK / 256 */
-#define SYS_SPI_FAST()                 { SYS_SD_SPI_PORT->CR1 = (SYS_SD_SPI_PORT->CR1 & ~0x38) | SYS_SD_SPI_HIGH;  }   /* Set SCLK = PCLK / 2 */
+#define SYS_SPI_SLOW()                  { SYS_SD_SPI_PORT->CR1 = (SYS_SD_SPI_PORT->CR1 & ~0x38) | SYS_SD_SPI_LOW;   }   /* Set SCLK = PCLK / 256 */
+#define SYS_SPI_FAST()                  { SYS_SD_SPI_PORT->CR1 = (SYS_SD_SPI_PORT->CR1 & ~0x38) | SYS_SD_SPI_HIGH;  }   /* Set SCLK = PCLK / 2 */
 
-#define SYS_SPI_CS_LOW()               { SYS_SD_SPI_CS_PER->ODR &= ~SYS_SD_SPI_CS_PIN; }
-#define SYS_SPI_CS_HIGH()              { SYS_SD_SPI_CS_PER->ODR |= SYS_SD_SPI_CS_PIN; }
+#define SYS_SPI_CS_LOW()                { SYS_SD_SPI_CS_PER->ODR &= ~SYS_SD_SPI_CS_PIN; }
+#define SYS_SPI_CS_HIGH()               { SYS_SD_SPI_CS_PER->ODR |= SYS_SD_SPI_CS_PIN; }
 
-#define TEXT_SPI_PORT_INITED           "SPI port enabled.\n\r"
+#define TEXT_SPI_PORT_INITED            "SPI port enabled.\n\r"
 
 // /////////////////////////////////////////////////////////////////////////////
 // Macros.
@@ -202,7 +209,10 @@ void ArcadeIT_SPI_Port_Write_Buffer
   uint32_t pNumberOfBytes // Number of bytes to send.
 );
 // -----------------------------------------------------------------------------
-int ArcadeIT_SPI_Port_Init (void);
+int ArcadeIT_SPI_Port_Init (
+  uint16_t pClock // the clock frequency to set the SPI port
+  );
+// -----------------------------------------------------------------------------
 
 // /////////////////////////////////////////////////////////////////////////////
 
