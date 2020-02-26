@@ -1,9 +1,0 @@
-slider.c:4:6:slider_draw	16	static
-slider.c:26:13:slider_calculate_marker_position	0	static
-slider.c:32:13:slider_refresh	16	static
-slider.c:39:13:slider_set_value	16	static
-slider.c:49:13:slider_decrement	16	static
-slider.c:54:13:slider_increment	16	static
-slider.c:59:13:slider_select	8	static
-slider.c:65:13:slider_deselect	8	static
-slider.c:72:6:slider_keystroke_handler	0	static

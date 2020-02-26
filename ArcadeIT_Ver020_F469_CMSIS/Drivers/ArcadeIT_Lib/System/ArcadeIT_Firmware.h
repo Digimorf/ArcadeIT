@@ -394,7 +394,13 @@
 // Macros
 // /////////////////////////////////////////////////////////////////////////////
 
-#define SYS_MCU_CYCLES  DWT->CYCCNT
+#define SYS_MCU_CYCLES()     ((uint32_t)DWT->CYCCNT)
+#define SYS_MCU_CYCLES_RESET DWT->CYCCNT = 0
+
+#define SYS_MCU_TO_NS(hclk)  ((uint32_t)(((hclk) * (5.55)) / 1))
+#define SYS_MCU_TO_US(hclk)  ((uint32_t)(((hclk) * (5.55)) / 1000))
+#define SYS_MCU_TO_MS(hclk)  ((uint32_t)(((hclk) * (5.55)) / 1000000))
+#define SYS_MCU_TO_S(hclk)   ((uint32_t)(((hclk) * (5.55)) / 1000000000))
 
 // /////////////////////////////////////////////////////////////////////////////
 // Types

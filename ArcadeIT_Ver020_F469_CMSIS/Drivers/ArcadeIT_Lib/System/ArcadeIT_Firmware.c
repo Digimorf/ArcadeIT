@@ -16,7 +16,7 @@
  * @file    ArcadeIT_Firmware.c
  * @version V0.13
  * @date    28-06-2017
- * @last    01-07-2020
+ * @last    24-02-2020
  * @brief   This library is used to interface the firmware to the user application.
  *
  ******************************************************************************
@@ -50,20 +50,25 @@
 #include <System/ArcadeIT_Utilities.h>
 #include <System/ArcadeIT_Firmware.h>
 
-#if 0
 // ArcadeIT! Storage libraries.
-#include "System/Disk/ArcadeIT_Storage.h"
-#include "System/Peripherals/ArcadeIT_RAMDisk_LL.h"
-#include "System/Peripherals/ArcadeIT_SD_Card_LL.h"
+#include <System/Disk/ArcadeIT_Storage.h>
+#include <System/Devices/ArcadeIT_SD_Card_LL.h>
 
 // ArcadeIT! System clocks and counters.
+#include "System/Units/ArcadeIT_Scheduler.h"
+
+#if 0
+#include "System/Peripherals/ArcadeIT_RAMDisk_LL.h"
+
 #include "System/Peripherals/ArcadeIT_RTC.h"
 #endif
-#include "System/Units/ArcadeIT_Scheduler.h"
 #if 0
 #include "System/Peripherals/ArcadeIT_DMM.h"
 #endif
 
+// FATFS functions.
+#include <ff.h>
+#include <diskio.h>
 
 // ArcadeIT! Applications
 #include <Applications/Terminal/ArcadeIT_Terminal_Serial.h>
@@ -74,6 +79,7 @@
 #include <System/Devices/ArcadeIT_Serial_Port.h>
 #include <System/Devices/ArcadeIT_SPI_Port.h>
 #include <System/Devices/ArcadeIT_I2C_Port.h>
+
 
 #if 0
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
@@ -126,6 +132,8 @@ extern Shell_Command_t gCurrentCommand;
 
 // external files used for demos
 extern const unsigned char gANSIDemo1[7352];
+
+extern uint8_t gCurrentDrive;
 
 // //////////////////////////////////////////////////////////////////////////////
 // Globals
@@ -295,7 +303,7 @@ void ArcadeIT_System_Reset (void)
    */
 
   // Performs a software reset.
-  NVIC_SystemReset ();
+  NVIC_SystemReset();
 
 } // end ArcadeIT_System_Reset.
 
@@ -310,7 +318,7 @@ void ArcadeIT_Wait_VBlank (void)
    */
 
   // Synchronize every task in the VBlank video time.
-  while (!ArcadeIT_If_VBlank ());
+  while (!ArcadeIT_If_VBlank());
 
 } // end ArcadeIT_Wait_VBlank.
 
@@ -325,7 +333,7 @@ uint8_t ArcadeIT_If_VBlank (void)
    */
 
   // Synchronize every task in the VBlank video time.
-  return 0;//ArcadeIT_VGA_VBlank ();
+  return 0;//ArcadeIT_VGA_VBlank();
 
 } // end ArcadeIT_If_VBlank.
 
@@ -350,7 +358,7 @@ void ArcadeIT_SysTick_Handler (void)
   // Run the tasks scheduler.
   if (gUnits & ARCADEIT_UNIT_SCHEDULER)
   {
-      ArcadeIT_Scheduler_Update ();
+      ArcadeIT_Scheduler_Update();
 
   } // End if.
 
@@ -485,6 +493,8 @@ void ArcadeIT_ArcadeIT_Start (void)
    * RETURNS:     Nothing
    */
 
+  char lString[256];
+
   // ---------------------------------------------------------------------------
   if (gDevices & ARCADEIT_DEVICE_SERIAL)
   {
@@ -495,7 +505,7 @@ void ArcadeIT_ArcadeIT_Start (void)
   // ---------------------------------------------------------------------------
   // Clock and timer system. Thjis must be called before the SD card initialization.
   // 1ms System Tick timer.
-  ArcadeIT_SysTick_Init ();
+  ArcadeIT_SysTick_Init();
 
   // ---------------------------------------------------------------------------
   if (gDevices & ARCADEIT_DEVICE_TESTPADS)
@@ -531,7 +541,7 @@ void ArcadeIT_ArcadeIT_Start (void)
   if (gDevices & ARCADEIT_DEVICE_STATUSLED)
   {
     // Start LED Status system.
-    ArcadeIT_Status_LEDS_Init ();
+    ArcadeIT_Status_LEDS_Init();
 
   } // End if.
   // ---------------------------------------------------------------------------
@@ -540,7 +550,7 @@ void ArcadeIT_ArcadeIT_Start (void)
   if (gUnits & ARCADEIT_UNIT_SCHEDULER)
   {
     // Start the scheduler system.
-    ArcadeIT_Scheduler_Task_Init ();
+    ArcadeIT_Scheduler_Task_Init();
 
   } // End if.
   // ---------------------------------------------------------------------------
@@ -549,11 +559,11 @@ void ArcadeIT_ArcadeIT_Start (void)
   {
     if (gStorage & ARCADEIT_STORAGE_SD_CARD_SPI1)
     {
-      ArcadeIT_SPI_Port_Init (SPI_FREQ_25_00_MHz);
+      ArcadeIT_SPI_Port_Init (SPI_FREQ_22_50_MHz);
     }
     else
     {
-      ArcadeIT_SPI_Port_Init (SPI_FREQ_50_00_MHz);
+      ArcadeIT_SPI_Port_Init (SPI_FREQ_45_00_MHz);
 
     } // End if.
 
@@ -562,7 +572,61 @@ void ArcadeIT_ArcadeIT_Start (void)
   if (gDevices & ARCADEIT_DEVICE_I2C)
   {
     // Starts and configure the serial port.
-    ArcadeIT_I2C_Port_Init(100000);
+    ArcadeIT_I2C_Port_Init(I2C_100kHz);
+
+  } // End if.
+  // ---------------------------------------------------------------------------
+  // Storage systems
+  if (gStorage & (ARCADEIT_STORAGE_RAM_DISK | ARCADEIT_STORAGE_SD_CARD_SPI1))
+  {
+    FRESULT lValue;
+
+    if (gStorage & ARCADEIT_STORAGE_SD_CARD_SPI1)
+    {
+      lValue = ArcadeIT_SDCard_Disk_Start();
+      if (lValue == FR_OK)
+      {
+        lValue = f_chdrive(ArcadeIT_Utility_Get_String_ID(DEV_SD, (char*)gDriveName));
+        if (lValue == FR_OK)
+        {
+          gCurrentDrive = DEV_SD;
+
+          // Shows a message to serial port as debug
+          if (gDevices & ARCADEIT_DEVICE_SERIAL)
+          {
+            // Starts and configure the serial port.
+            sprintf(lString, "Current drive: [%s]\n\r", ArcadeIT_Utility_Get_String_ID(gCurrentDrive, (char*)gDriveName));
+            ArcadeIT_Serial_Port_String_Send(lString);
+
+          } // End if.
+        }
+        else // Didn't set current drive to SD Card
+        {
+          // Shows a message to serial port as debug
+          if (gDevices & ARCADEIT_DEVICE_SERIAL)
+          {
+            // Starts and configure the serial port.
+            sprintf(lString, "%s\n\r", ArcadeIT_Utility_Get_String_ID(lValue, (char*)gErrorMessages));
+            ArcadeIT_Serial_Port_String_Send(lString);
+
+          } // End if.
+
+        } // End if.
+      }
+      else // Disk not started
+      {
+        // Shows a message to serial port as debug
+        if (gDevices & ARCADEIT_DEVICE_SERIAL)
+        {
+          // Starts and configure the serial port.
+          sprintf(lString, "%s\n\r", ArcadeIT_Utility_Get_String_ID(lValue, (char*)gErrorMessages));
+          ArcadeIT_Serial_Port_String_Send(lString);
+
+        } // End if.
+
+      } // End if.
+
+    } // End if.
 
   } // End if.
 
@@ -587,7 +651,7 @@ void ArcadeIT_Test_Bench (void)
 
   gStorage = NONE
       //| ARCADEIT_STORAGE_RAM_DISK     // Ram disk with a FAT File system on the SRAM expansion
-      //| ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
+        | ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
       ;
 
   gDevices = NONE
@@ -609,363 +673,7 @@ void ArcadeIT_Test_Bench (void)
   ArcadeIT_ArcadeIT_Start();
 
 #ifdef TEST // Test suite
-  // --------------------------------------------------------------------------
-  char lString[256];
-
-#if 0
-  // ===========================================================================
-  // Status LEDs
-  for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
-  {
-    ArcadeIT_Status_LED1_Toggle();
-    ArcadeIT_System_Delay(250);
-    ArcadeIT_Status_LED2_Toggle();
-    ArcadeIT_System_Delay(250);
-
-  } // End if.
-#endif
-#if 1
-  // --------------------------------------------------------------------------
-  // We setup the scheduler to blink the Status LED 1 at 1Hz (every seconds).
-
-  if (gUnits & ARCADEIT_UNIT_SCHEDULER)
-  {
-    if (gDevices & ARCADEIT_DEVICE_STATUSLED)
-    {
-          ArcadeIT_Scheduler_Task_Set (
-              0,
-              (void*) ArcadeIT_Status_LED1_Toggle,
-              NULL,
-              ARCADEIT_SCHEDULER_REPEAT_INFINITELY,
-              ARCADEIT_PAUSE_HALF_SECOND
-              );
-
-     } // End if.
-
-  } // End if.
-#endif
-#if 0
-  // --------------------------------------------------------------------------
-  // Shows 256 colors over the serial terminal
-  if (gDevices & ARCADEIT_DEVICE_SERIAL)
-  {
-    ArcadeIT_System_Delay(5000);
-    ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-    ArcadeIT_Status_LED2_Toggle();
-
-    ArcadeIT_Serial_Port_String_Send("ANSI colors table on serial terminal:\n\r");
-    ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
-
-    for (uint8_t lRow = 0; lRow < 16; lRow++)
-    {
-      for (uint8_t lCol = 0; lCol < 16; lCol++)
-      {
-        sprintf(lString, ATTR_COLOR_256_BG, lRow * 16 + lCol);
-        ArcadeIT_Serial_Port_String_Send(lString);
-        sprintf(lString, " %03d ", lRow * 16 + lCol);
-        ArcadeIT_Serial_Port_String_Send(lString);
-
-      } // end for
-
-      ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-
-    } // end for
-
-    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-    ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
-    ArcadeIT_Status_LED2_Toggle();
-
-  } // End if.
-#endif
-#if 0
-  // --------------------------------------------------------------------------
-  // Shows ANSI artwork over the serial terminal
-  if (gDevices & ARCADEIT_DEVICE_SERIAL)
-  {
-    ArcadeIT_System_Delay(5000);
-    ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-    ArcadeIT_Status_LED2_Toggle();
-
-    ArcadeIT_Serial_Port_String_Send("ANSI art on serial terminal:\n\r");
-    ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
-
-    unsigned char *lANSIArtPtr = (unsigned char *)&gANSIDemo1[0];
-    for (uint16_t lChar = 0; lChar < 7352; lChar++)
-    {
-      ArcadeIT_Serial_Port_Char_Send(*lANSIArtPtr++);
-
-    } // end for
-
-    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-    ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
-    ArcadeIT_Status_LED2_Toggle();
-
-  } // End if.
-#endif
-#if 0
-  // --------------------------------------------------------------------------
-  // Shows terminal TUI ANSI widgets demo over the serial terminal
-  if (gDevices & ARCADEIT_DEVICE_SERIAL)
-  {
-    ArcadeIT_System_Delay(5000);
-    ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-    ArcadeIT_Status_LED2_Toggle();
-
-    ArcadeIT_Serial_Port_String_Send("TUI widgets for serial terminal:\n\r");
-    ArcadeIT_Serial_Port_String_Send(CURSOR_OFF);
-
-    label_t  title1   = {1, 0, 220, 18, "OUTPUT1", LABEL_SKIN4_ANSI};
-    frame_t  window1 = {1, 1, 40, 10, 27, 18, title1, FRAME_SKIN_ANSI};
-    slider_h_t sliderh1 = {2, 39, 9, false, 0.0, 10.0, 2.0, 0.0, 0, 0, SLIDER_SKIN_ANSI};
-    slider_v_t sliderv1 = {38, 2, 9, false, 0.0, 10.0, 2.0, 0.0, 0, 0, SLIDER_SKIN_ANSI};
-
-    ArcadeIT_System_Delay(2000);
-    ArcadeIT_Status_LED2_Toggle();
-
-    frame_draw(&window1);
-
-    slider_h_refresh(&sliderh1);
-    slider_v_refresh(&sliderv1);
-
-    char lBufferfg[100], lBufferbg[100];
-    uint8_t lFlags = WINDOW_SLIDER_H | WINDOW_SLIDER_V | WINDOW_TITLE;
-    window_t window2 = {"Window", 1, 6, 20, 10, 0, 0, WINDOW_SKIN_ANSI, lBufferfg, lBufferbg, lFlags};
-    window_draw(&window2);
-
-    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-    ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
-    ArcadeIT_Status_LED2_Toggle();
-
-  } // End if.
-#endif
-#if 0
-  // ---------------------------------------------------------------------------
-  // I2C Tests
-  if (gDevices & ARCADEIT_DEVICE_I2C)
-  {
-    /*
-       This test reads and writes a block of data from/to an I2C 32KB EEPROM
-       24LC256
-                                                      ArcadeIT!
-       Write Protect = 0                                CN15
-       Address = 0                                     +-----+
-                                                       |     |
-                                     Pull-up resistors |     |
-               .-------------.      .-----o-------o----|  1  | VCC
-             .-|             |-.    |     |       |    |     |
-       .-----|1|A0        VCC|8|----'    .-.     .-.   |     |
-       |     '-|             |-'       R1| |   R2| |   |     |
-       |     .-|             |-.     4.7K| | 4.7K| |   |     |
-       o-----|2|A1 24LC256 WP|7|----.    '-'     '-'   |     |
-       |     '-|   EEPROM    |-'    |     |       |    |     |
-       |     .-|   I2C       |-.    |     |       |    |     |
-       o-----|3|A2        SCL|6|----)- ---o-------)----|  3  | SCL
-       |     '-|             |-'    |             |    |     |
-       |     .-|             |-.    |             |    |     |
-       o-----|4|GND       SDA|5|----)- -----------o----|  2  | SDA
-       |     '-|             |-'    |                  |     |
-       |       '-------------'      |                  |     |
-       |                            |             .----|  4  | GND
-       |                            |             |    |     |
-      ===                          ===           ===   |     |
-      GND                          GND           GND   +-----+
-                                                         I2C
-       */
-
-    uint8_t lDataRead = 0x0, lDataToWrite = 0xA5;
-    uint16_t lAddress = 0x0000;
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      ArcadeIT_System_Delay(5000);
-      ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-      ArcadeIT_Status_LED2_Toggle();
-
-      ArcadeIT_Serial_Port_String_Send("I2C test for EEPROM:\n\r");
-
-      sprintf(lString, "Writing '0x%02X' to memory @ 0x%04X ", lDataToWrite, lAddress);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-    } // end if
-
-    // Write byte to the memory starting from address 0
-    // Start condition
-    ArcadeIT_I2C_StartCommunication();
-    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_MODE_SELECT);
-    // Send byte: Control byte
-    ArcadeIT_I2C_Send7bitAddress(0xA0, I2C_Direction_Transmitter);
-    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
-    // Send bytes: Set internal 16-bit address
-    ArcadeIT_I2C_Send(lAddress >> 8);
-    ArcadeIT_I2C_Send(lAddress & 0xFF);
-    // Send byte: Data byte
-    ArcadeIT_I2C_Send(lDataToWrite);
-    // End condition
-    ArcadeIT_I2C_EndCommunication();
-    // Wait for internal write operation completed
-    ArcadeIT_System_Delay(5);
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      ArcadeIT_Serial_Port_String_Send("-> done!\r\n");
-
-      sprintf(lString, "Reading memory @ 0x%04X ", lAddress);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-    } // end if
-
-    // Read byte to the memory starting from address 0
-    // Start condition
-    ArcadeIT_I2C_StartCommunication();
-    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_MODE_SELECT);
-    // Send byte: Control byte
-    ArcadeIT_I2C_Send7bitAddress(0xA0, I2C_Direction_Transmitter);
-    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED);
-    // Send bytes: Set internal 16-bit address
-    ArcadeIT_I2C_Send(lAddress >> 8);
-    ArcadeIT_I2C_Send(lAddress & 0xFF);
-    // Address set, restart communication to switch master in receive mode
-    ArcadeIT_I2C_StartCommunication();
-    ArcadeIT_I2C_WaitEvent(I2C_EVENT_MASTER_MODE_SELECT);
-    // Send byte: Control byte
-    ArcadeIT_I2C_Send7bitAddress(0xA0, I2C_Direction_Receiver);
-    // receive a byte without sending an Acknowledge
-    ArcadeIT_I2C_Receive(&lDataRead, I2C_NOACK);
-    // End condition
-    ArcadeIT_I2C_EndCommunication();
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      sprintf(lString, "-> 0x%02X, ", lDataRead);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-      ArcadeIT_Serial_Port_String_Send(lDataRead == lDataToWrite ? "correct\r\n" : "wrong!\r\n");
-
-      ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-      ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
-    } // end if
-
-    ArcadeIT_Status_LED2_Toggle();
-
-  } // end if
-#endif
-#if 1
-  // ---------------------------------------------------------------------------
-  // SPI Tests
-  if (gDevices & ARCADEIT_DEVICE_SPI1)
-  {
-    /*
-       This test reads and writes a byte from/to an SPI 32KB SRAM 23K256
-
-
-                    24K256                         ArcadeIT!
-                    SPI SRAM                       SPI port, SD Card / CN10
-                    .-------------.                .--------.
-                  .-|             |-.              |  o  o  |  2 GND  | 1 3.3V
-      <8 CS]------|1|CS        VCC|8|-o-[1 3.3V>   |  o  o |   4 NC   | 3 SCK
-                  '-|             |-' |            |  o  o |   6 MISO | 5 MOSI
-                  .-|             |-. |            |  o  o  |  8 CS   | 7 SD DET.
-    <6 MISO]-o----|2|SO        HLD|7|-'            '--------'
-             |    '-|             |-'
-            .-.   .-|             |-.
-          R2| |   |3|NC        CLK|6|---[3 SCK >
-        4.7K| |   '-|             |-'
-            '-'   .-|             |-.
-             |  .-|4|GND        SI|5|---[5 MOSI>
-    <1 3.3V]-'  | '-|             |-'
-                |   '-------------'
-               ===
-               GND
-    */
-
-    ArcadeIT_SPI_Port_Init (SPI_FREQ_25_00_MHz);
-
-    uint8_t lDataRead = 0x0, lDataToWrite = 0xA5;
-    uint16_t lAddress = 0x0000;
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      ArcadeIT_System_Delay(5000);
-      ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
-      ArcadeIT_Status_LED2_Toggle();
-
-      ArcadeIT_Serial_Port_String_Send("SPI test for SRAM:\n\r");
-
-    } // end if
-
-    // set SRAM in single byte transfer mode
-    SYS_SPI_CS_LOW();
-    ArcadeIT_SPI_Port_RW_Byte(0x1);
-    ArcadeIT_SPI_Port_RW_Byte(0x0);
-    SYS_SPI_CS_HIGH();
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-      ArcadeIT_Serial_Port_String_Send("SRAM status register set to: ");
-
-    // set SRAM in single byte transfer mode
-    SYS_SPI_CS_LOW();
-    ArcadeIT_SPI_Port_RW_Byte(0x5);
-    lDataRead = ArcadeIT_SPI_Port_RW_Byte(0x0);
-    SYS_SPI_CS_HIGH();
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      sprintf(lString, "0x%02X\n\r", lDataRead);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-      sprintf(lString, "Writing '0x%02X' to memory @ 0x%04X ", lDataToWrite, lAddress);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-    } // end if
-
-    // write a byte into SRAM
-    SYS_SPI_CS_LOW();
-    ArcadeIT_SPI_Port_RW_Byte(0x02);
-
-    // Send bytes: Set internal 16-bit address
-    ArcadeIT_SPI_Port_RW_Byte(lAddress >> 8);
-    ArcadeIT_SPI_Port_RW_Byte(lAddress & 0xFF);
-
-    ArcadeIT_SPI_Port_RW_Byte(lDataToWrite);
-    SYS_SPI_CS_HIGH();
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      ArcadeIT_Serial_Port_String_Send("-> done!\r\n");
-
-      sprintf(lString, "Reading memory @ 0x%04X ", lAddress);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-    } // end if
-
-    // read a byte from SRAM
-    SYS_SPI_CS_LOW();
-    ArcadeIT_SPI_Port_RW_Byte(0x03);
-
-    // Send bytes: Set internal 16-bit address
-    ArcadeIT_SPI_Port_RW_Byte(lAddress >> 8);
-    ArcadeIT_SPI_Port_RW_Byte(lAddress & 0xFF);
-
-    lDataRead = ArcadeIT_SPI_Port_RW_Byte(0x0);
-    SYS_SPI_CS_HIGH();
-
-    if (gDevices & ARCADEIT_DEVICE_SERIAL)
-    {
-      sprintf(lString, "-> 0x%02X, ", lDataRead);
-      ArcadeIT_Serial_Port_String_Send(lString);
-
-      ArcadeIT_Serial_Port_String_Send(lDataRead == lDataToWrite ? "correct\r\n" : "wrong!\r\n");
-
-      ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
-      ArcadeIT_Serial_Port_String_Send(CURSOR_ON);
-
-    } // end if
-
-    ArcadeIT_Status_LED2_Toggle();
-
-  } // end if
-  // ===========================================================================
-#endif
+#include <Demofiles/test.c>
 #endif // TEST
 
   while (1)
@@ -974,7 +682,7 @@ void ArcadeIT_Test_Bench (void)
     // Periodic tasks
     if (gUnits & ARCADEIT_UNIT_SCHEDULER)
     {
-      ArcadeIT_Scheduler_Run ();
+      ArcadeIT_Scheduler_Run();
 
     } // End if.
 

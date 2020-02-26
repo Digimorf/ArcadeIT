@@ -1,4 +1,4 @@
-ArcadeIT_SPI_Port.c:107:9:ArcadeIT_SPI_Port_RW_Byte	0	static
-ArcadeIT_SPI_Port.c:148:6:ArcadeIT_SPI_Port_Read_Buffer	16	static
-ArcadeIT_SPI_Port.c:173:6:ArcadeIT_SPI_Port_Write_Buffer	16	static
-ArcadeIT_SPI_Port.c:195:5:ArcadeIT_SPI_Port_Init	8	static
+ArcadeIT_SPI_Port.c:106:9:ArcadeIT_SPI_Port_RW_Byte	0	static
+ArcadeIT_SPI_Port.c:147:6:ArcadeIT_SPI_Port_Read_Buffer	16	static
+ArcadeIT_SPI_Port.c:172:6:ArcadeIT_SPI_Port_Write_Buffer	16	static
+ArcadeIT_SPI_Port.c:194:5:ArcadeIT_SPI_Port_Init	8	static

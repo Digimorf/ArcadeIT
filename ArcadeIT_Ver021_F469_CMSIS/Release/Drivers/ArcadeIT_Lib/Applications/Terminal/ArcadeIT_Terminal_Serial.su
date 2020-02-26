@@ -1,0 +1,12 @@
+ArcadeIT_Terminal_Serial.c:83:6:color_set	264	static
+ArcadeIT_Terminal_Serial.c:92:6:cursor_at	264	static
+ArcadeIT_Terminal_Serial.c:101:6:label_draw	272	static
+ArcadeIT_Terminal_Serial.c:133:6:frame_draw	280	static
+ArcadeIT_Terminal_Serial.c:184:6:slider_h_calculate_marker_position	0	static
+ArcadeIT_Terminal_Serial.c:192:6:slider_h_draw	272	static
+ArcadeIT_Terminal_Serial.c:226:6:slider_h_refresh	16	static
+ArcadeIT_Terminal_Serial.c:237:6:slider_v_calculate_marker_position	0	static
+ArcadeIT_Terminal_Serial.c:245:6:slider_v_draw	280	static
+ArcadeIT_Terminal_Serial.c:285:6:slider_v_refresh	16	static
+ArcadeIT_Terminal_Serial.c:296:6:window_draw	128	static
+ArcadeIT_Terminal_Serial.c:327:6:window_move	4	static

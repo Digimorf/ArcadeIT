@@ -1,0 +1,12 @@
+Drivers/FATFS/source/ff.o: ../Drivers/FATFS/source/ff.c \
+ ../Drivers/FATFS/source/ff.h ../Drivers/FATFS/source/ffconf.h \
+ ../Drivers/FATFS/source/diskio.h \
+ C:/Users/Francesco/STM32CubeIDE/workspace_1.3.0/ArcadeIT_Ver021_F469_CMSIS/Drivers/FATFS/source/ff.h
+
+../Drivers/FATFS/source/ff.h:
+
+../Drivers/FATFS/source/ffconf.h:
+
+../Drivers/FATFS/source/diskio.h:
+
+C:/Users/Francesco/STM32CubeIDE/workspace_1.3.0/ArcadeIT_Ver021_F469_CMSIS/Drivers/FATFS/source/ff.h:
