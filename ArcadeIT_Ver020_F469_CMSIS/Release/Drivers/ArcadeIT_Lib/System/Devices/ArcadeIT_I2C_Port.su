@@ -1,8 +1,0 @@
-ArcadeIT_I2C_Port.c:81:5:ArcadeIT_I2C_CheckEvent	0	static
-ArcadeIT_I2C_Port.c:103:8:ArcadeIT_I2C_WaitEvent	4	static
-ArcadeIT_I2C_Port.c:134:8:ArcadeIT_I2C_StartCommunication	4	static
-ArcadeIT_I2C_Port.c:157:6:ArcadeIT_I2C_EndCommunication	0	static
-ArcadeIT_I2C_Port.c:171:8:ArcadeIT_I2C_Send7bitAddress	0	static
-ArcadeIT_I2C_Port.c:204:8:ArcadeIT_I2C_Send	4	static
-ArcadeIT_I2C_Port.c:226:8:ArcadeIT_I2C_Receive	8	static
-ArcadeIT_I2C_Port.c:256:6:ArcadeIT_I2C_Port_Init	16	static

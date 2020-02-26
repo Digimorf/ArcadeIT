@@ -1,3 +1,0 @@
-arm_rfft_fast_f32.c:43:6:stage_rfft_f32	12	static
-arm_rfft_fast_f32.c:129:6:merge_rfft_f32	12	static
-arm_rfft_fast_f32.c:324:6:arm_rfft_fast_f32	24	static

@@ -1,3 +1,0 @@
-ffunicode.c:15275:7:ff_uni2oem	12	static
-ffunicode.c:15311:7:ff_oem2uni	12	static
-ffunicode.c:15464:7:ff_wtoupper	16	static
