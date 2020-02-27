@@ -132,24 +132,112 @@ DSTATUS ArcadeIT_SDCard_Disk_Status (void);
 DRESULT ArcadeIT_SDCard_Disk_Read
 (
   BYTE *pBuffer,   // Pointer to the data buffer to store read data
-  DWORD pSector,   // Start pSector number (LBA)
+  DWORD pSector,   // Start sector number (LBA)
   UINT  pCount     // Number of sectors to read (1..128)
 );
 // -----------------------------------------------------------------------------
 DRESULT ArcadeIT_SDCard_Disk_Write
 (
   const BYTE *pBuffer,   // Pointer to the data to write
-  DWORD pSector,   // Start pSector number (LBA)
-  UINT  pCount     // Number of sectors to write (1..128)
+  DWORD pSector,         // Start sector number (LBA)
+  UINT  pCount           // Number of sectors to write (1..128)
 );
 // -----------------------------------------------------------------------------
 DRESULT ArcadeIT_SDCard_Disk_Ioctl
 (
   BYTE pCommand,   // Control command code
-  void *pBuffer    // Pointer to the conrtol data
+  void *pBuffer    // Pointer to the control data
 );
 // -----------------------------------------------------------------------------
 FRESULT ArcadeIT_SDCard_Disk_Start (void);
 // /////////////////////////////////////////////////////////////////////////////
+
+/*
+  SD-Cards are nothing dfferent than a EEPROM, and are divided in 512 bytes sectors.
+  Compared to common EEPROM they have a special programmable controller that is
+  used to access the sectors of the memory block.
+
+  At low level only a few functions are needed:
+  - Initialization
+  - Read sector
+  - Write sector
+  - IO control command
+  - Status read
+
+            ,-------------------------------------------------------.
+           /  CS    MOSI   #####  #####   CLK   #####  MISO   ##### |
+          /  #####  #####  #####  #####  #####  #####  #####  ##### |
+         /   #####  #####  #####  #####  #####  #####  #####  ##### |
+        /    #####  #####  #####  #####  #####  #####  #####  ##### |
+       /     #####  #####  #####  #####  #####  #####  #####  ##### |
+      /      #####  #####  #####  #####  #####  #####  #####  ##### |
+     /####     |      |      |      |      |      |      ^          |
+    /#####     |      |      V      V      |      V      |          |
+   | #####     |      |     GND    VDD     |     GND     |          |
+   | #####     |      |                    |             |          |
+   | #####     |      '-------------.      |      .------'          |
+   |           |                    |      |      |                 |
+   |           V                    V      V      |                 |
+   | +------------------------------------------------------------+ |
+   | |Res.    CS                   Data   CLK   Data          Res.| |
+   | |                              In           Out              | |
+   | |------------------------------------------------------------| |
+   | |               SD-Card SPI interface driver                 | |
+   | +------------------------------------------------------------+ |
+   |                                |      |      ^                 |
+   |     Registers                  V      V      |                 |
+   |   +------------+        +-----------------------+              |
+   |   | OCR [31:0] |<------>|                       |              |
+   |   +------------+        |    Card interface     |              |
+   |   | CID [127:0]|<------>|                       |              |
+   |   +------------+        |      controller       |              |
+   |   | RCA [15:0] |<------>|                       |              |
+   |   +------------+        |                       |              |
+   |   | DSR [15:0] |<------>|                       |              |
+   |   +------------+        |                       |  +--------+  |
+   |   | CSD [127:0]|<------>|                       |  |        |  |
+   |   +------------+        |                 Reset |<-|        |  |
+   |   | SCR [63:0] |<------>|                       |  |        |  |
+   |   +------------+        +-----------------------+  |        |  |
+   |                                                    | Power  |  |
+   |                                                    |  on    |  |
+   |                                                    | detect.|  |
+   |     +-------------------------------------------+  |        |  |
+   |     |                                           |  |        |  |
+   |     |   Memory core interface             Reset |<-|        |  |
+   |     |                                           |  |        |  |
+   |     +-------------------------------------------+  +--------+  |
+   |                                 | ^                            |
+   |                                 V |                            |
+   |     #######################################################    |
+   |     #0 |1 |2 |3 |4 |. |. |. |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--#    |
+   |     #  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  #    |
+   |     #######################################################    |
+   |                   Memory sectors 512 bytes each                |
+   |                                                                |
+   '----------------------------------------------------------------'
+
+   You could use the SD-Card as a simple block of memory with contiguous sectors
+   or as a file system with a driver layer on top of it, like for example FATFS:
+
+   http://elm-chan.org/fsw/ff/00index_e.html
+
+   For more information on the low level access to the SD-Card take a look here:
+   http://elm-chan.org/docs/mmc/mmc_e.html
+
+ */
 
 #endif // _ARCADEIT_SD_CARD_LL_H_

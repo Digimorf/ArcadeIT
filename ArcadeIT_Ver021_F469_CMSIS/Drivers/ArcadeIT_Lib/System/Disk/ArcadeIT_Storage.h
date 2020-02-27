@@ -31,14 +31,6 @@
  26-07-2017:
  - Creation date of the library structure.
 
-
-sd
-
-
- gnd 3 5 cs mosi clk miso gnd
-
-
-
  *******************************************************************************
 */
 
@@ -51,9 +43,9 @@ sd
 #include <inttypes.h>
 
 // ArcadeIT Libraries.
-#include "System/ArcadeIT_Common.h"
-#include "System/ArcadeIT_Utilities.h"
-#include "System/ArcadeIT_Firmware.h"
+#include <System/ArcadeIT_Common.h>
+#include <System/ArcadeIT_Utilities.h>
+#include <System/ArcadeIT_Firmware.h>
 
 // FATFS functions.
 #include "ff.h"
@@ -65,10 +57,10 @@ sd
 #define USE_DETECT_PIN          FALSE
 #define USE_WRITE_PROTECTION    FALSE
 
-#define INDEX_DRIVE                       0
-#define INDEX_ROOT                        1
-#define INDEX_PATH                        2
-#define INDEX_FILE                        3
+#define INDEX_DRIVE             0
+#define INDEX_ROOT              1
+#define INDEX_PATH              2
+#define INDEX_FILE              3
 
 // /////////////////////////////////////////////////////////////////////////////
 // Macros.
@@ -89,6 +81,7 @@ extern const char gErrorMessages[];
 // /////////////////////////////////////////////////////////////////////////////
 
 // These are the functions used by the core of FATFS library.
+
 /*
 File Access
   f_open - Open/Create a file

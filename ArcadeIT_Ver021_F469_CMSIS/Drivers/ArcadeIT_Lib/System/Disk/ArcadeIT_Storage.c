@@ -10,13 +10,13 @@
  * -----------------------------------------------------------------
  *                   S T O R A G E   I T E R F A C E
  * -----------------------------------------------------------------
- *           (C)2018 www.digimorf.com, www.arcadeit.net
+ *           (C)2020 www.digimorf.com, www.arcadeit.net
  *
  * @author  Francesco De Simone
  * @file    ArcadeIT_Storage.c
  * @version V0.13
  * @date    26-07-2017
- * @last    03-07-2018
+ * @last    26-02-2020
  * @brief   This library is used to manage the main routines of the storage system.
  *          Initialization, read, write, ioctl and status for each media installed.
  *
@@ -30,6 +30,9 @@
  HISTORY
  26-07-2017:
  - Creation date of the library structure.
+
+ 26-02-2020:
+ - converted to CMSIS and ported to GitHUB
 
  *******************************************************************************
 */
@@ -54,12 +57,10 @@
 #include <System/Devices/ArcadeIT_SD_Card_LL.h>
 
 // ArcadeIT! System clocks and counters.
-//#include "System/Peripherals/ArcadeIT_RTC.h"
+#include <System/Devices/ArcadeIT_RTC.h>
 //#include "System/Peripherals/ArcadeIT_DMM.h"
 
 // ArcadeIT! Applications.
-//#include "System/Applications/ArcadeIT_Terminal.h"
-
 #include <Devices/ArcadeIT_Serial_Port.h>
 
 // /////////////////////////////////////////////////////////////////////////////
@@ -111,24 +112,15 @@ const char gErrorMessages[] = {
 // /////////////////////////////////////////////////////////////////////////////
 DWORD get_fattime (void)
 {
- /* RTC_DateTypeDef lRTC_DateStructure;
-  RTC_TimeTypeDef lRTC_TimeStructure;
+  rtc_time_t lTempTime = ArcadeIT_RTC_TimeDate_Get();
 
-  // Get the current Time
-  RTC_GetTime(RTC_Format_BIN, &lRTC_TimeStructure);
-
-  // Get the current Date
-  RTC_GetDate(RTC_Format_BIN, &lRTC_DateStructure);
-
-  return  (  (uint32_t)(2000 + lRTC_DateStructure.RTC_Year - 1980) << 25)
-          | ((uint32_t)lRTC_DateStructure.RTC_Month << 21)
-          | ((uint32_t)lRTC_DateStructure.RTC_Date << 16)
-          | ((uint32_t)lRTC_TimeStructure.RTC_Hours  << 11)
-          | ((uint32_t)lRTC_TimeStructure.RTC_Minutes << 5)
-          | ((uint32_t)lRTC_TimeStructure.RTC_Seconds >> 1
+  return  (  (uint32_t)(2000 + lTempTime.year - 1980) << 25)
+          | ((uint32_t)lTempTime.month << 21)
+          | ((uint32_t)lTempTime.mday << 16)
+          | ((uint32_t)lTempTime.hour << 11)
+          | ((uint32_t)lTempTime.min << 5)
+          | ((uint32_t)lTempTime.sec >> 1
           );
-*/
-  return 0;
 
 } // end get_fattime
 

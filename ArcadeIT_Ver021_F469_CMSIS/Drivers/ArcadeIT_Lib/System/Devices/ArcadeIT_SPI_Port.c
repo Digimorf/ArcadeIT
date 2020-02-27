@@ -16,7 +16,7 @@
  * @file    ArcadeIT_SPI_Port.h
  * @version V0.13
  * @date    26-07-2017
- * @last    21-02-2020
+ * @last    26-02-2020
  * @brief   This library is used to drive the SPI port at low level.
  *
  ******************************************************************************

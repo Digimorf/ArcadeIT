@@ -373,18 +373,33 @@ int ArcadeIT_SPI_Port_Init (
 
  -
 
- Typical transmission
+ Typical transmission over the SPI BUS
 
-               +-----+-----+-----+-----+-----+-----+-----+-----+---+
-               |                      byte                     |Ack|
-               +-----+-----+-----+-----+-----+-----+-----+-----+---+
-  Start        |     |     |     |     |     |     |     |     |   |   End
-  condition    |0    |1    |2    |3    |4    |5    |6    |7    |   |   condition
-  |------.     .--.        .--------.        .-----------------#####    .------|
-  |SDA   |     |1 |   0    |1     1 |   0    |1     1     1    #####    |   SDA|
-         '--- -'  '--------'        '--------'                 ##### ---' .----|
-  |----.       .--.  .--.  .--.  .--.  .--.  .--.  .--.  .--.  .--.
-  |SCL |       |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |       | SCL|
-  |    '----- -'  '--'  '--'  '--'  '--'  '--'  '--'  '--'  '--'  '- -----'    |
+                +-----+-----+-----+-----+-----+-----+-----+-----+
+                |                      byte                     |
+                +-----+-----+-----+-----+-----+-----+-----+-----+
+                |     |     |     |     |     |     |     |     |
+                |0    |1    |2    |3    |4    |5    |6    |7    |
+
+       |-----.  .--.        .--------.        .--------------.    .-----|
+  IN <-|MISO |  |1 |   0    |1     1 |   0    |1     1     1 |    | MISO|<- OUT
+       |     '--'  '--------'        '--------'              '----'     |
+       |-----.  .--.        .--------.        .--------------.    .-----|
+ OUT-> |MOSI |  |1 |   0    |1     1 |   0    |1     1     1 |    | MOSI|-> IN
+       |     '--'  '--------'        '--------'              '----'     |
+       |-----.  .--.  .--.  .--.  .--.  .--.  .--.  .--.  .--.    .-----|
+    .->|SCK  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |    |  SCK|
+    |  |     '--'  '--'  '--'  '--'  '--'  '--'  '--'  '--'  '----'     |
+    |  |-----.                                                    .-----| SPI
+   MCU |CS   |                                                    |   CS| PER
+       |     '----------------------------------------------------'     |
+
+ The SPI port of the ArcadeIT! has been configured to be compatible mostly with
+ the SD-Cards, but is can work with many other devices that use it. If you need
+ to customize the configuration, you can refer to the reference manual:
+
+ From: RM0386, Reference manual, page 1088
+
+ 31 Serial peripheral interface/ inter-IC sound (SPI/I2S)
 
  */

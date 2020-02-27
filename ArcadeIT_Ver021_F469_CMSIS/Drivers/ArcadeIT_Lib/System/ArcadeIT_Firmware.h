@@ -116,7 +116,10 @@
   #define RCC_AHB1Periph_DMA1                 ((uint32_t)0x00200000)
   #define RCC_AHB1Periph_DMA2                 ((uint32_t)0x00400000)
   #define RCC_AHB1Periph_DMA2D                ((uint32_t)0x00800000)
+  #define RCC_AHB1Periph_BKPSRAM              ((uint32_t)0x00040000)
+
   #define RCC_AHB2Periph_OTG_FS               ((uint32_t)0x00000080)
+
   #define RCC_AHB3Periph_FMC                  ((uint32_t)0x00000001)
 
   #define RCC_APB1Periph_TIM2                 ((uint32_t)0x00000001)
@@ -125,6 +128,7 @@
   #define RCC_APB1Periph_I2C2                 ((uint32_t)0x00400000)
   #define RCC_APB1Periph_PWR                  ((uint32_t)0x10000000)
   #define RCC_APB1Periph_DAC                  ((uint32_t)0x20000000)
+
   #define RCC_APB2Periph_TIM1                 ((uint32_t)0x00000001)
   #define RCC_APB2Periph_TIM8                 ((uint32_t)0x00000002)
   #define RCC_APB2Periph_SPI1                 ((uint32_t)0x00001000)

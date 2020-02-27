@@ -9,6 +9,7 @@
 "Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o"
 "Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.o"
 "Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_I2C_Port.o"
+"Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_RTC.o"
 "Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.o"
 "Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SPI_Port.o"
 "Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Serial_Port.o"

@@ -545,6 +545,14 @@ void ArcadeIT_ArcadeIT_Start (void)
 
   } // End if.
   // ---------------------------------------------------------------------------
+  // Time and date system.
+  if (gUnits & ARCADEIT_UNIT_RTC)
+    {
+      // Enable the RTC clock.
+      ArcadeIT_RTC_Init ();
+
+    } // End if.
+  // ---------------------------------------------------------------------------
   // Systems scheduler task. This must be set AFTER the Systick has been initialized
   // because uses the ISR function that is handled by the Systick.
   if (gUnits & ARCADEIT_UNIT_SCHEDULER)
@@ -636,7 +644,7 @@ void ArcadeIT_Test_Bench (void)
 
   // System features.
   gUnits = NONE
-      //| ARCADEIT_UNIT_RTC           // Real time clock
+        | ARCADEIT_UNIT_RTC           // Real time clock
       //| ARCADEIT_UNIT_DMM           // The custom ArcadeIt Dynamic Memory Manager
         | ARCADEIT_UNIT_SCHEDULER     // The task scheduler system.
       ;

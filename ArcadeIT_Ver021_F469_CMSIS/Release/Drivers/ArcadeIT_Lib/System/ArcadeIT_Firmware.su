@@ -9,4 +9,4 @@ ArcadeIT_Firmware.c:341:6:ArcadeIT_SysTick_Handler	0	static
 ArcadeIT_Firmware.c:367:6:SysTick_Handler	0	static
 ArcadeIT_Firmware.c:374:6:ArcadeIT_PowerUP_Systems	0	static
 ArcadeIT_Firmware.c:487:6:ArcadeIT_ArcadeIT_Start	272	static
-ArcadeIT_Firmware.c:631:6:ArcadeIT_Test_Bench	880	static
+ArcadeIT_Firmware.c:639:6:ArcadeIT_Test_Bench	880	static
