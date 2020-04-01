@@ -15,7 +15,9 @@ Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_Storage.o: \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/FATFS/source/ffconf.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/FATFS/source/diskio.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_Storage.h \
- C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.h \
+ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_SD_Card.h \
+ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_RAMDisk.h \
+ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SRAM_LL.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_RTC.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Serial_Port.h
 
@@ -49,7 +51,11 @@ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/
 
 C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_Storage.h:
 
-C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.h:
+C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_SD_Card.h:
+
+C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_RAMDisk.h:
+
+C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SRAM_LL.h:
 
 C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_RTC.h:
 

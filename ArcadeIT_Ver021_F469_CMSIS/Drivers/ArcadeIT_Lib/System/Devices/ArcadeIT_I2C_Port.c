@@ -38,6 +38,11 @@
   046  PH5  SDA         CN15-2
   045  PH4  SCL         CN15-3
   GND  VSS  GND         CN15-4
+  ---------------------------------------
+  3.3V VDD  3.3V        CN15-1
+  046  PH8  SDA         CN15-2    I2C3
+  045  PA8  SCL         CN15-3    I2C3
+  GND  VSS  GND         CN15-4
 
  ArcadeIT! mainboard:
 

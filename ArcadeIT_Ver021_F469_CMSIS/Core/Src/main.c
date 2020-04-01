@@ -107,7 +107,7 @@
 
 int main(void)
 {
-  ArcadeIT_Test_Bench();
+   ArcadeIT_Test_Bench();
 
   return 0;
 

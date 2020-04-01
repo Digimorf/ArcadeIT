@@ -177,7 +177,7 @@
     )
 
 //#define P12BIT_TO_RGB_DMA2D(c)  ((((c) & 0xF000)<<8)|(((c) & 0x0F00)<<4)|(((c) & 0x00F0)))
-#define RGB_TO_16BIT565(r,g,b)  ((((r) >> 3) << 11) | (((g) >> 2) << 5) | (((b) >> 3)))
+#define RGB_TO_16BIT565(r,g,b)  ((((b) >> 3) << 11) | (((g) >> 2) << 5) | (((r) >> 3)))
 #define P12BIT_TO_16BIT565(c)   ((((c) & 0xF000)>>3)|(((c) & 0x0F00)>>9)|(((c) & 0x0100)<<7)|(((c) & 0x00F0)))
    /*  P12BIT_TO_16BIT565
        RRRRGGGG BBBB1xxx

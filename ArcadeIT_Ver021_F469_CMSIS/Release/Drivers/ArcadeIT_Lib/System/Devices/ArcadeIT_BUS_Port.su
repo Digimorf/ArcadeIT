@@ -1,0 +1,4 @@
+ArcadeIT_BUS_Port.c:327:6:FMC_NORSRAMInit	12	static
+ArcadeIT_BUS_Port.c:428:6:FMC_NORSRAMCmd	0	static
+ArcadeIT_BUS_Port.c:445:5:ArcadeIT_BUS_Port_Init	8	static
+ArcadeIT_BUS_Port.c:878:6:ArcadeIT_BUS_Port_SRAM	64	static

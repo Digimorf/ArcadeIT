@@ -10,7 +10,7 @@
   // --------------------------------------------------------------------------
   char lString[256];
 
-#if 0
+#if 1
   // ===========================================================================
   // Status LEDs
   for (uint8_t lCycles = 0; lCycles < 4; lCycles++)
@@ -487,7 +487,7 @@
 
   } // end if
 #endif
-#if 01
+#if 0
   // ---------------------------------------------------------------------------
   // SD-Card access test
   if (gStorage & ARCADEIT_STORAGE_SD_CARD_SPI1)
@@ -556,4 +556,118 @@
     ArcadeIT_Status_LED2_Toggle();
 
   } // end if
+#endif
+#if 0
+  // ---------------------------------------------------------------------------
+  // SD-Card access test
+  if (gStorage & ARCADEIT_STORAGE_SD_CARD_SPI1)
+  {
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      ArcadeIT_System_Delay(5000);
+      ArcadeIT_Serial_Port_String_Send(RESET_DEVICE);
+      ArcadeIT_Status_LED2_Toggle();
+
+      ArcadeIT_Serial_Port_String_Send("File test for RAM Disk:\n\r");
+
+    } // end if
+
+    // Create a new file
+    // the global file system that ArcadeIT! opens is held by the global variable
+    // FATFS gFileSystemSD;
+    FIL lFile;                /* File objects */
+    BYTE lFileBuffer[4096];   /* File copy buffer */
+    FRESULT lFileStatus = 0;  /* FatFs function common result code */
+    UINT lBytesRead = 0;
+    uint8_t lChar = 32;
+
+    // create a file
+    lFileStatus += f_open(&lFile, "RAMDISK:file-test.txt", FA_WRITE | FA_CREATE_ALWAYS);
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      sprintf(lString, "%s", lFileStatus == FR_OK ? "File created.\r\n" : "Problems in creating the file.\r\n");
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+    } // end if
+
+    // store some text
+    lFileStatus += f_write(&lFile, "ASCII Charset:\r\n", strlen("ASCII Charset:\r\n"), &lBytesRead);
+    for (lChar = 32; lChar < 128; lChar++)
+    {
+      lFileBuffer[lChar - 32] = lChar;
+
+    } // end for
+    lFileBuffer[lChar - 32] = 0;
+
+    lFileStatus += f_write(&lFile, lFileBuffer, strlen((char*)lFileBuffer), &lBytesRead);
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      sprintf(lString, "%s", lFileStatus == FR_OK ? "File populated.\r\n" : "Problems in populating the file.\r\n");
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+    } // end if
+
+    // close file
+    f_close(&lFile);
+
+    // Now show file
+    lFileStatus = f_open(&lFile, "RAMDISK:file-test.txt", FA_READ);
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      sprintf(lString, "%s", lFileStatus == FR_OK ? "File opened.\r\n" : "Problems in opening the file.\r\n");
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+      sprintf(lString, "File size: %d bytes\r\n", f_size(&lFile));
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+    } // end if
+
+    lFileStatus += f_read(&lFile, lFileBuffer, f_size(&lFile), &lBytesRead);  /* Read a chunk of source file */
+    if (gDevices & ARCADEIT_DEVICE_SERIAL)
+    {
+      sprintf(lString, "%s", (lBytesRead == f_size(&lFile)) ? "File read.\r\n" : "Problems in reading the file.\r\n");
+      ArcadeIT_Serial_Port_String_Send(lString);
+
+    } // end if
+
+    if (lBytesRead == f_size(&lFile))
+      ArcadeIT_Utility_Show_Bytes(0, lFileBuffer, lBytesRead);
+
+    ArcadeIT_Status_LED2_Toggle();
+
+    // close file
+    f_close(&lFile);
+
+  } // end if
+#endif
+#if 0
+  uint8_t lBytes[8];
+
+  ArcadeIT_BUS_Port_SRAM(1);
+  gRAMAddress[0] = 0xf0;
+  gRAMAddress[1] = 0xf1;
+  gRAMAddress[2] = 0xf2;
+  gRAMAddress[3] = 0xf3;
+  gRAMAddress[4] = 0xf4;
+  gRAMAddress[5] = 0xf5;
+  gRAMAddress[6] = 0xf6;
+  gRAMAddress[7] = 0xf7;
+  ArcadeIT_System_Delay(10);
+
+  lBytes[0] = gRAMAddress[0];
+  lBytes[1] = gRAMAddress[1];
+  lBytes[2] = gRAMAddress[2];
+  lBytes[3] = gRAMAddress[3];
+  lBytes[4] = gRAMAddress[4];
+  lBytes[5] = gRAMAddress[5];
+  lBytes[6] = gRAMAddress[6];
+  lBytes[7] = gRAMAddress[7];
+  ArcadeIT_System_Delay(10);
+
+  for (uint8_t lB = 0; lB < 8; lB++)
+  {
+    sprintf(lString, "0x%02X\n\r", lBytes[lB]);
+    ArcadeIT_Serial_Port_String_Send(lString);
+  }
+
 #endif

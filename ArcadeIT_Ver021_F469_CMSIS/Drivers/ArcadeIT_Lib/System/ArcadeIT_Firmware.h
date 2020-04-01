@@ -69,6 +69,7 @@
   #define PLL_Q                               7   // USB OTG FS, SDIO and RNG Clock =  PLL_VCO / PLLQ
   #define PLL_N                               180
   #define PLL_P                               2   // SYSCLK = PLL_VCO / PLL_P
+  #define ARCADEIT_SYS_CLOCK                  180000000
 
   #define GPIO_Pin_0                          ((uint16_t)0x0001)
   #define GPIO_Pin_1                          ((uint16_t)0x0002)
@@ -141,7 +142,7 @@
   #define RCC_APB1ENR                         RCC->APB1ENR
   #define RCC_APB2ENR                         RCC->APB2ENR
 
-  static __I uint8_t APBAHBPrescTable[16] = {0, 0, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 6, 7, 8, 9};
+  static __IO uint8_t APBAHBPrescTable[16] = {0, 0, 0, 0, 1, 2, 3, 4, 1, 2, 3, 4, 6, 7, 8, 9};
 
   #define NVIC_PriorityGroup_0   ((uint32_t)0x700) /*!< 0 bits for pre-emption priority 4 bits for subpriority */
   #define NVIC_PriorityGroup_1   ((uint32_t)0x600) /*!< 1 bits for pre-emption priority 3 bits for subpriority */
@@ -149,6 +150,78 @@
   #define NVIC_PriorityGroup_3   ((uint32_t)0x400) /*!< 3 bits for pre-emption priority 1 bits for subpriority */
   #define NVIC_PriorityGroup_4   ((uint32_t)0x300) /*!< 4 bits for pre-emption priority 0 bits for subpriority */
 
+  #define TIM_CKD_DIV1                       ((uint16_t)0x0000)
+  #define TIM_CKD_DIV2                       ((uint16_t)0x0100)
+  #define TIM_CKD_DIV4                       ((uint16_t)0x0200)
+  #define TIM_PSCReloadMode_Update           ((uint16_t)0x0000)
+  #define TIM_PSCReloadMode_Immediate        ((uint16_t)0x0001)
+
+  #define TIM_OCPreload_Enable               ((uint16_t)0x0008)
+  #define TIM_OCPreload_Disable              ((uint16_t)0x0000)
+  #define TIM_OCMode_Timing                  ((uint16_t)0x0000)
+  #define TIM_OCMode_Active                  ((uint16_t)0x0010)
+  #define TIM_OCMode_Inactive                ((uint16_t)0x0020)
+  #define TIM_OCMode_Toggle                  ((uint16_t)0x0030)
+  #define TIM_OC3Mode_PWM                    ((uint16_t)0x0060)
+  #define TIM_OC4Mode_PWM                    ((uint16_t)0x6000)
+  #define TIM_OCPolarity_High                ((uint16_t)0x0000)
+  #define TIM_OCPolarity_Low                 ((uint16_t)0x0002)
+  #define TIM_OutputState_Disable            ((uint16_t)0x0000)
+  #define TIM_OutputState_Enable             ((uint16_t)0x0001)
+  #define TIM_OCNPolarity_High               ((uint16_t)0x0000)
+  #define TIM_DMA_Update                     ((uint16_t)0x0100)
+  #define TIM_DMA_CC1                        ((uint16_t)0x0200)
+  #define TIM_DMABase_CR1                    ((uint16_t)0x0000)
+  #define TIM_DMABase_CR2                    ((uint16_t)0x0001)
+  #define TIM_DMABase_SMCR                   ((uint16_t)0x0002)
+  #define TIM_DMABase_DIER                   ((uint16_t)0x0003)
+  #define TIM_DMABase_SR                     ((uint16_t)0x0004)
+  #define TIM_DMABase_EGR                    ((uint16_t)0x0005)
+  #define TIM_DMABase_CCMR1                  ((uint16_t)0x0006)
+  #define TIM_DMABase_CCMR2                  ((uint16_t)0x0007)
+  #define TIM_DMABase_CCER                   ((uint16_t)0x0008)
+  #define TIM_DMABase_CNT                    ((uint16_t)0x0009)
+  #define TIM_DMABase_PSC                    ((uint16_t)0x000A)
+  #define TIM_DMABase_ARR                    ((uint16_t)0x000B)
+  #define TIM_DMABase_RCR                    ((uint16_t)0x000C)
+  #define TIM_DMABase_CCR1                   ((uint16_t)0x000D)
+  #define TIM_DMABase_CCR2                   ((uint16_t)0x000E)
+  #define TIM_DMABase_CCR3                   ((uint16_t)0x000F)
+  #define TIM_DMABase_CCR4                   ((uint16_t)0x0010)
+  #define TIM_DMABase_BDTR                   ((uint16_t)0x0011)
+  #define TIM_DMABase_DCR                    ((uint16_t)0x0012)
+  #define TIM_DMABase_OR                     ((uint16_t)0x0013)
+  #define TIM_DMABurstLength_1Transfer       ((uint16_t)0x0000)
+  #define TIM_DMABurstLength_2Transfers      ((uint16_t)0x0100)
+  #define TIM_DMABurstLength_3Transfers      ((uint16_t)0x0200)
+  #define TIM_DMABurstLength_4Transfers      ((uint16_t)0x0300)
+  #define TIM_DMABurstLength_5Transfers      ((uint16_t)0x0400)
+  #define TIM_DMABurstLength_6Transfers      ((uint16_t)0x0500)
+  #define TIM_DMABurstLength_7Transfers      ((uint16_t)0x0600)
+  #define TIM_DMABurstLength_8Transfers      ((uint16_t)0x0700)
+  #define TIM_DMABurstLength_9Transfers      ((uint16_t)0x0800)
+  #define TIM_DMABurstLength_10Transfers     ((uint16_t)0x0900)
+  #define TIM_DMABurstLength_11Transfers     ((uint16_t)0x0A00)
+  #define TIM_DMABurstLength_12Transfers     ((uint16_t)0x0B00)
+  #define TIM_DMABurstLength_13Transfers     ((uint16_t)0x0C00)
+  #define TIM_DMABurstLength_14Transfers     ((uint16_t)0x0D00)
+  #define TIM_DMABurstLength_15Transfers     ((uint16_t)0x0E00)
+  #define TIM_DMABurstLength_16Transfers     ((uint16_t)0x0F00)
+  #define TIM_DMABurstLength_17Transfers     ((uint16_t)0x1000)
+  #define TIM_DMABurstLength_18Transfers     ((uint16_t)0x1100)
+
+  #define DMA_Stream0_IT_MASK                (uint32_t)(DMA_LISR_FEIF0 | DMA_LISR_DMEIF0 | \
+                                                        DMA_LISR_TEIF0 | DMA_LISR_HTIF0 | \
+                                                        DMA_LISR_TCIF0)
+
+  #define DMA_Stream1_IT_MASK                (uint32_t)(DMA_Stream0_IT_MASK << 6)
+  #define DMA_Stream2_IT_MASK                (uint32_t)(DMA_Stream0_IT_MASK << 16)
+  #define DMA_Stream3_IT_MASK                (uint32_t)(DMA_Stream0_IT_MASK << 22)
+  #define DMA_Stream4_IT_MASK                (uint32_t)(DMA_Stream0_IT_MASK | (uint32_t)0x20000000)
+  #define DMA_Stream5_IT_MASK                (uint32_t)(DMA_Stream1_IT_MASK | (uint32_t)0x20000000)
+  #define DMA_Stream6_IT_MASK                (uint32_t)(DMA_Stream2_IT_MASK | (uint32_t)0x20000000)
+  #define DMA_Stream7_IT_MASK                (uint32_t)(DMA_Stream3_IT_MASK | (uint32_t)0x20000000)
+  #define TRANSFER_IT_MASK                   (uint32_t)0x0F3C0F3C
 // ---------------------------------------------------------------------------------------
   #define TEXT_ARCADEIT_INIT "Initializing ArcadeIT! System...\n\r"
 // ---------------------------------------------------------------------------------------
@@ -211,36 +284,21 @@
 // ---------------------------------------------------------------------------------------
 // Peripherals: LCD
 // ---------------------------------------------------------------------------------------
-  #define ARCADEIT_LCD_RESET_RCC                RCC_AHB1PeriphClockCmd
-  #define ARCADEIT_LCD_RESET_PERIPHERAL         RCC_AHB1Periph_GPIOH
-  #define ARCADEIT_LCD_RESET_PORT               GPIOH
-  #define ARCADEIT_LCD_RESET_PIN                GPIO_Pin_7
-
-  #define ARCADEIT_LCD_BL_PWM_TIMER_RCC         RCC_APB2PeriphClockCmd
-  #define ARCADEIT_LCD_BL_PWM_TIMER_PERIPHERAL  RCC_APB2Periph_TIM1
-  #define ARCADEIT_LCD_BL_PWM_TIMER             TIM1
-  #define ARCADEIT_LCD_BL_PWM_TIMER_AF          GPIO_AF_TIM1
-
-  #define ARCADEIT_LCD_BL_PWM_PORT_RCC          RCC_AHB1PeriphClockCmd
-  #define ARCADEIT_LCD_BL_PWM_PORT_PERIPHERAL   RCC_AHB1Periph_GPIOE
-  #define ARCADEIT_LCD_1_BL_PWM_PORT            GPIOE
-  #define ARCADEIT_LCD_1_BL_PWM_PIN             GPIO_Pin_13
-  #define ARCADEIT_LCD_1_BL_PWM_PIN_S           GPIO_PinSource13
-  #define ARCADEIT_LCD_2_BL_PWM_PORT            GPIOE
-  #define ARCADEIT_LCD_2_BL_PWM_PIN             GPIO_Pin_14
-  #define ARCADEIT_LCD_2_BL_PWM_PIN_S           GPIO_PinSource14
-
-  #define TEXT_LCD_INITED                       "LCD %d enabled.\n\r"
+  #define ARCADEIT_A100_LCD                     ILI9341
+  #define ARCADEIT_A100_LCD_WIDTH               320
+  #define ARCADEIT_A100_LCD_HEIGHT              240
+  #define TEXT_LCD_INITED                       "LCD ports enabled.\n\r"
+  #define TEXT_LCD_PORT_SET                     "LCD port set.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: Parallel
 // ---------------------------------------------------------------------------------------
-  #define TEXT_PARALLEL_PORT_INITED     "Parallel port enabled.\n\r"
+  #define TEXT_PARALLEL_PORT_INITED             "Parallel port enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: RTC (Real Time Clock)
 // ---------------------------------------------------------------------------------------
-  #define TEXT_RTC_INITED               "Real time clock enabled.\n\r"
+  #define TEXT_RTC_INITED                       "Real time clock enabled.\n\r"
 
 // ---------------------------------------------------------------------------------------
 // Peripherals: Serial port
@@ -432,6 +490,8 @@ enum inputmode
 // /////////////////////////////////////////////////////////////////////////////
 extern char gString[ARCADEIT_STRING_LENGTH_MAX];
 extern char gTimeStamp[SYSTEM_TIMESTAMP_LEN];
+
+extern __IO uint8_t gCubeMonitorTrigger1;
 
 extern __IO uint32_t gSecondaryTimer;
 extern __IO uint32_t gSystemTimer, gSystemTick;

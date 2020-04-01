@@ -48,16 +48,13 @@ default.size.stdout \
 OBJDUMP_LIST += \
 ArcadeIT_Ver021_F469_CMSIS.list \
 
-OBJCOPY_BIN += \
-ArcadeIT_Ver021_F469_CMSIS.bin \
-
 
 # All Target
 all: ArcadeIT_Ver021_F469_CMSIS.elf secondary-outputs
 
 # Tool invocations
-ArcadeIT_Ver021_F469_CMSIS.elf: $(OBJS) $(USER_OBJS) C:\Users\Francesco\Documents\GitHub\ArcadeIT\ArcadeIT_Ver021_F469_CMSIS\STM32F469IITX_FLASH.ld
-	arm-none-eabi-gcc -o "ArcadeIT_Ver021_F469_CMSIS.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Francesco\Documents\GitHub\ArcadeIT\ArcadeIT_Ver021_F469_CMSIS\STM32F469IITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ArcadeIT_Ver021_F469_CMSIS.map" -Wl,--gc-sections -Wl,--verbose -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+ArcadeIT_Ver021_F469_CMSIS.elf: $(OBJS) $(USER_OBJS) C:\Users\info\Documents\GitHub\ArcadeIT\ArcadeIT_Ver021_F469_CMSIS\STM32F469IITX_FLASH.ld
+	arm-none-eabi-gcc -o "ArcadeIT_Ver021_F469_CMSIS.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\info\Documents\GitHub\ArcadeIT\ArcadeIT_Ver021_F469_CMSIS\STM32F469IITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="ArcadeIT_Ver021_F469_CMSIS.map" -Wl,--gc-sections -Wl,--verbose -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,17 +68,12 @@ ArcadeIT_Ver021_F469_CMSIS.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-ArcadeIT_Ver021_F469_CMSIS.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "ArcadeIT_Ver021_F469_CMSIS.bin"
-	@echo 'Finished building: $@'
-	@echo ' '
-
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
 
 .PHONY: all clean dependents
 .SECONDARY:

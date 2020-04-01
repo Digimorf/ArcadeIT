@@ -1,5 +1,5 @@
-Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.o: \
- ../Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.c \
+Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SRAM_LL.o: \
+ ../Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SRAM_LL.c \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/ArcadeIT_Common.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/ArcadeIT_Utilities.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.h \
@@ -15,9 +15,10 @@ Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.o: \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/FATFS/source/ff.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/FATFS/source/ffconf.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_Storage.h \
- C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.h \
+ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_RAMDisk.h \
+ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SRAM_LL.h \
  C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Serial_Port.h \
- C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SPI_Port.h
+ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_BUS_Port.h
 
 C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/ArcadeIT_Common.h:
 
@@ -49,8 +50,10 @@ C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/
 
 C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_Storage.h:
 
-C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SD_Card_LL.h:
+C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Disk/ArcadeIT_RAMDisk.h:
+
+C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SRAM_LL.h:
 
 C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_Serial_Port.h:
 
-C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_SPI_Port.h:
+C:/Users/Francesco/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_BUS_Port.h:

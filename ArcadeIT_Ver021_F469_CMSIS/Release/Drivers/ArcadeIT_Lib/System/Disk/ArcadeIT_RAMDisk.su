@@ -1,0 +1,6 @@
+ArcadeIT_RAMDisk.c:138:9:ArcadeIT_RAMDisk_Initialize	0	static
+ArcadeIT_RAMDisk.c:148:9:ArcadeIT_RAMDisk_Status	0	static
+ArcadeIT_RAMDisk.c:162:9:ArcadeIT_RAMDisk_Read	8	static
+ArcadeIT_RAMDisk.c:187:9:ArcadeIT_RAMDisk_Write	8	static
+ArcadeIT_RAMDisk.c:211:9:ArcadeIT_RAMDisk_Ioctl	0	static
+ArcadeIT_RAMDisk.c:257:9:ArcadeIT_RAMDisk_Start	4624	static

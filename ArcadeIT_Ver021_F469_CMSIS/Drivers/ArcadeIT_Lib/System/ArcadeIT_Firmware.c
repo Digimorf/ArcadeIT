@@ -52,16 +52,12 @@
 
 // ArcadeIT! Storage libraries.
 #include <System/Disk/ArcadeIT_Storage.h>
-#include <System/Devices/ArcadeIT_SD_Card_LL.h>
+#include <System/Disk/ArcadeIT_SD_Card.h>
+#include <System/Disk/ArcadeIT_RAMDisk.h>
 
 // ArcadeIT! System clocks and counters.
-#include "System/Units/ArcadeIT_Scheduler.h"
+#include <System/Units/ArcadeIT_Scheduler.h>
 
-#if 0
-#include "System/Peripherals/ArcadeIT_RAMDisk_LL.h"
-
-#include "System/Peripherals/ArcadeIT_RTC.h"
-#endif
 #if 0
 #include "System/Peripherals/ArcadeIT_DMM.h"
 #endif
@@ -79,11 +75,12 @@
 #include <System/Devices/ArcadeIT_Serial_Port.h>
 #include <System/Devices/ArcadeIT_SPI_Port.h>
 #include <System/Devices/ArcadeIT_I2C_Port.h>
-
+#include <System/Devices/ArcadeIT_BUS_Port.h>
+#include <System/Devices/ArcadeIT_RTC.h>
+#include <System/Devices/ArcadeIT_LCD_LL.h>
 
 #if 0
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
-#include "System/Peripherals/ArcadeIT_BUS_Port.h"
 #include "System/Peripherals/ArcadeIT_Parallel_Port.h"
 
 // ArcadeIT! Audio and video.
@@ -105,18 +102,23 @@
 #endif
 #define ARCADEIT_DEMOMODE
 
+#define DMA2D_WORKING               ((DMA2D->CR & DMA2D_CR_START))
+#define DMA2D_WAIT                  do { while (DMA2D_WORKING); DMA2D->IFCR = DMA2D_IFSR_CTCIF;} while (0);
+
 // /////////////////////////////////////////////////////////////////////////////
 // External elements.
 // /////////////////////////////////////////////////////////////////////////////
+
+extern __IO uint8_t *gDisplayAddress[2];
+extern LCD_Driver_t gLCDDriver[2];
+extern uint16_t gLCDLineBuffer[320];
 /*
 // Select the system board.
 extern uint8_t *gVGAFrameBufferTemp;
 extern __IO uint8_t gSwapBuffer;
 extern const uint8_t gVGACharacterSet6x8[13074];
 
-extern __IO uint8_t *gDisplayAddress[2];
-extern LCD_Driver_t gLCDDriver[2];
-extern uint16_t gLCDLineBuffer[320];
+
 extern Color_Palette_t gDefaultPalette, *gVGAPaletteShow, *gVGAPaletteRender;
 
 extern const uint8_t gVGATerminalBackground[77586];
@@ -140,6 +142,8 @@ extern uint8_t gCurrentDrive;
 // //////////////////////////////////////////////////////////////////////////////
 
 uint32_t gDevices = 0, gUnits = 0, gStorage = 0; // Flags for the activation of the systems
+
+__IO uint8_t gCubeMonitorTrigger1 = 0;
 
 __IO uint32_t gSystemTimer = 0, gSecondaryTimer = 0, gSystemTick = 0;
 
@@ -562,6 +566,23 @@ void ArcadeIT_ArcadeIT_Start (void)
 
   } // End if.
   // ---------------------------------------------------------------------------
+  if (gDevices & ARCADEIT_DEVICE_BUS)
+  {
+    // Start Expansion BUS.
+    ArcadeIT_BUS_Port_Init ();
+
+  } // End if.
+  // ---------------------------------------------------------------------------
+  // The external SRAM must be set before output devices in case we want to use
+  // it as a frame buffer
+  if (gDevices & ARCADEIT_DEVICE_RAM_MODULE)
+  {
+    ArcadeIT_BUS_Port_SRAM(BUS_SRAM_PRESCALER);
+
+    ArcadeIT_SRAM_Init ();
+
+  } // End if.
+  // ---------------------------------------------------------------------------
   // Start the SPI Port
   if (gDevices & ARCADEIT_DEVICE_SPI1)
   {
@@ -627,15 +648,208 @@ void ArcadeIT_ArcadeIT_Start (void)
       } // End if.
 
     } // End if.
+    // -------------------------------------------------------------------------
+    if ((gStorage & ARCADEIT_STORAGE_RAM_DISK) && (gDevices & ARCADEIT_DEVICE_RAM_MODULE))
+    {
+      lValue = ArcadeIT_RAMDisk_Start();
+      if (lValue == FR_OK)
+      {
+        lValue = f_chdrive(ArcadeIT_Utility_Get_String_ID(DEV_RAM, (char*)gDriveName));
+        if (lValue == FR_OK)
+        {
+          gCurrentDrive = DEV_RAM;
+
+          // Shows a message to serial port as debug
+          if (gDevices & ARCADEIT_DEVICE_SERIAL)
+          {
+            // Starts and configure the serial port.
+            sprintf(lString, "Current drive: [%s]\n\r", ArcadeIT_Utility_Get_String_ID(gCurrentDrive, (char*)gDriveName));
+            ArcadeIT_Serial_Port_String_Send(lString);
+
+          } // End if.
+        }
+        else // Didn't set current drive to SD Card
+        {
+          // Shows a message to serial port as debug
+          if (gDevices & ARCADEIT_DEVICE_SERIAL)
+          {
+            // Starts and configure the serial port.
+            sprintf(lString, "%s\n\r", ArcadeIT_Utility_Get_String_ID(lValue, (char*)gErrorMessages));
+            ArcadeIT_Serial_Port_String_Send(lString);
+
+          } // End if.
+
+        } // End if.
+      }
+      else // Disk not started
+
+      {
+        // Shows a message to serial port as debug
+        if (gDevices & ARCADEIT_DEVICE_SERIAL)
+        {
+          // Starts and configure the serial port.
+          sprintf(lString, "%s\n\r", ArcadeIT_Utility_Get_String_ID(lValue, (char*)gErrorMessages));
+          ArcadeIT_Serial_Port_String_Send(lString);
+
+        } // End if.
+
+      } // End if.
+
+    } // End if.
 
   } // End if.
-
   // ---------------------------------------------------------------------------
-  ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+  // Set LCD output if any. This must be set AFTER the Systick has been initialized
+  // Because uses the delay function that is handled by the Systick.
+  if (gDevices & ARCADEIT_DEVICE_LCDS)
+  {
+
+    ArcadeIT_BUS_Port_SRAM(3);
+    //ArcadeIT_Bus_Port_LCD(3);
+
+    // Starts and configure the LCD port.
+    LCD_Driver_Start ();
+
+    gLCDDriver[0].mirror = FALSE;
+
+  } // End if.
+  // ---------------------------------------------------------------------------
+  // Shows a message to serial port as debug
+  if (gDevices & ARCADEIT_DEVICE_SERIAL)
+  {
+    ArcadeIT_Serial_Port_String_Send(CURSOR_NEWLINE);
+
+  } // End if.
 
 } // End ArcadeIT_Start
 
 // ////////////////////////////////////////////////////////////////////////////
+void ArcadeIT_ChromeART_Fill(
+    uint16_t pX1, uint16_t pY1,
+    uint16_t pWidth, uint16_t pHeight,
+    uint32_t pColor,
+    uint32_t pOutputDevice,
+    uint8_t pOutputDeviceNumber
+    )
+{
+
+  uint32_t lAddress = 0;
+
+  //  RCC->AHB1RSTR |= RCC_AHB1RSTR_DMA2DRST;
+  //  RCC->AHB1RSTR &= ~RCC_AHB1RSTR_DMA2DRST;
+
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
+
+  RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
+  RCC->AHB1RSTR &= ~RCC_AHB1Periph_DMA2D;
+
+  switch (pOutputDevice)
+  {
+    case ARCADEIT_DEVICE_LCDS:
+      /* Destination area */
+      //LCD_Area_Set(pOutputDeviceNumber, pX1, pY1, pWidth, pHeight);
+      if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
+
+      RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
+      RCC->AHB1RSTR &= ~RCC_AHB1Periph_DMA2D;
+
+      /* Configure  the line Offset */
+      DMA2D->OOR = 0;//gLCDDriver[pOutputDeviceNumber].width - pWidth;
+      DMA2D->NLR = 0x00100140;// (pHeight << 16) | gLCDDriver[pOutputDeviceNumber].width;
+
+      /* Configures the color mode of the output image */
+      DMA2D->OPFCCR = DMA2D_RGB565;
+
+      /* Configures the output memory address */
+      DMA2D->OMAR = lAddress;
+      DMA2D->OCOLR = 0xF800; //RGB_TO_16BIT565(255,0,0);//pColor;
+
+      /* Output Address */
+      lAddress = (uint32_t)(gDisplayAddress[pOutputDeviceNumber] + LCD_DATA);
+      DMA2D->CR = (uint32_t)CR_MASK;
+      DMA2D->CR |= DMA2D_R2M;
+
+      DMA2D->CR |= DMA2D_CR_START;
+    break;
+
+    case ARCADEIT_DEVICE_VGA:
+      /* Configure  the line Offset */
+      //DMA2D->OOR &= ~(uint32_t)DMA2D_OOR_LO;
+      //DMA2D->OOR |= 0;
+
+      /* Configure the number of line and pixel per line */
+      //DMA2D->NLR &= ~(DMA2D_NLR_NL | DMA2D_NLR_PL);
+      //DMA2D->NLR |= 1 | (gLCDDriver[pLCDId].width << 16);
+
+      //lAddress = gLCDDriver[pOutputDeviceNumber].video_buffer_memory + (gLCDDriver[pOutputDeviceNumber].width * pY2) + pX2;
+    break;
+
+  } // end switch
+
+  /* Configures the DMA2D operation mode */
+  DMA2D->CR = (uint32_t)CR_MASK;
+  DMA2D->CR |= DMA2D_R2M;
+
+  DMA2D->CR |= DMA2D_CR_START;
+
+} // End ArcadeIT_ChromeART_Fill
+
+#if 0
+void ArcadeIT_ChromeART_Copy(
+    uint8_t *pBufferFrom, uint16_t pX1, uint16_t pY1,
+    uint8_t *pBufferTo, uint16_t pX2, uint16_t pY2
+    )
+{
+  /* Configures the BG offset */
+  //DMA2D->BGOR &= ~(uint32_t)DMA2D_BGOR_LO;
+  //DMA2D->BGOR |= (DMA2D_BG_InitStruct->DMA2D_BGO);
+
+  /* Configures the FG offset */
+  //DMA2D->FGOR &= ~(uint32_t)DMA2D_FGOR_LO;
+  //DMA2D->FGOR |= (DMA2D_FG_InitStruct->DMA2D_FGO);
+
+  //DMA2D->BGCMAR = DMA2D_BG_InitStruct->DMA2D_BGCMAR;
+  //DMA2D->FGCMAR = DMA2D_FG_InitStruct->DMA2D_FGCMAR;
+
+  /* Configures the output memory address */
+  DMA2D->OMAR = 0;
+
+  /* Configures the color mode of the output image */
+  DMA2D->OPFCCR &= ~(uint32_t)DMA2D_OPFCCR_CM;
+  DMA2D->OPFCCR |= DMA2D_RGB565;
+
+  /* Configures the DMA2D operation mode */
+  DMA2D->CR &= (uint32_t)CR_MASK;
+  DMA2D->CR |= DMA2D_M2M;
+
+  /* Configure  the line Offset */
+  DMA2D->OOR &= ~(uint32_t)DMA2D_OOR_LO;
+  DMA2D->OOR |= 0;
+
+  /* Configure the number of line and pixel per line */
+  DMA2D->NLR &= ~(DMA2D_NLR_NL | DMA2D_NLR_PL);
+  DMA2D->NLR |= 1 | (gLCDDriver[pLCDId].width << 16);
+
+} // End ArcadeIT_ChromeART_Copy
+#endif
+
+void ArcadeIT_ChromeART_Init(void)
+{
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
+
+  /* Configures background Pixel Format Convertor */
+  DMA2D->BGPFCCR &= (uint32_t)PFCCR_MASK;
+  DMA2D->BGPFCCR |= (CM_L8 | (CLUT_CM_RGB888 << 4) | (256 << 8) | (REPLACE_ALPHA_VALUE << 16) | (255 << 24));
+
+  /* Configures foreground Pixel Format Convertor */
+  DMA2D->FGPFCCR &= (uint32_t)PFCCR_MASK;
+  DMA2D->FGPFCCR |= (CM_L8 | CLUT_CM_ARGB8888 << 4 | 256 << 8 | NO_MODIF_ALPHA_VALUE << 16 | 0 << 24);
+
+} // end ArcadeIT_ChromeART_Init
+
+// ////////////////////////////////////////////////////////////////////////////
+uint16_t lFakePWM_Out = 0, lFakePWM_Counter = 0, lFakePWM_Counter_Limit = 18000, lFakePWM_Duty = 32, lFakePWM_Duty_Counter = 0, lFakePWM_Duty_Counter_limit = 255;
+
 void ArcadeIT_Test_Bench (void)
 {
   // The following variables hold the flags that start the features/peripherals
@@ -644,27 +858,27 @@ void ArcadeIT_Test_Bench (void)
 
   // System features.
   gUnits = NONE
-        | ARCADEIT_UNIT_RTC           // Real time clock
-      //| ARCADEIT_UNIT_DMM           // The custom ArcadeIt Dynamic Memory Manager
-        | ARCADEIT_UNIT_SCHEDULER     // The task scheduler system.
+      //| ARCADEIT_UNIT_RTC             // Real time clock
+      //| ARCADEIT_UNIT_DMM             // The custom ArcadeIt Dynamic Memory Manager
+        | ARCADEIT_UNIT_SCHEDULER       // The task scheduler system.
       ;
 
   gStorage = NONE
       //| ARCADEIT_STORAGE_RAM_DISK     // Ram disk with a FAT File system on the SRAM expansion
-        | ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
+      //| ARCADEIT_STORAGE_SD_CARD_SPI1 // File system FAT on SD Card over the SPI1 port
       ;
 
   gDevices = NONE
-      //| ARCADEIT_SYSTEM_BUS           // The main BUS of the system.
-      //| ARCADEIT_DEVICE_RAM_MODULE    // SRAM expansion
+        | ARCADEIT_DEVICE_BUS           // The main BUS of the system.
+        | ARCADEIT_DEVICE_RAM_MODULE    // SRAM expansion
       //| ARCADEIT_DEVICE_EXPANSION     // SLOTS expansion
-        | ARCADEIT_DEVICE_SPI1          // SPI 1 port
-        | ARCADEIT_DEVICE_I2C           // I2C port
-      //| ARCADEIT_DEVICE_LCDS          // LCDs port
+      //| ARCADEIT_DEVICE_SPI1          // SPI 1 port
+      //| ARCADEIT_DEVICE_I2C           // I2C port
+        | ARCADEIT_DEVICE_LCDS          // LCDs port
       //| ARCADEIT_DEVICE_VGA           // VGA port
       //| ARCADEIT_DEVICE_AUDIO         // Audio DAC port
       //| ARCADEIT_DEVICE_PARALLEL      // Parallel port
-      //| ARCADEIT_DEVICE_USB           // USB port
+      //| ARCADEIT_DEVICHE_USB          // USB port
         | ARCADEIT_DEVICE_SERIAL        // Serial port USART 2
         | ARCADEIT_DEVICE_STATUSLED     // Two Status LEDs
         | ARCADEIT_DEVICE_TESTPADS      // System clock test pads
@@ -676,8 +890,68 @@ void ArcadeIT_Test_Bench (void)
 #include <Demofiles/test.c>
 #endif // TEST
 
+#if 0
+  // Set all GPIOs of port A to output, pull-down at max frequency
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_GPIOB) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_GPIOB;
+
+  // GPIOB address in memory is:
+  // (0x40000000UL + 0x00020000UL) + 0x400
+  GPIOB->MODER   = 0x55555555; // All GPIOs set to GPIO_Mode_OUT
+  GPIOB->OSPEEDR = 0xFFFFFFFF; // All GPIOs set to GPIO_Speed_100MHz
+  GPIOB->OTYPER  = 0x00000000; // All GPIOs set to GPIO_OType_PP
+  GPIOB->PUPDR   = 0xAAAAAAAA; // All GPIOs set to GPIO_PuPd_DOWN
+
+  // __IO uint32_t ODR;  GPIO port output data register, Address offset: 0x14
+  GPIOB->ODR     = 0;          // All outputs set to 0
+
+  uint16_t GPIOB_Output = 0;
+#endif
+
+  LCD_0_Backlight_Set(100);
+  LCD_1_Backlight_Set(100);
+
+  gCubeMonitorTrigger1 = 1;
+
+  uint32_t color = 0xF800;
+
+  //ArcadeIT_ChromeART_Fill(30, 30, 120, 60, color++, ARCADEIT_DEVICE_LCDS, LCD_1_ID);
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
+
+  RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
+  RCC->AHB1RSTR &= ~RCC_AHB1Periph_DMA2D;
+
+  DMA2D->OOR = 1;
+  DMA2D->NLR = (320 << 16) | 1; // width << 16 | height
+  DMA2D->OPFCCR = DMA2D_RGB565;
+  DMA2D->OMAR = (uint32_t)(gDisplayAddress[0] + LCD_DATA);
+
+  DMA2D->CR &= (uint32_t)CR_MASK;
+  DMA2D->CR |= DMA2D_R2M;
+
   while (1)
   {
+#if 0
+    // Set outputs of port B to an incremented value for each cycle.
+    /*
+     *  15 ________________
+     *  -
+     *  3  ____----____----
+     *  2  ___---___---___-
+     *  1  __--__--__--__--
+     *  0  _-_-_-_-_-_-_-_-
+     *     0123456789abcdef
+     */
+    // Address of GPIOB->ODR = 0x40020414
+    GPIOB->ODR = GPIOB_Output++;
+
+    // waits for 1 mS.
+    ArcadeIT_System_Delay(10);
+#endif
+
+    while (DMA2D->CR & DMA2D_CR_START);
+    DMA2D->OCOLR = (color++ & 0xFFFF);
+    DMA2D->CR |= DMA2D_CR_START;
+    ArcadeIT_System_Delay(100);
 
     // Periodic tasks
     if (gUnits & ARCADEIT_UNIT_SCHEDULER)

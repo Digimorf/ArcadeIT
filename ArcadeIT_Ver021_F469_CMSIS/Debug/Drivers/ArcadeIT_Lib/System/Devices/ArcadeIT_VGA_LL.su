@@ -1,0 +1,15 @@
+ArcadeIT_VGA_LL.c:225:1:ArcadeIT_VGA_Info	16	static
+ArcadeIT_VGA_LL.c:239:1:ArcadeIT_GFX_Palette_Get	8	static
+ArcadeIT_VGA_LL.c:263:1:ArcadeIT_GFX_Colors_Range_Get	16	static
+ArcadeIT_VGA_LL.c:292:1:ArcadeIT_GFX_Colors_Get	16	static
+ArcadeIT_VGA_LL.c:322:1:ArcadeIT_VGA_HClock_Set	4	static
+ArcadeIT_VGA_LL.c:448:1:ArcadeIT_VGA_Init	8	static
+ArcadeIT_VGA_LL.c:614:1:ArcadeIT_VGA_Mode_Set	8	static
+ArcadeIT_VGA_LL.c:831:1:ArcadeIT_VGA_Deinit	0	static
+ArcadeIT_VGA_LL.c:876:1:ArcadeIT_VGA_Switch_Screen	0	static
+ArcadeIT_VGA_LL.c:891:1:ArcadeIT_VGA_Swap_Buffer	0	static
+ArcadeIT_VGA_LL.c:908:1:ArcadeIT_VGA_Swap_Palette	0	static
+ArcadeIT_VGA_LL.c:922:1:ArcadeIT_VGA_Start	0	static
+ArcadeIT_VGA_LL.c:972:1:ArcadeIT_VGA_Stop	0	static
+ArcadeIT_VGA_LL.c:988:1:ArcadeIT_VGA_VBlank	0	static
+ArcadeIT_VGA_LL.c:1002:1:DMA2_Stream1_IRQHandler	16	static

@@ -48,8 +48,8 @@
 #include <System/ArcadeIT_Firmware.h>
 
 // FATFS functions.
-#include "ff.h"
-#include "diskio.h"
+#include <ff.h>
+#include <diskio.h>
 
 // /////////////////////////////////////////////////////////////////////////////
 // Defines.

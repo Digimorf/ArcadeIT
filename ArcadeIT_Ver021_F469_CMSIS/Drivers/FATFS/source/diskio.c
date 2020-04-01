@@ -7,20 +7,24 @@
 /* storage control modules to the FatFs module with a defined API.       */
 /*-----------------------------------------------------------------------*/
 
-#include "ff.h"			/* Obtains integer types */
-#include "diskio.h"		/* Declarations of disk functions */
+#include <ff.h> 			/* Obtains integer types */
+#include <diskio.h>		/* Declarations of disk functions */
 
 // /////////////////////////////////////////////////////////////////////////////
 // Added by Francesco De Simone to implement devices of ArcadeIT!
 // This section is an interface layer between FATFS and ArcadeIT to use when
 // updating this library.
 
-
-// Include Low Level storage devices libraries
-#include <System/Devices/ArcadeIT_SD_Card_LL.h>
+// ArcadeIT! Storage libraries.
+#include <System/Disk/ArcadeIT_Storage.h>
+#include <System/Disk/ArcadeIT_SD_Card.h>
+#include <System/Disk/ArcadeIT_RAMDisk.h>
 
 // Prototypes for unused functions
-DSTATUS RAM_disk_status();
+DSTATUS RAM_disk_status()
+{
+  return ArcadeIT_RAMDisk_Status();
+}
 DSTATUS MMC_disk_status();
 DSTATUS USB_disk_status();
 DSTATUS SD_disk_status()
@@ -28,7 +32,11 @@ DSTATUS SD_disk_status()
   return ArcadeIT_SDCard_Disk_Status();
 }
 
-DSTATUS RAM_disk_initialize();
+DSTATUS RAM_disk_initialize()
+{
+  return ArcadeIT_RAMDisk_Initialize();
+}
+
 DSTATUS MMC_disk_initialize();
 DSTATUS USB_disk_initialize();
 DSTATUS SD_disk_initialize()
@@ -36,7 +44,10 @@ DSTATUS SD_disk_initialize()
   return ArcadeIT_SDCard_Disk_Initialize();
 }
 
-DSTATUS RAM_disk_read(BYTE *buff, DWORD sector, UINT count);
+DSTATUS RAM_disk_read(BYTE *buff, DWORD sector, UINT count)
+{
+  return ArcadeIT_RAMDisk_Read(buff, sector, count);
+}
 DSTATUS MMC_disk_read(BYTE *buff, DWORD sector, UINT count);
 DSTATUS USB_disk_read(BYTE *buff, DWORD sector, UINT count);
 DSTATUS SD_disk_read(BYTE *buff, DWORD sector, UINT count)
@@ -44,7 +55,10 @@ DSTATUS SD_disk_read(BYTE *buff, DWORD sector, UINT count)
   return ArcadeIT_SDCard_Disk_Read(buff, sector, count);
 }
 
-DSTATUS RAM_disk_write(const BYTE *buff, DWORD sector, UINT count);
+DSTATUS RAM_disk_write(const BYTE *buff, DWORD sector, UINT count)
+{
+  return ArcadeIT_RAMDisk_Write(buff, sector, count);
+}
 DSTATUS MMC_disk_write(const BYTE *buff, DWORD sector, UINT count);
 DSTATUS USB_disk_write(const BYTE *buff, DWORD sector, UINT count);
 DSTATUS SD_disk_write(const BYTE *buff, DWORD sector, UINT count)
@@ -66,7 +80,7 @@ DSTATUS disk_status (
 
 	switch (pdrv) {
 	case DEV_RAM :
-		//result = RAM_disk_status();
+		result = RAM_disk_status();
 
 		// translate the reslut code here
 
@@ -111,16 +125,16 @@ DSTATUS disk_initialize (
 
 	switch (pdrv) {
 	case DEV_RAM :
-		//result = RAM_disk_initialize();
+		result = RAM_disk_initialize();
 
-		// translate the reslut code here
+		// translate the result code here
 
 		return result;
 
 	case DEV_MMC :
 		//result = MMC_disk_initialize();
 
-		// translate the reslut code here
+		// translate the result code here
 
 		return result;
 
@@ -128,14 +142,14 @@ DSTATUS disk_initialize (
 	  case DEV_SD :
 	    result = SD_disk_initialize();
 
-	    // translate the reslut code here
+	    // translate the result code here
 
 	    return result;
 
 	case DEV_USB :
 		//result = USB_disk_initialize();
 
-		// translate the reslut code here
+		// translate the result code here
 
 		return result;
 	}
@@ -161,7 +175,7 @@ DRESULT disk_read (
 	case DEV_RAM :
 		// translate the arguments here
 
-		//result = RAM_disk_read(buff, sector, count);
+		result = RAM_disk_read(buff, sector, count);
 
 		// translate the reslut code here
 
@@ -218,7 +232,7 @@ DRESULT disk_write (
 	case DEV_RAM :
 		// translate the arguments here
 
-		//result = RAM_disk_write(buff, sector, count);
+		result = RAM_disk_write(buff, sector, count);
 
 		// translate the reslut code here
 
@@ -271,6 +285,7 @@ DRESULT disk_ioctl (
 
 	switch (pdrv) {
 	case DEV_RAM :
+    result = ArcadeIT_RAMDisk_Ioctl(cmd, buff);
 
 		// Process of the command for the RAM drive
 

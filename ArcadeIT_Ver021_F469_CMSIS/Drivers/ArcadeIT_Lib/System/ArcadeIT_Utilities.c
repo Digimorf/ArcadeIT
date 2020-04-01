@@ -74,43 +74,7 @@
 // /////////////////////////////////////////////////////////////////////////////
 // Shared functions.
 // /////////////////////////////////////////////////////////////////////////////
-/*
-void ArcadeIT_Utility_DMA_Init(void)
-{
-    NVIC_InitTypeDef         lNVIC_InitStructure;
-    DMA_InitTypeDef          lDMA_InitStructure;
 
-    DMA_Cmd(DMA2_Stream0, DISABLE);
-    DMA_DeInit(DMA2_Stream0);
-
-    if ((RCC_AHB1ENR & RCC_AHB1Periph_DMA2) == FALSE)
-      RCC_AHB1PeriphClockCmd (RCC_AHB1Periph_DMA2, ENABLE);
-
-    DMA_StructInit(&lDMA_InitStructure);
-
-    // Set the parameters to be configured
-    lDMA_InitStructure.DMA_Channel = DMA_Channel_7;
-    lDMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
-    lDMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Enable;
-    lDMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
-    lDMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
-    lDMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToMemory;
-    lDMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
-    lDMA_InitStructure.DMA_Priority = DMA_Priority_Low;
-    lDMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
-    lDMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_3QuartersFull;
-    lDMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
-    lDMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
-    DMA_Init(DMA2_Stream0, &lDMA_InitStructure);
-
-    lNVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream0_IRQn;
-    lNVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = NVIC_VIDEO_PRIORITY;
-    lNVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
-    lNVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init (&lNVIC_InitStructure);
-
-} // End ArcadeIT_Utility_DMA_Init
-*/
 // -----------------------------------------------------------------------------
 void ArcadeIT_Utility_Uppercase
 (

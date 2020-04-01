@@ -84,9 +84,7 @@
 
 // ArcadeIT! Storage libraries.
 #include <System/Disk/ArcadeIT_Storage.h>
-
-// Storage devices layers.
-#include <Devices/ArcadeIT_SD_Card_LL.h>
+#include <System/Disk/ArcadeIT_SD_Card.h>
 
 // ArcadeIT! Peripherals and buses.
 #include <Devices/ArcadeIT_Serial_Port.h>
@@ -655,7 +653,6 @@ FRESULT ArcadeIT_SDCard_Disk_Start (void)
       // Shows a message to serial port as debug
       if (gDevices & ARCADEIT_DEVICE_SERIAL)
       {
-        // Starts and configure the serial port.
         ArcadeIT_Serial_Port_String_Send(lString);
 
       } // End if.
@@ -665,7 +662,6 @@ FRESULT ArcadeIT_SDCard_Disk_Start (void)
       // Shows a message to serial port as debug
       if (gDevices & ARCADEIT_DEVICE_SERIAL)
       {
-        // Starts and configure the serial port.
         ArcadeIT_Serial_Port_String_Send(lString);
 
       } // End if.
@@ -679,7 +675,6 @@ FRESULT ArcadeIT_SDCard_Disk_Start (void)
       // Shows a message to serial port as debug
       if (gDevices & ARCADEIT_DEVICE_SERIAL)
       {
-        // Starts and configure the serial port.
         ArcadeIT_Serial_Port_String_Send(lString);
 
       } // End if.
@@ -695,7 +690,6 @@ FRESULT ArcadeIT_SDCard_Disk_Start (void)
       // Shows a message to serial port as debug
       if (gDevices & ARCADEIT_DEVICE_SERIAL)
       {
-        // Starts and configure the serial port.
         ArcadeIT_Serial_Port_String_Send(lString);
 
       } // End if.
@@ -708,7 +702,6 @@ FRESULT ArcadeIT_SDCard_Disk_Start (void)
       // Shows a message to serial port as debug
       if (gDevices & ARCADEIT_DEVICE_SERIAL)
       {
-        // Starts and configure the serial port.
         ArcadeIT_Serial_Port_String_Send(lString);
 
       } // End if.
