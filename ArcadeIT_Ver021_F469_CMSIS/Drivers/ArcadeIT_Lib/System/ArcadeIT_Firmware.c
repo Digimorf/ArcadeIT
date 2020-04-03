@@ -78,13 +78,13 @@
 #include <System/Devices/ArcadeIT_BUS_Port.h>
 #include <System/Devices/ArcadeIT_RTC.h>
 #include <System/Devices/ArcadeIT_LCD_LL.h>
+#include <System/Devices/ArcadeIT_VGA_LL.h>
 
 #if 0
 #include "System/Peripherals/ArcadeIT_USB_Port.h"
 #include "System/Peripherals/ArcadeIT_Parallel_Port.h"
 
 // ArcadeIT! Audio and video.
-#include "System/Peripherals/ArcadeIT_VGA_LL.h"
 #include "System/Peripherals/ArcadeIT_AUDIO_LL.h"
 #include "System/Peripherals/ArcadeIT_LCD_LL.h"
 #include "System/Video/ArcadeIT_Gfx_Utilities.h"
@@ -147,10 +147,10 @@ __IO uint8_t gCubeMonitorTrigger1 = 0;
 
 __IO uint32_t gSystemTimer = 0, gSecondaryTimer = 0, gSystemTick = 0;
 
+__IO Video_Driver_t gVideoDriver, gVideoDriverBackup;
+
 /*
 uint8_t gTerminal = FALSE;
-
-__IO Video_Driver_t gVideoDriver, gVideoDriverBackup;
 
 uint32_t gMemoryHeap = 0, gMemoryChip = 0;
 
@@ -703,8 +703,7 @@ void ArcadeIT_ArcadeIT_Start (void)
   // Because uses the delay function that is handled by the Systick.
   if (gDevices & ARCADEIT_DEVICE_LCDS)
   {
-
-    ArcadeIT_BUS_Port_SRAM(3);
+    ArcadeIT_BUS_Port_SRAM(6);
     //ArcadeIT_Bus_Port_LCD(3);
 
     // Starts and configure the LCD port.
@@ -724,6 +723,7 @@ void ArcadeIT_ArcadeIT_Start (void)
 } // End ArcadeIT_Start
 
 // ////////////////////////////////////////////////////////////////////////////
+#if 0
 void ArcadeIT_ChromeART_Fill(
     uint16_t pX1, uint16_t pY1,
     uint16_t pWidth, uint16_t pHeight,
@@ -735,9 +735,6 @@ void ArcadeIT_ChromeART_Fill(
 
   uint32_t lAddress = 0;
 
-  //  RCC->AHB1RSTR |= RCC_AHB1RSTR_DMA2DRST;
-  //  RCC->AHB1RSTR &= ~RCC_AHB1RSTR_DMA2DRST;
-
   if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
 
   RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
@@ -746,8 +743,6 @@ void ArcadeIT_ChromeART_Fill(
   switch (pOutputDevice)
   {
     case ARCADEIT_DEVICE_LCDS:
-      /* Destination area */
-      //LCD_Area_Set(pOutputDeviceNumber, pX1, pY1, pWidth, pHeight);
       if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
 
       RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
@@ -762,7 +757,7 @@ void ArcadeIT_ChromeART_Fill(
 
       /* Configures the output memory address */
       DMA2D->OMAR = lAddress;
-      DMA2D->OCOLR = 0xF800; //RGB_TO_16BIT565(255,0,0);//pColor;
+      DMA2D->OCOLR = 0x0000;
 
       /* Output Address */
       lAddress = (uint32_t)(gDisplayAddress[pOutputDeviceNumber] + LCD_DATA);
@@ -789,12 +784,10 @@ void ArcadeIT_ChromeART_Fill(
   /* Configures the DMA2D operation mode */
   DMA2D->CR = (uint32_t)CR_MASK;
   DMA2D->CR |= DMA2D_R2M;
-
   DMA2D->CR |= DMA2D_CR_START;
 
 } // End ArcadeIT_ChromeART_Fill
 
-#if 0
 void ArcadeIT_ChromeART_Copy(
     uint8_t *pBufferFrom, uint16_t pX1, uint16_t pY1,
     uint8_t *pBufferTo, uint16_t pX2, uint16_t pY2
@@ -831,7 +824,6 @@ void ArcadeIT_ChromeART_Copy(
   DMA2D->NLR |= 1 | (gLCDDriver[pLCDId].width << 16);
 
 } // End ArcadeIT_ChromeART_Copy
-#endif
 
 void ArcadeIT_ChromeART_Init(void)
 {
@@ -846,6 +838,7 @@ void ArcadeIT_ChromeART_Init(void)
   DMA2D->FGPFCCR |= (CM_L8 | CLUT_CM_ARGB8888 << 4 | 256 << 8 | NO_MODIF_ALPHA_VALUE << 16 | 0 << 24);
 
 } // end ArcadeIT_ChromeART_Init
+#endif
 
 // ////////////////////////////////////////////////////////////////////////////
 uint16_t lFakePWM_Out = 0, lFakePWM_Counter = 0, lFakePWM_Counter_Limit = 18000, lFakePWM_Duty = 32, lFakePWM_Duty_Counter = 0, lFakePWM_Duty_Counter_limit = 255;
@@ -912,21 +905,43 @@ void ArcadeIT_Test_Bench (void)
 
   gCubeMonitorTrigger1 = 1;
 
-  uint32_t color = 0xF800;
+  uint16_t lColor = 0xFF;
+  uint32_t lTime = 0;
 
+#if 1
   //ArcadeIT_ChromeART_Fill(30, 30, 120, 60, color++, ARCADEIT_DEVICE_LCDS, LCD_1_ID);
   if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2D) == FALSE) RCC->AHB1ENR |= RCC_AHB1Periph_DMA2D;
-
+  // Enable DMA2D reset state
   RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
+  // Release DMA2D from reset state
   RCC->AHB1RSTR &= ~RCC_AHB1Periph_DMA2D;
-
-  DMA2D->OOR = 1;
-  DMA2D->NLR = (320 << 16) | 1; // width << 16 | height
-  DMA2D->OPFCCR = DMA2D_RGB565;
-  DMA2D->OMAR = (uint32_t)(gDisplayAddress[0] + LCD_DATA);
-
+  // Configures the DMA2D operation mode
   DMA2D->CR &= (uint32_t)CR_MASK;
   DMA2D->CR |= DMA2D_R2M;
+  // Configures the color mode of the output image
+  DMA2D->OPFCCR &= ~(uint32_t)DMA2D_OPFCCR_CM;
+  DMA2D->OPFCCR |= DMA2D_RGB565;
+  // Configures the output color
+  //if (DMA2D_InitStruct->DMA2D_CMode == DMA2D_RGB565)
+  DMA2D->OCOLR |= ((0 << 5) | (0x1F << 11) | (0x1F) | (0));
+  // Configures the output memory address
+  DMA2D->OMAR = (uint32_t)(gDisplayAddress[0] + LCD_DATA);
+  // Configure  the line Offset
+  DMA2D->OOR &= ~(uint32_t)DMA2D_OOR_LO;
+  DMA2D->OOR |= 0;
+  // Configure the number of line and pixel per line
+  DMA2D->NLR &= ~(DMA2D_NLR_NL | DMA2D_NLR_PL);
+  DMA2D->NLR |= (240 | (320 << 16));
+  // Start DMA2D transfer by setting START bit
+  DMA2D->CR |= (uint32_t)DMA2D_CR_START;
+  // Wait for TC Flag activation
+  while(((DMA2D->ISR) & DMA2D_ISR_TCIF) == (uint32_t)RESET){};
+#endif
+
+#if 0
+  if ((RCC->AHB1ENR & RCC_AHB1Periph_DMA2) == FALSE)
+    RCC->AHB1ENR |= RCC_AHB1Periph_DMA2;
+#endif
 
   while (1)
   {
@@ -948,10 +963,71 @@ void ArcadeIT_Test_Bench (void)
     ArcadeIT_System_Delay(10);
 #endif
 
-    while (DMA2D->CR & DMA2D_CR_START);
-    DMA2D->OCOLR = (color++ & 0xFFFF);
-    DMA2D->CR |= DMA2D_CR_START;
-    ArcadeIT_System_Delay(100);
+#if 1
+    // Enable DMA2D reset state
+    RCC->AHB1RSTR |= RCC_AHB1Periph_DMA2D;
+    // Release DMA2D from reset state
+    RCC->AHB1RSTR &= ~RCC_AHB1Periph_DMA2D;
+    // Configures the DMA2D operation mode
+    DMA2D->CR &= (uint32_t)CR_MASK;
+    DMA2D->CR |= DMA2D_R2M;
+    // Configures the color mode of the output image
+    DMA2D->OPFCCR &= ~(uint32_t)DMA2D_OPFCCR_CM;
+    DMA2D->OPFCCR |= DMA2D_RGB565;
+    // Configures the output color
+    //if (DMA2D_InitStruct->DMA2D_CMode == DMA2D_RGB565)
+    DMA2D->OCOLR |= lColor++;
+    // Configures the output memory address
+    DMA2D->OMAR = (uint32_t)(gDisplayAddress[0] + LCD_DATA);
+    // Configure  the line Offset
+    DMA2D->OOR &= ~(uint32_t)DMA2D_OOR_LO;
+    DMA2D->OOR |= 0;
+    // Configure the number of line and pixel per line
+    DMA2D->NLR &= ~(DMA2D_NLR_NL | DMA2D_NLR_PL);
+    DMA2D->NLR |= (240 | (320 << 16));
+    // Start DMA2D transfer by setting START bit
+    DMA2D->CR |= (uint32_t)DMA2D_CR_START;
+    // Wait for TC Flag activation
+    while(((DMA2D->ISR) & DMA2D_ISR_TCIF) == (uint32_t)RESET){};
+#endif
+
+#if 0
+    //while (DMA2_Stream0->NDTR > 0);
+
+    DMA2_Stream0->CR &= ~DMA_SxCR_EN;
+
+    lColor++;
+    // Set the parameters to be configured
+    DMA2_Stream0->CR = DMA_Channel_0
+                     | DMA_DIR_MemoryToMemory
+                     | DMA_PeripheralInc_Disable
+                     | DMA_PeripheralDataSize_HalfWord
+                     | DMA_PeripheralBurst_Single
+                     | DMA_MemoryInc_Disable
+                     | DMA_MemoryDataSize_Byte
+                     | DMA_MemoryBurst_Single
+                     | DMA_Mode_Circular
+                     | DMA_Priority_Low;
+
+    // Reset DMAy Streamx FIFO control register
+    DMA2_Stream0->FCR = (uint32_t)0x00000021;
+    DMA2->LIFCR = DMA_Stream1_IT_MASK;
+    DMA2_Stream0->M0AR = (uint32_t)(gDisplayAddress[0] + LCD_DATA);
+    DMA2_Stream0->PAR = (uint32_t)&lColor;
+    DMA2_Stream0->NDTR = 1;
+    DMA2_Stream0->CR |= DMA_SxCR_EN;
+#endif
+
+#if 0
+    lTime = SYS_MCU_CYCLES();
+    for (uint32_t pixel = 0; pixel < 320 * 240; pixel++)
+    {
+      *((uint16_t*)gDisplayAddress[0] + LCD_DATA) = lColor;
+
+    } // end for
+    lColor++;
+    while (SYS_MCU_CYCLES() < lTime + 45000000);
+#endif
 
     // Periodic tasks
     if (gUnits & ARCADEIT_UNIT_SCHEDULER)

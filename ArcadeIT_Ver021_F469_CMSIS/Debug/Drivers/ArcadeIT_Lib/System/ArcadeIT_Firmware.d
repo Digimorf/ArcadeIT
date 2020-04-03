@@ -28,6 +28,7 @@ Drivers/ArcadeIT_Lib/System/ArcadeIT_Firmware.o: \
  C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_BUS_Port.h \
  C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_RTC.h \
  C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_LCD_LL.h \
+ C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_VGA_LL.h \
  C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/Demofiles/test.c
 
 C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/ArcadeIT_Common.h:
@@ -85,5 +86,7 @@ C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/Arcad
 C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_RTC.h:
 
 C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_LCD_LL.h:
+
+C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/System/Devices/ArcadeIT_VGA_LL.h:
 
 C:/Users/info/Documents/GitHub/ArcadeIT/ArcadeIT_Ver021_F469_CMSIS/Drivers/ArcadeIT_Lib/Demofiles/test.c:

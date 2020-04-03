@@ -1029,7 +1029,7 @@ void LCD_Parallel_Init
   gLCDDriver[pLCDId].scanline = 0;
   gLCDDriver[pLCDId].address = gDisplayAddress[pLCDId];
 
-  gLCDDriver[pLCDId].video_buffer_memory = (uint8_t*)malloc(gLCDDriver[pLCDId].width * gLCDDriver[pLCDId].height);
+  //gLCDDriver[pLCDId].video_buffer_memory = (uint8_t*)malloc(gLCDDriver[pLCDId].width * gLCDDriver[pLCDId].height);
 
   LCD_Configure(pLCDId, (uint16_t*)&gLCDSequence[pLCDType][pOrientation][0]);
 
