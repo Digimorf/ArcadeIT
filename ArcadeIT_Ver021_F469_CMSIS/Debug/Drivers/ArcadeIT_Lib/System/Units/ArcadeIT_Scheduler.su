@@ -1,6 +1,0 @@
-ArcadeIT_Scheduler.c:74:6:ArcadeIT_Scheduler_Task_Init	4	static
-ArcadeIT_Scheduler.c:102:6:ArcadeIT_Scheduler_Task_Set	20	static
-ArcadeIT_Scheduler.c:141:6:ArcadeIT_Scheduler_Task_Unset	0	static
-ArcadeIT_Scheduler.c:162:6:ArcadeIT_Scheduler_Update	16	static
-ArcadeIT_Scheduler.c:217:6:ArcadeIT_Scheduler_Run	16	static
-ArcadeIT_Scheduler.c:244:9:ArcadeIT_Scheduler_Task_Running	0	static

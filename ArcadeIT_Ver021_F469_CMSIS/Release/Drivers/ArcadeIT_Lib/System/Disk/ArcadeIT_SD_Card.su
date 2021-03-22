@@ -1,7 +1,0 @@
-ArcadeIT_SD_Card.c:242:13:send_cmd	24	static
-ArcadeIT_SD_Card.c:304:9:ArcadeIT_SDCard_Disk_Initialize	24	static
-ArcadeIT_SD_Card.c:406:9:ArcadeIT_SDCard_Disk_Status	0	static
-ArcadeIT_SD_Card.c:414:9:ArcadeIT_SDCard_Disk_Read	24	static
-ArcadeIT_SD_Card.c:462:9:ArcadeIT_SDCard_Disk_Write	24	static
-ArcadeIT_SD_Card.c:512:9:ArcadeIT_SDCard_Disk_Ioctl	40	static
-ArcadeIT_SD_Card.c:638:9:ArcadeIT_SDCard_Disk_Start	4640	static
